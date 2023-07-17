@@ -9,7 +9,11 @@ function M.config()
     bufferline.setup({
         options = {
             mode = "buffers", -- set to "tabs" to only show tabpages instead
-            style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
+            --style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
+            style_preset = {
+                bufferline.style_preset.no_italic,
+                --bufferline.style_preset.no_bold
+            },
             separator_style = "slant",
             themable = true,
             close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
