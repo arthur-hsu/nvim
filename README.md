@@ -9,9 +9,7 @@
 Terminal字體換成帶有`NERD`的
   
 比如 `JetBrainsMono Nerd font`
-```shell
-cp JetBrainsMono /usr/share/fonts
-```
+
 
 - Set up
 ```shell
@@ -33,4 +31,6 @@ git clone https://github.com/aaa890177/lazy_nvim.git AppData/Local/nvim
 ```shell
 cd
 git clone https://github.com/aaa890177/lazy_nvim.git .config/nvim
+cd .config/nvim
+cp JetBrainsMono /usr/share/fonts
 ```
