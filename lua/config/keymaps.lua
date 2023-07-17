@@ -32,10 +32,10 @@ keymap("n", "<C-s>", "<esc>:w!<CR>", opts)
 keymap("n", "<C-z>",  "<C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w!<CR>", opts)
 keymap("i", "<C-z>",  "<esc><C-o>", opts)
- 
 
---keymap("n", "<F3>",":GitGutterLineHighlightsToggle<CR>", opts)
-keymap("n", "<F4>",":NvimTreeToggle<CR>", opts)
+
+keymap("n", "term",":terminal<CR>i", opts)
+
 keymap("n", "<F5>",":RunCode<CR>", opts)
 
 keymap("n", "spl", ":set splitright<CR>:vsplit<CR> ", opts)
