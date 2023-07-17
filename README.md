@@ -9,6 +9,7 @@
 Terminal字體換成帶有`NERD`的
   
 比如 `JetBrainsMono Nerd font`
+`cp JetBrainsMono /usr/share/fonts`
 
 
 - Set up
