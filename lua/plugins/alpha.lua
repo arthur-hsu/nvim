@@ -7,5 +7,6 @@ local M = {
 
 function M.config()
     require'alpha'.setup(require'alpha.themes.startify'.config)
+    --require'alpha'.setup(require'alpha.themes.dashboard'.config)
 end
 return M

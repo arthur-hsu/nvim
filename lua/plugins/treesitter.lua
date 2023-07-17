@@ -1,12 +1,15 @@
 local M = {
     'nvim-treesitter/nvim-treesitter',
-    build = ":TSUpdate",
+    build = function()
+		require("nvim-treesitter.install").update({ with_sync = true })
+	end,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {'HiPhish/nvim-ts-rainbow2'},
 }
 
 
 function M.config()
+    require("nvim-treesitter.install").compilers = { "gcc", "clang", "mingw" }
     require'nvim-treesitter.configs'.setup {
 
         -- 安装 language parser

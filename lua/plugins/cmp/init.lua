@@ -27,7 +27,7 @@ function M.config()
     sign({name = 'DiagnosticSignError', text = '✘'})
     sign({name = 'DiagnosticSignWarn', text = '▲'})
     sign({name = 'DiagnosticSignHint', text = '⚑'})
-    sign({name = 'DiagnosticSignInfo', text = 'ℹ️'})
+    sign({name = 'DiagnosticSignInfo', text = '⚑'})
         
     vim.diagnostic.config({
         virtual_text = false,

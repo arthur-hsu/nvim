@@ -233,7 +233,7 @@ function M.config()
                 glyphs = {
                     default = '',
                     symlink = '',
-                    bookmark = '',
+                    --bookmark = '',
                     modified = '●',
                     folder = {
                         arrow_closed = '',
@@ -268,7 +268,7 @@ function M.config()
         },
         system_open = { cmd = '', args = {} },
         diagnostics = {
-            enable = true,
+            enable = false,
             show_on_dirs = false,
             show_on_open_dirs = true,
             debounce_delay = 50,

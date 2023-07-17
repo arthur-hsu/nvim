@@ -34,19 +34,33 @@ return {
       ---@type lspconfig.options
       servers = {
         jsonls = {},
-        pyright = {},
+        pyright = {
+            settings={
+                python={
+                    analysis={
+                        diagnosticSeverityOverrides = {
+                            reportUnboundVariable = "none",
+                            reportUndefinedVariable = "none",
+                            reportGeneralTypeIssues = "none",
+                        }
+                    }
+                }
+            }
+        },
+
         lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
+            -- mason = false, -- set to false if you don't want this server to be installed with mason
+            settings = {
+                Lua = {
+                    diagnostics = { globals = {'vim'} },
+                    workspace = {
+                        checkThirdParty = false,
+                    },
+                    completion = {
+                        callSnippet = "Replace",
+                    },
+                },
             },
-          },
         },
       },
       -- you can do any additional lsp server setup here
@@ -112,7 +126,7 @@ return {
 
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = { { "<leader>mc", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ui = { border = "rounded" },
       ensure_installed = {
@@ -120,13 +134,13 @@ return {
         "stylua",
         "prettier",
         "shfmt",
-        "jq",
+        --"jq",
         -- Linter
         "eslint_d",
-        "standardrb",
+        --"standardrb",
         "golangci-lint",
         "shellcheck",
-        "yamllint",
+        --"yamllint",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
