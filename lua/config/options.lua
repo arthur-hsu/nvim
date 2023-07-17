@@ -1,6 +1,6 @@
 local opt = vim.opt
 local cmd = vim.cmd
-local g = vim.g 
+local g = vim.g
 opt.guifont = "JetBrainsMonoNL Nerd Font Mono:h14"
 opt.buftype = ""
 
@@ -18,7 +18,7 @@ cmd "set clipboard+=unnamedplus"
 vim.api.nvim_buf_set_option(0, 'modifiable', true)
 opt.wrap = true
 opt.fileformat = unix
-opt.textwidth = 200    
+opt.textwidth = 200
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4
