@@ -20,9 +20,10 @@ Terminal字體換成帶有`NERD`的
 
 - Set up
 ```shell
-sudo apt install snapd curl git python3-pip
+sudo apt install snapd curl git python3-pip software-properties-common
+sudo snap install core
 sudo snap install snap-store
-sudo apt install neovim
+sudo snap install nvim --classic
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install -y nodejs
 pip3 install pynvim neovim
