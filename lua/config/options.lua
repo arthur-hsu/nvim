@@ -45,6 +45,9 @@ cmd ("set buftype=")
 opt.modifiable=true
 g.completeopt = "menu,menuone,noselect"
 
+vim.o.undofile = true
+vim.opt.undodir = vim.fn.stdpath('state') .. '/undo'
+
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
 
 
