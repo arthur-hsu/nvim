@@ -22,8 +22,8 @@ Terminal字體換成帶有`NERD`的
 ```shell
 sudo apt install snapd curl git python3-pip
 sudo snap install snap-store
-sudo snap install neovim
-sudo apt-get install nodejs
+sudo apt install neovim
+sudo apt-get install npm
 pip3 install pynvim neovim
 npm install neovim
 ```
