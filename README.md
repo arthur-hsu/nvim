@@ -40,5 +40,5 @@ git clone https://github.com/aaa890177/lazy_nvim.git AppData/Local/nvim
 cd
 git clone https://github.com/aaa890177/lazy_nvim.git .config/nvim
 cd .config/nvim
-cp JetBrainsMono /usr/share/fonts
+sudo cp -r JetBrainsMono /usr/share/fonts
 ```
