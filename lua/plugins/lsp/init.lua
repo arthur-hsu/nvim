@@ -42,6 +42,7 @@ return {
                             reportUnboundVariable = "none",
                             reportUndefinedVariable = "none",
                             reportGeneralTypeIssues = "none",
+                            reportMissingImports = 'none',
                         }
                     }
                 }
