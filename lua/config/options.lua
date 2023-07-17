@@ -31,8 +31,9 @@ opt.showmatch = true
 opt.scrolloff=12
 
 -- opt.backspace=indent,eol,start
-opt.mouse = a 
-opt.selectmode = mouse,key
+cmd("set mouse=a")
+cmd("set selection=exclusive")
+cmd("set selectmode =mouse,key")
 opt.matchtime=0
 opt.ignorecase = true
 opt.incsearch = true
@@ -41,10 +42,13 @@ opt.expandtab = true
 opt.autoread = true
 opt.cursorline = true 
 cmd ("set buftype=")
-opt.modifiable = true
+opt.modifiable=true
 g.completeopt = "menu,menuone,noselect"
 
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
+
+
+
 
 
 
