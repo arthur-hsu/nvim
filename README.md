@@ -11,11 +11,11 @@ Terminal字體換成帶有`NERD`的
 比如 `JetBrainsMono Nerd font`
 
 - Dependency
-  `Nert font`,
-  `nodejs`,
-  `git`,
-  `pip install neovim`,
-  `npm install neovim`,
+  `Nert font`, 
+  `nodejs`, 
+  `git`, 
+  `pip install neovim`, 
+  `npm install neovim`
 
 
 - Set up
