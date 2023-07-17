@@ -30,7 +30,8 @@ function M.config()
     sign({name = 'DiagnosticSignInfo', text = 'ℹ️'})
         
     vim.diagnostic.config({
-        virtual_text = false
+        virtual_text = false,
+        update_in_insert = false,
     })
         
     -- Show line diagnostics automatically in hover window

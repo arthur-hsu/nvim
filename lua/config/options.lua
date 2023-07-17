@@ -30,7 +30,7 @@ opt.showcmd = true
 opt.showmatch = true
 opt.scrolloff=12
 
--- opt.backspace=indent,eol,start
+cmd("set backspace=indent,eol,start")
 cmd("set mouse=a")
 cmd("set selection=exclusive")
 cmd("set selectmode =mouse,key")
