@@ -23,7 +23,8 @@ Terminal字體換成帶有`NERD`的
 sudo apt install snapd curl git python3-pip
 sudo snap install snap-store
 sudo apt install neovim
-sudo apt-get install npm
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
 pip3 install pynvim neovim
 npm install neovim
 ```
