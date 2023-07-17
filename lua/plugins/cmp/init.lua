@@ -11,6 +11,7 @@ local M = {
         "hrsh7th/cmp-cmdline",
         "onsails/lspkind-nvim",
         "hrsh7th/cmp-nvim-lua",
+        --"hrsh7th/cmp-nvim-lsp-signature-help",
     },
 }
 
@@ -23,21 +24,21 @@ function M.config()
             numhl = ''
         })
     end
-        
+
     sign({name = 'DiagnosticSignError', text = '✘'})
     sign({name = 'DiagnosticSignWarn', text = '▲'})
     sign({name = 'DiagnosticSignHint', text = '⚑'})
     sign({name = 'DiagnosticSignInfo', text = '⚑'})
-        
+
     vim.diagnostic.config({
         virtual_text = false,
         update_in_insert = false,
     })
-        
+
     -- Show line diagnostics automatically in hover window
     vim.o.updatetime = 250
     vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
-    
+
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     -- Use buffer source for `/`.
@@ -69,6 +70,7 @@ function M.config()
             end,
         },
         sources = cmp.config.sources({
+            --{ name = 'nvim_lsp_signature_help' },
             { name = "path" },
             { name = "nvim_lsp", group_index = 1 },
             { name = 'buffer',group_index = 2 },

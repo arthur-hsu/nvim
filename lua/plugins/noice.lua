@@ -38,7 +38,7 @@ function M.config()
             backend = "nui", -- backend to use to show regular cmdline completions
             ---@type "NoicePopupmenuItemKind|false"
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
-            kind_icons = false, -- set to `false` to disable icons
+            kind_icons = true, -- set to `false` to disable icons
         },
         -- default options for require('noice').redirect
         -- see the section on Command Redirection

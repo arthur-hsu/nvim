@@ -14,8 +14,6 @@ opt.undofile = true
 cmd "set undodir=$HOME/.undodir/nvim"
 cmd "set clipboard=unnamed"
 cmd "set clipboard+=unnamedplus"
--- vim.api.nvim_buf_set_option(0, 'buftype', 'nofile')
-vim.api.nvim_buf_set_option(0, 'modifiable', true)
 opt.wrap = true
 opt.fileformat = unix
 opt.textwidth = 200
@@ -29,12 +27,11 @@ opt.ruler  = true
 opt.showcmd = true
 opt.showmatch = true
 opt.scrolloff=12
-
 cmd("set backspace=indent,eol,start")
 cmd("set mouse=a")
 cmd("set selection=exclusive")
 cmd("set selectmode =mouse,key")
-opt.matchtime=0
+opt.matchtime=1
 opt.ignorecase = true
 opt.incsearch = true
 opt.hlsearch = true
@@ -44,6 +41,10 @@ opt.cursorline = true
 cmd ("set buftype=")
 opt.modifiable=true
 g.completeopt = "menu,menuone,noselect"
+-- Faster scrolling
+--vim.o.lazyredraw = true
+-- Decrease redraw time
+vim.o.redrawtime = 100
 
 vim.o.undofile = true
 vim.opt.undodir = vim.fn.stdpath('state') .. '/undo'

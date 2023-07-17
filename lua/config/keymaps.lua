@@ -12,12 +12,15 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
-keymap("n", "rc", ":w<CR> :e $MYVIMRC<CR>",opts)
+
+
 keymap("n", "<F6>", ":<esc>:source $MYVIMRC<CR>",opts)
 if vim.loop.os_uname().sysname == 'Linux' then
+    keymap("n", "rc",":w<CR> :e $HOME/.config/nvim/lua<CR>" ,opts)
     keymap("n", "note", ":w<CR> :e $HOME/.note.txt<CR>",opts)
     keymap("n", "test", ":w<CR> :e $HOME/.test.py<CR>",opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
+    keymap("n", "rc",":w<CR> :e $HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
     keymap("n", "note", ":w<CR> :e $HOME\\.note.txt<CR>",opts)
     keymap("n", "test", ":w<CR> :e $HOME\\.test.py<CR>",opts)
 end

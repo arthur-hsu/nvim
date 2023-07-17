@@ -6,7 +6,7 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      -- { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+       --{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       -- "haringsrob/nvim_context_vt",
