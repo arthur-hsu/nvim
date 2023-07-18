@@ -35,6 +35,7 @@ keymap("n", "<C-s>", "<esc>:w!<CR>", opts)
 keymap("n", "<C-z>",  "<C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w!<CR>", opts)
 keymap("i", "<C-z>",  "<esc><C-o>", opts)
+keymap("i", "<C-v>", "<esc>pa", opts)
 
 
 keymap("n", "term",":terminal<CR>i", opts)

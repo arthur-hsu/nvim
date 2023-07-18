@@ -84,7 +84,7 @@ function M.config()
                 -- Table of diagnostic sources, available sources are:
                 --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
                     sources = {'nvim_lsp'},
-                    symbols = {error = '✘', warn = '▲', info = '⚑', hint = '⚑'},
+                    symbols = {error = '✘ ', warn = '▲ ', info = '⚑ ', hint = '⚑ '},
                     colored = true, -- Displays a colored diff status if set to true
                     icons_enabled = true,
                 },
