@@ -17,27 +17,6 @@ local M = {
 
 
 function M.config()
-    local sign = function(opts)
-        vim.fn.sign_define(opts.name, {
-            texthl = opts.name,
-            text = opts.text,
-            numhl = ''
-        })
-    end
-
-    sign({name = 'DiagnosticSignError', text = '✘'})
-    sign({name = 'DiagnosticSignWarn', text = '▲'})
-    sign({name = 'DiagnosticSignHint', text = '⚑'})
-    sign({name = 'DiagnosticSignInfo', text = '⚑'})
-
-    vim.diagnostic.config({
-        virtual_text = false,
-        update_in_insert = false,
-    })
-
-    -- Show line diagnostics automatically in hover window
-    vim.o.updatetime = 250
-    vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
     local cmp = require("cmp")
     local luasnip = require("luasnip")

@@ -13,6 +13,7 @@ function M.config()
     vim.cmd [[highlight IndentBlanklineIndent5 guifg=#C678DD gui=nocombine]]
     vim.cmd [[highlight IndentBlanklineIndent6 guifg=#E06C75 gui=nocombine]]
     vim.opt.list = true
+    --vim.opt.listchars:append "space:⋅"
     require("indent_blankline").setup {
         space_char_blankline = " ",
         show_current_context = true,

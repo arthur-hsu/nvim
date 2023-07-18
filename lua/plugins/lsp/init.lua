@@ -15,12 +15,6 @@ return {
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
-        severity_sort = true,
-      },
       -- Automatically format on save
       autoformat = true,
       -- options for vim.lsp.buf.format
@@ -127,7 +121,6 @@ return {
 
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>mc", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ui = { border = "rounded" },
       ensure_installed = {

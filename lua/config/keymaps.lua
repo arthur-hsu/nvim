@@ -12,9 +12,16 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
+keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
+keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
+keymap("n", "<leader>noh", "<cmd>noh<CR>",opts)
+keymap("n", "<F3>", "<cmd>Telescope<cr>", opts)
+keymap('n', '<F4>', '<Cmd>NvimTreeToggle<CR>',opts)
+keymap("n", "<F5>",":RunCode<CR>", opts)
+keymap("n", "<F6>", ":<esc>:luafile %<CR>",opts)
+keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
+keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
 
-
-keymap("n", "<F6>", ":<esc>:source $MYVIMRC<CR>",opts)
 if vim.loop.os_uname().sysname == 'Linux' then
     keymap("n", "rc",":w<CR> :e $HOME/.config/nvim/lua<CR>" ,opts)
     keymap("n", "note", ":w<CR> :e $HOME/.note.txt<CR>",opts)
@@ -40,7 +47,6 @@ keymap("i", "<C-v>", "<esc>pa", opts)
 
 keymap("n", "term",":terminal<CR>i", opts)
 
-keymap("n", "<F5>",":RunCode<CR>", opts)
 
 keymap("n", "spl", ":set splitright<CR>:vsplit<CR> ", opts)
 keymap("n", "spk", ":set splitbelow<CR>:split<CR> ", opts)

@@ -50,8 +50,8 @@ vim.o.undofile = true
 vim.opt.undodir = vim.fn.stdpath('state') .. '/undo'
 
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
-
-
+--cmd([[autocmd BufWritePost luafile source luafile]])
+--cmd([[autocmd BufEnter * lua vim.lsp.diagnostic.disable()]])
 
 
 

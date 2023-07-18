@@ -40,7 +40,6 @@ function M.config()
     -- open nvimTree by default.
     -- vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
 
-    vim.keymap.set('n', '<F4>', '<Cmd>NvimTreeToggle<CR>')
 
     -- Silently open a new tab
     local function open_tab_silent(node)

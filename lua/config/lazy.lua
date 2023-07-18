@@ -22,4 +22,3 @@ require("lazy").setup({
   install = { missing = true, colorscheme = { "zephyr" } },
   ui = { border = "rounded" },
 })
-vim.keymap.set("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Plugin Manager" })

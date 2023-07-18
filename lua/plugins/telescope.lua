@@ -45,6 +45,5 @@ function M.config()
         },
     })
     require("telescope").load_extension("undo")
-    vim.keymap.set("n", "<F7>", "<cmd>Telescope undo<cr>")
 end
 return M
