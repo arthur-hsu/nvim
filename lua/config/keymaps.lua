@@ -12,6 +12,19 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
+
+if vim.loop.os_uname().sysname == 'Linux' then
+    keymap("n", "rc",":w<CR> :e $HOME/.config/nvim/lua<CR>" ,opts)
+    keymap("n", "note", ":w<CR> :e $HOME/.note.txt<CR>",opts)
+    keymap("n", "test", ":w<CR> :e $HOME/.test.py<CR>",opts)
+    keymap("n", "<F2>",":terminal<CR>i", opts)
+elseif vim.loop.os_uname().sysname == 'Windows_NT' then
+    keymap("n", "rc",":w<CR> :e $HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
+    keymap("n", "note", ":w<CR> :e $HOME\\.note.txt<CR>",opts)
+    keymap("n", "test", ":w<CR> :e $HOME\\.test.py<CR>",opts)
+    keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
+end
+
 keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
 keymap("n", "<leader>noh", "<cmd>noh<CR>",opts)
@@ -22,15 +35,6 @@ keymap("n", "<F6>", ":<esc>:luafile %<CR>",opts)
 keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
 keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
 
-if vim.loop.os_uname().sysname == 'Linux' then
-    keymap("n", "rc",":w<CR> :e $HOME/.config/nvim/lua<CR>" ,opts)
-    keymap("n", "note", ":w<CR> :e $HOME/.note.txt<CR>",opts)
-    keymap("n", "test", ":w<CR> :e $HOME/.test.py<CR>",opts)
-elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-    keymap("n", "rc",":w<CR> :e $HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
-    keymap("n", "note", ":w<CR> :e $HOME\\.note.txt<CR>",opts)
-    keymap("n", "test", ":w<CR> :e $HOME\\.test.py<CR>",opts)
-end
 keymap("n", "<TAB>", ">>", opts)
 keymap("n", "<S-TAB>", "<<", opts)
 keymap("v", "<TAB>", ">gv", opts)
@@ -45,7 +49,6 @@ keymap("i", "<C-z>",  "<esc><C-o>", opts)
 keymap("i", "<C-v>", "<esc>pa", opts)
 
 
-keymap("n", "term",":terminal<CR>i", opts)
 
 
 keymap("n", "spl", ":set splitright<CR>:vsplit<CR> ", opts)
