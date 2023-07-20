@@ -39,13 +39,13 @@ npm install neovim
 - On windows
 ```shell
 cd
-git clone https://github.com/aaa890177/lazy_nvim.git AppData/Local/nvim
+git clone https://github.com/arthur-hsu/lazy_nvim.git AppData/Local/nvim
 ```
 
 - On linux
 ```shell
 cd
-git clone https://github.com/aaa890177/lazy_nvim.git .config/nvim
+git clone https://github.com/arthur-hsu/lazy_nvim.git .config/nvim
 cd .config/nvim
 sudo cp -r JetBrainsMono /usr/share/fonts
 ```
