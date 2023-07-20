@@ -18,6 +18,12 @@ Terminal字體換成帶有`NERD`的
   `npm install neovim`
 
 
+- Ubuntu-mate Terminal color
+```
+dconf load /org/mate/terminal/ < mate-terminal-profile.bckp
+```
+and switch profile to ubuntu
+
 - Set up
 ```shell
 sudo apt install snapd curl git python3-pip software-properties-common
