@@ -1,11 +1,11 @@
 return {
     {
+        "NTBBloodbath/doom-one.nvim",
+        priority=1000
+    },
+    {
         "nvimdev/zephyr-nvim",
-        lazy = true,
         priority = 1000,
-        --config = function()
-           --vim.cmd.colorscheme "zephyr"
-        --end
     },
     {
         "catppuccin/nvim",
@@ -60,7 +60,7 @@ return {
         priority = 1000,
         opts = function()
             return {
-                style = "night",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                style = "storm",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
                 -- transparent = true,
                 -- styles = {
                 --   sidebars = "transparent",
