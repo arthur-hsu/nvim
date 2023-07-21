@@ -1,5 +1,6 @@
 local M = {
     'goolord/alpha-nvim',
+    lazy=false,
     ement = "VimEnter",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
 }

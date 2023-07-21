@@ -2,7 +2,7 @@ local M = {
     'ray-x/lsp_signature.nvim',
     lazy = false,
     --enabled = false,
-    event="InsertEnter",
+    --event="InsertEnter",
 }
 
 
@@ -11,7 +11,7 @@ function M.config()
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         hint_enable = false, -- 启用虚拟提示
         hint_prefix = "",  -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
-        noice = true,
+        noice = false,
         padding = '|',
         hi_parameter = "LspSignatureActiveParameter", -- 你的参数将如何被突出显示
         warp = false,

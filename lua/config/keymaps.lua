@@ -14,14 +14,14 @@ local keymap = vim.api.nvim_set_keymap
 
 
 if vim.loop.os_uname().sysname == 'Linux' then
-    keymap("n", "rc",":w<CR> :e $HOME/.config/nvim/lua<CR>" ,opts)
-    keymap("n", "note", ":w<CR> :e $HOME/.note.txt<CR>",opts)
-    keymap("n", "test", ":w<CR> :e $HOME/.test.py<CR>",opts)
+    keymap("n", "rc",":e $HOME/.config/nvim/lua<CR>" ,opts)
+    keymap("n", "note", ":e $HOME/Desktop/note.txt<CR>",opts)
+    keymap("n", "test", ":e $HOME/Desktop/test.py<CR>",opts)
     keymap("n", "<F2>",":terminal<CR>i", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-    keymap("n", "rc",":w<CR> :e $HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
-    keymap("n", "note", ":w<CR> :e $HOME\\.note.txt<CR>",opts)
-    keymap("n", "test", ":w<CR> :e $HOME\\.test.py<CR>",opts)
+    keymap("n", "rc",":e $HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
+    keymap("n", "note", ":e $HOME\\Desktop\\note.txt<CR>",opts)
+    keymap("n", "test", ":e $HOME\\Desktop\\test.py<CR>",opts)
     keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
 end
 
@@ -71,7 +71,7 @@ keymap("t", "<ESC>", "<C-\\><C-n>", term_opts)
 
 keymap("n", "ty", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap("n", "tr", "<cmd>BufferLineCyclePrev<CR>", opts)
-keymap("n", "td", "<cmd>bd!<CR>", opts)
+keymap("n", "tt", "<cmd>bd!<CR>", opts)
 keymap("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>", opts)
 keymap("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>", opts)
 keymap("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<cr>", opts)
@@ -86,7 +86,7 @@ keymap("n", "<leader>$", "<cmd>BufferLineGoToBuffer -1<cr>", opts)
 
 keymap("t", "ty", "<C-\\><C-n><cmd>BufferLineCycleNext<CR>", term_opts)
 keymap("t", "tr", "<C-\\><C-n><cmd>BufferLineCyclePrev<CR>", term_opts)
-keymap("t", "td", "<C-\\><C-n><cmd>bd!<CR>", term_opts)
+keymap("t", "tt", "<C-\\><C-n><cmd>bd!<CR>", term_opts)
 keymap("t", "<leader>1", "<C-\\><C-n><cmd>BufferLineGoToBuffer 1<cr>", term_opts)
 keymap("t", "<leader>2", "<C-\\><C-n><cmd>BufferLineGoToBuffer 2<cr>", term_opts)
 keymap("t", "<leader>3", "<C-\\><C-n><cmd>BufferLineGoToBuffer 3<cr>", term_opts)

@@ -13,6 +13,7 @@ return{
     },
     {
         "nathom/filetype.nvim",
+        --lazy=true
         event = 'VeryLazy',
     },
     {
