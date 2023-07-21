@@ -9,7 +9,7 @@ local M = {
 function M.config()
     require "lsp_signature".setup({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
-        hint_enable = true, -- 启用虚拟提示
+        hint_enable = false, -- 启用虚拟提示
         hint_prefix = "",  -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
         noice = true,
         padding = '|',

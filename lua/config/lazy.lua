@@ -19,6 +19,6 @@ require("lazy").setup({
   },
   concurrency = 24,
   defaults = { lazy = true, version = nil },
-  install = { missing = true, colorscheme = { "zephyr" } },
+  install = { missing = true },
   ui = { border = "rounded" },
 })
