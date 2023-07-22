@@ -1,9 +1,5 @@
 return {
     {
-        "NTBBloodbath/doom-one.nvim",
-        priority = 1000
-    },
-    {
         "nvimdev/zephyr-nvim",
         priority = 1000,
     },
