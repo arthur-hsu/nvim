@@ -5,7 +5,7 @@ local M = {
 
 function M.config()
     require('osc52').setup {}
-    vim.keymap.set('v', '<C-c>', require('osc52').copy_visual)
+    vim.keymap.set('v', '<leader>y', require('osc52').copy_visual)
 
 
     --Using nvim-osc52 as clipboard provider

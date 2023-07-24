@@ -13,8 +13,9 @@ opt.background = dark
 cmd "set nu rnu"
 opt.undofile = true
 cmd "set undodir=$HOME/.undodir/nvim"
-cmd "set clipboard=unnamed"
-cmd "set clipboard+=unnamedplus"
+--cmd "set clipboard=unnamed"
+--cmd "set clipboard+=unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 opt.wrap = true
 opt.fileformat = unix
 opt.textwidth = 200

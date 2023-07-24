@@ -7,6 +7,6 @@ function M.config()
         default_mappings = true,
     }
     vim.keymap.set("n", "gr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", {noremap=true})
-    vim.keymap.set("n", "gg", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
+    --vim.keymap.set("n", "gg", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
 end
 return M
