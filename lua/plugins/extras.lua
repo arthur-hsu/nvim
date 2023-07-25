@@ -8,7 +8,8 @@ return{
     },
     {
         'nvim-tree/nvim-web-devicons',
-        event = 'VeryLazy',
+        lazy = true,
+        --event = 'VeryLazy',
     },
     {
         'dstein64/vim-startuptime',
@@ -29,7 +30,6 @@ return{
     },
     {
         'iamcco/markdown-preview.nvim',
-        lazy = true,
         event = 'VeryLazy'
     }
 }
