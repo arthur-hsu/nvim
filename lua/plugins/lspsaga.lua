@@ -1,7 +1,8 @@
 local M = {
     'nvimdev/lspsaga.nvim',
-    lazy = false,
-    enevt = "VeryLazy",
+    lazy = true,
+    --enevt = "InsertEnter",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons'     -- optional

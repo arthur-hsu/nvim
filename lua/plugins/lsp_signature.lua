@@ -1,6 +1,7 @@
 local M = {
     'ray-x/lsp_signature.nvim',
     lazy = false,
+    --event = { "BufReadPost", "BufNewFile" },
     --enabled = false,
     --event="InsertEnter",
 }
