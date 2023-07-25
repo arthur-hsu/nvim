@@ -128,13 +128,13 @@ return {
         "stylua",
         "prettier",
         "shfmt",
-        --"jq",
+        "jq",
         -- Linter
         "eslint_d",
-        --"standardrb",
+        "standardrb",
         "golangci-lint",
         "shellcheck",
-        --"yamllint",
+        "yamllint",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
