@@ -2,7 +2,7 @@ local M = {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.2',
     event="VeryLazy",
-    dependencies = {"nvim-lua/plenary.nvim","debugloop/telescope-undo.nvim"}
+    dependencies = {"nvim-lua/plenary.nvim","debugloop/telescope-undo.nvim","folke/noice.nvim"}
 }
 
 
@@ -28,9 +28,9 @@ function M.config()
                 --layout_strategy = "vertical",
                 --layout_config = {
                     --preview_height = 0.8,
-                --},
-                mappings = {
-                    i = {
+                    --},
+                    mappings = {
+                        i = {
                         ["<C-cr>"] = require("telescope-undo.actions").yank_additions,
                         ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
                         ["<cr>"] = require("telescope-undo.actions").restore,
@@ -45,5 +45,6 @@ function M.config()
         },
     })
     require("telescope").load_extension("undo")
+    require("telescope").load_extension("noice")
 end
 return M

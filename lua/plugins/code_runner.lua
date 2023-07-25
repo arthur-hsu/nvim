@@ -16,7 +16,8 @@ end
 function M.config()
     require('code_runner').setup({
         -- choose default mode (valid term, tab, float, toggle)
-        mode = "tab",
+        --mode = "tab",
+        mode = "term",
         -- Focus on runner window(only works on toggle, term and tab mode)
         focus = true,
         -- startinsert (see ':h inserting-ex')

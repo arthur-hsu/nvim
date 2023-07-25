@@ -11,6 +11,14 @@ Terminal字體換成帶有`NERD`的
 比如 `JetBrainsMono Nerd font`
 
 - Powershell
+`https://marcus116.blogspot.com/2019/02/chocolatey-windows-chocolatey.html`
+
+```
+choco install mingw
+choco install ripgrep
+choco install fd
+```
+
 ```
 nvim $profile
 
