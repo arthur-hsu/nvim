@@ -1,7 +1,20 @@
 return {
     {
-        "nvimdev/zephyr-nvim",
+        "arthur-hsu/zephyr-nvim",
         priority = 1000,
+    },
+    {
+        'AlexvZyl/nordic.nvim',
+        priority = 1000
+    },
+    {
+        'Shatur/neovim-ayu',
+        priority = 1000,
+        --opts = function ()
+            --return{
+                --mirage = true,
+            --}
+        --end
     },
     {
         "rebelot/kanagawa.nvim",
@@ -23,7 +36,9 @@ return {
                     theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
                 },
                 overrides = function(colors) -- add/modify highlights
-                    return {}
+                    return {
+
+                    }
                 end,
                 theme = "wave",              -- Load "wave" theme when 'background' option is not set
                 background = {               -- map the value of 'background' option to a theme
