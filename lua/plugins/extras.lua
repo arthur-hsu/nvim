@@ -27,4 +27,8 @@ return{
         'scrooloose/nerdcommenter',
         event = 'VeryLazy',
     },
+    {
+        'iamcco/markdown-preview.nvim',
+        event = 'VeryLazy'
+    }
 }

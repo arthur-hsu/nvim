@@ -10,6 +10,16 @@ Terminal字體換成帶有`NERD`的
   
 比如 `JetBrainsMono Nerd font`
 
+- Powershell
+```
+nvim $profile
+
+Set-PSReadlineKeyHandler -Key Tab -Function Complete
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+```
+
+
 - Dependency
   `Nert font`, 
   `nodejs`, 

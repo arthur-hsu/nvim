@@ -54,7 +54,11 @@ vim.opt.undodir = vim.fn.stdpath('state') .. '/undo'
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
 --cmd([[autocmd BufWritePost luafile source luafile]])
 --cmd([[autocmd BufEnter * lua vim.lsp.diagnostic.disable()]])
-
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
 
 
 
