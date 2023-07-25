@@ -43,15 +43,15 @@ keymap("v", "<S-TAB>", "<gv", opts)
 keymap("v", "<", "<gv", opts)
 
 keymap("n", "<C-s>", "<esc>:w!<CR>", opts)
-keymap("n", "<C-z>",  "<C-o>", opts)
+keymap("n", "<C-z>",  "<C-o><C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w!<CR>", opts)
-keymap("i", "<C-z>",  "<esc><C-o>", opts)
+keymap("i", "<C-z>",  "<esc><C-o><C-o>", opts)
 keymap("v", "<C-c>", '"+y', opts)
 --keymap("n", "<C-v", '"+p', opts)
 --keymap("i", "<C-v", '"+p', opts)
 keymap("i", "<C-v>", "<esc>pa", opts)
 keymap("v", "<C-v>", "<esc>pA", opts)
-keymap("n", "<C-v>", "pA", opts)
+keymap("n", "<C-v>", "pa", opts)
 
 
 
