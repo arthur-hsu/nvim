@@ -27,7 +27,7 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
-
+                marksman = {},
                 jsonls = {},
                 pyright = {
                     settings={
