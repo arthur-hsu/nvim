@@ -65,6 +65,12 @@ keymap("n", "<A-Down>", ":resize+5 <CR> ", opts)
 
 
 
+--keymap('n', 'gd', "<CMD>Lspsaga goto_definition<CR>", opts)
+--keymap('n', 'gh', vim.lsp.buf.hover, opts)
+--keymap('n', 'gH', vim.lsp.buf.signature_help, opts)
+
+--keymap('n', 'gr', vim.lsp.buf.signature_help, opts)
+--keymap('n', 'gd', vim.lsp.buf.definition, opts)
 
 
 
