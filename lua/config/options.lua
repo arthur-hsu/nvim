@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
@@ -13,8 +14,6 @@ opt.background = dark
 cmd "set nu rnu"
 opt.undofile = true
 cmd "set undodir=$HOME/.undodir/nvim"
---cmd "set clipboard=unnamed"
---cmd "set clipboard+=unnamedplus"
 vim.opt.clipboard = "unnamedplus"
 opt.wrap = false
 opt.fileformat = unix

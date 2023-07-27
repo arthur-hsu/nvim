@@ -6,3 +6,5 @@ require "config.keymaps"
 vim.cmd.colorscheme "zephyr"
 --vim.cmd.colorscheme "tokyonight"
 
+
+

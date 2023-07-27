@@ -30,9 +30,11 @@ return{
     },
     {
         'iamcco/markdown-preview.nvim',
-        event = 'VeryLazy',
+        lazy = false,
+        event = 'VimEnter',
         config = function()
-            vim.fn["mkdp#util#install"]()
+            --vim.fn["mkdp#util#install"]()
+            vim.keymap.set('n', '<leader>mark', "<CMD>MarkdownPreview<CR>", { noremap = true, silent = true })
         end,
     },
     {
