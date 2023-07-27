@@ -1,8 +1,8 @@
-# lazy_nvim
-## Terminal字體設定
+# nvim
+- Terminal字體設定
 ![image](https://github.com/aaa890177/nvim/assets/127286236/d813b1f6-4bf4-4355-991d-d02bd6061970)
 
-下載連結: https://www.nerdfonts.com/font-downloads
+下載連結: <https://www.nerdfonts.com/font-downloads>
 
 下載完後安裝字體
   
