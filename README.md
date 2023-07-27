@@ -29,11 +29,11 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 
 
 - Dependency
-  `Nert font`, 
-  `nodejs`, 
-  `git`, 
-  `pip install neovim`, 
-  `npm install neovim`
+  --`Nert font`
+  --`nodejs`
+  --`git`
+  --`pip install neovim`,
+  --`npm install neovim`
 
 
 - Ubuntu-mate Terminal color
@@ -66,4 +66,5 @@ cd
 git clone https://github.com/arthur-hsu/nvim.git .config/nvim
 cd .config/nvim
 sudo cp -r JetBrainsMono /usr/share/fonts
+sudo apt install ripgrep fd-find
 ```
