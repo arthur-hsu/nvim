@@ -4,7 +4,7 @@ local M = {
 		require("nvim-treesitter.install").update({ with_sync = true })
 	end,
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {'HiPhish/nvim-ts-rainbow2'},
+    dependencies = {'HiPhish/nvim-ts-rainbow2',"nvim-treesitter/nvim-treesitter-textobjects",},
 }
 
 
