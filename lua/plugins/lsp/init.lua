@@ -28,6 +28,7 @@ return {
             ---@type lspconfig.options
             servers = {
                 marksman = {},
+                --pylsp={},
                 jsonls = {},
                 pyright = {
                     settings={

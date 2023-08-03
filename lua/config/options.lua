@@ -3,7 +3,7 @@ local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
 
-opt.guifont = "JetBrainsMonoNL Nerd Font Mono:h11"
+opt.guifont = "JetBrainsMono Nerd Font Mono:h11"
 opt.buftype = ""
 
 opt.swapfile = false

@@ -37,6 +37,10 @@ return{
         end,
     },
     {
+        'lithammer/nvim-pylance',
+        lazy=false,
+    },
+    {
         'TobinPalmer/pastify.nvim',
         lazy = true,
         event = 'VeryLazy',

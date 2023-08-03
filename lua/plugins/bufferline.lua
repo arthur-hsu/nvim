@@ -11,7 +11,7 @@ function M.config()
             mode = "buffers", -- set to "tabs" to only show tabpages instead
             --style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
             style_preset = {
-                bufferline.style_preset.no_italic,
+                --bufferline.style_preset.no_italic,
                 --bufferline.style_preset.no_bold
             },
             separator_style = "slant",
@@ -19,7 +19,11 @@ function M.config()
             close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
             right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
             left_mouse_command = "buffer %d",    -- can be a string | function, | false see "Mouse actions"
-            middle_mouse_command = nil,          -- can be a string | function, | false see "Mouse actions"
+            middle_mouse_command = "vertical sbuffer %d",          -- can be a string | function, | false see "Mouse actions"
+            indicator = {
+                icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                style = 'icon',
+            },
             --hover = {
                 --enabled = true,
                 --delay = 200,
@@ -48,16 +52,17 @@ function M.config()
                     text = function ()
                         return vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
                     end,
+                    highlight = "Directory",
                     text_align = "center",
                     separator = true
                 }
             },
-            highlights = {
-                indicator_visible ={
-                    fg = "#ff0000",
-                    bg = "#ffffff"
-                }
-            }
+            --highlights = {
+                --indicator_visible ={
+                    --fg = "#ff0000",
+                    --bg = "#ffffff"
+                --}
+            --}
         }
     })
 end
