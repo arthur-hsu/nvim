@@ -2,7 +2,11 @@ local M = {
     'folke/which-key.nvim',
     init = function()
         vim.o.timeout = true
+<<<<<<< HEAD
         vim.o.timeoutlen = 320
+=======
+        vim.o.timeoutlen = 50
+>>>>>>> c21b2b4116ac595ed3892602b6a438f0ce7748c7
     end,
     event = 'VeryLazy',
 }
@@ -55,8 +59,8 @@ function M.config()
             winblend = 0,
         },
         layout = {
-            height = { min = 4, max = 25 }, -- min and max height of the columns
-            width = { min = 20, max = 50 }, -- min and max width of the columns
+            height = { min = 4, max = 15 }, -- min and max height of the columns
+            width = { min = 10, max = 20 }, -- min and max width of the columns
             spacing = 3, -- spacing between columns
             align = 'center', -- align columns left, center or right
         },
