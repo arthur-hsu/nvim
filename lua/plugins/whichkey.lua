@@ -2,11 +2,7 @@ local M = {
     'folke/which-key.nvim',
     init = function()
         vim.o.timeout = true
-<<<<<<< HEAD
         vim.o.timeoutlen = 320
-=======
-        vim.o.timeoutlen = 50
->>>>>>> c21b2b4116ac595ed3892602b6a438f0ce7748c7
     end,
     event = 'VeryLazy',
 }

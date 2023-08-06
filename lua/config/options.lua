@@ -41,6 +41,8 @@ opt.autoread = true
 opt.cursorline = true
 cmd ("set buftype=")
 opt.modifiable=true
+--opt.iskeyword:append(":")
+
 g.completeopt = "menu,menuone,noselect"
 -- Faster scrolling
 --vim.o.lazyredraw = true
@@ -49,7 +51,7 @@ vim.o.redrawtime = 100
 
 vim.o.undofile = true
 vim.opt.undodir = vim.fn.stdpath('state') .. '/undo'
-
+cmd('set isk-=.')
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
 --cmd([[autocmd BufWritePost luafile source luafile]])
 --cmd([[autocmd BufEnter * lua vim.lsp.diagnostic.disable()]])
