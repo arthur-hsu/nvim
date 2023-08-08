@@ -6,24 +6,6 @@ local M = {
 }
 
 function M.config()
-    require("notify").setup({
-        background_colour = "NotifyBackground",
-        fps = 60,
-        icons = {
-            DEBUG = "",
-            ERROR = "",
-            INFO = "",
-            TRACE = "✎",
-            WARN = ""
-        },
-        level = 2,
-        minimum_width = 50,
-        render = "default",
-        stages = "fade_in_slide_out",
-        timeout = 3000,
-        top_down = true
-    })
-
     require("noice").setup(
     {
         cmdline = {
@@ -31,30 +13,37 @@ function M.config()
             view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
             opts = {}, -- global options for the cmdline. See section on views
             ---"@type table<string, CmdlineFormat>"
-            format = {
-                --without nert font
-                --cmdline = { icon = ">" },
-                --search_down = { icon = "🔍⌄" },
-                --search_up = { icon = "🔍⌃" },
-                --filter = { icon = "$" },
-                --lua = { icon = "☾" },
-                --help = { icon = "?" },
-            },
         },
         messages = {
+            --------------------------------------------------------------------------------
+            --View             Backend    Description
+            ---------------- ---------- ----------------------------------------------------
+            --notify           notify     nvim-notify with level=nil, replace=false, merge=false
+            --split            split      horizontal split
+            --vsplit           split      vertical split
+            --popup            popup      simple popup
+            --mini             mini       minimal view, by default bottom right, right-aligned
+            --cmdline          popup      bottom line, similar to the classic cmdline
+            --cmdline_popup    popup      fancy cmdline popup, with different styles according to the cmdline mode
+            --cmdline_output   split      split used by config.presets.cmdline_output_to_split
+            --messages         split      split used for :messages
+            --confirm          popup      popup used for confirm events
+            --hover            popup      popup used for lsp signature help and hover
+            --popupmenu        nui.menu   special view with the options used to render the popupmenu when backend is nui
+            --------------------------------------------------------------------------------
             -- NOTE: If you enable messages, then the cmdline is enabled automatically.
             -- This is a current Neovim limitation.
             enabled = true, -- enables the Noice messages UI
-            view = "notify", -- default view for messages
-            view_error = "notify", -- view for errors
-            view_warn = "notify", -- view for warnings
+            view = "mini", -- default view for messages
+            view_error = "mini", -- view for errors
+            view_warn = "mini", -- view for warnings
             view_history = "messages", -- view for :messages
             view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
         },
         popupmenu = {
             enabled = true, -- enables the Noice popupmenu UI
             ---@type 'nui'|'cmp'
-            backend = "nui", -- backend to use to show regular cmdline completions
+            backend = "cmp", -- backend to use to show regular cmdline completions
             ---@type "NoicePopupmenuItemKind|false"
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
             kind_icons = true, -- set to `false` to disable icons
@@ -144,7 +133,7 @@ function M.config()
                 opts = {}, -- merged with defaults from documentation
             },
             signature = {
-                enabled = false,
+                enabled = true,
                 auto_open = {
                     enabled = true,
                     trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -158,7 +147,7 @@ function M.config()
             message = {
                 -- Messages shown by lsp servers
                 enabled = true,
-                view = "notify",
+                view = "mini",
                 opts = {},
             },
             -- defaults for hover and signature help
@@ -174,38 +163,15 @@ function M.config()
                 },
             },
         },
-        markdown = {
-            hover = {
-                ["|(%S-)|"] = vim.cmd.help, -- vim help links
-                ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
-            },
-            highlights = {
-                ["|%S-|"] = "@text.reference",
-                ["@%S+"] = "@parameter",
-                ["^%s*(Parameters:)"] = "@text.title",
-                ["^%s*(Return:)"] = "@text.title",
-                ["^%s*(See also:)"] = "@text.title",
-                ["{%S-}"] = "@parameter",
-            },
-        },
-        health = {
-            checker = true, -- Disable if you don't want health checks to run
-        },
-        smart_move = {
-            -- noice tries to move out of the way of existing floating windows.
-            enabled = true, -- you can disable this behaviour here
-            -- add any filetypes here, that shouldn't trigger smart move.
-            excluded_filetypes = { "cmp_menu", "cmp_docs", "notify" },
-        },
         ---"@type NoicePresets"
         presets = {
             -- you can enable a preset by setting it to true, or a table that will override the preset config
             -- you can also add custom presets that you can enable/disable with enabled=true
-            bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = false, -- position the cmdline and popupmenu together
-            long_message_to_split = false, -- long messages will be sent to a split
+            bottom_search = true, -- use a classic bottom cmdline for search
+            command_palette = true, -- position the cmdline and popupmenu together
+            long_message_to_split = true, -- long messages will be sent to a split
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            lsp_doc_border = false, -- add a border to hover docs and signature help
         },
         throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
         ---"@type NoiceConfigViews"
@@ -215,22 +181,17 @@ function M.config()
         ---"@type table<string, NoiceFilter>"
         status = {}, --- @see section on statusline components
         ---"@type NoiceFormatOptions"
-        --format = {
-            --level = {
-                --icons = {
-                    --error = "✖",
-                    --warn = "▼",
-                    --info = "●",
-                --},
-            --},
-        --},
-        --inc_rename = {
-            --cmdline = {
-                --format = {
-                    --IncRename = { icon = "⟳" }
-                --},
-            --},
-        --}
     })
+    vim.keymap.set({"n", "i", "s"}, "<c-f>", function()
+        if not require("noice.lsp").scroll(4) then
+            return "<c-f>"
+        end
+    end, { silent = true, expr = true })
+
+    vim.keymap.set({"n", "i", "s"}, "<c-b>", function()
+        if not require("noice.lsp").scroll(-4) then
+            return "<c-b>"
+        end
+    end, { silent = true, expr = true })
 end
 return M
