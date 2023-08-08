@@ -24,6 +24,9 @@ local M = {
 function M.config()
     require('lualine').setup {
         options = {
+            theme = 'ayu_mirage',
+            component_separators = '|',
+            section_separators = { left = '', right = '' },
             disabled_filetypes = {     -- Filetypes to disable lualine for.
                 statusline = {"NvimTree","diffpanel"},       -- only ignores the ft for statusline.
                 winbar = {"NvimTree","diffpanel"},                     -- only ignores the ft for winbar.
@@ -35,11 +38,13 @@ function M.config()
                 {'mode',
                     icons_enabled = true, -- Enables the display of icons alongside the component.
                     icon = nil,
+                    separator = { left = '' },
+                    right_padding = 2
                 },
             },
             lualine_b = {
                 { 'diff',
-                    colored = true, -- Displays a colored diff status if set to true
+                    colored = false, -- Displays a colored diff status if set to true
                     diff_color = {
                         -- Same color values as the general color option can be used here.
                         added    = 'DiffAdd',    -- Changes the diff's added color
@@ -97,7 +102,10 @@ function M.config()
             },
             lualine_z = {
                 {'location',
-                    colored = true},
+                    colored = true,
+                    separator = { right = '' },
+                    left_padding = 2
+                },
             }
         }
     }

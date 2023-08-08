@@ -30,7 +30,7 @@ function M.config()
                     --preview_height = 0.8,
                     --},
                     mappings = {
-                        i = {
+                    i = {
                         ["<C-cr>"] = require("telescope-undo.actions").yank_additions,
                         ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
                         ["<cr>"] = require("telescope-undo.actions").restore,
@@ -38,7 +38,7 @@ function M.config()
                     n = {
                         ["y"] = require("telescope-undo.actions").yank_additions,
                         ["Y"] = require("telescope-undo.actions").yank_deletions,
-                        ["<leader>u"] = require("telescope-undo.actions").restore,
+                        ["<cr>"] = require("telescope-undo.actions").restore,
                     },
                 },
             },
