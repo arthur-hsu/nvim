@@ -43,7 +43,7 @@ return{
     {
         'TobinPalmer/pastify.nvim',
         lazy = true,
-        event = 'VeryLazy',
+        event = 'BufEnter *.md',
         cmd = { 'Pastify' },
         config = function ()
             require('pastify').setup {
