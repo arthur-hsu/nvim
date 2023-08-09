@@ -1,11 +1,14 @@
-local M = {
-    'goolord/alpha-nvim',
-    lazy=false,
-    ement = "VimEnter",
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+
+return{
+    {
+        'goolord/alpha-nvim',
+        --enabled = false,
+        lazy=false,
+        ement = "VimEnter",
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function ()
+            --require'alpha'.setup(require'alpha.themes.startify'.config)
+            require'alpha'.setup(require'alpha.themes.dashboard'.config)
+        end
+    }
 }
-function M.config()
-    require'alpha'.setup(require'alpha.themes.startify'.config)
-    --require'alpha'.setup(require'alpha.themes.dashboard'.config)
-end
-return M
