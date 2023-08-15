@@ -1,9 +1,9 @@
 local M = {
     "lukas-reineke/indent-blankline.nvim",
-    event = 'VeryLazy',
-    enabled = true,
+    event = { "BufReadPost", "BufNewFile" },
+    --event = 'VeryLazy',
+    --enabled = false,
 }
-
 
 function M.config()
     vim.cmd [[highlight IndentBlanklineIndent1 guifg=#98C379 gui=nocombine]]
@@ -17,6 +17,7 @@ function M.config()
     require("indent_blankline").setup {
         space_char_blankline = " ",
         show_current_context = true,
+        show_current_context_start = true,
         char_highlight_list = {
             "IndentBlanklineIndent1",
             "IndentBlanklineIndent2",
