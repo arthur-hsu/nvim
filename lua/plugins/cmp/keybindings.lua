@@ -43,8 +43,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
         vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
         vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-        vim.keymap.set({'n','v'}, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>", opts)
+        vim.keymap.set('n', '<space>rn', "<CMD>Lspsaga rename<CR>", opts)
+        vim.keymap.set('n', '<space>sw', "<CMD>Lspsaga outline<CR>", opts)
+        vim.keymap.set('n', '<space>sf', "<CMD>Lspsaga finder<CR>", opts)
+        vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>", opts)
         vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
         -- See `:help vim.lsp.*` for documentation on any of the below functions
     end,
@@ -79,15 +81,15 @@ pluginKeys.cmp = function(cmp)
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
         --["<CR>"] = cmp.mapping({
-            --i = function(fallback)
-                --if cmp.visible() and cmp.get_active_entry() then
-                    --cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                --else
-                    --fallback()
-                --end
-            --end,
-            --s = cmp.mapping.confirm({ select = true }),
-            --c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        --i = function(fallback)
+        --if cmp.visible() and cmp.get_active_entry() then
+        --cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        --else
+        --fallback()
+        --end
+        --end,
+        --s = cmp.mapping.confirm({ select = true }),
+        --c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         --}),
         ["<Tab>"] = cmp.mapping(
             function(fallback)
