@@ -48,15 +48,16 @@ return {
         -- Menu
         -- TODO: Add projects and Frecency?
         dashboard.section.buttons.val = {
-            dashboard.button("e",       "  New file", ":ene <BAR> startinsert<CR>"),
-            dashboard.button("<F2>",    "  Terminal", "<cmd>terminal<CR>i"),
-            dashboard.button("LDR f r", "󰔠  Recent files", "<cmd>Telescope oldfiles<CR>"),
-            dashboard.button("LDR f f", "  Find files", "<cmd>Telescope find_files<CR>"),
-            dashboard.button("LDR f g", "󰊄  Find text", "<cmd>Telescope live_grep<CR>"),
-            dashboard.button("LDR f p", "󱠏  Projects", "<cmd>lua require'telescope'.extensions.project.project{}<CR>"),
-            --dashboard.button("LDR p c", "  Config", "<cmd>e $MYVIMRC<CR>"),
-            dashboard.button("LDR   L", "  Plugins", "<cmd>Lazy<CR>"),
-            --dashboard.button("LDR q", "  Quit", "<cmd>qa<CR>"),
+            dashboard.button("E",  "  New file", ":ene <BAR> startinsert<CR>"),
+            dashboard.button("T",  "  Terminal", "<cmd>terminal<CR>i"),
+            dashboard.button("D",  "  Diffview", "<cmd>DiffviewFileHistory<CR>"),
+            dashboard.button("FR", "󰔠  Recent files", "<cmd>Telescope oldfiles<CR>"),
+            dashboard.button("FB", "  File browser", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>"),
+            dashboard.button("FG", "󰊄  Find text", "<cmd>Telescope live_grep<CR>"),
+            dashboard.button("FP", "󱠏  Projects", "<cmd>lua require'telescope'.extensions.project.project{}<CR>"),
+            dashboard.button("rc", "  Config", "<cmd>e $MYVIMRC<CR>"),
+            dashboard.button("L",  "  Plugins", "<cmd>Lazy<CR>"),
+            dashboard.button("q",  "  Quit", "<cmd>qa<CR>"),
         }
 
         alpha.setup(dashboard.config)
