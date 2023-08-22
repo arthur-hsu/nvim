@@ -3,6 +3,7 @@ local M = {
     build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })
 	end,
+    --enabled =false,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {'HiPhish/nvim-ts-rainbow2',"nvim-treesitter/nvim-treesitter-textobjects",},
 }
