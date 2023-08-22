@@ -22,6 +22,12 @@ function M.config()
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
     vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fb",
+        ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+        { noremap = true }
+    )
 
 
     require("telescope").setup({
