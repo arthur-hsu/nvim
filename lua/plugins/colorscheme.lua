@@ -1,20 +1,11 @@
 return {
     {
+        'lunarvim/darkplus.nvim',
+        priority = 1000,
+    },
+    {
         "arthur-hsu/zephyr-nvim",
         priority = 1000,
-    },
-    {
-        'AlexvZyl/nordic.nvim',
-        priority = 1000
-    },
-    {
-        'Shatur/neovim-ayu',
-        priority = 1000,
-        --opts = function ()
-            --return{
-                --mirage = true,
-            --}
-        --end
     },
     {
         "rebelot/kanagawa.nvim",
@@ -42,7 +33,7 @@ return {
                 end,
                 theme = "wave",              -- Load "wave" theme when 'background' option is not set
                 background = {               -- map the value of 'background' option to a theme
-                    dark = "wave",           -- try "dragon" !
+                    dark = "dragon",           -- try "dragon" !
                     light = "lotus"
                 },
             }
@@ -53,7 +44,7 @@ return {
         priority = 1000,
         opts = function()
             return {
-                style = "storm",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                style = "night",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
                 -- transparent = true,
                 -- styles = {
                 --   sidebars = "transparent",
