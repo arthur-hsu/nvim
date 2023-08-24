@@ -15,13 +15,13 @@ local keymap = vim.api.nvim_set_keymap
 
 if vim.loop.os_uname().sysname == 'Linux' then
     keymap("n", "rc",":Telescope file_browser path=$HOME/.config/nvim/lua<CR>" ,opts)
-    keymap("c", "note", ":e $HOME/Desktop/note.txt<CR>",opts)
-    keymap("c", "test", ":e $HOME/Desktop/test.py<CR>",opts)
+    keymap("c", "NOTE", ":e $HOME/Desktop/note.txt<CR>",opts)
+    keymap("c", "TEST", ":e $HOME/Desktop/test.py<CR>",opts)
     keymap("n", "<F2>",":terminal<CR>i", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "rc",":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
-    keymap("c", "note", ":e $HOME\\Desktop\\note.txt<CR>",opts)
-    keymap("c", "test", ":e $HOME\\Desktop\\test.py<CR>",opts)
+    keymap("c", "NOTE", ":e $HOME\\Desktop\\note.txt<CR>",opts)
+    keymap("c", "TEST", ":e $HOME\\Desktop\\test.py<CR>",opts)
     keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
 end
 
