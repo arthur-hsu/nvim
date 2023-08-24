@@ -35,6 +35,8 @@ keymap("n", "<F5>",":RunCode<CR>", opts)
 keymap("n", "<F6>", "<cmd>DiffviewFileHistory<CR>",opts)
 keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
 keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
+keymap('n', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
+keymap('i', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 keymap("n", "<F12>", ":StartupTime<CR>",opts)
 
 keymap("n", "<TAB>", ">>", opts)
