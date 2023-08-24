@@ -39,7 +39,7 @@ function M.config()
             },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
         linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = { interval = 1000, follow_files = true },
@@ -47,7 +47,7 @@ function M.config()
         current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
             virt_text = true,
-            virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+            virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
             delay = 0,
             ignore_whitespace = false,
         },
