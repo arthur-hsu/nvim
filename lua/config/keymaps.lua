@@ -25,6 +25,7 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
 end
 
+
 keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",opts)
@@ -34,6 +35,7 @@ keymap("n", "<F5>",":RunCode<CR>", opts)
 keymap("n", "<F6>", "<cmd>DiffviewFileHistory<CR>",opts)
 keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
 keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
+keymap("n", "<F12>", ":StartupTime<CR>",opts)
 
 keymap("n", "<TAB>", ">>", opts)
 keymap("n", "<S-TAB>", "<<", opts)
