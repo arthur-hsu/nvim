@@ -97,8 +97,8 @@ pluginKeys.cmp = function(cmp)
                     cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
                 elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
-                elseif has_words_before() then
-                    cmp.complete()
+                --elseif has_words_before() then
+                    --cmp.complete()
                 else
                     fallback()
                 end
