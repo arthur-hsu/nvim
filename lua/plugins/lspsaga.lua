@@ -61,12 +61,12 @@ function M.config()
             },
         },
         lightbulb = {
-            enable = true,
+            enable = false,
             sign = false,
             debounce = 10,
             sign_priority = 40,
             virtual_text = true,
-            enable_in_insert = true,
+            enable_in_insert = false,
         },
         scroll_preview = {
             scroll_down = '<C-f>',

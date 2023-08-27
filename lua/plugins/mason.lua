@@ -18,6 +18,7 @@ return{
                 "standardrb",
                 "golangci-lint",
                 "shellcheck",
+                "markdownlint",
                 "yamllint",
             },
         },
