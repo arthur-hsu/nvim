@@ -34,9 +34,19 @@ return{
         'iamcco/markdown-preview.nvim',
         lazy = true,
         event = {'BufEnter *.md', "BufRead *.md", "BufNewFile *.md" },
+        build = "cd app && npm install",
+        --build = function() vim.fn["mkdp#util#install"]() end,
         config = function()
-            vim.fn["mkdp#util#install"]()
+            --vim.fn["mkdp#util#install"]()
             vim.keymap.set('n', '<leader>md', "<CMD>MarkdownPreview<CR>", { noremap = true, silent = true })
+            vim.g.mkdp_auto_close = true
+            vim.g.mkdp_open_to_the_world = false
+            vim.g.mkdp_open_ip = "127.0.0.1"
+            vim.g.mkdp_port = "8888"
+            --vim.g.mkdp_browser = ""
+            vim.g.mkdp_echo_preview_url = false
+            vim.g.mkdp_page_title = "${name}"
+            vim.g.mkdp_theme = 'dark'
         end,
     },
     {
