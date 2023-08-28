@@ -1,7 +1,6 @@
 return{
     {
         'NvChad/nvim-colorizer.lua',
-        --'norcalli/nvim-colorizer.lua',
         event = 'VeryLazy',
         config = function ()
             --require'colorizer'.setup({})
@@ -73,5 +72,9 @@ return{
     {
         'lithammer/nvim-pylance',
         lazy=true,
+    },
+    {
+        'github/copilot.vim',
+        event = { "BufReadPost", "BufNewFile" },
     }
 }

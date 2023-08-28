@@ -1,5 +1,6 @@
 local M = {
     "folke/noice.nvim",
+    --enabled = false,
     dependencies = {'nvim-tree/nvim-web-devicons',"MunifTanjim/nui.nvim","rcarriga/nvim-notify",},
     event="VeryLazy",
     --event = { "BufReadPost", "BufNewFile" },
@@ -112,7 +113,7 @@ function M.config()
             -- event is always "notify" and kind can be any log level as a string
             -- The default routes will forward notifications to nvim-notify
             -- Benefit of using Noice for this is the routing and consistent history view
-            enabled = true,
+            enabled = false,
             view = "notify",
         },
         lsp = {
