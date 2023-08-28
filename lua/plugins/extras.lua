@@ -76,5 +76,10 @@ return{
     {
         'github/copilot.vim',
         event = { "BufReadPost", "BufNewFile" },
+        config = function ()
+            vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
+            vim.g.copilot_no_tab_map = true
+            vim.cmd[[highlight CopilotSuggestion guifg=#96ff00 guibg=#162a33 ctermfg=8]]
+        end,
     }
 }
