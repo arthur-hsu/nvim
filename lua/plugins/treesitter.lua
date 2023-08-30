@@ -15,7 +15,9 @@ function M.config()
 
         -- 安装 language parser
         -- :TSInstallInfo 命令查看支持的语言
-        ensure_installed = {"python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline"},
+        ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
+        'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',
+        'julia','prql','puppet','starlark','t32','tsx','v','wgsl_bevy'},
         -- 启用代码高亮功能
         highlight = {
             enable = true,
