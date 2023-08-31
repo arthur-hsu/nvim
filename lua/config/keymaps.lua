@@ -21,6 +21,8 @@ if vim.loop.os_uname().sysname == 'Linux' then
     --keymap("n", "<F2>",":terminal bash<CR>i", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     vim.opt.shell = 'pwsh'
+    vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
+    vim.opt.shellxquote = ''
     keymap("n", "rc",":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
     keymap("c", "NOTE", ":e $HOME\\Desktop\\note.txt<CR>",opts)
     keymap("c", "TEST", ":e $HOME\\Desktop\\test.py<CR>",opts)
