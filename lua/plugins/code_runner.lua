@@ -21,7 +21,7 @@ function M.config()
         -- Focus on runner window(only works on toggle, term and tab mode)
         focus = true,
         -- startinsert (see ':h inserting-ex')
-        startinsert = false,
+        startinsert = true,
         insert_prefix = "",
         term = {
             --  Position to open the terminal, this option is ignored if mode ~= term
