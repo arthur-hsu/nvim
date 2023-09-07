@@ -29,7 +29,7 @@ function M.config()
         { noremap = true }
     )
 
-    --local fb_actions = require "telescope._extensions.file_browser.actions"
+    local fb_actions = require "telescope._extensions.file_browser.actions"
     require("telescope").setup({
         extensions = {
             file_browser = {
@@ -45,7 +45,7 @@ function M.config()
                         --["<A-m>"] = fb_actions.move,
                         --["<A-y>"] = fb_actions.copy,
                         --["<A-d>"] = fb_actions.remove,
-                        --["<C-o>"] = fb_actions.open,
+                        ["<C-o>"] = fb_actions.open,
                         --["<C-g>"] = fb_actions.goto_parent_dir,
                         --["<C-e>"] = fb_actions.goto_home_dir,
                         --["<C-w>"] = fb_actions.goto_cwd,

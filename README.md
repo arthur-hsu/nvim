@@ -73,4 +73,30 @@ sudo apt install -y nodejs
 pip3 install pynvim neovim
 npm install neovim
 ```
+```
+fb_actions.open = function(prompt_bufnr)
+  local quiet = action_state.get_current_picker(prompt_bufnr).finder.quiet
+  local selections = fb_utils.get_selected_files(prompt_bufnr, true)
+  if vim.tbl_isempty(selections) then
+    fb_utils.notify("actions.open", { msg = "No selection to be opened!", level = "INFO", quiet = quiet })
+    return
+  end
 
+  local cmd = vim.fn.has "win32" == 1 and "start" or vim.fn.has "mac" == 1 and "open" or "xdg-open"
+  if vim.fn.has "win32" == 1 then
+      for _, selection in ipairs(selections) do
+          vim.cmd(string.format('!start %s', selection:absolute()))
+      end
+  else
+      for _, selection in ipairs(selections) do
+        require("plenary.job")
+          :new({
+            command = cmd,
+            args = { selection:absolute() },
+          })
+          :start()
+      end
+  end
+  actions.close(prompt_bufnr)
+end
+```
