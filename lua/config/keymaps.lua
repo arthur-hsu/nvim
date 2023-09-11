@@ -16,7 +16,7 @@ local keymap = vim.api.nvim_set_keymap
 if vim.loop.os_uname().sysname == 'Linux' then
     vim.opt.shell = 'bash'
     keymap("n", "rc",":Telescope file_browser path=$HOME/.config/nvim/lua<CR>" ,opts)
-    keymap("c", "Note", ":e $HOME/Desktop/note.txt<CR>",opts)
+    keymap("c", "Note", ":e $HOME/workdir/notedir<CR>",opts)
     keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>",opts)
     --keymap("n", "<F2>",":terminal bash<CR>i", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
@@ -24,7 +24,7 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
     vim.opt.shellxquote = ''
     keymap("n", "rc",":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
-    keymap("c", "Note", ":e $HOME\\Desktop\\note.txt<CR>",opts)
+    keymap("c", "Note", ":e $HOME\\workdir\\notedir<CR>",opts)
     keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>",opts)
     --keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
 end
