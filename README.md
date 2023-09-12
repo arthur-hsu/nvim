@@ -29,9 +29,7 @@ git clone https://github.com/arthur-hsu/nvim.git AppData/Local/nvim
 chocolatey install:<https://marcus116.blogspot.com/2019/02/chocolatey-windows-chocolatey.html>
 
 ```shell
-choco install mingw
-choco install ripgrep
-choco install fd
+choco install mingw ripgrep fd
 ```
 
 ### powershell set
@@ -68,7 +66,7 @@ sudo apt install snapd curl git python3-pip software-properties-common
 sudo snap install core
 sudo snap install snap-store
 sudo snap install nvim --classic
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
 pip3 install pynvim neovim
 npm install neovim
