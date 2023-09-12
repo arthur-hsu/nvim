@@ -16,7 +16,7 @@ Terminal字體換成帶有`NERD`的
 `nodejs`  
 `git`  
 `pip install neovim`  
-`npm install neovim`  
+`npm install neovim yarn`  
 
 
 ## windows
@@ -71,6 +71,8 @@ sudo apt install -y nodejs
 pip3 install pynvim neovim
 npm install neovim
 ```
+
+## windows
 ```
 fb_actions.open = function(prompt_bufnr)
   local quiet = action_state.get_current_picker(prompt_bufnr).finder.quiet
