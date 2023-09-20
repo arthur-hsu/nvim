@@ -6,7 +6,7 @@ local M = {
 
 
 local function python()
-    if vim.loop.os_uname().sysname == 'Linux' then
+    if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
         return "python3 -u"
     elseif vim.loop.os_uname().sysname == 'Windows_NT' then
         return "python -u"
