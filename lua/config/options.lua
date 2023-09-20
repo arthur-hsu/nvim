@@ -11,7 +11,8 @@ vim.api.nvim_command('filetype plugin indent on')
 opt.termguicolors = true
 g.python_highlight_all = 1
 opt.background = dark
-cmd "set nu rnu"
+opt.number = true
+opt.relativenumber = true
 opt.undofile = true
 cmd "set undodir=$HOME/.undodir/nvim"
 vim.opt.clipboard = "unnamedplus"
