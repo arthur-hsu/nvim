@@ -8,6 +8,19 @@ return{
         end
     },
     {
+        'xiyaowong/transparent.nvim',
+        --lazy = false,
+        --event = 'VeryLazy',
+        event = { "BufReadPost", "BufNewFile" },
+        priority = 1000,
+        opts ={
+            exclude_groups = {'bufferline'},
+        },
+        config= function ()
+            require('transparent').clear_prefix('lualine')
+        end
+    },
+    {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
         --event = 'VeryLazy',

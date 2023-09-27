@@ -11,6 +11,7 @@ else
     --vim.cmd.colorscheme "kanagawa"
     --vim.cmd.colorscheme "darkplus"
     vim.cmd.colorscheme "zephyr"
+    require "config.color"
     --vim.cmd.colorscheme "tokyonight"
 end
 

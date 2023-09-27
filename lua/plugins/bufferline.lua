@@ -14,10 +14,10 @@ function M.config()
                 --bufferline.style_preset.no_italic,
                 --bufferline.style_preset.no_bold
             },
-            separator_style = "slant",
-            themable = true,
+            separator_style = 'thin',           -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
+            themable = false,
             close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
-            right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+            right_mouse_command = "bdelete! %d", -- can be a string | function  | false, see "Mouse actions"
             left_mouse_command = "buffer %d",    -- can be a string | function, | false see "Mouse actions"
             middle_mouse_command = "vertical sbuffer %d",          -- can be a string | function, | false see "Mouse actions"
             indicator = {
@@ -57,12 +57,36 @@ function M.config()
                     separator = true
                 }
             },
-            --highlights = {
-                --indicator_visible ={
-                    --fg = "#ff0000",
-                    --bg = "#ffffff"
-                --}
-            --}
+
+
+            highlights = {
+                --fill = {
+                    --fg = 'fg',
+                    --bg = 'bg',
+                --},
+                --background = {
+                    --fg = 'fg',
+                    --bg = 'bg',
+                --},
+                --tab = {
+                    --fg = '<colour-value-here>',
+                    --bg = '<colour-value-here>',
+                --},
+                --tab_selected = {
+                    --fg = '<colour-value-here>',
+                    --bg = '<colour-value-here>',
+                --},
+                --tab_separator = {
+                    --fg = '<colour-value-here>',
+                    --bg = '<colour-value-here>',
+                --},
+                --tab_separator_selected = {
+                    --fg = '<colour-value-here>',
+                    --bg = '<colour-value-here>',
+                    --sp = '<colour-value-here>',
+                    --underline = '<colour-value-here>',
+                --},
+            }
         }
     })
 end
