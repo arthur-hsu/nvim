@@ -165,7 +165,6 @@ function M.config()
             centralize_selection = false,
             cursorline = true,
             width = 30,
-            hide_root_folder = false,
             side = 'left',
             preserve_window_proportions = false,
             number = false,
