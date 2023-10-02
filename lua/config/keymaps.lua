@@ -60,7 +60,6 @@ if vim.loop.os_uname().sysname == 'Linux' or 'Windows_NT' then
     vim.keymap.set('v', '<leader>y', require('osc52').copy_visual)
 elseif vim.loop.os_uname().sysname == 'Darwin' then
     keymap("v", "<C-c>", '"+y', opts)
-    keymap("v", "<A-c>", '"+y', opts)
 end
 --keymap("n", "<C-v", '"+p', opts)
 --keymap("i", "<C-v", '"+p', opts)
