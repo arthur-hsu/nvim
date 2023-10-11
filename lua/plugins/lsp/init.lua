@@ -85,12 +85,8 @@ return {
             },
             ---@param opts PluginLspOpts
             config = function(plugin, opts)
-
-
-
                 local servers = opts.servers
                 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-                
 
                 local function setup(server)
                     local server_opts = servers[server] or {}
