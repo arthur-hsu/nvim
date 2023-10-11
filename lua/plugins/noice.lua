@@ -20,8 +20,13 @@ function M.config()
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
         cmdline = {
+            --🔍⌄
             enabled = true, -- enables the Noice cmdline UI
             view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+            format = {
+                search_down = { kind = "search", pattern = "^/", icon = "🔍 ", lang = "regex" },
+                search_up = { kind = "search", pattern = "^%?", icon = "🔍 ", lang = "regex" },
+            },
             opts = {}, -- global options for the cmdline. See section on views
             ---"@type table<string, CmdlineFormat>"
         },
