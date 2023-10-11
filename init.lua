@@ -8,10 +8,10 @@ else
     require "config.keymaps"
     require "config.lualine_theme"
     require "config.options"
+    vim.cmd.colorscheme "zephyr"
+    --require "config.color"
     --vim.cmd.colorscheme "kanagawa"
     --vim.cmd.colorscheme "darkplus"
-    vim.cmd.colorscheme "zephyr"
-    require "config.color"
     --vim.cmd.colorscheme "tokyonight"
 end
 

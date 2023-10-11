@@ -28,22 +28,31 @@ return {
             ---@type lspconfig.options
             servers = {
                 marksman = {},
-                --pylsp={},
                 jsonls = {},
                 pyright = {
+                    --capabilities = {
+                        --textDocument = {
+                            --publishDiagnostics = {
+                                --tagSupport = {
+                                    --valueSet = {2},
+                                --},
+                            --},
+                        --},
+                    --},
                     settings={
                         python={
                             analysis={
                                 diagnosticSeverityOverrides = {
+                                    --typeCheckingMode = 'off',
+                                    reportMissingImports = "none",
+                                    reportUnusedVariable = "none",
                                     reportUnboundVariable = "none",
                                     reportUndefinedVariable = "none",
                                     reportGeneralTypeIssues = "none",
-                                    reportMissingImports = 'none',
-                                    reportUnusedVariable = false,
                                 }
                             }
                         }
-                    }
+                    },
                 },
                 bashls ={},
                 lua_ls = {
@@ -80,7 +89,8 @@ return {
 
 
                 local servers = opts.servers
-                local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+                local capabilities = require("cmp_nvim_lsp").default_capabilities()
+                
 
                 local function setup(server)
                     local server_opts = servers[server] or {}
@@ -115,6 +125,7 @@ return {
 
                 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
                 require("mason-lspconfig").setup_handlers({ setup })
+
             end,
         },
     }

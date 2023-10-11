@@ -5,7 +5,7 @@ local M = {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         'nvim-treesitter/nvim-treesitter', -- optional
-        'nvim-tree/nvim-web-devicons'     -- optional
+        'nvim-tree/nvim-web-devicons'      -- optional
     }
 }
 
@@ -73,6 +73,7 @@ function M.config()
             scroll_up = '<C-b>',
         },
         request_timeout = 2000,
+
         finder = {
             max_height = 0.5,
             left_width = 0.3,
@@ -133,13 +134,13 @@ function M.config()
             detail = true,
             auto_close = true,
             close_after_jump = true,
-            layout = 'normal',
+            layout = 'float', -- float or normal
             max_height = 0.5,
-            left_width = 0.5,
+            left_width = 0.3,
             keys = {
-                toggle_or_jump = 'o',
+                toggle_or_jump = '<CR>',
                 quit = 'q',
-                jump = '<CR>',
+                jump = '<j>',
             },
         },
         callhierarchy = {
