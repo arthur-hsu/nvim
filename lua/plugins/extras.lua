@@ -10,8 +10,8 @@ return{
     },
     {
         'xiyaowong/transparent.nvim',
+        --event = 'VeryLazy',
         event = { "BufReadPost", "BufNewFile" },
-        priority = 1000,
         opts ={
             exclude_groups = {'bufferline'},
         },

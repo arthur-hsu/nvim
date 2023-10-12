@@ -18,7 +18,7 @@ local function header()
     "  ▒   ▒▒ ░  ░▒ ░ ▒░    ░     ▒ ░▒░ ░░░▒░ ░ ░   ░▒ ░ ▒░",
     "  ░   ▒     ░░   ░   ░       ░  ░░ ░ ░░░ ░ ░   ░░   ░ ",
     "      ░  ░   ░               ░  ░  ░   ░        ░     ",
-    "                                                      ",
+    --"                                                      ",
     }
 	return arthur_1
 end
@@ -48,15 +48,15 @@ return {
         -- Menu
         -- TODO: Add projects and Frecency?
         dashboard.section.buttons.val = {
-            dashboard.button("E",  "  New file", ":ene <BAR> startinsert<CR>"),
-            dashboard.button("T",  "  Terminal", "<cmd>terminal<CR>i"),
-            dashboard.button("D",  "  Diffview", "<cmd>DiffviewFileHistory<CR>"),
-            dashboard.button("FR", "󰔠  Recent files", "<cmd>Telescope oldfiles<CR>"),
-            dashboard.button("FB", "  File browser", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>"),
-            dashboard.button("FG", "󰊄  Find text", "<cmd>Telescope live_grep<CR>"),
-            dashboard.button("FP", "󱠏  Projects", "<cmd>lua require'telescope'.extensions.project.project{}<CR>"),
-            dashboard.button("rc", "  Config", "<cmd>e $MYVIMRC<CR>"),
-            dashboard.button("L",  "  Plugins", "<cmd>Lazy<CR>"),
+            dashboard.button("e",  "  New file", ":ene <BAR> startinsert<CR>"),
+            dashboard.button("t",  "  Terminal", "<cmd>terminal<CR>i"),
+            dashboard.button("d",  "  Diffview", "<cmd>DiffviewFileHistory<CR>"),
+            dashboard.button("r", "󰔠  Recent files", "<cmd>Telescope oldfiles<CR>"),
+            --dashboard.button("FB", "  File browser", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>"),
+            --dashboard.button("FG", "󰊄  Find text", "<cmd>Telescope live_grep<CR>"),
+            --dashboard.button("FP", "󱠏  Projects", "<cmd>lua require'telescope'.extensions.project.project{}<CR>"),
+            --dashboard.button("rc", "  Config", "<cmd>e $MYVIMRC<CR>"),
+            --dashboard.button("L",  "  Plugins", "<cmd>Lazy<CR>"),
             dashboard.button("q",  "  Quit", "<cmd>qa<CR>"),
         }
 
