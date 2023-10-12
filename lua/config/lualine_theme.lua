@@ -139,21 +139,21 @@ ins_left {
 ins_left {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = "#94b6cb", gui = 'bold' },
+    color = { fg = "#94b6cb", gui = 'bold',bg='None' },
 }
 
 ins_left { 'location' }
 
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+ins_left { 'progress', color = { fg = colors.fg, gui = 'bold',bg='None' } }
 
 ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     symbols = { error = ' ', warn = ' ', info = ' ' },
     diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
+        color_error = { fg = colors.red,bg='None' },
+        color_warn = { fg = colors.yellow,bg='None' },
+        color_info = { fg = colors.cyan,bg='None' },
     },
 }
 
@@ -196,14 +196,14 @@ ins_right {
     'o:encoding', -- option component same as &encoding in viml
     fmt = string.upper, -- I'm not sure why it's upper case either ;)
     cond = conditions.hide_in_width,
-    color = { fg = colors.green, gui = 'bold' },
+    color = { fg = colors.green, gui = 'bold',bg='None' },
 }
 
 ins_right {
     'fileformat',
     fmt = string.upper,
     icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = colors.green, gui = 'bold' },
+    color = { fg = colors.green, gui = 'bold',bg='None' },
 }
 
 ins_right {
@@ -211,13 +211,13 @@ ins_right {
     'filetype',
     --fmt = string.upper,
     icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = colors.green },
+    color = { fg = colors.green ,bg='None'},
 }
 
 ins_right {
     'branch',
     icon = '',
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = colors.magenta, gui = 'bold',bg='None' },
 }
 
 ins_right {
@@ -225,9 +225,9 @@ ins_right {
     -- Is it me or the symbol for modified us really weird
     symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
     diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
+        added = { fg = colors.green,bg='None' },
+        modified = { fg = colors.orange,bg='None' },
+        removed = { fg = colors.red,bg='None' },
     },
     cond = conditions.hide_in_width,
 }
