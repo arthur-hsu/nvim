@@ -19,7 +19,7 @@ function M.config()
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
     vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+    --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
     vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
     vim.api.nvim_set_keymap(
@@ -31,6 +31,29 @@ function M.config()
 
     local fb_actions = require "telescope._extensions.file_browser.actions"
     require("telescope").setup({
+        defaults = {
+            scroll_strategy = "limit",
+            initial_mode = "normal",
+            prompt_prefix = "➤  ",
+            vimgrep_arguments = {
+                "rg",
+                "--hidden",
+                "--color=never",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
+                "--smart-case",
+                -- "--colors 'match:fg:169,169,169'"
+            },
+            file_ignore_patterns = {
+                "node_modules",
+                ".git",
+                ".cache",
+                "__pychace__",
+                ".pytest_cache"
+            },
+        },
         extensions = {
             file_browser = {
                 theme = "ivy",
