@@ -44,7 +44,7 @@ cmd ("set buftype=")
 opt.modifiable=true
 opt.laststatus = 1
 
-opt.guicursor = ""
+--opt.guicursor = ""
 --opt.iskeyword:append(":")
 
 g.completeopt = "menu,menuone,noselect"
