@@ -47,7 +47,7 @@ return {
                                     reportMissingImports = "none",
                                     reportUnusedVariable = "none",
                                     reportUnboundVariable = "none",
-                                    reportUndefinedVariable = "none",
+                                    --reportUndefinedVariable = "none",
                                     reportGeneralTypeIssues = "none",
                                 }
                             }

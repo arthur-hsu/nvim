@@ -16,7 +16,6 @@ opt.relativenumber = true
 opt.undofile = true
 cmd "set undodir=$HOME/.undodir/nvim"
 vim.opt.clipboard = "unnamedplus"
---vim.opt.clipboard = "unnamed"
 opt.wrap = false
 opt.fileformat = unix
 opt.textwidth = 200
@@ -40,12 +39,12 @@ opt.incsearch = true
 opt.hlsearch = true
 opt.expandtab = true
 opt.autoread = true
-opt.cursorline = true
+--opt.cursorline = true
 cmd ("set buftype=")
 opt.modifiable=true
 opt.laststatus = 1
 
---opt.guicursor = ""
+opt.guicursor = ""
 --opt.iskeyword:append(":")
 
 g.completeopt = "menu,menuone,noselect"

@@ -73,6 +73,29 @@ local config = {
     },
 }
 
+local mode_color = {
+    n = colors.blue,
+    i = colors.green,
+    v = colors.cyan,
+    V = colors.cyan,
+    c = colors.magenta,
+    no = colors.red,
+    s = colors.orange,
+    S = colors.orange,
+    [''] = colors.orange,
+    ic = colors.yellow,
+    R = colors.violet,
+    Rv = colors.violet,
+    cv = colors.red,
+    ce = colors.red,
+    r = colors.cyan,
+    rm = colors.cyan,
+    ['r?'] = colors.cyan,
+    ['!'] = colors.red,
+    t = colors.red,
+}
+
+
 -- Inserts a component in lualine_c at left section
 local function ins_left(component)
     table.insert(config.sections.lualine_c, component)
@@ -87,54 +110,36 @@ ins_left {
     function()
         return '▊'
     end,
-    color = { fg = colors.blue }, -- Sets highlighting of component
+    --color = { fg = colors.blue }, -- Sets highlighting of component
+    color = function()
+        -- auto change color according to neovims mode
+        return { fg = mode_color[vim.fn.mode()],bg='None'  }
+    end,
     padding = { left = 0, right = 1 }, -- We don't need space before this
 }
 
 ins_left {
     -- mode component
     function()
-        return ''
+        return ''
     end,
     color = function()
         -- auto change color according to neovims mode
-        local mode_color = {
-            n = colors.red,
-            i = colors.green,
-            v = colors.blue,
-            [''] = colors.blue,
-            V = colors.blue,
-            c = colors.magenta,
-            no = colors.red,
-            s = colors.orange,
-            S = colors.orange,
-            [''] = colors.orange,
-            ic = colors.yellow,
-            R = colors.violet,
-            Rv = colors.violet,
-            cv = colors.red,
-            ce = colors.red,
-            r = colors.cyan,
-            rm = colors.cyan,
-            ['r?'] = colors.cyan,
-            ['!'] = colors.red,
-            t = colors.red,
-        }
-        return { fg = mode_color[vim.fn.mode()] }
+        return { fg = mode_color[vim.fn.mode()],bg='None' }
     end,
     padding = { right = 1 },
 }
 
-ins_left {
-    -- filesize component
-    'filesize',
-    cond = conditions.buffer_not_empty,
-}
+--ins_left {
+    ---- filesize component
+    --'filesize',
+    --cond = conditions.buffer_not_empty,
+--}
 
 ins_left {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.blue, gui = 'bold' },
+    color = { fg = "#94b6cb", gui = 'bold' },
 }
 
 ins_left { 'location' }
@@ -177,8 +182,13 @@ ins_left {
         end
         return msg
     end,
-    icon = ' LSP:',
-    color = { fg = colors.orange, gui = 'bold' },
+    icon = ' ',
+
+    color = function()
+        -- auto change color according to neovims mode
+        return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' }
+    end,
+    --color = { fg = colors.orange, gui = 'bold' },
 }
 
 -- Add components to right sections
@@ -224,8 +234,12 @@ ins_right {
 ins_right {
     function()
         return '▊'
+        --return ''
     end,
-    color = { fg = colors.blue },
+    color = function()
+        -- auto change color according to neovims mode
+        return { fg = mode_color[vim.fn.mode()], bg='None' }
+    end,
     padding = { left = 1 },
 }
 

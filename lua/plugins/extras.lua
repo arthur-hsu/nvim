@@ -1,16 +1,15 @@
 return{
     {
         'NvChad/nvim-colorizer.lua',
-        event = 'VeryLazy',
+        event = { "BufReadPost", "BufNewFile" },
+        --event = 'VeryLazy',
         config = function ()
-            --require'colorizer'.setup({})
-            require("colorizer").attach_to_buffer(0, { mode = "background", css = true})
+            require'colorizer'.setup({})
+            --require("colorizer").attach_to_buffer(0, { mode = "background", css = true})
         end
     },
     {
         'xiyaowong/transparent.nvim',
-        --lazy = false,
-        --event = 'VeryLazy',
         event = { "BufReadPost", "BufNewFile" },
         priority = 1000,
         opts ={
@@ -23,7 +22,6 @@ return{
     {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
-        --event = 'VeryLazy',
     },
     {
         'dstein64/vim-startuptime',
@@ -31,8 +29,8 @@ return{
     },
     {
         "nathom/filetype.nvim",
-        --lazy=true
-        event = 'VeryLazy',
+        event = "VimEnter",
+        --event = 'VeryLazy',
     },
     {
         "sindrets/diffview.nvim",
@@ -84,75 +82,43 @@ return{
     },
     {
         'lithammer/nvim-pylance',
+        enabled = false,
         lazy=true,
     },
-    {
-        'github/copilot.vim',
-        event = { "BufReadPost", "BufNewFile" },
-        enabled=false,
-        config = function ()
-            vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
-            vim.g.copilot_no_tab_map = true
-            vim.cmd[[highlight CopilotSuggestion guifg=#96ff00 guibg=#162a33 ctermfg=8]]
-        end,
-    },
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = { "BufReadPost", "BufNewFile" },
-        --event = "InsertEnter",
+    { 
+        'gen740/SmoothCursor.nvim',
+        event = 'VeryLazy',
         config = function()
-            require("copilot").setup({
-                panel = {
-                    enabled = true,
-                    auto_refresh = true,
-                    keymap = {
-                        jump_prev = "[[",
-                        jump_next = "]]",
-                        accept = "<CR>",
-                        refresh = "gr",
-                        open = "<M-CR>"
+            require('smoothcursor').setup({
+                autostart = true,
+                cursor = "",              -- cursor shape (need nerd font)
+                texthl = "SmoothCursor",   -- highlight group, default is { bg = nil, fg = "#FFD400" }
+                linehl = nil,              -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
+                type = "default",          -- define cursor movement calculate function, "default" or "exp" (exponential).
+                fancy = {
+                    enable = true,        -- enable fancy mode
+                    head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+                    body = {
+                        { cursor = "", texthl = "SmoothCursorRed" },
+                        { cursor = "", texthl = "SmoothCursorOrange" },
+                        { cursor = "●", texthl = "SmoothCursorYellow" },
+                        { cursor = "●", texthl = "SmoothCursorGreen" },
+                        { cursor = "•", texthl = "SmoothCursorAqua" },
+                        { cursor = ".", texthl = "SmoothCursorBlue" },
+                        { cursor = ".", texthl = "SmoothCursorPurple" },
                     },
-                    layout = {
-                        position = "bottom", -- | top | left | right
-                        ratio = 0.4
-                    },
+                    tail = { cursor = nil, texthl = "SmoothCursor" }
                 },
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    debounce = 75,
-                    keymap = {
-                        accept = "<C-a>",
-                        accept_word = false,
-                        accept_line = false,
-                        next = "<M-]>",
-                        prev = "<M-[>",
-                        dismiss = "<C-e>",
-                    },
-                },
-                filetypes = {
-                    yaml = false,
-                    markdown = true,
-                    help = false,
-                    gitcommit = false,
-                    gitrebase = false,
-                    hgcommit = false,
-                    svn = false,
-                    cvs = false,
-                    ["."] = false,
-                },
-                copilot_node_command = 'node', -- Node.js version must be > 16.x
-                server_opts_overrides = {
-                    trace = "verbose",
-                    settings = {
-                        advanced = {
-                            listCount = 10, -- #completions for panel
-                            inlineSuggestCount = 3, -- #completions for getCompletions
-                        }
-                    },
-                }
+                flyin_effect = nil,        -- "bottom" or "top"
+                speed = 25,                -- max is 100 to stick to your current position
+                intervals = 35,            -- tick interval
+                priority = 10,             -- set marker priority
+                timeout = 3000,            -- timout for animation
+                threshold = 3,             -- animate if threshold lines jump
+                disable_float_win = false, -- disable on float window
+                enabled_filetypes = nil,   -- example: { "lua", "vim" }
+                disabled_filetypes = nil,  -- this option will be skipped if enabled_filetypes is set. example: { "TelescopePrompt", "NvimTree" }
             })
-        end,
-    }
+        end
+    },
 }
