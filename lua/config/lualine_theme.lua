@@ -207,7 +207,6 @@ ins_right {
 }
 
 ins_right {
-    --'fileformat',
     'filetype',
     --fmt = string.upper,
     icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
