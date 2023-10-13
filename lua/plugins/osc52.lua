@@ -23,18 +23,19 @@ function M.config()
       copy = {['+'] = copy, ['*'] = copy},
       paste = {['+'] = paste, ['*'] = paste},
     }
-    local opts = { noremap = true, silent = true }
+    local opts = {noremap = false, silent = true }
 	if vim.g.clipboard.name == 'osc52' then
 	    vim.keymap.set("v", "<C-c>", require('osc52').copy_visual,opts)
+	    vim.keymap.set("v", "y", require('osc52').copy_visual,opts)
 	    if vim.loop.os_uname().sysname == 'Darwin' then
-		vim.keymap.set("v", "M-c",require('osc52').copy_visual,opts)
+            vim.keymap.set("v", "M-c",require('osc52').copy_visual,opts)
 	    end
 	else
 	    vim.keymap.set("v", "<C-c>", '"+y', opts)
+	    vim.keymap.set("v", "y", '"+y', opts)
 	    if vim.loop.os_uname().sysname == 'Darwin' then
-		vim.keymap.set("v", "<M-c>", '"+y', opts)
+            vim.keymap.set("v", "<M-c>", '"+y', opts)
 	    end
-
 	end
 end
 return M
