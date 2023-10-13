@@ -43,7 +43,6 @@ keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
 keymap('n', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 keymap('i', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 keymap("n", "<F12>", ":StartupTime<CR>",opts)
-
 keymap("n", "<TAB>", ">>", opts)
 keymap("n", "<S-TAB>", "<<", opts)
 keymap("v", "<TAB>", ">gv", opts)
@@ -58,6 +57,7 @@ keymap("i", "<C-z>",  "<esc><C-o><C-o>", opts)
 keymap("n", "<C-v>", "p", opts)
 
 
+keymap("n","<C-n>",'',opts)
 
 
 
