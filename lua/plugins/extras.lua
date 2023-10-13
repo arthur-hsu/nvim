@@ -10,8 +10,8 @@ return{
     },
     {
         'xiyaowong/transparent.nvim',
-        --event = 'VeryLazy',
-        event = { "BufReadPost", "BufNewFile" },
+        event = 'VimEnter',
+        --event = { "BufReadPost", "BufNewFile" },
         opts ={
             exclude_groups = {'bufferline'},
         },
