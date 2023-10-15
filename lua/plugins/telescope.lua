@@ -33,7 +33,7 @@ function M.config()
     require("telescope").setup({
         defaults = {
             scroll_strategy = "limit",
-            initial_mode = "normal",
+            initial_mode = "insert", --normal
             prompt_prefix = "➤  ",
             vimgrep_arguments = {
                 "rg",
