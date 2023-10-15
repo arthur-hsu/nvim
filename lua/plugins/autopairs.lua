@@ -1,18 +1,18 @@
 local M = {
     "windwp/nvim-autopairs",
     event = 'VeryLazy',
+    enabled = false,
 }
 
 function M.config()
     require('nvim-autopairs').setup(
         {
-            enable_check_bracket_line = false
+            enable_check_bracket_line = false,
         })
     ------------------------------------------------------
     -- use treesitter to check for a pair.
     local npairs = require("nvim-autopairs")
     local Rule = require('nvim-autopairs.rule')
-    
     npairs.setup({
         check_ts = true,
         ts_config = {
@@ -30,8 +30,6 @@ function M.config()
         :with_pair(ts_conds.is_not_ts_node({'function'}))
     })
     local cmp = require("cmp")
-
-
     -- If you want insert `(` after select function or method item
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     cmp.event:on('confirm_done',cmp_autopairs.on_confirm_done())

@@ -11,16 +11,15 @@ local M = {
         "hrsh7th/cmp-cmdline",
         "onsails/lspkind-nvim",
         "hrsh7th/cmp-nvim-lua",
-        --"hrsh7th/cmp-nvim-lsp-signature-help",
-        "ray-x/lsp_signature.nvim"
+        --"hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
+        'rafamadriz/friendly-snippets'
     },
 }
 
 
 function M.config()
-
     local cmp = require("cmp")
-    local luasnip = require("luasnip")
+    require("luasnip.loaders.from_vscode").lazy_load()
     -- Use buffer source for `/`.
     cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
@@ -52,9 +51,9 @@ function M.config()
         sources = cmp.config.sources({
             --{ name = 'nvim_lsp_signature_help' },
             { name = "path" },
-            { name = "nvim_lsp", group_index = 1 },
-            { name = 'buffer',group_index = 2 },
-            { name = 'luasnip', group_index = 3 },
+            { name = "nvim_lsp", group_index = 2 },
+            { name = 'buffer',group_index = 3 },
+            { name = 'luasnip', group_index = 1, max_item_count = 3 },
         }),
         window = {
             completion = cmp.config.window.bordered(),

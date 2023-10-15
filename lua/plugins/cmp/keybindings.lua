@@ -74,50 +74,30 @@ pluginKeys.cmp = function(cmp)
         -- 出现补全
         ["<A-.>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- 取消
-        ["<C-e>"] = cmp.mapping({
+        ["/"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        -- 确认
-        -- Accept currently selected item. If none selected, `select` first item.
-        -- Set `select` to `false` to only confirm explicitly selected items.
-        --["<CR>"] = cmp.mapping({
-        --i = function(fallback)
-        --if cmp.visible() and cmp.get_active_entry() then
-        --cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-        --else
-        --fallback()
-        --end
-        --end,
-        --s = cmp.mapping.confirm({ select = true }),
-        --c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-        --}),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
         ["<Tab>"] = cmp.mapping(
             function(fallback)
-                if cmp.visible() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+                local copilot = require 'copilot.suggestion'
+                if copilot.is_visible() then
+                    copilot.accept()
+                elseif cmp.visible() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
                 elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
-                --elseif has_words_before() then
-                    --cmp.complete()
+                elseif has_words_before() then
+                    cmp.complete()
                 else
                     fallback()
                 end
             end, { "i", "s" }
         ),
-        -- right confirm
-        --["<right>"] = cmp.mapping(
-        --function(fallback)
-        --if cmp.visible() then
-        --cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
-        --elseif cmp.visible() and require("luasnip").expand_or_jumpable() then
-        --vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-        --else
-        --fallback()
-        --end
-        --end, { "i", "s" }
-        --),
-        -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     }
 end
 

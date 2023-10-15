@@ -28,7 +28,7 @@ function M.config()
         },
         -- 启用基于Treesitter的代码格式化(=) . NOTE: This is an experimental feature.
         indent = {
-            enable = false
+            enable = true
         },
         rainbow = {
             enable = true,

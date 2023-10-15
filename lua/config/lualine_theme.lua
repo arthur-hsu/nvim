@@ -183,12 +183,9 @@ ins_left {
         return msg
     end,
     icon = ' ',
-
     color = function()
-        -- auto change color according to neovims mode
         return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' }
     end,
-    --color = { fg = colors.orange, gui = 'bold' },
 }
 
 -- Add components to right sections

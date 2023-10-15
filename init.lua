@@ -6,7 +6,6 @@ else
     require "config.diagnostic"
     require "config.lazy"
     require "config.keymaps"
-    require "config.lualine_theme"
     require "config.options"
     vim.cmd.colorscheme "zephyr"
     --require "config.color"
