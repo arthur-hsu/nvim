@@ -244,6 +244,15 @@ function M.config()
         },
         cond = conditions.hide_in_width,
     }
+    ins_right{
+        function ()
+            status = require("copilot.api").status.data
+            print(status.message)
+            return status.message
+        end,
+        color = { fg = colors.magenta, gui = 'bold',bg='None' },
+
+    }
     ins_right {
         function()
             return '▊'
