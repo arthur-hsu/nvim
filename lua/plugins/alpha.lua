@@ -1,7 +1,10 @@
 return {
     "goolord/alpha-nvim",
     event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        { 'MaximilianLloyd/ascii.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
+    },
     --lazy = false,
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
@@ -28,26 +31,24 @@ return {
       ░  ░   ░               ░  ░  ░   ░        ░     
         ]]
 
-        dashboard.section.header.val = vim.split(arthur_1, "\n")
+        --dashboard.section.header.val = vim.split(nvim_logo, "\n")
+        dashboard.section.header.val = require('ascii').art.text.neovim.the_edge
+        
         dashboard.section.buttons.val = {
             dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
             dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+            --dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("n", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
             --dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
             --dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
             dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         }
+        dashboard.opts.layout[1].val = 5
 
-        -- set highlight
-        --for _, button in ipairs(dashboard.section.buttons.val) do
-            --button.opts.hl = "AlphaButtons"
-            --button.opts.hl_shortcut = "AlphaShortcut"
-        --end
-        --dashboard.section.header.opts.hl = "comment"
+        --dashboard.section.header.opts.hl = "AlphaHeader"
         --dashboard.section.buttons.opts.hl = "AlphaButtons"
         --dashboard.section.footer.opts.hl = "AlphaFooter"
-        --dashboard.opts.layout[1].val = 10
         return dashboard
     end,
     config = function(_, dashboard)
