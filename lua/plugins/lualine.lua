@@ -21,7 +21,7 @@ local colors = {
     yellow   = '#ECBE7B',
     cyan     = '#008080',
     darkblue = '#081633',
-    green    = '#98be65',
+    green    = '#88D97B',
     orange   = '#FF8800',
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
@@ -141,22 +141,23 @@ function M.config()
             return ''
         end,
         color = function()
-            -- auto change color according to neovims mode
             return { fg = mode_color[vim.fn.mode()],bg='None' }
         end,
         padding = { right = 1 },
     }
 
-    --ins_left {
-        ---- filesize component
-        --'filesize',
-        --cond = conditions.buffer_not_empty,
-    --}
+    ins_left{
+        'mode',
+        fmt = string.upper,
+        color = function ()
+            return{ fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' }
+        end
+    }
 
     ins_left {
         'filename',
         cond = conditions.buffer_not_empty,
-        color = { fg = "#94b6cb", gui = 'bold',bg='None' },
+        color = { fg = "#7FCEFF", gui = 'bold',bg='None' },
     }
     ins_left {
         'branch',
@@ -165,9 +166,12 @@ function M.config()
     }
 
 
-    ins_left { 'location' }
+    ins_left {
+        'location',
+        color= { fg = colors.yellow, gui = 'bold',bg='None' },
+    }
 
-    ins_left { 'progress', color = { fg = colors.fg, gui = 'bold',bg='None' } }
+    ins_left { 'progress', color = { fg = colors.yellow, gui = 'bold',bg='None' } }
 
     ins_left {
         'diagnostics',
@@ -222,14 +226,27 @@ function M.config()
         'o:encoding', -- option component same as &encoding in viml
         fmt = string.upper, -- I'm not sure why it's upper case either ;)
         cond = conditions.hide_in_width,
-        color = { fg = colors.green, gui = 'bold',bg='None' },
+        color = { fg = colors.yellow, gui = 'bold',bg='None' },
     }
 
+    local os = vim.loop.os_uname().sysname
     ins_right {
-        'fileformat',
-        fmt = string.upper,
-        icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-        color = { fg = colors.green, gui = 'bold',bg='None' },
+        function ()
+            local os_icons ={
+                ["Windows"]= '',
+                ["Darwin"] = '',
+                ["Linux"]  = '',
+            }
+            return os_icons[os]
+        end,
+        color = function ()
+            local os_color = {
+                ["Windows"] = {fg = "#087CD5",bg='None'},
+                ["Darwin"] = {fg = '#A9B3B9',bg='None'},
+                ["Linux"] = {fg = '#88D97B',bg='None'},
+            }
+            return os_color[os]
+        end
     }
 
     ins_right {
