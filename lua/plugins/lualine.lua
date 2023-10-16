@@ -25,7 +25,7 @@ local colors = {
     orange   = '#FF8800',
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
-    blue     = '#51afef',
+    blue     = '#7FCEFF',
     red      = '#ec5f67',
 }
 
@@ -123,22 +123,22 @@ function M.config()
         table.insert(config.sections.lualine_x, component)
     end
 
-    ins_left {
-        function()
-            return '▊'
-        end,
-        --color = { fg = colors.blue }, -- Sets highlighting of component
-        color = function()
-            -- auto change color according to neovims mode
-            return { fg = mode_color[vim.fn.mode()],bg='None'  }
-        end,
-        padding = { left = 0, right = 1 }, -- We don't need space before this
-    }
+    --ins_left {
+        --function()
+            --return '▊'
+        --end,
+        ----color = { fg = colors.blue }, -- Sets highlighting of component
+        --color = function()
+            ---- auto change color according to neovims mode
+            --return { fg = mode_color[vim.fn.mode()],bg='None'  }
+        --end,
+        --padding = { left = 0, right = 1 }, -- We don't need space before this
+    --}
 
     ins_left {
         -- mode component
         function()
-            return ''
+            return ' '
         end,
         color = function()
             return { fg = mode_color[vim.fn.mode()],bg='None' }
@@ -154,41 +154,25 @@ function M.config()
         end
     }
 
+
+    --ins_left {
+        --'filetype',
+        ----fmt = string.upper,
+        --icons_only = true,
+        ----icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+        --color = { fg = colors.yellow ,bg='None'},
+    --}
     ins_left {
         'filename',
+        color = { fg = colors.green, gui = 'bold',bg='None' },
         cond = conditions.buffer_not_empty,
-        color = { fg = "#7FCEFF", gui = 'bold',bg='None' },
-    }
-    ins_left {
-        'branch',
-        icon = '',
-        color = { fg = colors.magenta, gui = 'bold',bg='None' },
     }
 
+    ins_left { 'location', color = { fg = colors.yellow, bg='None' } }
 
-    ins_left {
-        'location',
-        color= { fg = colors.yellow, gui = 'bold',bg='None' },
-    }
+    ins_left { 'progress', color = { fg = colors.yellow, bg='None' } }
 
-    ins_left { 'progress', color = { fg = colors.yellow, gui = 'bold',bg='None' } }
 
-    ins_left {
-        'diagnostics',
-        sources = { 'nvim_diagnostic' },
-        symbols = {
-            error = " ",
-            warn  = " ",
-            info  = " ",
-            hint  = "󰝶 ",
-        },
-        diagnostics_color = {
-            color_error = { fg = colors.red,bg='None' },
-            color_warn = { fg = colors.yellow,bg='None' },
-            color_info = { fg = colors.cyan,bg='None' },
-            color_hint = { fg = colors.fg,bg='None' },
-        },
-    }
 
     -- Insert mid section. You can make any number of sections in neovim :)
     -- for lualine it's any number greater then 2
@@ -221,6 +205,34 @@ function M.config()
         end,
     }
 
+    ins_right {
+        'diagnostics',
+        sources = { 'nvim_diagnostic' },
+        symbols = {
+            error = " ",
+            warn  = " ",
+            info  = " ",
+            hint  = "󰝶 ",
+        },
+        diagnostics_color = {
+            color_error = { fg = colors.red,bg='None' },
+            color_warn = { fg = colors.yellow,bg='None' },
+            color_info = { fg = colors.cyan,bg='None' },
+            color_hint = { fg = colors.fg,bg='None' },
+        },
+    }
+
+    ins_right {
+        'diff',
+        -- Is it me or the symbol for modified us really weird
+        --symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+        diff_color = {
+            added = { fg = colors.green,bg='None' },
+            modified = { fg = colors.yellow,bg='None' },
+            removed = { fg = colors.red,bg='None' },
+        },
+        cond = conditions.hide_in_width,
+    }
     -- Add components to right sections
     ins_right {
         'o:encoding', -- option component same as &encoding in viml
@@ -249,25 +261,13 @@ function M.config()
         end
     }
 
-    ins_right {
-        'filetype',
-        --fmt = string.upper,
-        icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-        color = { fg = colors.green ,bg='None'},
-    }
-
 
     ins_right {
-        'diff',
-        -- Is it me or the symbol for modified us really weird
-        symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
-        diff_color = {
-            added = { fg = colors.green,bg='None' },
-            modified = { fg = colors.yellow,bg='None' },
-            removed = { fg = colors.red,bg='None' },
-        },
-        cond = conditions.hide_in_width,
+        'branch',
+        icon = '',
+        color = { fg = colors.magenta, gui = 'bold',bg='None' },
     }
+
     local status = require("copilot.api").status.data
     ins_right{
         function ()
@@ -281,7 +281,6 @@ function M.config()
             return copilot_status[status.status] .. (status.message or "")
         end,
         color = function ()
-            
             local copilot_colours = {
                 [""] = { fg = '#00f4ff', bg = 'None' },
                 ["Normal"] = { fg = '#00f4ff',bg = 'None' },
@@ -293,17 +292,17 @@ function M.config()
         end
 
     }
-    ins_right {
-        function()
-            return '▊'
-            --return ''
-        end,
-        color = function()
-            -- auto change color according to neovims mode
-            return { fg = mode_color[vim.fn.mode()], bg='None' }
-        end,
-        padding = { left = 1 },
-    }
+    --ins_right {
+        --function()
+            --return '▊'
+            ----return ''
+        --end,
+        --color = function()
+            ---- auto change color according to neovims mode
+            --return { fg = mode_color[vim.fn.mode()], bg='None' }
+        --end,
+        --padding = { left = 1 },
+    --}
 
     -- Now don't forget to initialize lualine
     lualine.setup(config)
