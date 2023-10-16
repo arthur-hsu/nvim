@@ -43,7 +43,7 @@ opt.autoread = true
 --opt.cursorline = true
 cmd ("set buftype=")
 opt.modifiable=true
-opt.laststatus = 1
+opt.laststatus = 0
 
 --opt.guicursor = ""
 --opt.iskeyword:append(":")
