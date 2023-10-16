@@ -27,6 +27,9 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
+                docker_compose_language_service = {},
+                dockerls ={},
+                html = {},
                 marksman = {},
                 jsonls = {},
                 pyright = {
