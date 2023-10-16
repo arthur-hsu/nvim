@@ -53,31 +53,6 @@ function M.config()
         },
         current_line_blame_formatter_opts = { relative_time = true },
         current_line_blame_formatter = '      <author>, <author_time:%R> - <summary> ',
-        --current_line_blame_formatter = function(name, blame_info,opts)
-            --if blame_info.author == name then blame_info.author = 'You' end
-            --local text
-            --text = blame_info.summary
-            --if blame_info.summary == 'Not Committed Yet' then
-                --text = blame_info.summary
-            --else
-                --local date_time
-                --if opts.relative_time then
-                    --date_time = require('gitsigns.util').get_relative_time(tonumber(blame_info['author_time']))
-                --else
-                    --date_time = os.date('%Y-%m-%d', tonumber(blame_info['author_time']))
-                --end
-                --text = string.format('%s, %s - %s', blame_info.author,date_time, blame_info.summary)
-
-
-                ----text = string.format('%s%s, %s - %s', blame_info.author,blame_info.author_mail,date_time,
-                ------ os.date(
-                ------      '%Y-%m-%d',
-                ------      tonumber(blame_info['author_time'])),
-                ----blame_info.summary)
-            --end
-            --return {{'       ' .. text,'  ', 'GitSignsCurrentLineBlame'}}
-            ----return {{' ' .. text .. '  ', 'GitSignsCurrentLineBlame'}}
-        --end,
         sign_priority = 6,
         update_debounce = 100,
         status_formatter = nil, -- Use default

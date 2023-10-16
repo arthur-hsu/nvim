@@ -158,6 +158,12 @@ function M.config()
         cond = conditions.buffer_not_empty,
         color = { fg = "#94b6cb", gui = 'bold',bg='None' },
     }
+    ins_left {
+        'branch',
+        icon = '',
+        color = { fg = colors.magenta, gui = 'bold',bg='None' },
+    }
+
 
     ins_left { 'location' }
 
@@ -166,11 +172,17 @@ function M.config()
     ins_left {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
-        symbols = { error = ' ', warn = ' ', info = ' ' },
+        symbols = {
+            error = " ",
+            warn  = " ",
+            info  = " ",
+            hint  = "󰝶 ",
+        },
         diagnostics_color = {
             color_error = { fg = colors.red,bg='None' },
             color_warn = { fg = colors.yellow,bg='None' },
             color_info = { fg = colors.cyan,bg='None' },
+            color_hint = { fg = colors.fg,bg='None' },
         },
     }
 
@@ -227,11 +239,6 @@ function M.config()
         color = { fg = colors.green ,bg='None'},
     }
 
-    ins_right {
-        'branch',
-        icon = '',
-        color = { fg = colors.magenta, gui = 'bold',bg='None' },
-    }
 
     ins_right {
         'diff',
@@ -239,18 +246,34 @@ function M.config()
         symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
         diff_color = {
             added = { fg = colors.green,bg='None' },
-            modified = { fg = colors.orange,bg='None' },
+            modified = { fg = colors.yellow,bg='None' },
             removed = { fg = colors.red,bg='None' },
         },
         cond = conditions.hide_in_width,
     }
+    local status = require("copilot.api").status.data
     ins_right{
         function ()
-            status = require("copilot.api").status.data
-            print(status.message)
-            return status.message
+            local copilot_status = {
+                [""] = '',
+                ["Normal"] = '',
+                ["Warning"] = '',
+                ["InProgress"] = '',
+                ["Error"] = '',
+            }
+            return copilot_status[status.status] .. (status.message or "")
         end,
-        color = { fg = colors.magenta, gui = 'bold',bg='None' },
+        color = function ()
+            
+            local copilot_colours = {
+                [""] = { fg = '#00f4ff', bg = 'None' },
+                ["Normal"] = { fg = '#00f4ff',bg = 'None' },
+                ["Warning"] = { fg = colors.orange, bg = 'None' },
+                ["InProgress"] = { fg = colors.yellow, bg = 'None' },
+                ["Error"] = { fg = colors.yellow, bg = 'None' },
+            }
+            return copilot_colours[status.status]
+        end
 
     }
     ins_right {
