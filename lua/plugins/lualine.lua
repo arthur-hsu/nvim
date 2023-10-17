@@ -133,7 +133,7 @@ function M.config()
     ins_left {
         function () return vim.fn.expand('%:t') end,
         cond = conditions.buffer_not_empty,
-        color = function () return { fg = icon_color, gui = 'bold',bg='None' } end
+        color = function () return { fg = (icon_color or mode_color[vim.fn.mode()]), gui = 'bold',bg='None' } end
     }
 
     -- Location & Progress --
@@ -167,7 +167,7 @@ function M.config()
             return msg
         end,
         icon = file_icon,
-        color = function() return { fg = icon_color,gui = 'bold',bg='None' } end,
+        color = function() return { fg = ( icon_color or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
     }
     
     -- Diagnostic --

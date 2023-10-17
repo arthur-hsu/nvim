@@ -32,6 +32,7 @@ return {
                 html = {},
                 marksman = {},
                 jsonls = {},
+                yamlls = {},
                 pyright = {
                     --capabilities = {
                         --textDocument = {
