@@ -8,7 +8,22 @@ function M.config()
         silent     = true,
     }
 
-    --Using nvim-osc52 as clipboard provider
+    local opts = {noremap = false, silent = true }
+    if vim.fn.getenv('SSH_CLIENT') then
+        vim.keymap.set("v", "<C-c>", require('osc52').copy_visual)
+        if vim.loop.os_uname().sysname == 'Darwin' then
+            vim.keymap.set("v", "M-c",require('osc52').copy_visual)
+        end
+    else
+        vim.keymap.set("v", "<C-c>", '"+y',opts)
+        vim.keymap.set("v", "y", '"+y',opts)
+        if vim.loop.os_uname().sysname == 'Darwin' then
+            vim.keymap.set("v", "M-c",'"+y',opts)
+        end
+    end
+
+    --Using nvim-osc52 as clipboard provider--
+
     local function copy(lines, _)
       require('osc52').copy(table.concat(lines, '\n'))
     end
@@ -22,19 +37,21 @@ function M.config()
       copy = {['+'] = copy, ['*'] = copy},
       paste = {['+'] = paste, ['*'] = paste},
     }
-    local opts = {noremap = false, silent = true }
-	if vim.g.clipboard.name == 'osc52' then
-	    vim.keymap.set("v", "<C-c>", require('osc52').copy_visual, opts)
-	    vim.keymap.set("v", "y", require('osc52').copy_visual, opts)
-	    if vim.loop.os_uname().sysname == 'Darwin' then
-            vim.keymap.set("v", "M-c",require('osc52').copy_visual,opts)
-	    end
-	--else
-		--vim.keymap.set("v", "<C-c>", '"+y', opts)
-		--vim.keymap.set("v", "y", '"+y', opts)
-		--if vim.loop.os_uname().sysname == 'Darwin' then
-            --vim.keymap.set("v", "<M-c>", '"+y', opts)
-		--end
-	end
+    --
+    --automatically copy text that was yanked into register '+'
+    
+    --function copy()
+        --if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
+            --require('osc52').copy_register('+')
+        --end
+    --end
+    --vim.api.nvim_create_autocmd('TextYankPost', {callback = copy})
+
+    --function C_c()
+        --if vim.v.event.operator == '<C-c>' and vim.v.event.regname == '+' then
+            --require('osc52').copy_register('+')
+        --end
+    --end
+    --vim.api.nvim_create_autocmd('TextYankPost', {callback = C_c})
 end
 return M

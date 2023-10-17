@@ -54,7 +54,7 @@ keymap("n", "<C-s>", ":w<CR>", opts)
 keymap("n", "<C-z>",  "<C-o><C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w<CR>", opts)
 keymap("i", "<C-z>",  "<esc><C-o><C-o>", opts)
-keymap("n", "<C-v>", "p", opts)
+keymap("n", "<C-v>", 'p', opts)
 
 
 --keymap("n","<C-n>",'',opts)

@@ -272,11 +272,11 @@ function M.config()
     ins_right{
         function ()
             local copilot_status = {
-                [""] = '',
-                ["Normal"] = '',
-                ["Warning"] = '',
-                ["InProgress"] = '',
-                ["Error"] = '',
+                [""] = ' ',
+                ["Normal"] = ' ',
+                ["Warning"] = ' ',
+                ["InProgress"] = ' ',
+                ["Error"] = ' ',
             }
             return copilot_status[status.status] .. (status.message or "")
         end,
