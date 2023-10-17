@@ -10,13 +10,14 @@ local colors = {
     magenta  = '#c678dd',
     blue     = '#7FCEFF',
     red      = '#e95678',
+    bg_visual = "#b3deef",
 }
 
 local mode_color = {
     n = colors.blue,
     i = colors.green,
-    v = colors.cyan,
-    V = colors.cyan,
+    v = colors.bg_visual,
+    V = colors.bg_visual,
     c = colors.magenta,
     no = colors.red,
     s = colors.orange,
