@@ -242,20 +242,26 @@ function M.config()
     }
 
     local os = vim.loop.os_uname().sysname
+    if os == "Linux" then
+        os = io.popen("lsb_release -i -s"):read("*l")
+    end
     ins_right {
         function ()
             local os_icons ={
                 ["Windows"]= '',
                 ["Darwin"] = '',
-                ["Linux"]  = '',
+                --["Linux"]  = '',
+                ["Debian"] = '',
+                ["Ubuntu"] = ''
             }
             return os_icons[os]
         end,
         color = function ()
             local os_color = {
-                ["Windows"] = {fg = "#087CD5",bg='None'},
-                ["Darwin"] = {fg = '#A9B3B9',bg='None'},
-                ["Linux"] = {fg = '#88D97B',bg='None'},
+                ["Windows"] = {fg = "#087CD5", bg='None'},
+                ["Darwin"]  = {fg = "#A9B3B9", bg='None'},
+                ["Debian"]  = {fg = "#88D97B", bg='None'},
+                ["Ubuntu"]  = {fg = "#DD4814", bg='None'},
             }
             return os_color[os]
         end
