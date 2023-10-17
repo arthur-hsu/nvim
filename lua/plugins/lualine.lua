@@ -1,20 +1,3 @@
---branch (git branch)
---buffers (shows currently available buffers)
---diagnostics (diagnostics count from your preferred source)
---diff (git diff status)
---encoding (file encoding)
---fileformat (file format)
---filename
---filesize
---filetype
---hostname
---location (location in file in line:column format)
---mode (vim mode)
---progress (%progress in file)
---searchcount (number of search matches when hlsearch is active)
---selectioncount (number of selected characters or lines)
---tabs (shows currently available tabs)
---windows (shows currently available windows)
 local colors = {
     bg       = '#202328',
     fg       = '#bbc2cf',
@@ -22,11 +5,11 @@ local colors = {
     cyan     = '#008080',
     darkblue = '#081633',
     green    = '#88D97B',
-    orange   = '#FF8800',
+    orange   = '#FEA405',
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
     blue     = '#7FCEFF',
-    red      = '#ec5f67',
+    red      = '#e95678',
 }
 
 local mode_color = {
@@ -38,7 +21,7 @@ local mode_color = {
     no = colors.red,
     s = colors.orange,
     S = colors.orange,
-    [''] = colors.orange,
+    [''] = colors.orange,
     ic = colors.yellow,
     R = colors.violet,
     Rv = colors.violet,
@@ -73,6 +56,7 @@ function M.config()
 
     local lualine = require('lualine')
     local config = {
+        extensions = { "lazy" },
         options = {
             -- Disable sections and component separators
             disabled_filetypes = {     -- Filetypes to disable lualine for.
@@ -111,8 +95,6 @@ function M.config()
         },
     }
 
-
-
     -- Inserts a component in lualine_c at left section
     local function ins_left(component)
         table.insert(config.sections.lualine_c, component)
@@ -123,65 +105,50 @@ function M.config()
         table.insert(config.sections.lualine_x, component)
     end
 
-    --ins_left {
-        --function()
-            --return '▊'
-        --end,
-        ----color = { fg = colors.blue }, -- Sets highlighting of component
-        --color = function()
-            ---- auto change color according to neovims mode
-            --return { fg = mode_color[vim.fn.mode()],bg='None'  }
-        --end,
-        --padding = { left = 0, right = 1 }, -- We don't need space before this
-    --}
-
+    
+    -- Mode --
     ins_left {
         -- mode component
         function()
-            return ' '
+            Mode_text = {
+                n      = 'NORMAL',
+                i      = 'INSERT',
+                c      = 'COMMAND',
+                v      = 'VISUAL',
+                V      = 'V-LINE',
+                [''] = 'V-BLOCK',
+                R      = 'REPLACE',
+                t      = 'TERMINAL',
+            }
+            return '  '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
         end,
-        color = function()
-            return { fg = mode_color[vim.fn.mode()],bg='None' }
-        end,
+        color = function() return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' } end,
         padding = { right = 1 },
     }
 
-    ins_left{
-        'mode',
-        fmt = string.upper,
-        color = function ()
-            return{ fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' }
-        end
-    }
 
 
-    --ins_left {
-        --'filetype',
-        ----fmt = string.upper,
-        --icons_only = true,
-        ----icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-        --color = { fg = colors.yellow ,bg='None'},
-    --}
+    -- Filename & Icon --
+    local file_icon, icon_color, cterm_color = require('nvim-web-devicons').get_icon_colors(vim.fn.expand('%:t'))
     ins_left {
-        'filename',
-        color = { fg = colors.green, gui = 'bold',bg='None' },
+        function () return vim.fn.expand('%:t') end,
         cond = conditions.buffer_not_empty,
+        color = function () return { fg = icon_color, gui = 'bold',bg='None' } end
     }
 
+    -- Location & Progress --
     ins_left { 'location', color = { fg = colors.yellow, bg='None' } }
-
     ins_left { 'progress', color = { fg = colors.yellow, bg='None' } }
 
 
 
     -- Insert mid section. You can make any number of sections in neovim :)
     -- for lualine it's any number greater then 2
+    
+    -- LSP --
     ins_left {
-        function()
-            return '%='
-        end,
+        function() return '%=' end  -- Must be here
     }
-
     ins_left {
         -- Lsp server name .
         function()
@@ -199,12 +166,11 @@ function M.config()
             end
             return msg
         end,
-        icon = ' ',
-        color = function()
-            return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' }
-        end,
+        icon = file_icon,
+        color = function() return { fg = icon_color,gui = 'bold',bg='None' } end,
     }
-
+    
+    -- Diagnostic --
     ins_right {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
@@ -221,35 +187,39 @@ function M.config()
             color_hint = { fg = colors.fg,bg='None' },
         },
     }
-
+    
+    -- Diff --
     ins_right {
         'diff',
         -- Is it me or the symbol for modified us really weird
-        --symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+        --symbols = { added = ' ', modified = ' ', removed = ' ' },
         diff_color = {
             added = { fg = colors.green,bg='None' },
-            modified = { fg = colors.yellow,bg='None' },
+            modified = { fg = colors.orange,bg='None' },
             removed = { fg = colors.red,bg='None' },
         },
         cond = conditions.hide_in_width,
     }
-    -- Add components to right sections
+
+    -- Encoding type --
     ins_right {
         'o:encoding', -- option component same as &encoding in viml
         fmt = string.upper, -- I'm not sure why it's upper case either ;)
         cond = conditions.hide_in_width,
         color = { fg = colors.yellow, gui = 'bold',bg='None' },
     }
+
+    -- Lazy status --
     ins_right{
-        function ()
-            return require("lazy.status").updates
-        end,
-        cond = require("lazy.status").has_updates,
+        require('lazy.status').updates,
+        cond = require('lazy.status').has_updates,
         color = { fg = colors.green },
     }
 
+
+    -- OS --
     local os = vim.loop.os_uname().sysname
-    if os == "Linux" then
+    if os == "Darwin" then
         os = io.popen("lsb_release -i -s"):read("*l")
     end
     ins_right {
@@ -257,30 +227,30 @@ function M.config()
             local os_icons ={
                 ["Windows"]= '',
                 ["Darwin"] = '',
-                --["Linux"]  = '',
                 ["Debian"] = '',
                 ["Ubuntu"] = ''
             }
-            return os_icons[os]
+            return (os_icons[os] or '')
         end,
         color = function ()
             local os_color = {
                 ["Windows"] = {fg = "#087CD5", bg='None'},
                 ["Darwin"]  = {fg = "#A9B3B9", bg='None'},
-                ["Debian"]  = {fg = "#88D97B", bg='None'},
+                ["Debian"]  = {fg = "#D91857", bg='None'},
                 ["Ubuntu"]  = {fg = "#DD4814", bg='None'},
             }
-            return os_color[os]
+            return (os_color[os] or {fg = "#88D97B", bg='None'})
         end
     }
 
-
+    -- Branch --
     ins_right {
         'branch',
         icon = '',
         color = { fg = colors.magenta, gui = 'bold',bg='None' },
     }
 
+    -- Copilot --
     local status = require("copilot.api").status.data
     ins_right{
         function ()
@@ -303,21 +273,18 @@ function M.config()
             }
             return copilot_colours[status.status]
         end
-
     }
-    --ins_right {
-        --function()
-            --return '▊'
-            ----return ''
-        --end,
-        --color = function()
-            ---- auto change color according to neovims mode
-            --return { fg = mode_color[vim.fn.mode()], bg='None' }
-        --end,
-        --padding = { left = 1 },
-    --}
 
-    -- Now don't forget to initialize lualine
+    --ins_left {
+        --function() return '▊' end,
+        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        --padding = { left = 0, right = 1 }, -- We don't need space before this
+    --}
+    --ins_right {
+        --function() return '▊' end,
+        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        --padding = { left = 1}, -- We don't need space before this
+    --}
     lualine.setup(config)
 end
 return M

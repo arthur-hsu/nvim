@@ -5,15 +5,10 @@ local M = {
 }
 
 function M.config()
-    require('nvim-autopairs').setup(
-        {
-            enable_check_bracket_line = false,
-        })
-    ------------------------------------------------------
-    -- use treesitter to check for a pair.
-    local npairs = require("nvim-autopairs")
-    local Rule = require('nvim-autopairs.rule')
-    npairs.setup({
+    require('nvim-autopairs').setup({
+        fast_wrap = {},
+        enable_check_bracket_line = false,
+        --map_bs = false,
         check_ts = true,
         ts_config = {
             lua = {'string'},-- it will not add a pair on that treesitter node
@@ -21,6 +16,10 @@ function M.config()
             java = false,-- don't check treesitter on java
         }
     })
+    ------------------------------------------------------
+    -- use treesitter to check for a pair.
+    local npairs = require("nvim-autopairs")
+    local Rule = require('nvim-autopairs.rule')
     local ts_conds = require('nvim-autopairs.ts-conds')
     -- press % => %% only while inside a comment or string
     npairs.add_rules({
