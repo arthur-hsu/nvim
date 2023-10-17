@@ -140,7 +140,7 @@ function M.config()
             keys = {
                 toggle_or_jump = '<CR>',
                 quit = 'q',
-                jump = '<j>',
+                jump = 'g',
             },
         },
         callhierarchy = {
