@@ -240,6 +240,13 @@ function M.config()
         cond = conditions.hide_in_width,
         color = { fg = colors.yellow, gui = 'bold',bg='None' },
     }
+    ins_right{
+        function ()
+            return require("lazy.status").updates
+        end,
+        cond = require("lazy.status").has_updates,
+        color = { fg = colors.green },
+    }
 
     local os = vim.loop.os_uname().sysname
     if os == "Linux" then

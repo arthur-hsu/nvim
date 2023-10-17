@@ -12,13 +12,13 @@ function M.config()
     if vim.fn.getenv('SSH_CLIENT') then
         vim.keymap.set("v", "<C-c>", require('osc52').copy_visual)
         if vim.loop.os_uname().sysname == 'Darwin' then
-            vim.keymap.set("v", "M-c",require('osc52').copy_visual)
+            vim.keymap.set("v", "ç",require('osc52').copy_visual)
         end
     else
         vim.keymap.set("v", "<C-c>", '"+y',opts)
         vim.keymap.set("v", "y", '"+y',opts)
         if vim.loop.os_uname().sysname == 'Darwin' then
-            vim.keymap.set("v", "M-c",'"+y',opts)
+            vim.keymap.set("v", "ç",'"+y',opts)
         end
     end
 
