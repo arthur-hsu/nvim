@@ -34,6 +34,19 @@ local mode_color = {
     ['!'] = colors.red,
     t = colors.red,
 }
+
+local file_detial = function (scope)
+    local file_icon, icon_color, cterm_color = require('nvim-web-devicons').get_icon_colors(vim.fn.expand('%:t'))
+    local detial = {
+        icon = file_icon,
+        color = icon_color,
+        cterm = cterm_color,
+    }
+    return detial[scope]
+end
+
+
+
 local conditions = {
     buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -130,11 +143,10 @@ function M.config()
 
 
     -- Filename & Icon --
-    local file_icon, icon_color, cterm_color = require('nvim-web-devicons').get_icon_colors(vim.fn.expand('%:t'))
     ins_left {
         function () return vim.fn.expand('%:t') end,
         cond = conditions.buffer_not_empty,
-        color = function () return { fg = (icon_color or mode_color[vim.fn.mode()]), gui = 'bold',bg='None' } end
+        color = function () return { fg = (file_detial('color') or mode_color[vim.fn.mode()]), gui = 'bold',bg='None' } end
     }
 
     -- Location & Progress --
@@ -167,8 +179,8 @@ function M.config()
             end
             return msg
         end,
-        icon = file_icon,
-        color = function() return { fg = ( icon_color or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
+        icon = file_detial('icon'),
+        color = function() return { fg = ( file_detial('color') or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
     }
     
     -- Diagnostic --
