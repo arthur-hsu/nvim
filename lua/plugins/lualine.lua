@@ -8,7 +8,7 @@ local colors = {
     orange   = '#FEA405',
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
-    blue     = '#7FCEFF',
+    blue     = '#61afef',
     red      = '#e95678',
     bg_visual = "#b3deef",
 }
