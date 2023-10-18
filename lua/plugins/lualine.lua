@@ -220,7 +220,7 @@ function M.config()
 
     -- OS --
     local os = vim.loop.os_uname().sysname
-    if os == "Darwin" then
+    if os == "Linux" then
         os = io.popen("lsb_release -i -s"):read("*l")
     end
     ins_right {
