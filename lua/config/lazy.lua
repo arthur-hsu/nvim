@@ -18,7 +18,10 @@ require("lazy").setup({
     },
     concurrency = 24,
     defaults = { lazy = true, version = nil },
-    install = { colorscheme = {"zephyr"},missing = true },
+    install = {
+        colorscheme = {"zephyr"},
+        missing = true
+    },
     checker = { enabled = true, notify = false },
     change_detection = {
         -- automatically check for config file changes and reload the ui
