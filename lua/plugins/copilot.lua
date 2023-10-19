@@ -93,5 +93,24 @@ return{
                 end,
             })
         end,
+    },
+    {
+        "jonahgoldwastaken/copilot-status.nvim",
+        dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
+        lazy = true,
+        event = "BufReadPost",
+        config = function ()
+            require('copilot_status').setup({
+                icons = {
+                    idle = "idle",
+                    error = "error",
+                    offline = "offline",
+                    warning = "warning",
+                    loading = "loading",
+                },
+                debug = false,
+            })
+        end
     }
+
 }

@@ -264,25 +264,30 @@ function M.config()
     }
 
     -- Copilot --
-    local status = require("copilot.api").status.data
+    local status = require("copilot_status").status_string()
     ins_right{
         function ()
             local copilot_status = {
-                [""] = ' ',
-                ["Normal"] = ' ',
-                ["Warning"] = ' ',
-                ["InProgress"] = ' ',
-                ["Error"] = ' ',
+                ["idle"]    = ' ',
+                ["warning"] = ' ',
+                ["loading"] = ' ',
+                ["error"]   = ' ',
+                ["offline"] = ' ',
             }
-            return copilot_status[status.status] .. (status.message or "")
+            return copilot_status[status] -- .. (function () if status['offline'] then return status end end or "")
+            --return require("copilot_status").status_string()
+        end,
+        cond = function ()
+            require("copilot_status").enabled()
+            --require("copilot_status").status_string()
         end,
         color = function ()
             local copilot_colours = {
-                [""] = { fg = '#00f4ff', bg = 'None' },
-                ["Normal"] = { fg = '#00f4ff',bg = 'None' },
-                ["Warning"] = { fg = colors.orange, bg = 'None' },
-                ["InProgress"] = { fg = colors.yellow, bg = 'None' },
-                ["Error"] = { fg = colors.yellow, bg = 'None' },
+                ["idle"] = { fg = '#00f4c0', bg = 'None' },
+                ["warning"] = { fg = colors.orange,bg = 'None' },
+                ["loading"] = { fg = colors.orange, bg = 'None' },
+                ["error"] = { fg = colors.red, bg = 'None' },
+                ["offline"] = { fg = colors.bg_visual, bg = 'None' },
             }
             return copilot_colours[status.status]
         end

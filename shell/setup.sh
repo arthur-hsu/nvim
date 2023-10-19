@@ -1,4 +1,4 @@
-sudo cp -r JetBrainsMono /usr/share/fonts
+#sudo cp -r JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
@@ -19,12 +19,12 @@ sudo apt-get install nodejs -y
 # sudo make install
 
 
-sudo pip3 install neovim
-sudo npm install neovim
+#sudo pip3 install neovim
+#sudo npm install neovim
 
-sudo apt install -y zsh
-cd ~
-exit
+#sudo apt install -y zsh
+#cd ~
+#exit
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #chsh -s $(which zsh)
 #git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
