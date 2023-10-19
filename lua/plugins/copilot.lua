@@ -97,8 +97,9 @@ return{
     {
         "jonahgoldwastaken/copilot-status.nvim",
         dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
-        lazy = true,
-        event = "BufReadPost",
+        --lazy = true,
+        --event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
         config = function ()
             require('copilot_status').setup({
                 icons = {

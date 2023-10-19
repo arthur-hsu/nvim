@@ -1,23 +1,27 @@
 local colors = {
     bg       = '#202328',
     fg       = '#bbc2cf',
-    yellow   = '#ECBE7B',
+    yellow   = '#F7C251',
     cyan     = '#008080',
     darkblue = '#081633',
     green    = '#88D97B',
     orange   = '#FEA405',
     violet   = '#a9a1e1',
     magenta  = '#c678dd',
-    blue     = '#61afef',
+    lightblue= '#61afef',
+    blue     = '#31A8FF',
     red      = '#e95678',
-    bg_visual = "#b3deef",
+    offline  = "#b3deef",
+    bg_visual = "#89C0CF",
+    light_purple = "#b3b8f5",
+    mac = "#A9B3B9"
 }
 
 local mode_color = {
-    n = colors.blue,
+    n = colors.lightblue,
     i = colors.green,
-    v = colors.bg_visual,
-    V = colors.bg_visual,
+    v = colors.blue,
+    V = colors.blue,
     c = colors.magenta,
     no = colors.red,
     s = colors.orange,
@@ -44,7 +48,11 @@ local file_detial = function (scope)
     }
     return detial[scope]
 end
-
+local copilot_status = function (scope)
+    local status = require("copilot_status").status_string()
+    return scope[status]
+    
+end
 
 
 local conditions = {
@@ -119,6 +127,11 @@ function M.config()
         table.insert(config.sections.lualine_x, component)
     end
 
+    ins_left {
+        function() return '▊' end,
+        color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        padding = { left = 0, right = 1 }, -- We don't need space before this
+    }
     
     -- Mode --
     ins_left {
@@ -134,7 +147,7 @@ function M.config()
                 R      = 'REPLACE',
                 t      = 'TERMINAL',
             }
-            return '  '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
+            return ' '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
         end,
         color = function() return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' } end,
         padding = { right = 1 },
@@ -248,7 +261,7 @@ function M.config()
         color = function ()
             local os_color = {
                 ["Windows"] = {fg = "#087CD5", bg='None'},
-                ["Darwin"]  = {fg = "#A9B3B9", bg='None'},
+                ["Darwin"]  = {fg = colors.mac, bg='None'},
                 ["Debian"]  = {fg = "#D91857", bg='None'},
                 ["Ubuntu"]  = {fg = "#DD4814", bg='None'},
             }
@@ -264,45 +277,38 @@ function M.config()
     }
 
     -- Copilot --
-    local status = require("copilot_status").status_string()
     ins_right{
         function ()
-            local copilot_status = {
+            local icons = {
                 ["idle"]    = ' ',
                 ["warning"] = ' ',
                 ["loading"] = ' ',
                 ["error"]   = ' ',
                 ["offline"] = ' ',
             }
-            return copilot_status[status] -- .. (function () if status['offline'] then return status end end or "")
+            return copilot_status(icons)
             --return require("copilot_status").status_string()
         end,
         cond = function ()
-            require("copilot_status").enabled()
-            --require("copilot_status").status_string()
+            return require("copilot_status").enabled() == true
         end,
         color = function ()
             local copilot_colours = {
-                ["idle"] = { fg = '#00f4c0', bg = 'None' },
+                ["idle"] = { fg = colors.blue, bg = 'None' },
                 ["warning"] = { fg = colors.orange,bg = 'None' },
-                ["loading"] = { fg = colors.orange, bg = 'None' },
+                ["loading"] = { fg = colors.green, bg = 'None' },
                 ["error"] = { fg = colors.red, bg = 'None' },
-                ["offline"] = { fg = colors.bg_visual, bg = 'None' },
+                ["offline"] = { fg = colors.offline, bg = 'None' },
             }
-            return copilot_colours[status.status]
+            return copilot_status(copilot_colours)
         end
     }
 
-    --ins_left {
-        --function() return '▊' end,
-        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
-        --padding = { left = 0, right = 1 }, -- We don't need space before this
-    --}
-    --ins_right {
-        --function() return '▊' end,
-        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
-        --padding = { left = 1}, -- We don't need space before this
-    --}
+    ins_right {
+        function() return '▊' end,
+        color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        padding = { left = 1}, -- We don't need space before this
+    }
     lualine.setup(config)
 end
 return M

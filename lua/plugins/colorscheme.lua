@@ -13,9 +13,14 @@ return {
     },
     {
         'AlexvZyl/nordic.nvim',
-        lazy = false,
+        --lazy = false,
         priority = 1000,
         config = function()
+            local palette = require 'nordic.colors'
+            require('nordic').setup({
+                transparent_bg = true,
+                bold_keywords = true,
+            })
             require 'nordic' .load()
         end
     },
