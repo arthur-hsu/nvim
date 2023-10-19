@@ -1,6 +1,6 @@
 # install docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-chmod +x get-docker.sh; ./get-docker.sh
+#curl -fsSL https://get.docker.com -o get-docker.sh
+#chmod +x get-docker.sh; ./get-docker.sh
 
 #sudo add-apt-repository ppa:longsleep/golang-backports
 #sudo apt update
