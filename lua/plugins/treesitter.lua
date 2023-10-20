@@ -12,21 +12,16 @@ local M = {
 function M.config()
     require("nvim-treesitter.install").compilers = { "gcc", "clang", "mingw" }
     require'nvim-treesitter.configs'.setup {
-
         -- 安装 language parser
         -- :TSInstallInfo 命令查看支持的语言
-        ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
-        'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',
-        'julia','prql','puppet','starlark','t32','tsx','v','wgsl_bevy'},
-        -- 启用代码高亮功能
+        --ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
+        --'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',
+        --'julia','prql','puppet','starlark','t32','tsx','v','wgsl_bevy'},
+        auto_install = true,
+        ensure_installed = {"bash","python"},
         highlight = {
             enable = true,
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languageZZ            additional_vim_regex_highlighting = false
         },
-        -- 启用基于Treesitter的代码格式化(=) . NOTE: This is an experimental feature.
         indent = {
             enable = true
         },
