@@ -7,7 +7,7 @@ function M.config()
     require('osc52').setup {
         silent     = true,
     }
-
+    
     local opts = {noremap = false, silent = true }
     if vim.fn.getenv('SSH_CLIENT')~=vim.NIL then
         vim.print(vim.fn.getenv('SSH_CLIENT'))
