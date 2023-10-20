@@ -4,6 +4,7 @@ return{
         "williamboman/mason.nvim",
         cmd = "Mason",
         opts = {
+            max_concurrent_installers = 1,
             ui = { border = "rounded" },
             ensure_installed = {
                 --"pylint",
