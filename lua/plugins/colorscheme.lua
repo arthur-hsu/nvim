@@ -1,12 +1,12 @@
 return {
     {
         'lunarvim/darkplus.nvim',
-        lazy = false,
+        --lazy = false,
         priority = 1000,
     },
     {
         'AlexvZyl/nordic.nvim',
-        lazy = false,
+        --lazy = false,
         priority = 1000,
         config = function()
             local palette = require 'nordic.colors'
@@ -19,7 +19,7 @@ return {
     },
     {
         "rebelot/kanagawa.nvim",
-        lazy = false,
+        --lazy = false,
         priority = 1000,
         config = function ()
             require('kanagawa').setup({
@@ -52,7 +52,7 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        lazy = false,
+        --lazy = false,
         priority = 1000,
         opts = function()
             return {

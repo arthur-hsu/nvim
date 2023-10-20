@@ -127,11 +127,11 @@ function M.config()
         table.insert(config.sections.lualine_x, component)
     end
 
-    ins_left {
-        function() return '▊' end,
-        color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
-        padding = { left = 0, right = 1 }, -- We don't need space before this
-    }
+    --ins_left {
+        --function() return '▊' end,
+        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        --padding = { left = 0, right = 1 }, -- We don't need space before this
+    --}
     
     -- Mode --
     ins_left {
@@ -304,11 +304,11 @@ function M.config()
         end
     }
 
-    ins_right {
-        function() return '▊' end,
-        color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
-        padding = { left = 1}, -- We don't need space before this
-    }
+    --ins_right {
+        --function() return '▊' end,
+        --color = function() return { fg = mode_color[vim.fn.mode()],bg='None'  } end,
+        --padding = { left = 1}, -- We don't need space before this
+    --}
     lualine.setup(config)
 end
 return M
