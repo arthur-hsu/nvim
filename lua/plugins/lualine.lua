@@ -82,7 +82,7 @@ function M.config()
         options = {
             -- Disable sections and component separators
             disabled_filetypes = {     -- Filetypes to disable lualine for.
-                statusline = {"NvimTree","diffpanel",'alpha'},      -- only ignores the ft for statusline.
+                statusline = {"NvimTree","diffpanel"},      -- only ignores the ft for statusline.
                 winbar = {"NvimTree","diffpanel",'alpha'},          -- only ignores the ft for winbar.
             },
             globalstatus = true,

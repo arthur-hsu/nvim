@@ -11,6 +11,7 @@ local M = {
         "hrsh7th/cmp-cmdline",
         "onsails/lspkind-nvim",
         "hrsh7th/cmp-nvim-lua",
+        "zbirenbaum/copilot-cmp",
         --"hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
         'rafamadriz/friendly-snippets'
     },
@@ -41,7 +42,7 @@ function M.config()
     })
     cmp.setup({
         experimental = {
-            ghost_text = false,
+            ghost_text = true,
         },
         snippet = {
             expand = function(args)
@@ -50,16 +51,35 @@ function M.config()
         },
         sources = cmp.config.sources({
             --{ name = 'nvim_lsp_signature_help' },
-            { name = "path" },
+            { name = "copilot",group_index=2 },
             { name = "nvim_lsp", group_index = 2 },
-            { name = 'buffer',group_index = 3 },
-            { name = 'luasnip', group_index = 1, max_item_count = 3 },
+            { name = 'buffer',group_index = 2 },
+            { name = 'luasnip', group_index = 2, max_item_count = 3 },
+            { name = "path", group_index=2 },
         }),
         window = {
             completion = cmp.config.window.bordered(),
             documentation = cmp.config.window.bordered()
         },
         mapping = require("plugins.cmp.keybindings").cmp(cmp),
+        sorting = {
+            priority_weight = 2,
+            comparators = {
+                require("copilot_cmp.comparators").prioritize,
+
+                -- Below is the default comparitor list and order for nvim-cmp
+                cmp.config.compare.offset,
+                -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+                cmp.config.compare.exact,
+                cmp.config.compare.score,
+                cmp.config.compare.recently_used,
+                cmp.config.compare.locality,
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+            },
+        },
 
         formatting = {
             expandable_indicator = true,

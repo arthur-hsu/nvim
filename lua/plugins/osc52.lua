@@ -9,34 +9,32 @@ function M.config()
     }
 
     local opts = {noremap = false, silent = true }
-    if vim.fn.getenv('SSH_CLIENT') then
-        vim.keymap.set("v", "<C-c>", require('osc52').copy_visual)
-        if vim.loop.os_uname().sysname == 'Darwin' then
-            vim.keymap.set("v", "ç",require('osc52').copy_visual)
+    if vim.fn.getenv('SSH_CLIENT')~=vim.NIL then
+        vim.print(vim.fn.getenv('SSH_CLIENT'))
+        local function copy(lines, _)
+            require('osc52').copy(table.concat(lines, '\n'))
         end
+
+        local function paste()
+            return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
+        end
+
+        vim.g.clipboard = {
+            name = 'osc52',
+            copy = {['+'] = copy, ['*'] = copy},
+            paste = {['+'] = paste, ['*'] = paste},
+        }
+        vim.keymap.set("v", "<leader>y", require('osc52').copy_visual)
+
     else
-        vim.keymap.set("v", "<C-c>", '"+y',opts)
-        vim.keymap.set("v", "y", '"+y',opts)
-        if vim.loop.os_uname().sysname == 'Darwin' then
-            vim.keymap.set("v", "ç",'"+y',opts)
-        end
+        --vim.keymap.set("v", "y", '"+y',opts)
+        --if vim.loop.os_uname().sysname == 'Darwin' then
+            --vim.keymap.set("v", "ç",require('osc52').copy_visual)
+        --end
     end
 
     --Using nvim-osc52 as clipboard provider--
 
-    local function copy(lines, _)
-      require('osc52').copy(table.concat(lines, '\n'))
-    end
-
-    local function paste()
-      return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
-    end
-
-    vim.g.clipboard = {
-      name = 'osc52',
-      copy = {['+'] = copy, ['*'] = copy},
-      paste = {['+'] = paste, ['*'] = paste},
-    }
     --
     --automatically copy text that was yanked into register '+'
     
