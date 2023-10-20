@@ -1,19 +1,12 @@
 return {
     {
         'lunarvim/darkplus.nvim',
-        priority = 1000,
-    },
-    {
-        "arthur-hsu/zephyr-nvim",
         lazy = false,
         priority = 1000,
-        config = function ()
-            vim.cmd.colorscheme "zephyr"
-        end
     },
     {
         'AlexvZyl/nordic.nvim',
-        --lazy = false,
+        lazy = false,
         priority = 1000,
         config = function()
             local palette = require 'nordic.colors'
@@ -26,9 +19,10 @@ return {
     },
     {
         "rebelot/kanagawa.nvim",
+        lazy = false,
         priority = 1000,
-        opts = function ()
-            return{
+        config = function ()
+            require('kanagawa').setup({
                 compile = false,             -- enable compiling the colorscheme
                 undercurl = true,            -- enable undercurls
                 commentStyle = { italic = true },
@@ -53,11 +47,12 @@ return {
                     dark = "dragon",           -- try "dragon" !
                     light = "lotus"
                 },
-            }
+            })
         end
     },
     {
         "folke/tokyonight.nvim",
+        lazy = false,
         priority = 1000,
         opts = function()
             return {
@@ -75,7 +70,7 @@ return {
                     "startuptime",
                     "Outline",
                 },
-                on_colors = function(c)
+                --on_colors = function(c)
                   -- local hsluv = require("tokyonight.hsluv")
                   -- local function randomColor(color)
                   --   if color ~= "NONE" then
@@ -97,7 +92,7 @@ return {
                   --   end
                   -- end
                   -- set(c)
-                end,
+                --end,
                 on_highlights = function(hl, c)
                     hl.CursorLineNr = { fg = c.orange, bold = true }
                     hl.LineNr = { fg = c.orange, bold = true }
@@ -114,5 +109,13 @@ return {
                 end,
             }
         end,
+    },
+    {
+        "arthur-hsu/zephyr-nvim",
+        lazy = false,
+        priority = 1000,
+        config = function ()
+            vim.cmd.colorscheme "zephyr"
+        end
     },
 }
