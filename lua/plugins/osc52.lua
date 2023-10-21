@@ -24,6 +24,7 @@ function M.config()
             paste = {['+'] = paste, ['*'] = paste},
         }
         vim.keymap.set("v", "<leader>y", require('osc52').copy_visual)
+        vim.keymap.set("v", "<C-c>", require('osc52').copy_visual)
     else
         --vim.keymap.set("v", "y", '"+y',opts)
         --if vim.loop.os_uname().sysname == 'Darwin' then
