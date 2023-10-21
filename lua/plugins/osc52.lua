@@ -10,7 +10,6 @@ function M.config()
     
     local opts = {noremap = false, silent = true }
     if vim.fn.getenv('SSH_CLIENT')~=vim.NIL then
-        vim.print(vim.fn.getenv('SSH_CLIENT'))
         local function copy(lines, _)
             require('osc52').copy(table.concat(lines, '\n'))
         end
@@ -25,7 +24,6 @@ function M.config()
             paste = {['+'] = paste, ['*'] = paste},
         }
         vim.keymap.set("v", "<leader>y", require('osc52').copy_visual)
-
     else
         --vim.keymap.set("v", "y", '"+y',opts)
         --if vim.loop.os_uname().sysname == 'Darwin' then
