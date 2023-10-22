@@ -5,12 +5,8 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
-            -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-            --{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            -- "haringsrob/nvim_context_vt",
-            -- { "simrat39/inlay-hints.nvim", config = true },
         },
         ---@class PluginLspOpts
         opts = {
@@ -27,12 +23,6 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
-                docker_compose_language_service = {},
-                dockerls ={},
-                html = {},
-                marksman = {},
-                jsonls = {},
-                yamlls = {},
                 pyright = {
                     --capabilities = {
                         --textDocument = {
@@ -48,16 +38,22 @@ return {
                             analysis={
                                 diagnosticSeverityOverrides = {
                                     --typeCheckingMode = 'off',
+                                    --reportUndefinedVariable = "none",
                                     reportMissingImports = "none",
                                     reportUnusedVariable = "none",
                                     reportUnboundVariable = "none",
-                                    --reportUndefinedVariable = "none",
                                     reportGeneralTypeIssues = "none",
                                 }
                             }
                         }
                     },
                 },
+                docker_compose_language_service = {},
+                dockerls ={},
+                html = {},
+                marksman = {},
+                jsonls = {},
+                yamlls = {},
                 bashls ={},
                 lua_ls = {
                     -- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -74,18 +70,7 @@ return {
                     },
                 },
             },
-            -- you can do any additional lsp server setup here
-            -- return true if you don't want this server to be setup with lspconfig
-            ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-            setup = {
-                -- example to setup with typescript.nvim
-                -- tsserver = function(_, opts)
-                    --   require("typescript").setup({ server = opts })
-                    --   return true
-                    -- end,
-                    -- Specify * to use this function as a fallback for any server
-                    -- ["*"] = function(server, opts) end,
-                },
+            setup = {},
             },
             ---@param opts PluginLspOpts
             config = function(plugin, opts)
@@ -122,10 +107,8 @@ return {
                         end
                     end
                 end
-
                 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
                 require("mason-lspconfig").setup_handlers({ setup })
-
             end,
         },
     }

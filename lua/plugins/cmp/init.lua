@@ -21,25 +21,6 @@ local M = {
 function M.config()
     local cmp = require("cmp")
     require("luasnip.loaders.from_vscode").lazy_load()
-    -- Use buffer source for `/`.
-    cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = 'buffer' },
-        },
-    })
-    --Use cmdline & path source for ':'.
-    cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = 'path' },
-            { name = 'cmdline',
-            option={
-                ignore_cmds = {'term','terminal','qall','quit','write', 'Man', '!'},
-            },
-            }
-        }),
-    })
     cmp.setup({
         experimental = {
             ghost_text = true,
@@ -80,10 +61,10 @@ function M.config()
                 cmp.config.compare.order,
             },
         },
-
         formatting = {
             expandable_indicator = true,
             --fields = {'menu', 'abbr', 'kind'},
+            
             format = require("lspkind").cmp_format({
                 with_text = true, -- do not show text alongside icons
                 maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
@@ -94,6 +75,25 @@ function M.config()
                 end
             })
         },
+    })
+    -- Use buffer source for `/`.
+    cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' },
+        },
+    })
+    --Use cmdline & path source for ':'.
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' },
+            { name = 'cmdline',
+            option={
+                ignore_cmds = {'term','terminal','qall','quit','write', 'Man', '!'},
+            },
+            }
+        }),
     })
 end
 return M

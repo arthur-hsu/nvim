@@ -5,26 +5,23 @@ local M = {
 	end,
     --enabled =false,
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {'HiPhish/nvim-ts-rainbow2',"nvim-treesitter/nvim-treesitter-textobjects",},
+    dependencies = {'HiPhish/nvim-ts-rainbow2'},
 }
-
 
 function M.config()
     require("nvim-treesitter.install").compilers = { "gcc", "clang", "mingw" }
     require'nvim-treesitter.configs'.setup {
-        -- 安装 language parser
-        -- :TSInstallInfo 命令查看支持的语言
-        --ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
-        --'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',
-        --'julia','prql','puppet','starlark','t32','tsx','v','wgsl_bevy'},
         auto_install = true,
-        ensure_installed = {"bash","python"},
+        ensure_installed = {"python","bash"},
         highlight = {
             enable = true,
         },
         indent = {
             enable = true
         },
+        --ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
+        --'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',
+        --'julia','prql','puppet','starlark','t32','tsx','v','wgsl_bevy'},
         rainbow = {
             enable = true,
             -- list of languages you want to disable the plugin for
