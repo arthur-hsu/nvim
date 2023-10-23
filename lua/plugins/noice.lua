@@ -17,7 +17,7 @@ function M.config()
             command_palette = true, -- position the cmdline and popupmenu together
             long_message_to_split = false, -- long messages will be sent to a split
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            lsp_doc_border = false, -- add a border to hover docs and signature help
         },
         cmdline = {
             --🔍⌄
@@ -70,6 +70,12 @@ function M.config()
         redirect = {
             view = "popup",
             filter = { event = "msg_show" },
+        },
+        smart_move = {
+            -- noice tries to move out of the way of existing floating windows.
+            enabled = true, -- you can disable this behaviour here
+            -- add any filetypes here, that shouldn't trigger smart move.
+            excluded_filetypes = { "cmp_menu", "cmp_docs", "notify" },
         },
         -- You can add any custom commands below that will be available with `:Noice command`
         ---"@type table<string, NoiceCommand>"

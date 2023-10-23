@@ -99,6 +99,7 @@ return{
                 disable_float_win = true, -- disable on float window
                 enabled_filetypes = nil,   -- example: { "lua", "vim" }
                 disabled_filetypes = {
+                    "alpha",
                     "TelescopePrompt",
                     "NvimTree",
                     "lazy",

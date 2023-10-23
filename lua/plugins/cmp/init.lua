@@ -9,7 +9,41 @@ local M = {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-emoji",
         "hrsh7th/cmp-cmdline",
-        "onsails/lspkind-nvim",
+        {
+            "onsails/lspkind-nvim",
+            config = function ()
+                require('lspkind').init({
+                    symbol_map = {
+                        Copilot = "",
+                        Text = "󰉿",
+                        Method = "󰆧",
+                        Function = "󰊕",
+                        Constructor = "",
+                        Field = "󰜢",
+                        Variable = "󰀫",
+                        Class = "󰠱",
+                        Interface = "",
+                        Module = "",
+                        Property = "󰜢",
+                        Unit = "󰑭",
+                        Value = "󰎠",
+                        Enum = "",
+                        Keyword = "󰌋",
+                        Snippet = "",
+                        Color = "󰏘",
+                        File = "󰈙",
+                        Reference = "󰈇",
+                        Folder = "󰉋",
+                        EnumMember = "",
+                        Constant = "󰏿",
+                        Struct = "󰙅",
+                        Event = "",
+                        Operator = "󰆕",
+                        TypeParameter = "",
+                    },
+                })
+            end
+        },
         "hrsh7th/cmp-nvim-lua",
         "zbirenbaum/copilot-cmp",
         --"hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
@@ -21,28 +55,13 @@ local M = {
 function M.config()
     local cmp = require("cmp")
     require("luasnip.loaders.from_vscode").lazy_load()
-    -- Use buffer source for `/`.
-    cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = 'buffer' },
-        },
-    })
-    --Use cmdline & path source for ':'.
-    cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = 'path' },
-            { name = 'cmdline',
-            option={
-                ignore_cmds = {'term','terminal','qall','quit','write', 'Man', '!'},
-            },
-            }
-        }),
-    })
+    vim.api.nvim_set_hl(0, "CmpItemKindcopilot", { fg = "#31A8FF", bg = "None" })
     cmp.setup({
         experimental = {
             ghost_text = true,
+        },
+        view ={
+            entries = {name = 'custom', selection_order = 'near_cursor' }
         },
         snippet = {
             expand = function(args)
@@ -80,7 +99,6 @@ function M.config()
                 cmp.config.compare.order,
             },
         },
-
         formatting = {
             expandable_indicator = true,
             --fields = {'menu', 'abbr', 'kind'},
@@ -94,6 +112,26 @@ function M.config()
                 end
             })
         },
+    })
+
+    -- Use buffer source for `/`.
+    cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' },
+        },
+    })
+    --Use cmdline & path source for ':'.
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' },
+            { name = 'cmdline',
+            option={
+                ignore_cmds = {'term','terminal','qall','quit','write', 'Man', '!'},
+            },
+            }
+        }),
     })
 end
 return M
