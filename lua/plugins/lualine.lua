@@ -251,7 +251,7 @@ function M.config()
     ins_right {
         function ()
             local os_icons ={
-                ["Windows"]= '',
+                ["Windows_NT"]= '',
                 ["Darwin"] = '',
                 ["Debian"] = '',
                 ["Ubuntu"] = ''
