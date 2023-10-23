@@ -94,8 +94,8 @@ pluginKeys.cmp = function(cmp)
         ["<Tab>"] = cmp.mapping(
             function(fallback)
                 if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                    --cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+                    --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
                 elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
                 elseif has_words_before() then
