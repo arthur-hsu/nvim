@@ -4,7 +4,7 @@ local cmd = vim.cmd
 local g = vim.g
 opt.guifont = "JetBrainsMono Nerd Font Mono:h11"
 opt.buftype = ""
-
+opt.whichwrap = "b,s,<,>,[,],h,l"
 opt.swapfile = false
 vim.api.nvim_command('filetype plugin indent on')
 opt.termguicolors = true
@@ -28,21 +28,18 @@ opt.autoindent = false
 opt.ruler  = true
 opt.showcmd = true
 opt.showmatch = true
-opt.scrolloff=8
+opt.scrolloff=4
 cmd("set backspace=indent,eol,start")
 cmd("set mouse=a")
---cmd("set selection=exclusive")
---cmd("set selectmode =mouse,key")
 opt.matchtime=1
 opt.ignorecase = true
 opt.incsearch = true
 opt.hlsearch = true
 opt.expandtab = true
 opt.autoread = true
-cmd ("set buftype=")
 opt.modifiable=true
 opt.laststatus = 0
-
+opt.signcolumn = "yes"
 --opt.iskeyword:append(":")
 
 g.completeopt = "menu,menuone,noselect"
