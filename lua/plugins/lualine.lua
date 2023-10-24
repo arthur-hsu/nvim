@@ -251,7 +251,7 @@ function M.config()
     ins_right {
         function ()
             local os_icons ={
-                ["Windows"]= '',
+                ["Windows_NT"]= '',
                 ["Darwin"] = '',
                 ["Debian"] = '',
                 ["Ubuntu"] = ''
@@ -260,7 +260,7 @@ function M.config()
         end,
         color = function ()
             local os_color = {
-                ["Windows"] = {fg = "#087CD5", bg='None'},
+                ["Windows_NT"] = {fg = "#087CD5", bg='None'},
                 ["Darwin"]  = {fg = colors.mac, bg='None'},
                 ["Debian"]  = {fg = "#D91857", bg='None'},
                 ["Ubuntu"]  = {fg = "#DD4814", bg='None'},
