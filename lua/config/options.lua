@@ -2,7 +2,6 @@
 local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
-
 opt.guifont = "JetBrainsMono Nerd Font Mono:h11"
 opt.buftype = ""
 
@@ -40,12 +39,10 @@ opt.incsearch = true
 opt.hlsearch = true
 opt.expandtab = true
 opt.autoread = true
---opt.cursorline = true
 cmd ("set buftype=")
 opt.modifiable=true
 opt.laststatus = 0
 
---opt.guicursor = ""
 --opt.iskeyword:append(":")
 
 g.completeopt = "menu,menuone,noselect"

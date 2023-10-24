@@ -24,9 +24,9 @@ return {
         end)
 
         require("ibl").setup {
-            indent = { highlight = highlight, char = "▎" },
-            --indent = { highlight = highlight, char = "▏" },
-            --indent = { highlight = highlight },
+            --indent = { highlight = highlight, char = "▎" },
+            --indent = { highlight = highlight, char = "▏" ,},
+            indent = { highlight = highlight, char = "│" ,},
             scope ={
                 enabled = false,
                 show_start = false,
