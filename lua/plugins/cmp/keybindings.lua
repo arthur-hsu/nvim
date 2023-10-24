@@ -43,20 +43,6 @@ pluginKeys.cmp = function(cmp)
             s = cmp.mapping.confirm({ select = true }),
             c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         }),
-
-        ["<Tab>"] = cmp.mapping(
-            function(fallback)
-                if cmp.visible() then
-                    --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -66,18 +52,30 @@ pluginKeys.cmp = function(cmp)
                 fallback()
             end
         end, { "i", "s" }),
-
-        --["<Tab>"] = vim.schedule_wrap(function(fallback)
+        --["<Tab>"] = cmp.mapping(function(fallback)
             --if cmp.visible() and has_words_before() then
-                --cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace,selct = true })
-            ----elseif cmp.visible() and not has_words_before() then
+                --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            ----if cmp.visible() then
+                ----cmp.select_next_item()
                 ----cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+            --elseif luasnip.expand_or_jumpable() then
+                --luasnip.expand_or_jump()
+            --elseif has_words_before() then
+                --cmp.complete()
             --else
                 --fallback()
             --end
-        --end
-        --),
-
+        --end, { "i", "s" }),
+        
+        ["<Tab>"] = vim.schedule_wrap(
+            function(fallback)
+                if cmp.visible() and has_words_before() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    fallback()
+                end
+            end
+        ),
     }
 end
 
