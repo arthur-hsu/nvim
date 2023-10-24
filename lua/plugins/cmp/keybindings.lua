@@ -52,30 +52,28 @@ pluginKeys.cmp = function(cmp)
                 fallback()
             end
         end, { "i", "s" }),
-        --["<Tab>"] = cmp.mapping(function(fallback)
-            --if cmp.visible() and has_words_before() then
-                --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            ----if cmp.visible() then
-                ----cmp.select_next_item()
-                ----cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-            --elseif luasnip.expand_or_jumpable() then
-                --luasnip.expand_or_jump()
-            --elseif has_words_before() then
-                --cmp.complete()
-            --else
-                --fallback()
-            --end
-        --end, { "i", "s" }),
-        
-        ["<Tab>"] = vim.schedule_wrap(
-            function(fallback)
-                if cmp.visible() and has_words_before() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                else
-                    fallback()
-                end
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+                --cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
             end
-        ),
+        end, { "i", "s" }),
+        
+        --["<Tab>"] = vim.schedule_wrap(
+            --function(fallback)
+                --if cmp.visible() and has_words_before() then
+                    --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                --else
+                    --fallback()
+                --end
+            --end
+        --),
     }
 end
 
