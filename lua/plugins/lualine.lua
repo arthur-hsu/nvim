@@ -190,16 +190,17 @@ function M.config()
                     return client.name
                 end
             end
+           
             return msg
         end,
         icon = file_detial('icon'),
         color = function() return { fg = ( file_detial('color') or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
     }
-    
     -- Diagnostic --
     ins_right {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
+        sections = { 'error', 'warn' },
         symbols = {
             error = " ",
             warn  = " ",
