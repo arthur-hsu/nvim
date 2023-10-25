@@ -35,7 +35,7 @@ keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",opts)
 keymap("n", "<F3>", "<cmd>Telescope<cr>", opts)
-keymap('n', '<F4>', '<Cmd>NvimTreeToggle<CR>',opts)
+--keymap('n', '<F4>', '<Cmd>NvimTreeToggle<CR>',opts)
 keymap("n", "<F5>",":RunCode<CR>", opts)
 keymap("n", "<F6>", "<cmd>DiffviewFileHistory<CR>",opts)
 keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
@@ -57,7 +57,6 @@ keymap("i", "<C-z>",  "<esc><C-o><C-o>", opts)
 keymap("n", "<C-v>", 'p', opts)
 
 
---keymap("n","<C-n>",'',opts)
 
 
 
