@@ -15,7 +15,7 @@ function M.config()
                 --bufferline.style_preset.no_bold
             },
             separator_style = 'thin',           -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
-            themable = false,
+            themable = true,
             close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"
             right_mouse_command = "bdelete! %d", -- can be a string | function  | false, see "Mouse actions"
             left_mouse_command = "buffer %d",    -- can be a string | function, | false see "Mouse actions"
@@ -72,10 +72,10 @@ function M.config()
                     --fg = '<colour-value-here>',
                     --bg = '<colour-value-here>',
                 --},
-                --tab_selected = {
-                    --fg = '<colour-value-here>',
-                    --bg = '<colour-value-here>',
-                --},
+                tab_selected = {
+                    fg = '#fa3',
+                    bg = '#111',
+                },
                 --tab_separator = {
                     --fg = '<colour-value-here>',
                     --bg = '<colour-value-here>',
