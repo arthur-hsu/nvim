@@ -37,10 +37,6 @@ return{
         event = 'VeryLazy',
     },
     {
-        'scrooloose/nerdcommenter',
-        event = 'VeryLazy',
-    },
-    {
         'TobinPalmer/pastify.nvim',
         lazy = true,
         event = {'BufEnter *.md', "BufRead *.md", "BufNewFile *.md" },
