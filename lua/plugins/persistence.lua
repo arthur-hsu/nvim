@@ -2,7 +2,7 @@ return {
     {
         "folke/persistence.nvim",
         event = "BufReadPre",
-        enabled = false,
+        --enabled = false,
         opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
         -- stylua: ignore
         keys = {

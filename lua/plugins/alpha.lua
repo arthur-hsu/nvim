@@ -41,7 +41,7 @@ return {
             dashboard.button("n", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
             dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-            --dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+            dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
             --dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
             --dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         }
