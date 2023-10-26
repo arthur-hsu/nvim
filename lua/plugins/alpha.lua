@@ -36,7 +36,7 @@ return {
         dashboard.section.header.val = require('ascii').art.text.neovim.the_edge
         
         dashboard.section.buttons.val = {
-            dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
+            -- dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
             dashboard.button("s", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
             dashboard.button("n", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),

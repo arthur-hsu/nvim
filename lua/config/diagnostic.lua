@@ -15,10 +15,10 @@ sign({name = 'DiagnosticSignInfo', text = ' '})
 sign({name = 'DiagnosticSignHint', text = '󰝶 '})
 
 vim.diagnostic.config({
-    --virtual_text = false,
-    virtual_text = {
-        severity = { min = vim.diagnostic.severity.WARN }
-    },
+    virtual_text = false,
+    -- virtual_text = {
+    --     severity = { min = vim.diagnostic.severity.WARN }
+    -- },
     signs = {
         severity = { min = vim.diagnostic.severity.WARN }
     },

@@ -9,7 +9,8 @@ return{
     width = 50, -- width of the list when position is left or right
     icons = true, -- use devicons for filenames
     mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-    severity = vim.diagnostic.severity.INFO, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
+    -- severity = vim.diagnostic.severity.INFO, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT
+    severity = nil,
     fold_open = "", -- icon used for open folds
     fold_closed = "", -- icon used for closed folds
     group = true, -- group results by file
