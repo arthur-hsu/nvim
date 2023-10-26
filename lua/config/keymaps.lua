@@ -14,26 +14,20 @@ local keymap = vim.api.nvim_set_keymap
 
 
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
-    --vim.opt.shell = 'bash'
     keymap("n", "rc",":Telescope file_browser path=$HOME/.config/nvim/lua<CR>" ,opts)
     keymap("c", "Note", ":e $HOME/workdir/notedir<CR>",opts)
     keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>",opts)
-    --keymap("n", "<F2>",":terminal bash<CR>i", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-    --vim.opt.shell = 'pwsh'
-    --vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
-    --vim.opt.shellxquote = ''
     keymap("n", "rc",":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
     keymap("c", "Note", ":e $HOME\\workdir\\notedir<CR>",opts)
     keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>",opts)
-    --keymap("n", "<F2>",":terminal pwsh<CR>i", opts)
 end
 
-keymap("n", "<F2>",":terminal<CR>i", opts)
 
 keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",opts)
+keymap("n", "<F2>",":terminal<CR>i", opts)
 keymap("n", "<F3>", "<cmd>Telescope<cr>", opts)
 --keymap('n', '<F4>', '<Cmd>NvimTreeToggle<CR>',opts)
 keymap("n", "<F5>",":RunCode<CR>", opts)
@@ -42,7 +36,7 @@ keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
 keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
 keymap('n', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 keymap('i', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
-keymap("n", "<F12>", ":StartupTime<CR>",opts)
+-- keymap("n", "<F12>", ":StartupTime<CR>",opts)
 keymap("n", "<TAB>", ">>", opts)
 keymap("n", "<S-TAB>", "<<", opts)
 keymap("v", "<TAB>", ">gv", opts)

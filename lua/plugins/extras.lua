@@ -24,10 +24,6 @@ return{
         lazy = true,
     },
     {
-        'dstein64/vim-startuptime',
-        event = 'VeryLazy',
-    },
-    {
         "nathom/filetype.nvim",
         event = "VimEnter",
         --event = 'VeryLazy',
