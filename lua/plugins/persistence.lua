@@ -4,7 +4,7 @@ return {
         event = "BufReadPre",
         --enabled = false,
         opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
-        -- stylua: ignore
+         --stylua: ignore
         keys = {
             { "<leader>qs", function() require("persistence").load() end,                desc = "Restore Session" },
             { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },

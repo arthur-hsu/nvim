@@ -36,16 +36,17 @@ return {
         dashboard.section.header.val = require('ascii').art.text.neovim.the_edge
         
         dashboard.section.buttons.val = {
-            dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+            dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
+            dashboard.button("s", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
             dashboard.button("n", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+            dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
             dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-            dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
             --dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
             --dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         }
-        dashboard.opts.layout[1].val = 5
+        dashboard.opts.layout[1].val = #dashboard.section.buttons.val
 
         --dashboard.section.header.opts.hl = "AlphaHeader"
         --dashboard.section.buttons.opts.hl = "AlphaButtons"
