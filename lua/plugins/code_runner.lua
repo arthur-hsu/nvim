@@ -68,19 +68,19 @@ function M.config()
                 "cd $dir &&",
                 "javac $fileName &&",
                 "java $fileNameWithoutExt",
-            },  
+            },
             c = {
                 "cd $dir &&",
                 "gcc $fileName",
                 "-o $fileNameWithoutExt &&",
                 "$dir/$fileNameWithoutExt",
-            },  
+            },
             cpp = {
                 "cd $dir &&",
                 "g++ $fileName",
                 "-o $fileNameWithoutExt &&",
                 "$dir/$fileNameWithoutExt",
-            }, 
+            },
             python = python(),
             sh = "bash",
             rust = {

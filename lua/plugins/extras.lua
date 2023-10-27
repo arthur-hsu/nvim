@@ -10,10 +10,18 @@ return{
     },
     {
         'xiyaowong/transparent.nvim',
-        event = 'VimEnter',
-        --event = { "BufReadPost", "BufNewFile" },
-        opts ={
-            exclude_groups = {'bufferline'},
+        lazy=false,
+        -- enabled=false,
+        -- event = { "BufReadPost", "BufNewFile" },
+        opts={
+            extra_groups={
+                "NormalFloat",
+                "TelescopePrompt",
+                -- "BufferLine",
+                -- "BufferLineFill",
+                -- "BufferLineTab",
+                -- "BufferLineTabSelected"
+            },
         },
         config= function ()
             require('transparent').clear_prefix('lualine')

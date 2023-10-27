@@ -227,7 +227,7 @@ function M.config()
         },
         cond = conditions.hide_in_width,
     }
-
+    ins_right{'filetype'}
     -- Encoding type --
     ins_right {
         'o:encoding', -- option component same as &encoding in viml

@@ -8,6 +8,7 @@ function M.config()
     local bufferline = require('bufferline')
     bufferline.setup({
         options = {
+            -- 
             mode = "buffers", -- set to "tabs" to only show tabpages instead
             --style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
             style_preset = {
@@ -24,11 +25,11 @@ function M.config()
                 icon = '▎', -- this should be omitted if indicator style is not 'icon'
                 style = 'icon',
             },
-            --hover = {
-                --enabled = true,
-                --delay = 200,
-                --reveal = {'close'}
-            --},
+            -- hover = {
+            --     enabled = true,
+            --     delay = 200,
+            --     reveal = {'close'}
+            -- },
             buffer_close_icon = '󰅖',
             modified_icon = '●',
             close_icon = '',
@@ -57,37 +58,16 @@ function M.config()
                     separator = true
                 }
             },
-
-
             highlights = {
-                --fill = {
-                    --fg = 'fg',
-                    --bg = 'bg',
-                --},
-                --background = {
-                    --fg = 'fg',
-                    --bg = 'bg',
-                --},
-                --tab = {
-                    --fg = '<colour-value-here>',
-                    --bg = '<colour-value-here>',
-                --},
-                tab_selected = {
-                    fg = '#fa3',
-                    bg = '#111',
-                },
-                --tab_separator = {
-                    --fg = '<colour-value-here>',
-                    --bg = '<colour-value-here>',
-                --},
-                --tab_separator_selected = {
-                    --fg = '<colour-value-here>',
-                    --bg = '<colour-value-here>',
-                    --sp = '<colour-value-here>',
-                    --underline = '<colour-value-here>',
-                --},
             }
         }
     })
+    vim.g.transparent_groups = vim.list_extend(
+        vim.g.transparent_groups or {},
+        vim.tbl_map(function(v)
+            return v.hl_group
+        end, vim.tbl_values(require('bufferline.config').highlights))
+    )
+
 end
 return M
