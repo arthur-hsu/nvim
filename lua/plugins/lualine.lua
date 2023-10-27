@@ -147,7 +147,7 @@ function M.config()
                 R      = 'REPLACE',
                 t      = 'TERMINAL',
             }
-            return ' '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
+            return '  '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
         end,
         color = function() return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' } end,
         padding = { right = 1 },
@@ -227,7 +227,7 @@ function M.config()
         },
         cond = conditions.hide_in_width,
     }
-    ins_right{'filetype'}
+    -- ins_right{'filetype'}
     -- Encoding type --
     ins_right {
         'o:encoding', -- option component same as &encoding in viml
