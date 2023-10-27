@@ -21,7 +21,7 @@ function M.config()
                 fold_closed = "",
                 fold_open = "",
                 done = "✓",
-            },   
+            },
             view = {
                 -- Configure the layout and behavior of different types of views.
                 -- Available layouts:
@@ -43,7 +43,7 @@ function M.config()
                     layout = "diff3_horizontal",
                     disable_diagnostics = true,   -- Temporarily disable diagnostics for conflict buffers while in the view.
                     winbar_info = true,           -- See ':h diffview-config-view.x.winbar_info'
-                },   
+                },
                 file_history = {
                     -- Config for changed files in file history views.
                     layout = "diff2_horizontal",
@@ -55,7 +55,7 @@ function M.config()
                 tree_options = {                    -- Only applies when listing_style is 'tree'
                     flatten_dirs = true,              -- Flatten dirs that only contain one single dir
                     folder_statuses = "only_folded",  -- One of 'never', 'only_folded' or 'always'.
-                },  
+                },
                 win_config = {                      -- See ':h diffview-config-win_config'
                     position = "left",
                     width = 35,

@@ -8,13 +8,12 @@ function M.config()
     local bufferline = require('bufferline')
     bufferline.setup({
         options = {
-            -- 
             mode = "buffers", -- set to "tabs" to only show tabpages instead
-            --style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
-            style_preset = {
-                --bufferline.style_preset.no_italic,
-                --bufferline.style_preset.no_bold
-            },
+            style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal
+            -- style_preset = {
+            --     --bufferline.style_preset.no_italic,
+            --     --bufferline.style_preset.no_bold
+            -- },
             separator_style = 'thin',           -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' }
             themable = true,
             close_command = "bdelete! %d",       -- can be a string | function, | false see "Mouse actions"

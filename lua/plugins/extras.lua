@@ -17,10 +17,10 @@ return{
             extra_groups={
                 "NormalFloat",
                 "TelescopePrompt",
-                -- "BufferLine",
-                -- "BufferLineFill",
-                -- "BufferLineTab",
-                -- "BufferLineTabSelected"
+                "BufferLine",
+                "BufferLineFill",
+                "BufferLineTab",
+                "BufferLineTabSelected"
             },
         },
         config= function ()
