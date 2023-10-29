@@ -66,7 +66,7 @@ return{
         enabled = false,
         lazy=true,
     },
-    { 
+    {
         'gen740/SmoothCursor.nvim',
         event = 'VeryLazy',
         config = function()
