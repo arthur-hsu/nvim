@@ -40,7 +40,7 @@ return {
             dashboard.button("s", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
             dashboard.button("n", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+            dashboard.button("t", " " .. " Find text", ":Telescope live_grep <CR>"),
             dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
             dashboard.button("q", " " .. " Quit", ":qa<CR>"),
             --dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
