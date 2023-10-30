@@ -17,7 +17,7 @@ function M.config()
             enable = true,
         },
         indent = {
-            enable = true
+            enable = true,
         },
         --ensure_installed = {"bash","python","html", "css", "vim", "lua","json","vimdoc", "markdown","markdown_inline",'c','cpp',
         --'glsl','hlsl','ispc','java','javascript','objc','proto','perl','jsonnet','cuda','matlab','sql','cmake','arduino',

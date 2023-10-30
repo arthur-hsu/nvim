@@ -1,4 +1,4 @@
-#sudo cp -r JetBrainsMono /usr/share/fonts
+sudo cp -r JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
