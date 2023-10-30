@@ -1,0 +1,7 @@
+#!/usr/bin/expect
+set password "rak"
+set shell_path "/bin/zsh"
+spawn chsh -s "$shell_path"
+expect "Password: "
+send "$password\r"
+interact
