@@ -19,4 +19,5 @@ echo 'alias top="bpytop"' | tee -a ~/.zshrc
 sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting sudo)/g' ~/.zshrc
 sed -i  's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
 cp .p10k.zsh ~
+echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' | tee -a ~/.zshrc
 chsh -s $(which zsh)
