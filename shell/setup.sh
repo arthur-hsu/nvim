@@ -1,3 +1,9 @@
+hostname=$(hostname)
+git config --global credential.helper store
+git config --global user.name arthur
+git config --global user.email $hostname
+git config --global pull.rebase false
+
 sudo cp -r ../JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
