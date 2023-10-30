@@ -17,5 +17,6 @@ echo 'alias d="docker"' | tee -a ~/.zshrc
 echo 'alias fd="fdfind"' | tee -a ~/.zshrc
 echo 'alias top="bpytop"' | tee -a ~/.zshrc
 sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting sudo)/g' ~/.zshrc
-sed -i  's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' .zshrc
+sed -i  's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' | tee -a ~/.zshrc
 chsh -s $(which zsh)
