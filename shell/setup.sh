@@ -1,4 +1,5 @@
 #!/usr/bin/sh
+rm -r ~/Bookshelf
 hostname=$(hostname)
 git config --global credential.helper store
 git config --global user.name arthur
@@ -86,7 +87,6 @@ sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/
 cd ~/.config/nvim/shell/
 cp .p10k.zsh ~
 echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' | tee -a ~/.zshrc
-
 sudo apt-get install -y expect
 chmod +x change_shell.exp ; ./change_shell.exp
 zsh
