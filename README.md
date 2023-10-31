@@ -19,27 +19,7 @@ Terminal字體換成帶有`NERD`的
 `npm install neovim yarn`  
 
 
-## windows
 
-```shell
-cd
-git clone https://github.com/arthur-hsu/nvim.git AppData/Local/nvim
-```
-### setup
-chocolatey install:<https://marcus116.blogspot.com/2019/02/chocolatey-windows-chocolatey.html>
-
-```shell
-choco install mingw ripgrep fd
-```
-
-### powershell set
-```
-nvim $profile
-
-Set-PSReadlineKeyHandler -Key Tab -Function Complete
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-```
 
 ## Ubuntu
 
@@ -55,24 +35,25 @@ and switch profile to ubuntu
 
 ```shell
 cd
-git clone https://github.com/arthur-hsu/nvim.git .config/nvim
-cd .config/nvim
-sudo cp -r JetBrainsMono /usr/share/fonts
-sudo apt install ripgrep fd-find
-```
-
-```shell
-sudo apt install snapd curl git python3-pip software-properties-common
-sudo snap install core
-sudo snap install snap-store
-sudo snap install nvim --classic
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt install -y nodejs
-pip3 install pynvim neovim
-npm install neovim
+git clone --depth=1 https://github.com/arthur-hsu/nvim.git ~/.config/nvim
+cd .config/nvim/shell
+chmod +x setup.sh;./setup.sh
 ```
 
 ## windows
+
+```shell
+cd
+git clone https://github.com/arthur-hsu/nvim.git AppData/Local/nvim
+```
+### setup
+chocolatey install:<https://marcus116.blogspot.com/2019/02/chocolatey-windows-chocolatey.html>
+
+```shell
+choco install mingw ripgrep fd
+```
+
+### windows telescope
 ```
 fb_actions.open = function(prompt_bufnr)
   local quiet = action_state.get_current_picker(prompt_bufnr).finder.quiet
