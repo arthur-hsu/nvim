@@ -25,6 +25,8 @@ system_=$(uname -m)
 
 if [ "$system_" = 'aarch64' ]; then
     system_='arm64'
+elif [ "$system_" = 'x86_64' ]; then
+    system_='amd64'
 fi
 
 # echo $system_
@@ -42,8 +44,8 @@ else
     sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip checkinstall
     git clone -b stable http://github.com/neovim/neovim --depth=1 /tmp/neovim;
     cd /tmp/neovim
-    # make CMAKE_BUILD_TYPE=Release
-    # echo -e "\r\n" | sudo checkinstall
+    make CMAKE_BUILD_TYPE=Release
+    echo -e "\r\n" | sudo checkinstall
     version=$(ls | grep 'neovim_[0-9]*-[0-9]_'$system_'.deb' | sed -n 's/.*neovim_\([0-9]*-[0-9]\)_'$system_'.deb/\1/p')
     deb_file="neovim_${version}_$system_.deb"
     sudo dpkg -i "$deb_file"
