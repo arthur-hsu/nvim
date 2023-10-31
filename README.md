@@ -1,4 +1,11 @@
 # nvim
+## Set up
+
+```shell
+git clone --depth=1 https://github.com/arthur-hsu/nvim.git ~/.config/nvim
+cd .config/nvim/shell
+chmod +x setup.sh;./setup.sh
+```
 ## Terminal字體設定
 ![image](https://github.com/aaa890177/nvim/assets/127286236/d813b1f6-4bf4-4355-991d-d02bd6061970)
 
@@ -31,14 +38,7 @@ dconf load /org/mate/terminal/ < mate-terminal-profile.bckp
 and switch profile to ubuntu
 
 
-### Set up
 
-```shell
-cd
-git clone --depth=1 https://github.com/arthur-hsu/nvim.git ~/.config/nvim
-cd .config/nvim/shell
-chmod +x setup.sh;./setup.sh
-```
 
 ## windows
 
