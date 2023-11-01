@@ -37,16 +37,16 @@ return {
         
         dashboard.section.buttons.val = {
             -- dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
-            dashboard.button("s", "  " .. "   Current folder session", [[:lua require("persistence").load() <cr>]]),
-            dashboard.button("r", "  " .. "   Recent files", ":Telescope oldfiles <CR>"),
-            dashboard.button("n", " 󰙴 " .. "   New file", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("v", "  " .. "   View change history", ":DiffviewFileHistory <CR>"),
-            dashboard.button("c", "  " .. "   Config", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>"),
-            dashboard.button("q", "  " .. "   Quit", ":qa<CR>"),
-            -- dashboard.button("t", " " .. " Find text", ":Telescope live_grep <CR>"),
-            -- dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-            --dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
-            --dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+            dashboard.button("n", " 󰙴" .. " New file", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("s", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
+            dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+            dashboard.button("v", " " .. " View change history", ":DiffviewFileHistory <CR>"),
+            dashboard.button("c", " " .. " Config", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>"),
+            dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+            -- dashboard.button("t", " " .. " Find text", ":Telescope live_grep <CR>"),
+            -- dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+            -- dashboard.button("e", " " .. " Explore", ":Telescope file_browser<CR>"),
+            -- dashboard.button("l", " 󰒲" .. " Lazy", ":Lazy<CR>"),
         }
         dashboard.opts.layout[1].val = #dashboard.section.buttons.val
 
