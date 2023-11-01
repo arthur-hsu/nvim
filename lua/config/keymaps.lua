@@ -86,6 +86,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Buffer local mappings.
 
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'gr', "<cmd>Telescope lsp_references <CR>", {})
+        -- vim.keymap.set('n', 'gr', "<cmd>lua require'telescope.builtin'.lsp_references(require('telescope.themes').get_dropdown({}))<cr>", {})
         vim.keymap.set('n', 'gpd', "<CMD>Lspsaga peek_definition<CR>", opts)
         vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, opts)

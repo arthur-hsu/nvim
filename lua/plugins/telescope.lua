@@ -1,6 +1,5 @@
 local M = {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
     event="VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -32,9 +31,18 @@ function M.config()
     local fb_actions = require "telescope._extensions.file_browser.actions"
     require("telescope").setup({
         defaults = {
+            layout_config = {
+                vertical = {height = 0.8, width = 0.8}
+            },
             scroll_strategy = "limit",
             initial_mode = "insert", --normal
             prompt_prefix = "➤  ",
+            path_display = { "tail" },
+            dynamic_preview_title = true,
+            -- path_display = function(opts, path)
+            --   local tail = require("telescope.utils").path_tail(path)
+            --   return string.format("%s (%s)", tail, path)
+            -- end,
             vimgrep_arguments = {
                 "rg",
                 "--hidden",
@@ -50,6 +58,9 @@ function M.config()
                 "node_modules",
                 ".git",
                 ".cache",
+                ".pem",
+                ".resx",
+                ".key",
                 "__pychace__",
                 ".pytest_cache"
             },
