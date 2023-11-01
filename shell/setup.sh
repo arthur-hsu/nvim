@@ -72,8 +72,9 @@ echo 'alias cat="batcat"'                       | tee -a ~/.zshrc
 echo 'alias exa="exa --icons"'                  | tee -a ~/.zshrc
 echo 'alias tre="exa --long --tree --level=3"'  | tee -a ~/.zshrc
 echo 'alias ls="exa -s type"'                   | tee -a ~/.zshrc
-echo 'alias ll="exa -all -l"'                   | tee -a ~/.zshrc
+echo 'alias ll="exa -all -l -s type"'           | tee -a ~/.zshrc
 echo 'alias d="docker"'                         | tee -a ~/.zshrc
+echo 'alias dc="docker-compose"'                | tee -a ~/.zshrc
 echo 'alias fd="fdfind"'                        | tee -a ~/.zshrc
 echo 'alias top="bpytop"'                       | tee -a ~/.zshrc
 
