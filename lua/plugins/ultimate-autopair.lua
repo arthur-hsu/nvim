@@ -5,7 +5,8 @@ return {
     branch='development',
     config = function ()
         require('ultimate-autopair').setup({
-        --Config goes here
+            -- multi=false,
+            tabout={enable=true},
         })
         local function ls_name_from_event(event)
             return event.entry.source.source.client.config.name

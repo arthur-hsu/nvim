@@ -8,7 +8,7 @@ function M.config()
     require('nvim-autopairs').setup({
         fast_wrap = {},
         enable_check_bracket_line = false,
-        --map_bs = false,
+        -- map_bs = false,
         check_ts = true,
         ts_config = {
             lua = {'string'},-- it will not add a pair on that treesitter node

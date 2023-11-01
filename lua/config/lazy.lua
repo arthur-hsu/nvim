@@ -20,8 +20,9 @@ require("lazy").setup({
     defaults = { lazy = true, version = nil },
     install = {
         colorscheme = {"zephyr"},
+        -- colorscheme = {"tokyonight"},
         --colorscheme = {"nordic"},
-        --colorscheme = {"kanagawa"},
+        -- colorscheme = {"kanagawa"},
         missing = true
     },
     checker = { enabled = true, notify = false },
