@@ -14,26 +14,26 @@ local keymap = vim.api.nvim_set_keymap
 
 
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
-    keymap("n", "rc",":Telescope file_browser path=$HOME/.config/nvim/lua<CR>" ,opts)
-    keymap("c", "Note", ":e $HOME/workdir/notedir<CR>",opts)
-    keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>",opts)
+    keymap("n", "rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>", opts)
+    keymap("c", "Note", ":e $HOME/workdir/notedir<CR>", opts)
+    keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-    keymap("n", "rc",":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>" ,opts)
-    keymap("c", "Note", ":e $HOME\\workdir\\notedir<CR>",opts)
-    keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>",opts)
+    keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
+    keymap("c", "Note", ":e $HOME\\workdir\\notedir<CR>", opts)
+    keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>", opts)
 end
 
 
 keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
-keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",opts)
-keymap("n", "<F2>",":terminal<CR>i", opts)
+keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
+keymap("n", "<F2>", ":terminal<CR>i", opts)
 keymap("n", "<F3>", "<cmd>Telescope<cr>", opts)
 --keymap('n', '<F4>', '<Cmd>NvimTreeToggle<CR>',opts)
-keymap("n", "<F5>",":RunCode<CR>", opts)
-keymap("n", "<F6>", "<cmd>DiffviewOpen<CR>",opts)
+keymap("n", "<F5>", ":RunCode<CR>", opts)
+keymap("n", "<F6>", "<cmd>DiffviewOpen<CR>", opts)
 keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
-keymap("n", "<F8>", "<cmd>TroubleToggle<cr>",opts)
+keymap("n", "<F8>", "<cmd>TroubleToggle<cr>", opts)
 keymap('n', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 keymap('i', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
 -- keymap("n", "<F12>", ":StartupTime<CR>",opts)
@@ -45,9 +45,9 @@ keymap("v", "<S-TAB>", "<gv", opts)
 keymap("v", "<", "<gv", opts)
 
 keymap("n", "<C-s>", ":w<CR>", opts)
-keymap("n", "<C-z>",  "<C-o><C-o>", opts)
+keymap("n", "<C-z>", "<C-o><C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w<CR>", opts)
-keymap("i", "<C-z>",  "<esc><C-o><C-o>", opts)
+keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 keymap("n", "<C-v>", 'p', opts)
 
 
@@ -69,10 +69,9 @@ keymap("n", "<A-Down>", ":resize+5 <CR> ", opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -142,8 +141,3 @@ keymap("t", "<leader>7", "<C-\\><C-n><cmd>BufferLineGoToBuffer 7<cr>", term_opts
 keymap("t", "<leader>8", "<C-\\><C-n><cmd>BufferLineGoToBuffer 8<cr>", term_opts)
 keymap("t", "<leader>9", "<C-\\><C-n><cmd>BufferLineGoToBuffer 9<cr>", term_opts)
 keymap("t", "<leader>$", "<C-\\><C-n><cmd>BufferLineGoToBuffer -1<cr>", term_opts)
-
-
-
-
-
