@@ -128,7 +128,7 @@ function M.config()
             { name = 'path' },
             { name = 'cmdline',
             option={
-                ignore_cmds = {'wq','term','terminal','qall','quit','write', 'Man', '!'},
+                ignore_cmds = {'wq','wall','term','terminal','qall','quit','write', 'Man', '!'},
             },
             }
         }),
