@@ -57,10 +57,10 @@ keymap("n", "<C-v>", 'p', opts)
 
 keymap("n", "spl", ":set splitright<CR>:vsplit<CR> ", opts)
 keymap("n", "spk", ":set splitbelow<CR>:split<CR> ", opts)
-keymap("n", "<A-Right>", ":vertical resize-5 <CR> ", opts)
-keymap("n", "<A-Left>", ":vertical resize+5 <CR> ", opts)
-keymap("n", "<A-Up>", ":resize-5 <CR> ", opts)
-keymap("n", "<A-Down>", ":resize+5 <CR> ", opts)
+keymap("n", "<M-S-Right>", ":vertical resize-5 <CR> ", opts)
+keymap("n", "<M-S-Left>", ":vertical resize+5 <CR> ", opts)
+keymap("n", "<M-S-Up>", ":resize-5 <CR> ", opts)
+keymap("n", "<M-S-Down>", ":resize+5 <CR> ", opts)
 
 
 
