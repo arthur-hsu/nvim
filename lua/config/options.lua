@@ -25,6 +25,7 @@ opt.softtabstop = 4
 opt.autoindent = true
 opt.autochdir = true
 
+
 opt.ruler  = true
 opt.showcmd = true
 opt.showmatch = true
