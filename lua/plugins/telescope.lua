@@ -6,7 +6,7 @@ local M = {
         "debugloop/telescope-undo.nvim",
         "folke/noice.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
-        "nvim-telescope/telescope-project.nvim",
+        -- "nvim-telescope/telescope-project.nvim",
     }
 }
 
@@ -20,7 +20,7 @@ function M.config()
     vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
     --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
-    vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
+    -- vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fb",
@@ -136,6 +136,6 @@ function M.config()
     require("telescope").load_extension("undo")
     require("telescope").load_extension("noice")
     require("telescope").load_extension("file_browser")
-    require('telescope').load_extension('project')
+    -- require('telescope').load_extension('project')
 end
 return M
