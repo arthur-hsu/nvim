@@ -39,10 +39,11 @@ return {
                                 diagnosticSeverityOverrides = {
                                     --typeCheckingMode = 'off',
                                     --reportUndefinedVariable = "none",
-                                    reportMissingImports = "none",
-                                    reportUnusedVariable = "none",
-                                    reportUnboundVariable = "none",
-                                    reportGeneralTypeIssues = "none",
+                                    reportMissingImports        = "none",
+                                    reportUnusedVariable        = "none",
+                                    reportUnboundVariable       = "none",
+                                    reportGeneralTypeIssues     = "none",
+                                    reportOptionalMemberAccess  = "none",
                                 }
                             }
                         }
