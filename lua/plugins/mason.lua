@@ -5,7 +5,7 @@ return{
         cmd = "Mason",
         opts = {
             max_concurrent_installers = 4,
-            ui = { border = "rounded" },
+            ui = { border = "none" },
             ensure_installed = {
                 -- Formatter
                 --"pylint",

@@ -23,6 +23,7 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
+                ruff_lsp = {},
                 pyright = {
                     --capabilities = {
                         --textDocument = {
