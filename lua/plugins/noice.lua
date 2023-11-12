@@ -1,31 +1,30 @@
 local M = {
     "folke/noice.nvim",
-    --enabled = false,
     dependencies = {'nvim-tree/nvim-web-devicons',"MunifTanjim/nui.nvim","rcarriga/nvim-notify",},
     event="VeryLazy",
-    --event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()
     require("noice").setup(
     {
+        background_colour = "#000000",
         ---"@type NoicePresets"
         presets = {
             -- you can enable a preset by setting it to true, or a table that will override the preset config
             -- you can also add custom presets that you can enable/disable with enabled=true
-            bottom_search = false, -- use a classic bottom cmdline for search
             command_palette = true, -- position the cmdline and popupmenu together
+            lsp_doc_border = false, -- add a border to hover docs and signature help
+            bottom_search = false, -- use a classic bottom cmdline for search
             long_message_to_split = false, -- long messages will be sent to a split
             inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = false, -- add a border to hover docs and signature help
         },
         cmdline = {
-            --🔍⌄
             enabled = true, -- enables the Noice cmdline UI
             view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
             format = {
-                search_down = { kind = "search", pattern = "^/", icon = "🔍 ", lang = "regex" },
-                search_up = { kind = "search", pattern = "^%?", icon = "🔍 ", lang = "regex" },
+                cmdline = { pattern = "^:", icon = " ", lang = "vim" },
+                search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+                search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
             },
             opts = {}, -- global options for the cmdline. See section on views
             ---"@type table<string, CmdlineFormat>"
@@ -50,7 +49,7 @@ function M.config()
             -- NOTE: If you enable messages, then the cmdline is enabled automatically.
             -- This is a current Neovim limitation.
             enabled = true, -- enables the Noice messages UI
-            view = "mini", -- default view for messages
+            view = "notify", -- default view for messages
             view_error = "mini", -- view for errors
             view_warn = "mini", -- view for warnings
             view_history = "messages", -- view for :messages
@@ -187,9 +186,19 @@ function M.config()
         },
         throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
         ---"@type NoiceConfigViews"
-        views = {}, ---@see section on views
+        ---@see section on views
+        views = {},
         ---"@type NoiceRouteConfig[]"
-        routes = {}, --- @see section on routes
+        routes = { --- @see section on routes
+            {
+                filter = {
+                    event = "msg_show",
+                    kind = "",
+                    find = "written",
+                },
+                opts = { skip = true },
+            },
+        },
         ---"@type table<string, NoiceFilter>"
         status = {}, --- @see section on statusline components
         ---"@type NoiceFormatOptions"

@@ -20,8 +20,11 @@ return{
                 "BufferLine",
                 "BufferLineFill",
                 "BufferLineTab",
-                "BufferLineTabSelected"
+                "BufferLineTabSelected",
             },
+            exclude_groups={
+                "NotifyBackground",
+            }
         },
         config= function ()
             require('transparent').clear_prefix('lualine')

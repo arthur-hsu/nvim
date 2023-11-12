@@ -23,13 +23,12 @@ function M.config()
             copy = {['+'] = copy, ['*'] = copy},
             paste = {['+'] = paste, ['*'] = paste},
         }
-        vim.keymap.set("v", "<leader>y", require('osc52').copy_visual)
-        vim.keymap.set("v", "<C-c>", require('osc52').copy_visual)
-    else
-        --vim.keymap.set("v", "y", '"+y',opts)
-        --if vim.loop.os_uname().sysname == 'Darwin' then
-            --vim.keymap.set("v", "ç",require('osc52').copy_visual)
-        --end
+        vim.keymap.set("v", "<leader>y", require('osc52').copy_visual,opts)
+        vim.keymap.set("v", "<C-c>", require('osc52').copy_visual,opts)
+        vim.keymap.set("v", "<M-c>",require('osc52').copy_visual,opts)
+        -- if vim.loop.os_uname().sysname == 'Darwin' then
+        --     vim.keymap.set("v", "ç",require('osc52').copy_visual)
+        -- end
     end
 
     --Using nvim-osc52 as clipboard provider--

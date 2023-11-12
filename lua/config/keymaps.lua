@@ -1,3 +1,4 @@
+local opts = { noremap = true, silent = true }
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -5,7 +6,6 @@
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
-local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
 
@@ -15,11 +15,9 @@ local keymap = vim.api.nvim_set_keymap
 
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
     keymap("n", "rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>", opts)
-    keymap("c", "Note", ":e $HOME/workdir/notedir<CR>", opts)
     keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
-    keymap("c", "Note", ":e $HOME\\workdir\\notedir<CR>", opts)
     keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>", opts)
 end
 
@@ -44,11 +42,11 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<S-TAB>", "<gv", opts)
 keymap("v", "<", "<gv", opts)
 
+keymap("v", "<M-c>", "y", opts)
 keymap("n", "<C-s>", ":w<CR>", opts)
 keymap("n", "<C-z>", "<C-o><C-o>", opts)
 keymap("i", "<C-s>", "<esc>:w<CR>", opts)
 keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
-keymap("n", "<C-v>", 'p', opts)
 
 
 

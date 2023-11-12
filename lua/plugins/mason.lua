@@ -7,16 +7,16 @@ return{
             max_concurrent_installers = 4,
             ui = { border = "rounded" },
             ensure_installed = {
+                -- Formatter
                 --"pylint",
                 --"flake8",
-                -- Formatter
                 "stylua",
                 "prettier",
                 "shfmt",
                 "jq",
                 -- Linter
                 "eslint_d",
-                "standardrb",
+                -- "standardrb",
                 "golangci-lint",
                 "shellcheck",
                 "markdownlint",
