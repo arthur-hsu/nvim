@@ -273,7 +273,7 @@ function M.config()
     -- Branch --
     ins_right {
         'branch',
-        icon = '',
+        icon = '󰘬',
         color = { fg = colors.magenta, gui = 'bold',bg='None' },
     }
 
