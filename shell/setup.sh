@@ -68,7 +68,7 @@ echo 'alias vim="nvim"'                         | tee -a ~/.zshrc
 echo 'alias vi="nvim"'                          | tee -a ~/.zshrc
 echo 'alias nvi="nvim"'                         | tee -a ~/.zshrc
 echo 'alias nvimrc="cd ~/.config/nvim"'         | tee -a ~/.zshrc
-echo 'alias cat="batcat"'                       | tee -a ~/.zshrc
+echo 'alias cat="batcat --style=plain"'         | tee -a ~/.zshrc
 echo 'alias exa="exa --icons"'                  | tee -a ~/.zshrc
 echo 'alias tre="exa --long --tree --level=3"'  | tee -a ~/.zshrc
 echo 'alias ls="exa -s type"'                   | tee -a ~/.zshrc
