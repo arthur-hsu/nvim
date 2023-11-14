@@ -75,9 +75,11 @@ echo 'alias ls="exa -s type"'                   | tee -a ~/.zshrc
 echo 'alias ll="exa -all -l -s type"'           | tee -a ~/.zshrc
 echo 'alias d="docker"'                         | tee -a ~/.zshrc
 echo 'alias dc="docker-compose"'                | tee -a ~/.zshrc
+echo 'alias k=kubectl'                          | tee -a ~/.bashrc
 echo 'alias fd="fdfind"'                        | tee -a ~/.zshrc
 echo 'alias top="bpytop"'                       | tee -a ~/.zshrc
 echo 'export PATH=$PATH:~/.local/bin'           | tee -a ~/.zshrc
+echo 'source <(kubectl completion bash)'        | tee -a ~/.bashrc
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
