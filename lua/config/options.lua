@@ -12,8 +12,6 @@ g.python_highlight_all= 1
 opt.background= dark
 opt.number= true
 opt.relativenumber= true
-opt.undofile= true
-cmd "set undodir=$HOME/.undodir/nvim"
 vim.opt.clipboard= "unnamedplus"
 opt.wrap= false
 --opt.fileformat= unix
@@ -56,12 +54,12 @@ vim.o.redrawtime= 100
 
 vim.o.undofile= true
 vim.opt.undodir= vim.fn.stdpath('state') .. '/undo'
+vim.o.autoread = true
 cmd('set isk-=.')
 cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
-vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-  command = "if mode() != 'c' | checktime | endif",
-  pattern = { "*" },
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = { "*" },
 })
 
 
