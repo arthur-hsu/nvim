@@ -18,9 +18,10 @@ return {
             filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
         },
         config = function()
+            vim.api.nvim_set_hl(0, 'Folded', { bold=true,italic=true })
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
-                local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+                local suffix = ('  Hide %d lines '):format(endLnum - lnum)
                 local sufWidth = vim.fn.strdisplaywidth(suffix)
                 local targetWidth = width - sufWidth
                 local curWidth = 0
@@ -62,8 +63,8 @@ return {
                         winblend = 0
                     },
                     mappings = {
-                        scrollU = '<C-u>',
-                        scrollD = '<C-d>',
+                        scrollU = '<C-b>',
+                        scrollD = '<C-f>',
                         jumpTop = '[',
                         jumpBot = ']'
                     }
