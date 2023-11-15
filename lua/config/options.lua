@@ -24,12 +24,15 @@ opt.shiftwidth= 4
 opt.softtabstop= 4
 opt.autoindent= true
 opt.autochdir= true
-opt.autoindent= false
+opt.autoindent= true
 -- opt.autowriteall = true
 -- opt.autowrite = true
-
-
-
+opt.cursorline= true
+opt.cursorlineopt= 'number'
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.foldcolumn= "1"
+opt.signcolumn= "yes"
+-- opt.foldnestmax= "2"
 opt.ruler = true
 opt.showcmd= true
 opt.showmatch= true
@@ -45,7 +48,6 @@ opt.expandtab= true
 opt.autoread= true
 opt.modifiable= true
 opt.laststatus= 0
-opt.signcolumn= "yes"
 --opt.iskeyword:append(":")
 
 g.completeopt= "menu,menuone,noselect"

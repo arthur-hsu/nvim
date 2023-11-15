@@ -1,6 +1,7 @@
 return {
     'gen740/SmoothCursor.nvim',
     event = 'VeryLazy',
+    enabled = false,
     config = function()
         require('smoothcursor').setup({
             autostart = true,

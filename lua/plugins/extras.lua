@@ -11,23 +11,29 @@ return{
     {
         'xiyaowong/transparent.nvim',
         lazy=false,
-        -- enabled=false,
-        -- event = { "BufReadPost", "BufNewFile" },
-        opts={
-            extra_groups={
-                "NormalFloat",
-                "TelescopePrompt",
-                "BufferLine",
-                "BufferLineFill",
-                "BufferLineTab",
-                "BufferLineTabSelected",
-            },
-            exclude_groups={
-                "NotifyBackground",
-            }
-        },
         config= function ()
+            require("transparent").setup({ -- Optional, you don't have to run setup.
+                groups = { -- table: default groups
+                    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+                    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+                    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+                    'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
+                    'EndOfBuffer',
+                },
+                -- table: additional groups that should be cleared
+                extra_groups = {
+                    "FoldColumn",
+                    "UfoCursorFoldedLine",
+                    "UfoFoldedBg"
+                },
+                -- table: groups you don't want to clear
+                exclude_groups = {
+                    "NotifyBackground",
+                    'CursorLineNr',
+                },
+            })
             require('transparent').clear_prefix('lualine')
+            
         end
     },
     {
