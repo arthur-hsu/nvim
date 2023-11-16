@@ -7,7 +7,7 @@ return {
         require("statuscol").setup({
             -- configuration goes here, for example:
             relculright = true,
-            -- separator = " ",
+            separator = " ",
             segments = {
                 -- { sign = { name = { "smoothcursor" },text={ "smoothcursor" } } },
                 { text = { builtin.foldfunc},click = "v:lua.ScFa" },
@@ -20,6 +20,7 @@ return {
                     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
                     click = "v:lua.ScSa"
                 },
+                { text = { " " }},
             }
         })
     end,
