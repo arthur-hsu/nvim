@@ -48,12 +48,12 @@ local file_detial = function (scope)
     }
     return detial[scope]
 end
+
 local copilot_status = function (scope)
     local status = require("copilot_status").status_string()
     return scope[status]
     
 end
-
 
 local conditions = {
     buffer_not_empty = function()
@@ -75,7 +75,6 @@ local M = {
 }
 
 function M.config()
-
     local lualine = require('lualine')
     local config = {
         extensions = { "lazy" },
@@ -153,8 +152,6 @@ function M.config()
         padding = { right = 1 },
     }
 
-
-
     -- Filename & Icon --
     ins_left {
         function () return vim.fn.expand('%:t') end,
@@ -166,15 +163,10 @@ function M.config()
     ins_left { 'location', color = { fg = colors.yellow, bg='None' } }
     ins_left { 'progress', color = { fg = colors.yellow, bg='None' } }
 
-
-
     -- Insert mid section. You can make any number of sections in neovim :)
     -- for lualine it's any number greater then 2
-    
     -- LSP --
-    ins_left {
-        function() return '%=' end  -- Must be here
-    }
+    ins_left { function() return '%=' end } -- Must be here
     ins_left {
         -- Lsp server name .
         function()
@@ -221,7 +213,7 @@ function M.config()
     ins_right {
         'diff',
         -- Is it me or the symbol for modified us really weird
-        --symbols = { added = ' ', modified = ' ', removed = ' ' },
+        -- symbols = { added = ' ', modified = ' ', removed = ' ' },
         diff_color = {
             added = { fg = colors.green,bg='None' },
             modified = { fg = colors.orange,bg='None' },
