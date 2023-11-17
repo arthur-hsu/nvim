@@ -181,10 +181,11 @@ function M.config()
     ins_left {
         -- Lsp server name .
         function()
+            local msg = " "
             local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
             local clients = vim.lsp.get_active_clients()
             if next(clients) == nil then
-                return ''
+                return msg
             end
             for _, client in ipairs(clients) do
                 -- vim.print(client.name)
@@ -193,6 +194,7 @@ function M.config()
                     return file_detial('icon') .." ".. client.name
                 end
             end
+            return msg
         end,
         -- icon = ,
         color = function() return { fg = ( file_detial('color') or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
