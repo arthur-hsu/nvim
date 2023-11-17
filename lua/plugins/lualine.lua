@@ -136,6 +136,7 @@ function M.config()
     ins_left {
         -- mode component
         function()
+            local mode = vim.fn.mode()
             Mode_text = {
                 n      = 'NORMAL',
                 i      = 'INSERT',
@@ -146,7 +147,17 @@ function M.config()
                 R      = 'REPLACE',
                 t      = 'TERMINAL',
             }
-            return '  '..( Mode_text[vim.fn.mode()] or vim.fn.mode() )
+            Mode_icon= {
+                n      = '',
+                i      = '',
+                c      = '',
+                v      = '',
+                V      = '',
+                [''] = '',
+                R      = '',
+                t      = '',
+            }
+            return " "..Mode_icon[mode].." "..( Mode_text[mode] or mode )
         end,
         color = function() return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' } end,
         padding = { right = 1 },
