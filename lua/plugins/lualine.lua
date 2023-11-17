@@ -70,7 +70,7 @@ local conditions = {
 }
 local M = {
     'nvim-lualine/lualine.nvim',
-    dependencies = {'nvim-tree/nvim-web-devicons'},
+    dependencies = {'nvim-tree/nvim-web-devicons',"jonahgoldwastaken/copilot-status.nvim"},
     event="VeryLazy",
 }
 
@@ -187,15 +187,17 @@ function M.config()
             for _, client in ipairs(clients) do
                 local filetypes = client.config.filetypes
                 if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    return client.name
+                    return file_detial('icon') .." ".. client.name
                 end
             end
            
             return msg
         end,
-        icon = file_detial('icon'),
+        -- icon = ,
         color = function() return { fg = ( file_detial('color') or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
     }
+
+
     -- Diagnostic --
     ins_right {
         'diagnostics',
@@ -242,7 +244,6 @@ function M.config()
         cond = require('lazy.status').has_updates,
         color = { fg = colors.green },
     }
-
 
     -- OS --
     local os = vim.loop.os_uname().sysname
