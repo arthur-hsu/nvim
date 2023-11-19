@@ -7,7 +7,7 @@ local M = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        "hrsh7th/cmp-emoji",
+        -- "hrsh7th/cmp-emoji",
         "hrsh7th/cmp-cmdline",
         {
             "onsails/lspkind-nvim",
@@ -51,18 +51,17 @@ local M = {
     },
 }
 
-
 function M.config()
     local cmp = require("cmp")
     require("luasnip.loaders.from_vscode").lazy_load()
     vim.api.nvim_set_hl(0, "CmpItemKindcopilot", { fg = "#31A8FF", bg = "None" })
     cmp.setup({
         experimental = {
-            ghost_text = true,
+            ghost_text = false,
         },
-        view ={
-            entries = {name = 'custom', selection_order = 'near_cursor' }
-        },
+        -- view ={
+        --     entries = {name = 'custom', selection_order = 'near_cursor' }
+        -- },
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -101,7 +100,8 @@ function M.config()
         },
         formatting = {
             expandable_indicator = true,
-            --fields = {'menu', 'abbr', 'kind'},
+            fields = { cmp.ItemField.Abbr, cmp.ItemField.Kind },
+            -- fields = { cmp.ItemField.Abbr },
             format = require("lspkind").cmp_format({
                 with_text = true, -- do not show text alongside icons
                 maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
