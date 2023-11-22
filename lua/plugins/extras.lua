@@ -77,4 +77,9 @@ return{
         enabled = false,
         lazy=true,
     },
+    {
+        'junegunn/vim-easy-align',
+        enabled = false,
+        event="VeryLazy",
+    }
 }
