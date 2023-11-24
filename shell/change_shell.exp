@@ -1,7 +1,46 @@
 #!/usr/bin/expect
-set password "rak"
-set shell_path "/bin/zsh"
-spawn chsh -s "$shell_path"
-expect "Password: "
-send "$password\r"
-interact
+
+set timeout -1
+
+# 设置最大尝试次数
+set max_attempts 3
+set attempt_count 0
+
+set password [lindex $argv 0]
+# 循环直到输入正确的密码或达到最大尝试次数
+while {$attempt_count < $max_attempts} {
+    # 获取命令行参数中的密码变量
+    
+    # send_user "input password is $password\n"
+    # 在这里可以执行需要密码的命令，例如 ssh、sudo 等
+    set shell_path "/bin/zsh"
+    spawn chsh -s "$shell_path"
+
+    # 匹配密码提示
+    expect {
+        "Password:" {
+            send "$password\r"
+            exp_continue
+        }
+        "chsh: PAM: Authentication failure" {
+            incr attempt_count
+            send_user "Incorrect password. Please try again.\n"
+            # 在这里可以加入重新输入密码的逻辑
+            stty -echo
+            send_user "Enter your password: "
+            expect_user -re "(.*)\n"
+            set password $expect_out(1,string)
+            stty echo
+            send_user "\n"
+        }
+        eof {
+            send_user "change default shell successful.\n"
+            exit 0
+        }
+    }
+}
+
+# 如果达到最大尝试次数，输出错误消息并退出
+send_user "Max attempts reached. change default shell failed.\n"
+exit 1
+
