@@ -1,10 +1,9 @@
 #!/usr/bin/sh
-
+cp ./lxterminal.conf ~/.config/lxterminal/lxterminal.conf
 printf "Enter password: "
 stty -echo
 read user_password
 stty echo
-
 ./setup_nvim.sh
 ./setup_zsh.sh
 sudo apt-get install -y expect
