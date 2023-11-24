@@ -4,7 +4,7 @@
 ```shell
 git clone --depth=1 https://github.com/arthur-hsu/nvim.git ~/.config/nvim
 cd .config/nvim/shell
-chmod +x setup.sh;./setup.sh
+chmod +x *.sh;./install.sh
 ```
 ## Terminal字體設定
 ![image](https://github.com/aaa890177/nvim/assets/127286236/d813b1f6-4bf4-4355-991d-d02bd6061970)
