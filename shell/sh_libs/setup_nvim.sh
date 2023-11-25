@@ -28,8 +28,9 @@ sudo pip3 install neovim
 cd ~/Documents/ &&\
     sudo npm install neovim
 
-user_password="$1"
-./sh_libs/nvim_install.sh "$user_password"
+cd ~/.config/nvim/shell/ &&\
+    user_password="$1" &&\
+    ./sh_libs/nvim_install.sh "$user_password"
 
 
 
