@@ -8,7 +8,7 @@ git config --global pull.rebase true
 
 rm -r ~/Bookshelf
 
-sudo cp -r ../JetBrainsMono /usr/share/fonts
+sudo cp -r ./JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
@@ -29,8 +29,7 @@ cd ~/Documents/ &&\
     sudo npm install neovim
 
 user_password="$1"
-
-./nvim_install.sh "$user_password"
+./sh_libs/nvim_install.sh "$user_password"
 
 
 
