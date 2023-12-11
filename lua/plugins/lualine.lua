@@ -291,7 +291,7 @@ function M.config()
                 ["error"]   = ' ',
                 ["offline"] = ' ',
             }
-            return copilot_status(icons)
+            return copilot_status(icons) or ' '
             --return require("copilot_status").status_string()
         end,
         cond = function ()
@@ -305,7 +305,7 @@ function M.config()
                 ["error"] = { fg = colors.red, bg = 'None' },
                 ["offline"] = { fg = colors.offline, bg = 'None' },
             }
-            return copilot_status(copilot_colours)
+            return copilot_status(copilot_colours) or copilot_colours['error']
         end
     }
 
