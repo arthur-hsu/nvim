@@ -291,7 +291,7 @@ function M.config()
                 ["error"]   = ' ',
                 ["offline"] = ' ',
             }
-            return copilot_status(icons) or ' '
+            return copilot_status(icons) or icons['error']
             --return require("copilot_status").status_string()
         end,
         cond = function ()
