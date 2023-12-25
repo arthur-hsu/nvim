@@ -16,7 +16,7 @@ stty echo
 if [ "$#" -gt 0 ]; then
     # 如果有参数，则执行相应的操作，这里是一个示例函数
     echo "Install deskpi"
-    ./sh_libs/deskpi.sh
+    sudo ./sh_libs/deskpi.sh
 fi
 
 debian_version=$(cat /etc/debian_version)
