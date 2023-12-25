@@ -1,5 +1,5 @@
 #!/usr/bin/sh
-# cp ./sh_libs/lxterminal.conf ~/.config/lxterminal/lxterminal.conf
+cp ./sh_libs/lxterminal.conf ~/.config/lxterminal/lxterminal.conf
 printf "Enter password: "
 stty -echo
 read user_password
