@@ -16,7 +16,7 @@ files=$(ls -1 neovim_v*_"$system_".deb 2>/dev/null)
 if [ -n "$files" ]; then
     latest_file=$(echo "$files" | sort -V | tail -n 1)
     echo "latest file= $latest_file"
-    # sudo dpkg -i "$latest_file"
+    sudo dpkg -i "$latest_file"
 else
     echo "No neovim deb files found in the current directory."
     echo "$user_password" | sudo -S apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip checkinstall
