@@ -1,5 +1,13 @@
 #!/usr/bin/sh
+lxterminal_config_folder=~/.config/lxterminal
+
+# 检查文件夹是否存在
+if [ ! -d "$lxterminal_config_folder" ]; then
+    # 如果不存在，则创建文件夹
+    mkdir -p "$lxterminal_config_folder"
+fi
 cp ./sh_libs/lxterminal.conf ~/.config/lxterminal/lxterminal.conf
+
 printf "Enter password: "
 stty -echo
 read user_password
