@@ -22,12 +22,12 @@ else
     echo "$user_password" | sudo -S apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip checkinstall
     git clone -b stable http://github.com/neovim/neovim --depth=1 /tmp/neovim
     cd /tmp/neovim
-    # latest_tag=$(git describe --tags --match "v*" --abbrev=0)
     make CMAKE_BUILD_TYPE=Release
+    sudo make install
     echo -e "\r\n" | echo "$user_password" | sudo -S checkinstall
     version=$(ls | grep 'neovim_[0-9]*-[0-9]_'$system_'.deb' | sed -n 's/.*neovim_\([0-9]*-[0-9]\)_'$system_'.deb/\1/p')
     deb_file="neovim_${version}_$system_.deb"
-    echo "$user_password" | sudo -S dpkg -i "$deb_file"
+    # echo "$user_password" | sudo -S dpkg -i "$deb_file"
     tag=$(git describe --tags --match "v*" --abbrev=0)
     mv "$deb_file" ~/.config/nvim/shell/nvim_deb/neovim_"$tag"_"$system_".deb 
     echo "Install finish"
