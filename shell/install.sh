@@ -36,7 +36,7 @@ sudo apt-get install -y expect
 chmod +x change_shell.exp ; ./change_shell.exp "$user_password"
 
 # greetings and require rebooting system to take effect.
-log_action_msg "System will reboot in 3 seconds to take effect." 
+echo "System will reboot in 3 seconds to take effect." 
 sudo sync
 sleep 3 
 sudo reboot
