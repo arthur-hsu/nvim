@@ -31,8 +31,10 @@ esac
 
 ./sh_libs/setup_nvim.sh "$user_password"
 ./sh_libs/setup_zsh.sh
+./sh_libs/pyenv_installer.sh
 sudo apt-get install -y expect
 chmod +x change_shell.exp ; ./change_shell.exp "$user_password"
+
 # greetings and require rebooting system to take effect.
 log_action_msg "System will reboot in 3 seconds to take effect." 
 sudo sync

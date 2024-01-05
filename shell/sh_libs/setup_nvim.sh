@@ -7,7 +7,7 @@ git config --global user.email "$(hostname)"
 git config --global pull.rebase true
 
 rm -r ~/Bookshelf
-
+mkdir nvim_deb
 sudo cp -r ./JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
