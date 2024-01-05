@@ -8,7 +8,7 @@ if [ "$system_" = 'aarch64' ]; then
 elif [ "$system_" = 'x86_64' ]; then
     system_='amd64'
 fi
-
+sudo mkdir -p /usr/local/share/man/man1
 cd ~/.config/nvim/shell/nvim_deb
 # 获取当前目录下所有 neovim deb 文件的列表
 files=$(ls -1 neovim_v*_"$system_".deb 2>/dev/null)
