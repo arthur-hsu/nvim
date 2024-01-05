@@ -19,6 +19,13 @@ alias d="docker"
 alias dc="docker-compose"
 alias fd="fdfind"
 alias top="bpytop"
+
+alias deactivate="pyenv deactivate"
+activate(){
+    pyenv activate "$1"
+    export pypath=$(pyenv which python)
+}
+
 export PATH=$PATH:~/.local/bin
 EOF
 
