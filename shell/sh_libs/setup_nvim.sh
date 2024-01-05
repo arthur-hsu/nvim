@@ -1,12 +1,12 @@
 #!/usr/bin/sh
 
-
 git config --global credential.helper store
+git config --global pull.rebase true
 git config --global user.name "$USER"
 git config --global user.email "$(hostname)"
-git config --global pull.rebase true
 
-rm -r ~/Bookshelf
+rm -r ~/Bookshelf ~/Music ~/Pictures ~/Public ~/Templates ~/Videos
+
 mkdir nvim_deb
 sudo cp -r ./JetBrainsMono /usr/share/fonts
 sudo apt-get update
