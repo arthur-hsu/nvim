@@ -25,9 +25,15 @@ activate(){
     pyenv activate "$1"
     export pypath=$(pyenv which python)
 }
-
-export PATH=$PATH:~/.local/bin
 EOF
+
+cat <<'EOF' | sudo tee -a ~/.zshrc
+export PATH=$PATH:~/.local/bin
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+EOF
+
+
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
