@@ -21,8 +21,8 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>", opts)
 end
 
-
-keymap("n", "<leader>L", "<cmd>:Lazy<CR>", opts)
+keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>", opts)
+keymap("n", "<leader>L", "<cmd>Lazy<CR>", opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
 keymap("n", "<F2>", ":terminal<CR>i", opts)
