@@ -32,7 +32,7 @@ EOF
 
 cat <<'EOF' | sudo tee -a ~/.zshrc
 export PATH=$PATH:~/.local/bin
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ulimit -c 0
 EOF
 
