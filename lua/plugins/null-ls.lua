@@ -2,7 +2,7 @@ return{
     {
         "https://github.com/nvimtools/none-ls.nvim",
         lazy = true,
-        -- enabled = false,
+        enabled = false,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "mason.nvim",'nvim-lua/plenary.nvim'},
         opts = function()
