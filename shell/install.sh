@@ -29,6 +29,7 @@ case "$debian_version" in
 esac
 
 
+
 ./sh_libs/setup_nvim.sh "$user_password"
 ./sh_libs/setup_zsh.sh
 ./sh_libs/pyenv_installer.sh
