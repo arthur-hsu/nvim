@@ -7,6 +7,7 @@ return{
             max_concurrent_installers = 4,
             ui = { border = "none" },
             ensure_installed = {
+
                 -- Formatter
                 --"pylint",
                 --"flake8",
@@ -14,6 +15,7 @@ return{
                 "prettier",
                 "shfmt",
                 "jq",
+                "codelldb",
                 -- Linter
                 "eslint_d",
                 -- "standardrb",
@@ -23,7 +25,7 @@ return{
                 "yamllint",
             },
         },
-        ---@param opts MasonSettings | {ensure_installed: string[]}
+        -- ---@param opts MasonSettings | {ensure_installed: string[]}
         config = function(_, opts)
             require("mason").setup(opts)
             local mr = require("mason-registry")

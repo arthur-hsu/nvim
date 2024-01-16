@@ -2,6 +2,7 @@ return {
     'altermo/ultimate-autopair.nvim',
     -- enabled = false,
     event={'InsertEnter','CmdlineEnter'},
+    -- event="VeryLazy",
     branch='development',
     config = function ()
         require('ultimate-autopair').setup({

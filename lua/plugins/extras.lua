@@ -41,6 +41,16 @@ return{
     {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
+        opts ={
+            override = {
+                toml = {
+                    icon = "󰙩",
+                    color = "#ffffff",
+                    cterm_color = "231",
+                    name = "Toml",
+                }
+            }
+        }
     },
     {
         "nathom/filetype.nvim",
@@ -81,5 +91,10 @@ return{
         'junegunn/vim-easy-align',
         enabled = false,
         event="VeryLazy",
+    },
+    {
+        'dstein64/vim-startuptime',
+        event="VimEnter",
+        enabled = false,
     }
 }
