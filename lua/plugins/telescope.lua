@@ -10,9 +10,6 @@ local M = {
     }
 }
 
-
-
-
 function M.config()
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -27,17 +24,37 @@ function M.config()
         ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
         { noremap = true }
     )
-
+    local actions = require("telescope.actions")
     local fb_actions = require "telescope._extensions.file_browser.actions"
     require("telescope").setup({
         defaults = {
+            mappings = {
+                i = {
+                    ["<esc>"] = actions.close
+                },
+            },
+            layout_strategy = "flex",
             layout_config = {
-                vertical = {height = 0.8, width = 0.8}
+                horizontal = {
+                    height = 0.7,
+                    preview_cutoff = 10,
+                    prompt_position = "bottom",
+                    width = 0.9,
+                    preview_width = 0.6
+                },
+                vertical = {
+                    height = 0.9,
+                    preview_cutoff = 10,
+                    prompt_position = "bottom",
+                    width = 0.8,
+                    preview_height = 0.6,
+                },
             },
             scroll_strategy = "limit",
             initial_mode = "insert", --normal
             prompt_prefix = "➤  ",
-            path_display = { "tail" },
+            -- path_display = { "tail" },
+            path_display = { "smart" },
             dynamic_preview_title = true,
             -- path_display = function(opts, path)
             --   local tail = require("telescope.utils").path_tail(path)
@@ -58,9 +75,7 @@ function M.config()
                 "node_modules",
                 ".git",
                 ".cache",
-                ".pem",
                 ".resx",
-                ".key",
                 "__pychace__",
                 ".pytest_cache"
             },

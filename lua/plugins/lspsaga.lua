@@ -9,7 +9,6 @@ local M = {
     }
 }
 
-
 function M.config()
     require('lspsaga').setup({
         ui = {

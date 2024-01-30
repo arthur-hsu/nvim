@@ -19,7 +19,9 @@ require("lazy").setup({
     concurrency = 24,
     defaults = { lazy = true, version = nil },
     install = {
-        colorscheme = {"zephyr"},
+        -- colorscheme = {"material"},
+
+        -- colorscheme = {"zephyr"},
         -- colorscheme = {"tokyonight"},
         --colorscheme = {"nordic"},
         -- colorscheme = {"kanagawa"},
