@@ -2,12 +2,9 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
-    --event = 'VeryLazy',
-    --enabled = false,
     dependencies = {
         {
             'HiPhish/rainbow-delimiters.nvim',
-            branch = 'use-children',
             config = function()
                 -- This module contains a number of default definitions
                 -- require('rainbow-delimiters').setup({})
@@ -45,7 +42,6 @@ return {
             vim.api.nvim_set_hl(0, "CurrentScope", { fg = "#6fe77c"})
         end)
 
-        vim.g.rainbow_delimiters = { highlight = highlight }
 
         require("ibl").setup({
             -- indent = { highlight = highlight, char = "▎" },
@@ -60,23 +56,23 @@ return {
                 show_exact_scope = false,
                 include = {node_type = { ["*"] = { "*" } }}
             }
-
         })
-        local indent_blankline_augroup = vim.api.nvim_create_augroup("indent_blankline_augroup", {clear = true})
-        vim.api.nvim_create_autocmd("ModeChanged", {
-            group = indent_blankline_augroup,
-            pattern = "[vV\x16]*:*",
-            command = "IBLEnable",
-            desc = "Enable indent-blankline when exiting visual mode"
-        })
-
-        vim.api.nvim_create_autocmd("ModeChanged", {
-            group = indent_blankline_augroup,
-            pattern = "*:[vV\x16]*",
-            command = "IBLDisable",
-            desc = "Disable indent-blankline when exiting visual mode"
-        })
-        hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+        vim.g.rainbow_delimiters = { highlight = highlight }
+        -- local indent_blankline_augroup = vim.api.nvim_create_augroup("indent_blankline_augroup", {clear = true})
+        -- vim.api.nvim_create_autocmd("ModeChanged", {
+        --     group = indent_blankline_augroup,
+        --     pattern = "[vV\x16]*:*",
+        --     command = "IBLEnable",
+        --     desc = "Enable indent-blankline when exiting visual mode"
+        -- })
+        --
+        -- vim.api.nvim_create_autocmd("ModeChanged", {
+        --     group = indent_blankline_augroup,
+        --     pattern = "*:[vV\x16]*",
+        --     command = "IBLDisable",
+        --     desc = "Disable indent-blankline when exiting visual mode"
+        -- })
+        -- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end
 
 }
