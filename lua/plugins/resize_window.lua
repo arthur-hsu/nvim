@@ -38,7 +38,7 @@ return{
             "anuvyklack/animation.nvim"
         },
         event = "VeryLazy",
-        -- enabled = false,
+        enabled = false,
         config = function()
             vim.o.winwidth = 10
             vim.o.winminwidth = 10
