@@ -148,8 +148,8 @@ function M.config()
                 t      = 'TERMINAL',
             }
             Mode_icon= {
-                n      = '',
-                i      = '',
+                n      = '',
+                i      = '',
                 c      = '',
                 v      = '',
                 V      = '',
