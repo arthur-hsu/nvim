@@ -5,7 +5,6 @@ local M = {
 	end,
     --enabled =false,
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {'HiPhish/nvim-ts-rainbow2'},
 }
 
 function M.config()
@@ -13,7 +12,7 @@ function M.config()
     require'nvim-treesitter.configs'.setup {
         auto_install = true,
         sync_install = true,
-        ensure_installed = {"python","bash","json"}, -- or all
+        ensure_installed = {"python","bash","json",'vimdoc','gitcommit'}, -- or all
         highlight = {
             enable = true,
         },
@@ -28,16 +27,16 @@ function M.config()
             -- Which query to use for finding delimiters
             query = 'rainbow-parens',
             -- Highlight the entire buffer all at once
-            strategy = require('ts-rainbow').strategy.global,
-            hlgroups = {
-                'TSRainbowCyan',
-                'TSRainbowGreen',
-                'TSRainbowYellow',
-                'TSRainbowBlue',
-                'TSRainbowViolet',
-                --'TSRainbowRed',
-                --'TSRainbowOrange',
-            },
+            -- strategy = require('ts-rainbow').strategy.global,
+            -- hlgroups = {
+            --     'TSRainbowCyan',
+            --     'TSRainbowGreen',
+            --     'TSRainbowYellow',
+            --     'TSRainbowBlue',
+            --     'TSRainbowViolet',
+            --     --'TSRainbowRed',
+            --     --'TSRainbowOrange',
+            -- },
         },
     }
     -- 开启 Folding
