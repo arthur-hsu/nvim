@@ -70,7 +70,28 @@ local conditions = {
 }
 local M = {
     'nvim-lualine/lualine.nvim',
-    dependencies = {'nvim-tree/nvim-web-devicons',"jonahgoldwastaken/copilot-status.nvim"},
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        {
+            "jonahgoldwastaken/copilot-status.nvim",
+            dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
+            lazy = true,
+            event = { "BufReadPost", "BufNewFile" },
+            config = function ()
+                require('copilot_status').setup({
+                    icons = {
+                        idle = "idle",
+                        error = "error",
+                        offline = "offline",
+                        warning = "warning",
+                        loading = "loading",
+                    },
+                    debug = false,
+                })
+            end
+        }
+
+    },
     event="VeryLazy",
 }
 
@@ -200,7 +221,6 @@ function M.config()
         color = function() return { fg = ( file_detial('color') or mode_color[vim.fn.mode()] ),gui = 'bold',bg='None' } end,
     }
 
-
     -- Diagnostic --
     ins_right {
         'diagnostics',
@@ -299,10 +319,10 @@ function M.config()
         end,
         color = function ()
             local copilot_colours = {
-                ["idle"] = { fg = colors.blue, bg = 'None' },
-                ["warning"] = { fg = colors.orange,bg = 'None' },
+                ["idle"]    = { fg = colors.blue, bg = 'None' },
+                ["warning"] = { fg = colors.orange, bg = 'None' },
                 ["loading"] = { fg = colors.green, bg = 'None' },
-                ["error"] = { fg = colors.red, bg = 'None' },
+                ["error"]   = { fg = colors.red, bg = 'None' },
                 ["offline"] = { fg = colors.offline, bg = 'None' },
             }
             return copilot_status(copilot_colours) or copilot_colours['error']

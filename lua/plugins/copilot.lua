@@ -102,24 +102,5 @@ return{
             require("copilot_cmp").setup()
         end
     },
-    {
-        "jonahgoldwastaken/copilot-status.nvim",
-        dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
-        --lazy = true,
-        --event = "BufReadPost",
-        event = { "BufReadPost", "BufNewFile" },
-        config = function ()
-            require('copilot_status').setup({
-                icons = {
-                    idle = "idle",
-                    error = "error",
-                    offline = "offline",
-                    warning = "warning",
-                    loading = "loading",
-                },
-                debug = false,
-            })
-        end
-    }
 
 }
