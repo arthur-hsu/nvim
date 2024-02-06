@@ -41,16 +41,16 @@ return{
     {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
-        opts ={
-            override = {
-                toml = {
-                    icon = "󰙩",
-                    color = "#ffffff",
-                    cterm_color = "231",
-                    name = "Toml",
-                }
-            }
-        }
+        -- opts ={
+        --     override = {
+        --         toml = {
+        --             icon = "󰙩",
+        --             color = "#ffffff",
+        --             cterm_color = "231",
+        --             name = "Toml",
+        --         }
+        --     }
+        -- }
     },
     {
         "nathom/filetype.nvim",

@@ -151,11 +151,11 @@ function M.config()
                 n      = '',
                 i      = '',
                 c      = '',
-                v      = '',
-                V      = '',
-                [''] = '',
+                v      = '󰯍',  -- 󰓡 󰡎 󰯍 󰝡 
+                V      = '󰯎',  -- 󰓢 󰡏 󰯎 󰕏 
+                [''] = '',
                 R      = '',
-                t      = '',
+                t      = '',
             }
             return " "..Mode_icon[mode].." "..( Mode_text[mode] or mode )
         end,

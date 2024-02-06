@@ -37,8 +37,8 @@ return {
         
         dashboard.section.buttons.val = {
             -- dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
-            dashboard.button("n ", "󰙴 " .. " New file", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("s ", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
+            dashboard.button("n ", " " .. " New file", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("s ", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("r ", " " .. " Recent files", ":Telescope oldfiles <CR>"),
             dashboard.button("v ", " " .. " View change history", ":DiffviewFileHistory <CR>"),
             dashboard.button("c ", " " .. " Config", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>"),
@@ -74,14 +74,14 @@ return {
             callback = function()
                 local stats = require("lazy").stats()
                 local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                local version = " "
+                local version = " "
                     .. vim.version().major
                     .. "."
                     .. vim.version().minor
                     .. "."
                     .. vim.version().patch
-                local plugins = "             " .. stats.count .. "plugins        " .. ms .. "ms"
-                local datetime = os.date(" %Y/%m/%d        %H:%M           Weekday: %a")
+                local plugins = "             " .. stats.count .. "plugins        " .. ms .. "ms"
+                local datetime = os.date(" %Y/%m/%d        %H:%M            %a")
                 local footer = version .. plugins .. '\n \n'..datetime  .. "\n"
                 dashboard.section.footer.val = footer
                 pcall(vim.cmd.AlphaRedraw)
