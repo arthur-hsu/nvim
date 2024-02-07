@@ -8,7 +8,7 @@ git config --global user.email "$(hostname)"
 rm -r ~/Bookshelf ~/Music ~/Pictures ~/Public ~/Templates ~/Videos
 
 mkdir nvim_deb
-sudo rm -r /usr/share/fonts
+sudo rm -r /usr/share/fonts/JetBrainsMono
 sudo cp -r ./JetBrainsMono /usr/share/fonts
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
