@@ -9,7 +9,3 @@ else
     require "config.options"
     vim.cmd("TransparentEnable")
 end
-
-
-
-
