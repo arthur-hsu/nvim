@@ -45,6 +45,8 @@ return {
                                     reportUnboundVariable       = "none",
                                     reportGeneralTypeIssues     = "none",
                                     reportOptionalMemberAccess  = "none",
+                                    reportArgumentType          = "none",
+                                    reportOperatorIssue         = "none",
                                 }
                             }
                         }
