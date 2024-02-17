@@ -12,31 +12,13 @@ function M.config()
     require'nvim-treesitter.configs'.setup {
         auto_install = true,
         sync_install = true,
-        ensure_installed = {"python","bash","json",'vimdoc','gitcommit'}, -- or all
+        ensure_installed = {"python","bash","json",'vimdoc','gitcommit','markdown','markdown_inline','lua'}, -- or all
         highlight = {
             enable = true,
         },
         indent = {
             enable = true,
             disable = {'lua'},
-        },
-        rainbow = {
-            enable = true,
-            -- list of languages you want to disable the plugin for
-            disable = { 'jsx', 'cpp' },
-            -- Which query to use for finding delimiters
-            query = 'rainbow-parens',
-            -- Highlight the entire buffer all at once
-            -- strategy = require('ts-rainbow').strategy.global,
-            -- hlgroups = {
-            --     'TSRainbowCyan',
-            --     'TSRainbowGreen',
-            --     'TSRainbowYellow',
-            --     'TSRainbowBlue',
-            --     'TSRainbowViolet',
-            --     --'TSRainbowRed',
-            --     --'TSRainbowOrange',
-            -- },
         },
     }
     -- 开启 Folding

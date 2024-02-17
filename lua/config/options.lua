@@ -51,6 +51,7 @@ opt.laststatus= 0
 g.completeopt= "menu,menuone,noselect"
 -- Decrease redraw time
 vim.o.redrawtime= 100
+opt.updatetime=100
 
 vim.o.undofile= true
 vim.opt.undodir= vim.fn.stdpath('state') .. '/undo'
