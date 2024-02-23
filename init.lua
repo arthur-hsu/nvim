@@ -1,3 +1,7 @@
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+    vim.g.python3_host_prog= "C:\\Users\\arthur\\.pyenv\\pyenv-win\\versions\\3.11.7\\python.exe"
+end
+
 if vim.g.vscode then
     -- VSCode extension
     require "config.options"
