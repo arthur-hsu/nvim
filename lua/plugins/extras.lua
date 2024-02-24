@@ -51,7 +51,6 @@ return{
                 -- -- Whether to display highlights in INSERT mode or not
                 -- insert_mode = false,
             })
-            -- vim.cmd [[LocalHighlightOn]]
         end
     },
     {
