@@ -39,76 +39,6 @@ return{
         end
     },
     {
-        'godlygeek/tabular',
-        event = 'VeryLazy',
-    },
-    {
-        "sontungexpt/stcursorword",
-        event = "VeryLazy",
-        config = function ()
-            -- default configuration
-            require("stcursorword").setup({
-                max_word_length = 100, -- if cursorword length > max_word_length then not highlight
-                min_word_length = 2, -- if cursorword length < min_word_length then not highlight
-                excluded = {
-                    filetypes = {
-                        "TelescopePrompt",
-                        "alpha",
-                        "mason",
-                        "lazy",
-                        "DiffviewFileHistory",
-                        "DiffviewFiles",
-                        "Trouble",
-                        "lspinfo"
-                    },
-                    buftypes = {
-                        "nofile",
-                        "help",
-                        "terminal",
-                    },
-                    patterns = { -- the pattern to match with the file path
-                    -- "%.png$",
-                    -- "%.jpg$",
-                    -- "%.jpeg$",
-                    -- "%.pdf$",
-                    -- "%.zip$",
-                    -- "%.tar$",
-                    -- "%.tar%.gz$",
-                    -- "%.tar%.xz$",
-                    -- "%.tar%.bz2$",
-                    -- "%.rar$",
-                    -- "%.7z$",
-                    -- "%.mp3$",
-                    -- "%.mp4$",
-                },
-            },
-            highlight = {
-                underline = false,
-                fg = '#dcd7ba',
-                bg = "#2d4f67",
-            },
-        })
-        -- define a variable to store the current state of the cursorword highlight
-        local cursorword_highlight_enabled = true
-
-        -- Toggle the cursorword highlight
-        function ToggleCursorWordHighlight()
-            if cursorword_highlight_enabled then
-                -- If the current state is enabled, then execute the disable command
-                vim.cmd('CursorwordDisable')
-                cursorword_highlight_enabled = false
-            else
-                -- Else, execute the enable command
-                vim.cmd('CursorwordEnable')
-                cursorword_highlight_enabled = true
-            end
-        end
-        -- Register the `CursorwordToggle` command
-        vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
-
-        end
-    },
-    {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
     },
@@ -151,5 +81,87 @@ return{
         'dstein64/vim-startuptime',
         event="VimEnter",
         enabled = false,
-    }
+    },
+    {
+        -- NOTE: highlight CursorWord
+        "sontungexpt/stcursorword",
+        event = "VeryLazy",
+        config = function ()
+            -- default configuration
+            require("stcursorword").setup({
+                max_word_length = 100, -- if cursorword length > max_word_length then not highlight
+                min_word_length = 2, -- if cursorword length < min_word_length then not highlight
+                excluded = {
+                    filetypes = {
+                        "TelescopePrompt",
+                        "alpha",
+                        "mason",
+                        "lazy",
+                        "DiffviewFileHistory",
+                        "DiffviewFiles",
+                        "Trouble",
+                        "lspinfo"
+                    },
+                    buftypes = {
+                        "nofile",
+                        "help",
+                        "terminal",
+                    },
+                    patterns = { -- the pattern to match with the file path
+                    -- "%.png$",
+                    -- "%.jpg$",
+                    -- "%.jpeg$",
+                    -- "%.pdf$",
+                    -- "%.zip$",
+                    -- "%.tar$",
+                    -- "%.tar%.gz$",
+                    -- "%.tar%.xz$",
+                    -- "%.tar%.bz2$",
+                    -- "%.rar$",
+                    -- "%.7z$",
+                    -- "%.mp3$",
+                    -- "%.mp4$",
+                },
+            },
+            highlight = {
+                underline = false,
+                -- fg = '#dcd7ba',
+                -- bg = "#2d4f67",
+                bg = '#3E3C42',
+            },
+        })
+        -- define a variable to store the current state of the cursorword highlight
+        local cursorword_highlight_enabled = true
+
+        -- Toggle the cursorword highlight
+        function ToggleCursorWordHighlight()
+            if cursorword_highlight_enabled then
+                -- If the current state is enabled, then execute the disable command
+                vim.cmd('CursorwordDisable')
+                cursorword_highlight_enabled = false
+            else
+                -- Else, execute the enable command
+                vim.cmd('CursorwordEnable')
+                cursorword_highlight_enabled = true
+            end
+        end
+        -- Register the `CursorwordToggle` command
+        vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
+
+        end
+    },
+    {
+        'junegunn/vim-easy-align',
+        event = 'VeryLazy',
+        config = function ()
+            vim.cmd([[
+            xmap ga <Plug>(EasyAlign)
+            nmap ga <Plug>(EasyAlign)
+            ]])
+        end
+    },
+    {
+        'godlygeek/tabular',
+        event = 'VeryLazy',
+    },
 }

@@ -17,6 +17,7 @@ function M.config()
     vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
     --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
+
     -- vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
     vim.api.nvim_set_keymap(
         "n",
@@ -26,6 +27,7 @@ function M.config()
     )
     local actions = require("telescope.actions")
     local fb_actions = require "telescope._extensions.file_browser.actions"
+
     require("telescope").setup({
         defaults = {
             mappings = {
@@ -151,6 +153,13 @@ function M.config()
     require("telescope").load_extension("undo")
     require("telescope").load_extension("noice")
     require("telescope").load_extension("file_browser")
+
+
+
+
+
+
+
     -- require('telescope').load_extension('project')
 end
 return M

@@ -252,7 +252,6 @@ function M.config()
         },
         cond = conditions.hide_in_width,
     }
-    ins_right{'filetype'}
     -- Encoding type --
     ins_right {
         'o:encoding', -- option component same as &encoding in viml
@@ -260,6 +259,8 @@ function M.config()
         cond = conditions.hide_in_width,
         color = { fg = colors.yellow, gui = 'bold',bg='None' },
     }
+    -- File format --
+    ins_right{'filetype'}
 
     -- Lazy status --
     ins_right{
