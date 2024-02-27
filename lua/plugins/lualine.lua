@@ -80,8 +80,8 @@ local M = {
             config = function ()
                 require('copilot_status').setup({
                     icons = {
-                        idle = "idle",
-                        error = "error",
+                        idle    = "idle",
+                        error   = "error",
                         offline = "offline",
                         warning = "warning",
                         loading = "loading",
