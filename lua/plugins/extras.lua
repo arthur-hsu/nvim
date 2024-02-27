@@ -98,7 +98,7 @@ return{
             end
         end
 
-        vim.api.nvim_create_user_command('CursorWordToggle', ToggleCursorWordHighlight, {})
+        vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
 
         end
     },
