@@ -124,10 +124,12 @@ return{
                 },
             },
             highlight = {
-                underline = false,
-                -- fg = '#dcd7ba',
-                -- bg = "#2d4f67",
-                bg = '#3E3C42',
+                -- underline = true,
+                -- bg = '#191919',
+                -- fg = '#b3b8f5',
+                bg=nil,
+                fg = nil,
+                reverse = true
             },
         })
         -- define a variable to store the current state of the cursorword highlight
