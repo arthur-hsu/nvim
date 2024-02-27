@@ -54,9 +54,15 @@ return{
                     filetypes = {
                         "TelescopePrompt",
                         "alpha",
+                        "mason",
+                        "lazy",
+                        "DiffviewFileHistory",
+                        "DiffviewFiles",
+                        "Trouble",
+                        "lspinfo"
                     },
                     buftypes = {
-                        -- "nofile",
+                        "nofile",
                         "help",
                         "terminal",
                     },
@@ -82,22 +88,22 @@ return{
                 bg = "#2d4f67",
             },
         })
-        -- 定義一個變量來追蹤光標單詞高亮的啟用狀態
+        -- define a variable to store the current state of the cursorword highlight
         local cursorword_highlight_enabled = true
 
-        -- 定義一個函數來切換光標單詞高亮
+        -- Toggle the cursorword highlight
         function ToggleCursorWordHighlight()
             if cursorword_highlight_enabled then
-                -- 如果當前是啟用狀態，則執行禁用命令
+                -- If the current state is enabled, then execute the disable command
                 vim.cmd('CursorwordDisable')
                 cursorword_highlight_enabled = false
             else
-                -- 如果當前是禁用狀態，則執行啟用命令
+                -- Else, execute the enable command
                 vim.cmd('CursorwordEnable')
                 cursorword_highlight_enabled = true
             end
         end
-
+        -- Register the `CursorwordToggle` command
         vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
 
         end
