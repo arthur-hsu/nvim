@@ -46,71 +46,65 @@ return{
         "sontungexpt/stcursorword",
         event = "VeryLazy",
         config = function ()
-                -- default configuration
-                require("stcursorword").setup({
-                    max_word_length = 100, -- if cursorword length > max_word_length then not highlight
-                    min_word_length = 2, -- if cursorword length < min_word_length then not highlight
-                    excluded = {
-                        filetypes = {
-                            "TelescopePrompt",
-                        },
-                        buftypes = {
-                            -- "nofile",
-                            -- "terminal",
-                        },
-                        patterns = { -- the pattern to match with the file path
-                        -- "%.png$",
-                        -- "%.jpg$",
-                        -- "%.jpeg$",
-                        -- "%.pdf$",
-                        -- "%.zip$",
-                        -- "%.tar$",
-                        -- "%.tar%.gz$",
-                        -- "%.tar%.xz$",
-                        -- "%.tar%.bz2$",
-                        -- "%.rar$",
-                        -- "%.7z$",
-                        -- "%.mp3$",
-                        -- "%.mp4$",
+            -- default configuration
+            require("stcursorword").setup({
+                max_word_length = 100, -- if cursorword length > max_word_length then not highlight
+                min_word_length = 2, -- if cursorword length < min_word_length then not highlight
+                excluded = {
+                    filetypes = {
+                        "TelescopePrompt",
+                        "alpha",
                     },
+                    buftypes = {
+                        -- "nofile",
+                        "help",
+                        "terminal",
+                    },
+                    patterns = { -- the pattern to match with the file path
+                    -- "%.png$",
+                    -- "%.jpg$",
+                    -- "%.jpeg$",
+                    -- "%.pdf$",
+                    -- "%.zip$",
+                    -- "%.tar$",
+                    -- "%.tar%.gz$",
+                    -- "%.tar%.xz$",
+                    -- "%.tar%.bz2$",
+                    -- "%.rar$",
+                    -- "%.7z$",
+                    -- "%.mp3$",
+                    -- "%.mp4$",
                 },
-                highlight = {
-                    underline = false,
-                    fg = '#dcd7ba',
-                    bg = "#2d4f67",
-                },
-            })
+            },
+            highlight = {
+                underline = false,
+                fg = '#dcd7ba',
+                bg = "#2d4f67",
+            },
+        })
+        -- 定義一個變量來追蹤光標單詞高亮的啟用狀態
+        local cursorword_highlight_enabled = true
+
+        -- 定義一個函數來切換光標單詞高亮
+        function ToggleCursorWordHighlight()
+            if cursorword_highlight_enabled then
+                -- 如果當前是啟用狀態，則執行禁用命令
+                vim.cmd('CursorwordDisable')
+                cursorword_highlight_enabled = false
+            else
+                -- 如果當前是禁用狀態，則執行啟用命令
+                vim.cmd('CursorwordEnable')
+                cursorword_highlight_enabled = true
+            end
         end
-    },
-    {
-        'tzachar/local-highlight.nvim',
-        enabled = false,
-        event = 'VeryLazy',
-        config = function()
-            require('local-highlight').setup({
-                -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
-                -- -- OR attach to every filetype except:
-                -- disable_file_types = {'tex'},
-                -- hlgroup = 'Search',
-                -- cw_hlgroup = nil,
-                -- -- Whether to display highlights in INSERT mode or not
-                -- insert_mode = false,
-            })
+
+        vim.api.nvim_create_user_command('CursorWordToggle', ToggleCursorWordHighlight, {})
+
         end
     },
     {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
-        -- opts ={
-        --     override = {
-        --         toml = {
-        --             icon = "󰙩",
-        --             color = "#ffffff",
-        --             cterm_color = "231",
-        --             name = "Toml",
-        --         }
-        --     }
-        -- }
     },
     {
         "nathom/filetype.nvim",
@@ -146,11 +140,6 @@ return{
         'lithammer/nvim-pylance',
         enabled = false,
         lazy=true,
-    },
-    {
-        'junegunn/vim-easy-align',
-        enabled = false,
-        event="VeryLazy",
     },
     {
         'dstein64/vim-startuptime',
