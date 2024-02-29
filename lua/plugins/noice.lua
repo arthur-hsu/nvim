@@ -8,16 +8,41 @@ local M = {
             "rcarriga/nvim-notify",
             config = function ()
                 require("notify").setup({
-                    --background_colour = "NotifyBackground",
-                    --fps = 60,
+                    background_colour = "NotifyBackground",
+                    fps = 60,
                     --level = 2,
                     --minimum_width = 50,
-                    --render = "default",
-                    --stages = "fade_in_slide_out",
-                    timeout = 1000,
-                    --top_down = true
+                    -- Built-in renderers:
+                    -- "default" "minimal" "simple" "compact" "wrapped-compact"
+                    -- max_width = 200,
+                    -- max_height = 10,
+
+                    render = "default",
+                    time_formats = {
+                        notification = "%T",
+                        notification_history = "%FT%T"
+                    },
+                    -- stages = "fade_in_slide_out",
+                    -- stages = "fade",
+                    stages = 'static',
+                    timeout = 2000,
+                    top_down = true
                 })
                 
+            end
+        },
+        {
+            'mrded/nvim-lsp-notify',
+            event = 'VeryLazy',
+            requires = { 'rcarriga/nvim-notify' },
+            config = function()
+                require('lsp-notify').setup({
+                    notify = require('notify'),
+                    icons = {
+                        spinner = {"⣷" , "⣯", "⣟", "⡿", "⢿", "⣻", "⣽", "⣾"},
+                        done = "✓"
+                    }
+                })
             end
         },
     },
@@ -70,8 +95,8 @@ function M.config()
             -- This is a current Neovim limitation.
             enabled = true, -- enables the Noice messages UI
             view = "notify", -- default view for messages
-            view_error = "mini", -- view for errors
-            view_warn = "mini", -- view for warnings
+            view_error = "notify", -- view for errors
+            view_warn = "notify", -- view for warnings
             view_history = "popup", -- view for :messages
             view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
         },
@@ -96,59 +121,18 @@ function M.config()
             -- add any filetypes here, that shouldn't trigger smart move.
             excluded_filetypes = { "cmp_menu", "cmp_docs", "notify" },
         },
-        -- You can add any custom commands below that will be available with `:Noice command`
-        ---"@type table<string, NoiceCommand>"
-        commands = {
-            history = {
-                -- options for the message history that you get with `:Noice`
-                view = "split",
-                opts = { enter = true, format = "details" },
-                filter = {
-                    any = {
-                        { event = "notify" },
-                        { error = true },
-                        { warning = true },
-                        { event = "msg_show", kind = { "" } },
-                        { event = "lsp", kind = "message" },
-                    },
-                },
-            },
-            -- :Noice last
-            last = {
-                view = "popup",
-                opts = { enter = true, format = "details" },
-                filter = {
-                    any = {
-                        { event = "notify" },
-                        { error = true },
-                        { warning = true },
-                        { event = "msg_show", kind = { "" } },
-                        { event = "lsp", kind = "message" },
-                    },
-                },
-                filter_opts = { count = 1 },
-            },
-            -- :Noice errors
-            errors = {
-                -- options for the message history that you get with `:Noice`
-                view = "popup",
-                opts = { enter = true, format = "details" },
-                filter = { error = true },
-                filter_opts = { reverse = true },
-            },
-        },
         notify = {
             -- Noice can be used as `vim.notify` so you can route any notification like other messages
             -- Notification messages have their level and other properties set.
             -- event is always "notify" and kind can be any log level as a string
             -- The default routes will forward notifications to nvim-notify
             -- Benefit of using Noice for this is the routing and consistent history view
-            enabled = false,
+            enabled = true,
             view = "notify",
         },
         lsp = {
             progress = {
-                enabled = true,
+                enabled = false,
                 -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
                 -- See the section on formatting for more details on how to customize.
                 --- "@type NoiceFormat|string"
@@ -207,7 +191,9 @@ function M.config()
         throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
         ---"@type NoiceConfigViews"
         ---@see section on views
-        views = {},
+        views = {
+                -- notify = { replace = true },
+        },
         ---"@type NoiceRouteConfig[]"
         routes = { --- @see section on routes
             {

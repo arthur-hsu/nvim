@@ -70,7 +70,13 @@ keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 
 
 
-keymap("c", "terminal", ":terminal<CR>i", opts)
+vim.api.nvim_create_user_command('Terminal',
+    function ()
+        vim.cmd("terminal")
+        vim.api.nvim_input('i')
+    end
+, {})
+vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
 
 
 
