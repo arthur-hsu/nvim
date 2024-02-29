@@ -150,6 +150,7 @@ return{
         end
         -- Register the `CursorwordToggle` command
         vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
+        vim.cmd('CursorwordToggle')
 
         end
     },
