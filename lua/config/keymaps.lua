@@ -16,33 +16,51 @@ local keymap = vim.api.nvim_set_keymap
 
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
     keymap("n", "rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>", opts)
-    keymap("c", "Test", ":e $HOME/Desktop/test.py<CR>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
-    keymap("c", "Test", ":e $HOME\\Desktop\\test.py<CR>", opts)
 end
 
-keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>", opts)
-keymap("n", "<leader>L", "<cmd>Lazy<CR>", opts)
-keymap("n", "<leader>mc", "<cmd>Mason<CR>", opts)
-keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
-keymap("n", "<F2>", ":terminal<CR>i", opts)
-keymap("n", "<F3>", "<cmd>Telescope<cr>", opts)
-keymap('n', '<F4>', '<Cmd>TodoTelescope<CR>',opts)
-keymap("n", "<F5>", ":RunCode<CR>", opts)
-keymap("n", "<F6>", "<cmd>DiffviewFileHistory %<CR>", opts)
-keymap("n", "<F7>", "<cmd>Telescope undo<cr>", opts)
-keymap("n", "<F8>", "<cmd>TroubleToggle<cr>", opts)
-keymap('n', "<F9>", "<ESC>A<CR><ESC>:Pastify<CR>", opts)
-keymap('n', "<F10>", "<cmd>CursorwordToggle<CR>", opts)
-keymap("n", "<F12>", "<cmd>DiffviewOpen<CR>", opts)
+vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
+  local view = require("diffview.lib").get_current_view()
+
+  if view then
+    vim.cmd("DiffviewClose")
+  else
+    vim.cmd("DiffviewFileHistory " .. e.args)
+  end
+end, { nargs = "*" })
+
+vim.api.nvim_create_user_command("DiffviewToggle", function(e)
+  local view = require("diffview.lib").get_current_view()
+
+  if view then
+    vim.cmd("DiffviewClose")
+  else
+    vim.cmd("DiffviewOpen " .. e.args)
+  end
+end, { nargs = "*" })
+
+keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",             opts)
+keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                        opts)
+keymap("n", "<leader>mc", "<cmd>Mason<CR>",                       opts)
+keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",     opts)
+keymap("n", "<F2>",       "<cmd>DiffviewFileHistoryToggle<CR>",              opts)
+keymap("n", "<F3>",       "<cmd>Telescope<cr>",                   opts)
+keymap('n', '<F4>',       '<Cmd>TodoTelescope<CR>',               opts)
+keymap("n", "<F5>",       ":RunCode<CR>",                         opts)
+keymap("n", "<F6>",       "<cmd>DiffviewFileHistoryToggle %<CR>", opts)
+keymap("n", "<F7>",       "<cmd>Telescope undo<cr>",              opts)
+keymap("n", "<F8>",       "<cmd>TroubleToggle<cr>",               opts)
+keymap('n', "<F9>",       "<ESC>A<CR><ESC>:Pastify<CR>",          opts)
+keymap('n', "<F10>",      "<cmd>CursorwordToggle<CR>",            opts)
+keymap("n", "<F12>",      "<cmd>DiffviewOpen<CR>",                opts)
 -- keymap("n", "<F12>", ":StartupTime<CR>",opts)
-keymap("n", "<TAB>", ">>", opts)
-keymap("n", "<S-TAB>", "<<", opts)
-keymap("v", "<TAB>", ">gv", opts)
-keymap("v", ">", ">gv", opts)
+keymap("n", "<TAB>",   ">>",  opts)
+keymap("n", "<S-TAB>", "<<",  opts)
+keymap("v", "<TAB>",   ">gv", opts)
+keymap("v", ">",       ">gv", opts)
 keymap("v", "<S-TAB>", "<gv", opts)
-keymap("v", "<", "<gv", opts)
+keymap("v", "<",       "<gv", opts)
 
 keymap("v", "<M-c>", "y", opts)
 keymap("n", "<C-s>", ":w<CR>", opts)
@@ -52,15 +70,16 @@ keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 
 
 
+keymap("c", "terminal", ":terminal<CR>i", opts)
 
 
 
-keymap("n", "spl", ":set splitright<CR>:vsplit<CR> ", opts)
-keymap("n", "spk", ":set splitbelow<CR>:split<CR> ", opts)
-keymap("n", "<M-S-Right>", ":vertical resize-5 <CR> ", opts)
-keymap("n", "<M-S-Left>", ":vertical resize+5 <CR> ", opts)
-keymap("n", "<M-S-Up>", ":resize-5 <CR> ", opts)
-keymap("n", "<M-S-Down>", ":resize+5 <CR> ", opts)
+keymap("n", "spl",         ":set splitright<CR>:vsplit<CR> ", opts)
+keymap("n", "spk",         ":set splitbelow<CR>:split<CR> ",  opts)
+keymap("n", "<M-S-Right>", ":vertical resize-5 <CR> ",        opts)
+keymap("n", "<M-S-Left>",  ":vertical resize+5 <CR> ",        opts)
+keymap("n", "<M-S-Up>",    ":resize-5 <CR> ",                 opts)
+keymap("n", "<M-S-Down>",  ":resize+5 <CR> ",                 opts)
 
 
 
@@ -70,8 +89,8 @@ keymap("n", "<M-S-Down>", ":resize+5 <CR> ", opts)
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d',       vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d',       vim.diagnostic.goto_next)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -84,22 +103,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local opts = { buffer = ev.buf }
         -- Buffer local mappings.
 
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'gr', "<cmd>Telescope lsp_references <CR>", {})
-        -- vim.keymap.set('n', 'gr', "<cmd>lua require'telescope.builtin'.lsp_references(require('telescope.themes').get_dropdown({}))<cr>", {})
-        vim.keymap.set('n', 'gpd', "<CMD>Lspsaga peek_definition<CR>", opts)
-        vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-        vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-        vim.keymap.set('n', '<space>rn', "<CMD>lua vim.lsp.buf.rename()<CR>", opts)
-        --vim.keymap.set('n', '<space>rn', "<CMD>Lspsaga rename<CR>", opts)
-        vim.keymap.set('n', '<space>sw', "<CMD>Lspsaga outline<CR>", opts)
-        vim.keymap.set('n', '<space>sf', "<CMD>Lspsaga finder<CR>", opts)
-        vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>", opts)
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+        vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  opts)
+        vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references <CR>",                                    opts)
+        vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition<CR>",                                      opts)
+        vim.keymap.set('n',          'gh',        vim.lsp.buf.hover,                                                       opts)
+        vim.keymap.set('n',          'gH',        vim.lsp.buf.signature_help,                                              opts)
+        vim.keymap.set('n',          'gi',        vim.lsp.buf.implementation,                                              opts)
+        vim.keymap.set('n',          '<space>wa', vim.lsp.buf.add_workspace_folder,                                        opts)
+        vim.keymap.set('n',          '<space>wr', vim.lsp.buf.remove_workspace_folder,                                     opts)
+        vim.keymap.set('n',          '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+        vim.keymap.set('n',          '<space>rn', "<CMD>lua vim.lsp.buf.rename()<CR>",                                     opts)
+        vim.keymap.set('n',          '<space>sw', "<CMD>Lspsaga outline<CR>",                                              opts)
+        vim.keymap.set('n',          '<space>sf', "<CMD>Lspsaga finder<CR>",                                               opts)
+        vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>",                                          opts)
+        vim.keymap.set('n',          '<space>f',  function() vim.lsp.buf.format { async = true } end,                      opts)
     end,
 })
 

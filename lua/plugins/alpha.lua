@@ -40,7 +40,7 @@ return {
             dashboard.button("n ", " " .. " New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("s ", " " .. " Current folder session", [[:lua require("persistence").load() <cr>]]),
             dashboard.button("r ", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-            dashboard.button("v ", " " .. " View change history", ":DiffviewFileHistory <CR>"),
+            dashboard.button("v ", " " .. " View change", ":DiffviewToggle <CR>"),
             dashboard.button("c ", " " .. " Config", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>"),
             dashboard.button("q ", " " .. " Quit", ":qa<CR>"),
             -- dashboard.button("t", " " .. " Find text", ":Telescope live_grep <CR>"),

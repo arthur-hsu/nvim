@@ -118,6 +118,8 @@ function M.config()
                     { "n", "<leader>cB",  actions.conflict_choose_all("base"),    { desc = "Choose the BASE version of a conflict for the whole file" } },
                     { "n", "<leader>cA",  actions.conflict_choose_all("all"),     { desc = "Choose all the versions of a conflict for the whole file" } },
                     { "n", "dX",          actions.conflict_choose_all("none"),    { desc = "Delete the conflict region for the whole file" } },
+                    { "n", "q",           "<Cmd>DiffviewClose<CR>",               { desc = "Close Diffview" } },
+                    { "n", "<esc>",       "<Cmd>DiffviewClose<CR>",               { desc = "Close DiffView" } },
                 },
                 diff1 = {
                     -- Mappings in single window diff layouts
@@ -181,6 +183,8 @@ function M.config()
                     { "n", "<leader>cB",     actions.conflict_choose_all("base"),    { desc = "Choose the BASE version of a conflict for the whole file" } },
                     { "n", "<leader>cA",     actions.conflict_choose_all("all"),     { desc = "Choose all the versions of a conflict for the whole file" } },
                     { "n", "dX",             actions.conflict_choose_all("none"),    { desc = "Delete the conflict region for the whole file" } },
+                    { "n", "q",              "<Cmd>DiffviewClose<CR>",               { desc = "Close DiffView" } },
+                    { "n", "<esc>",          "<Cmd>DiffviewClose<CR>",               { desc = "Close DiffView" } },
                 },
                 file_history_panel = {
                     { "n", "g!",            actions.options,                     { desc = "Open the option panel" } },
@@ -207,10 +211,14 @@ function M.config()
                     { "n", "<leader>b",     actions.toggle_files,                { desc = "Toggle the file panel" } },
                     { "n", "g<C-x>",        actions.cycle_layout,                { desc = "Cycle available layouts" } },
                     { "n", "g?",            actions.help("file_history_panel"),  { desc = "Open the help panel" } },
+                    { "n", "q",             "<Cmd>DiffviewClose<CR>",            { desc = "Close Diffview" } },
+                    { "n", "<esc>",         "<Cmd>DiffviewClose<CR>",            { desc = "Close Diffview" } },
+
                 },
                 option_panel = {
                     { "n", "<tab>", actions.select_entry,          { desc = "Change the current option" } },
                     { "n", "q",     actions.close,                 { desc = "Close the panel" } },
+                    { "n", "<esc>", actions.close,                 { desc = "Close the panel" } },
                     { "n", "g?",    actions.help("option_panel"),  { desc = "Open the help panel" } },
                 },
                 help_panel = {

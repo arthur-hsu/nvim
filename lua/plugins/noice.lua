@@ -1,6 +1,26 @@
 local M = {
     "folke/noice.nvim",
-    dependencies = {'nvim-tree/nvim-web-devicons',"MunifTanjim/nui.nvim","rcarriga/nvim-notify",},
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+        {
+            "rcarriga/nvim-notify",
+            config = function ()
+                require("notify").setup({
+                    --background_colour = "NotifyBackground",
+                    --fps = 60,
+                    --level = 2,
+                    --minimum_width = 50,
+                    --render = "default",
+                    --stages = "fade_in_slide_out",
+                    timeout = 1000,
+                    --top_down = true
+                })
+                
+            end
+        },
+    },
     event="VeryLazy",
 }
 
