@@ -72,6 +72,7 @@ return {
         'https://github.com/xiyaowong/transparent.nvim',
         lazy=false,
         event="VimEnter",
+        enabled = true,
         config= function ()
             require("transparent").setup({ -- Optional, you don't have to run setup.
                 groups = { -- table: default groups
@@ -79,7 +80,7 @@ return {
                     'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
                     'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
                     'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
-                    'EndOfBuffer',
+                    'EndOfBuffer',"NormalFloat", "FloatBorder"
                 },
                 -- table: additional groups that should be cleared
                 extra_groups = {

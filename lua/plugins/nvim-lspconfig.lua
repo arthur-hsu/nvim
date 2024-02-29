@@ -25,6 +25,7 @@ return {
             servers = {
                 -- ruff_lsp = {},
                 pyright = {
+
                     --capabilities = {
                         --textDocument = {
                             --publishDiagnostics = {
@@ -36,6 +37,16 @@ return {
                     --},
                     settings={
                         python={
+                            -- activeParameter = 1,
+                            -- signatures = { {
+                            --     label = "(root_file_path: Unknown, settings: Unknown) -> None",
+                            --     parameters = { {
+                            --         label = { 1, 24 }
+                            --     }, {
+                            --         label = { 26, 43 }
+                            --     } }
+                            -- } },
+
                             analysis={
                                 diagnosticSeverityOverrides = {
                                     --typeCheckingMode = 'off',

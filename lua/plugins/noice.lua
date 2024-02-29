@@ -1,5 +1,6 @@
 local M = {
     "https://github.com/folke/noice.nvim",
+    -- enabled = false,
     dependencies = {
         'https://github.com/nvim-tree/nvim-web-devicons',
         "https://github.com/MunifTanjim/nui.nvim",
@@ -57,19 +58,19 @@ function M.config()
         presets = {
             -- you can enable a preset by setting it to true, or a table that will override the preset config
             -- you can also add custom presets that you can enable/disable with enabled=true
-            command_palette = true, -- position the cmdline and popupmenu together
-            lsp_doc_border = false, -- add a border to hover docs and signature help
-            bottom_search = false, -- use a classic bottom cmdline for search
+            command_palette       = true, -- position the cmdline and popupmenu together
+            lsp_doc_border        = true, -- add a border to hover docs and signature help
+            bottom_search         = false, -- use a classic bottom cmdline for search
             long_message_to_split = false, -- long messages will be sent to a split
-            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            inc_rename            = false, -- enables an input dialog for inc-rename.nvim
         },
         cmdline = {
             enabled = true, -- enables the Noice cmdline UI
             view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
             format = {
-                cmdline = { pattern = "^:", icon = " ", lang = "vim" },
+                cmdline     = { pattern = "^:", icon = " ", lang = "vim" },
                 search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-                search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+                search_up   = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
             },
             opts = {}, -- global options for the cmdline. See section on views
             ---"@type table<string, CmdlineFormat>"
@@ -93,12 +94,12 @@ function M.config()
             --------------------------------------------------------------------------------
             -- NOTE: If you enable messages, then the cmdline is enabled automatically.
             -- This is a current Neovim limitation.
-            enabled = true, -- enables the Noice messages UI
-            view = "notify", -- default view for messages
-            view_error = "notify", -- view for errors
-            view_warn = "notify", -- view for warnings
+            enabled      = true, -- enables the Noice messages UI
+            view         = "notify", -- default view for messages
+            view_error   = "notify", -- view for errors
+            view_warn    = "notify", -- view for warnings
             view_history = "popup", -- view for :messages
-            view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+            view_search  = "virtualtext", -- view for search count messages. Set to `false` to disable
         },
         popupmenu = {
             enabled = true, -- enables the Noice popupmenu UI
@@ -143,12 +144,9 @@ function M.config()
                 view = "mini",
             },
             override = {
-                -- override the default lsp markdown formatter with Noice
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                -- override the lsp markdown formatter with Noice
-                ["vim.lsp.util.stylize_markdown"] = true,
-                -- override cmp documentation with Noice (needs the other options to work)
-                ["cmp.entry.get_documentation"] = true,
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true, -- override the default lsp markdown formatter with Noice
+                ["vim.lsp.util.stylize_markdown"]                = true, -- override the lsp markdown formatter with Noice
+                ["cmp.entry.get_documentation"]                  = true, -- override cmp documentation with Noice (needs the other options to work)
             },
             hover = {
                 enabled = true,
@@ -158,7 +156,7 @@ function M.config()
                 opts = {}, -- merged with defaults from documentation
             },
             signature = {
-                enabled = true,
+                enabled = false,
                 auto_open = {
                     enabled = true,
                     trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -192,7 +190,7 @@ function M.config()
         ---"@type NoiceConfigViews"
         ---@see section on views
         views = {
-                -- notify = { replace = true },
+            -- notify = { replace = true },
         },
         ---"@type NoiceRouteConfig[]"
         routes = { --- @see section on routes

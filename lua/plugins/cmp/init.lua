@@ -21,7 +21,7 @@ local M = {
         },
         "https://github.com/hrsh7th/cmp-nvim-lua",
         "https://github.com/zbirenbaum/copilot-cmp",
-        --"hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
+        -- "hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
         'https://github.com/rafamadriz/friendly-snippets'
     },
 }
