@@ -1,5 +1,5 @@
 local M = {
-    'CRAG666/code_runner.nvim',
+    'https://github.com/CRAG666/code_runner.nvim',
     event="VeryLazy",
 }
 

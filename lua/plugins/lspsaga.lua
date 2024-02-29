@@ -1,5 +1,5 @@
 local M = {
-    'nvimdev/lspsaga.nvim',
+    'https://github.com/nvimdev/lspsaga.nvim',
     lazy = true,
     --enevt = "InsertEnter",
     event = { "BufReadPost", "BufNewFile" },

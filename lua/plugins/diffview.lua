@@ -1,5 +1,5 @@
 local M = {
-    'sindrets/diffview.nvim',
+    'https://github.com/sindrets/diffview.nvim',
     event="VeryLazy",
 }
 function M.config()

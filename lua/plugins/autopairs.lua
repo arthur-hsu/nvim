@@ -1,5 +1,5 @@
 local M = {
-    "windwp/nvim-autopairs",
+    "https://github.com/windwp/nvim-autopairs",
     event = 'VeryLazy',
     enabled = false,
 }

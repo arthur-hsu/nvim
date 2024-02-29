@@ -1,8 +1,6 @@
 return {
-    'altermo/ultimate-autopair.nvim',
-    -- enabled = false,
+    'https://github.com/altermo/ultimate-autopair.nvim',
     event={'InsertEnter','CmdlineEnter'},
-    -- event="VeryLazy",
     branch='development',
     config = function ()
         require('ultimate-autopair').setup({

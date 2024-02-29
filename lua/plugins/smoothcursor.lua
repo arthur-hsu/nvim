@@ -1,5 +1,5 @@
 return {
-    'gen740/SmoothCursor.nvim',
+    'https://github.com/gen740/SmoothCursor.nvim',
     event = 'VeryLazy',
     enabled = false,
     config = function()

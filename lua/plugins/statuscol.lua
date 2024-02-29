@@ -1,5 +1,5 @@
 return {
-    "luukvbaal/statuscol.nvim",
+    "https://github.com/luukvbaal/statuscol.nvim",
     -- enabled = false,
     event = 'VeryLazy',
     config = function()

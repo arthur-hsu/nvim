@@ -1,6 +1,6 @@
 return{
     {
-        'github/copilot.vim',
+        'https://github.com/github/copilot.vim',
         event = { "BufReadPost", "BufNewFile" },
         enabled=false,
         config = function ()
@@ -10,7 +10,7 @@ return{
         end,
     },
     {
-        "zbirenbaum/copilot.lua",
+        "https://github.com/zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = { "BufReadPost", "BufNewFile" },
         --event = "InsertEnter",
@@ -95,7 +95,7 @@ return{
         end,
     },
     {
-        "zbirenbaum/copilot-cmp",
+        "https://github.com/zbirenbaum/copilot-cmp",
         event = { "InsertEnter", "LspAttach" },
         --fix_pairs = true,
         config = function ()

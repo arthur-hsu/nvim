@@ -1,53 +1,28 @@
 local M = {
-    "hrsh7th/nvim-cmp",
+    "https://github.com/hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-        'L3MON4D3/LuaSnip',
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        "https://github.com/L3MON4D3/LuaSnip",
+        "https://github.com/saadparwaiz1/cmp_luasnip",
+        "https://github.com/hrsh7th/cmp-nvim-lsp",
+        "https://github.com/hrsh7th/cmp-buffer",
+        "https://github.com/hrsh7th/cmp-path",
         -- "hrsh7th/cmp-emoji",
-        "hrsh7th/cmp-cmdline",
+        "https://github.com/hrsh7th/cmp-cmdline",
         {
-            "onsails/lspkind-nvim",
+            "https://github.com/onsails/lspkind-nvim",
             config = function ()
                 require('lspkind').init({
                     symbol_map = {
                         Copilot = "",
-                        Text = "󰉿",
-                        Method = "󰆧",
-                        Function = "󰊕",
-                        Constructor = "",
-                        Field = "󰜢",
-                        Variable = "󰀫",
-                        Class = "󰠱",
-                        Interface = "",
-                        Module = "",
-                        Property = "󰜢",
-                        Unit = "󰑭",
-                        Value = "󰎠",
-                        Enum = "",
-                        Keyword = "󰌋",
-                        Snippet = "",
-                        Color = "󰏘",
-                        File = "󰈙",
-                        Reference = "󰈇",
-                        Folder = "󰉋",
-                        EnumMember = "",
-                        Constant = "󰏿",
-                        Struct = "󰙅",
-                        Event = "",
-                        Operator = "󰆕",
-                        TypeParameter = "",
                     },
                 })
             end
         },
-        "hrsh7th/cmp-nvim-lua",
-        "zbirenbaum/copilot-cmp",
+        "https://github.com/hrsh7th/cmp-nvim-lua",
+        "https://github.com/zbirenbaum/copilot-cmp",
         --"hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
-        'rafamadriz/friendly-snippets'
+        'https://github.com/rafamadriz/friendly-snippets'
     },
 }
 

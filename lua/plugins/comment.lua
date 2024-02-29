@@ -1,5 +1,5 @@
 return {
-    'numToStr/Comment.nvim',
+    'https://github.com/numToStr/Comment.nvim',
     event = "VeryLazy",
     opts = {
         -- `gco` - Insert comment to the next line and enters INSERT mode

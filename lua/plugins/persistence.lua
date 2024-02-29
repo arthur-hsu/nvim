@@ -1,6 +1,6 @@
 return {
     {
-        "folke/persistence.nvim",
+        "https://github.com/folke/persistence.nvim",
         event = "BufReadPre",
         -- enabled = false,
         opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },

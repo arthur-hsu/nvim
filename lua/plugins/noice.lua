@@ -1,9 +1,9 @@
 local M = {
-    "folke/noice.nvim",
+    "https://github.com/folke/noice.nvim",
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        'https://github.com/nvim-tree/nvim-web-devicons',
+        "https://github.com/MunifTanjim/nui.nvim",
+        "https://github.com/rcarriga/nvim-notify",
         {
             "rcarriga/nvim-notify",
             config = function ()
@@ -32,7 +32,7 @@ local M = {
             end
         },
         {
-            'mrded/nvim-lsp-notify',
+            'https://github.com/mrded/nvim-lsp-notify',
             event = 'VeryLazy',
             requires = { 'rcarriga/nvim-notify' },
             config = function()

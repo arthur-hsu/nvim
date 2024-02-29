@@ -1,7 +1,6 @@
 local M = {
-    'lewis6991/gitsigns.nvim',
+    'https://github.com/lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
-    enable=false,
 }
 
 function M.config()
