@@ -34,7 +34,9 @@ return {
             'confirm_done',
             function(event)
             local ok, ls_name = pcall(ls_name_from_event, event)
-            if ok and (ls_name == 'rust_analyzer' or ls_name == 'lua_ls') then
+            -- vim.print(ls_name)
+            
+            if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
                 return
             end
 

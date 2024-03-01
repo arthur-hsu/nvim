@@ -1,7 +1,33 @@
+
+
+local return_y = function()
+    local linenr = vim.api.nvim_win_get_cursor(0)[1] -- buf line number
+    local pumheight = vim.o.pumheight
+    local winline = vim.fn.winline() -- line number in the window
+    local winheight = vim.fn.winheight(0)
+
+    -- window top
+    if winline - 1 < pumheight then
+        return pumheight
+    end
+
+    -- window bottom
+    if winheight - winline < pumheight then
+        return -pumheight
+    end
+    return 0
+end
+
+
+
+
+
+
 return {
     'https://github.com/ray-x/lsp_signature.nvim',
     event = { "BufReadPost", "BufNewFile" },
     tag = "v0.2.0",
+
     -- event = "VeryLazy",
     -- enabled = false,
     opts = {
@@ -18,12 +44,12 @@ return {
         max_width = 80, -- max_width of signature floating_window, line will be wrapped if exceed max_width the value need >= 40
         wrap = true, -- allow doc/signature text wrap inside floating_window, useful if your lsp return doc/sig is too long
         floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-
+        floating_window_above_first = true,
         floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
         -- will set to true when fully tested, set to false will use whichever side has more space
         -- this setting will be helpful if you do not want the PUM and floating win overlap
 
-        close_timeout = 0, -- close floating window after ms when laster parameter is entered
+        close_timeout = 200, -- close floating window after ms when laster parameter is entered
         fix_pos = false,  -- set to true, the floating window will not auto-close until finish all parameters
         -- fix_pos = function(signatures, lspclient)
         --     if signatures[1].activeParameter >= 0 and #signatures[1].parameters == 1 then
@@ -65,27 +91,11 @@ return {
         select_signature_key = '<M-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
         move_cursor_key = nil, -- imap, use nvim_set_current_win to move cursor between current win and floating
 
-        floating_window_off_x = 1, -- adjust float windows x position. can be either a number or function
-        floating_window_off_y = 0, -- adjust float windows y position. e.g -2 move window up 2 lines; 2 move down 2 lines can be either number or function, see examples
+        -- floating_window_off_x = 1, -- adjust float windows x position. can be either a number or function
+        -- floating_window_off_y = 0, -- adjust float windows y position. e.g -2 move window up 2 lines; 2 move down 2 lines can be either number or function, see examples
 
-        -- floating_window_off_x = 5, -- adjust float windows x position.
-        -- floating_window_off_y = function() -- adjust float windows y position. e.g. set to -2 can make floating window move up 2 lines
-        --     local linenr = vim.api.nvim_win_get_cursor(0)[1] -- buf line number
-        --     local pumheight = vim.o.pumheight
-        --     local winline = vim.fn.winline() -- line number in the window
-        --     local winheight = vim.fn.winheight(0)
-        --
-        --     -- window top
-        --     if winline - 1 < pumheight then
-        --           return pumheight
-        --     end
-        --
-        --     -- window bottom
-        --     if winheight - winline < pumheight then
-        --           return -pumheight
-        --     end
-        --     return 0
-        -- end,
+        floating_window_off_x = 1, -- adjust float windows x position.
+        floating_window_off_y = 0
     },
     config = function(_, opts)
         require'lsp_signature'.setup(opts)
