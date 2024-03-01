@@ -104,7 +104,7 @@ function M.config()
             { name = 'path' },
             { name = 'cmdline',
             option={
-                ignore_cmds = {'wqall','wq','wall','term','terminal','qall','quit','write', 'Man', '!'},
+                ignore_cmds = {"Tabularize/",'wqall','wq','wall','term','terminal','qall','quit','write', 'Man', '!'},
             },
             }
         }),

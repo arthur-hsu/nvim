@@ -2,8 +2,8 @@
 local sign = function(opts)
     vim.fn.sign_define(opts.name, {
         texthl = opts.name,
-        text = opts.text,
-        numhl = ''
+        text   = opts.text,
+        numhl  = ''
     })
 end
 
@@ -20,7 +20,7 @@ vim.diagnostic.config({
     signs = {
         severity = { min = vim.diagnostic.severity.WARN }
     },
-    --underline = {severity = {min = vim.diagnostic.severity.WARN}},
+    -- underline = {severity = {min = vim.diagnostic.severity.WARN}},
     update_in_insert = false,
     severity_sort = true,
     --float = {

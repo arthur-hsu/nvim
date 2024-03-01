@@ -19,10 +19,10 @@ pluginKeys.cmp = function(cmp)
     end
     return {
         -- 上一个
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<up>"] = cmp.mapping.select_prev_item(),
+        ["<C-p>"]  = cmp.mapping.select_prev_item(),
+        ["<up>"]   = cmp.mapping.select_prev_item(),
         -- 下一个
-        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-n>"]  = cmp.mapping.select_next_item(),
         ["<down>"] = cmp.mapping.select_next_item(),
         -- 出现补全
         ["<C -,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -43,6 +43,7 @@ pluginKeys.cmp = function(cmp)
             s = cmp.mapping.confirm({ select = true }),
             c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         }),
+
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -52,6 +53,7 @@ pluginKeys.cmp = function(cmp)
                 fallback()
             end
         end, { "i", "s" }),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 -- cmp.select_next_item()

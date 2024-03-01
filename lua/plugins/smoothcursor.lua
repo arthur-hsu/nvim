@@ -5,10 +5,10 @@ return {
     config = function()
         require('smoothcursor').setup({
             autostart = true,
-            cursor = "",              -- cursor shape (need nerd font)
-            texthl = "SmoothCursor",   -- highlight group, default is { bg = nil, fg = "#FFD400" }
-            linehl = nil,              -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
-            type = "default",          -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
+            cursor    = "",            -- cursor shape (need nerd font)
+            texthl    = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
+            linehl    = nil,            -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
+            type      = "default",      -- Cursor movement calculation method, choose "default", "exp" (exponential) or "matrix".
             fancy = {
                 enable = true,        -- enable fancy mode
                 -- head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
@@ -59,14 +59,14 @@ return {
                 },
                 unstop = true,  -- Determines if the cursor should stop or not (false means it will stop)
             },
-            flyin_effect = nil,        -- "bottom" or "top"
-            speed = 25,                -- max is 100 to stick to your current position
-            intervals = 35,            -- tick interval
-            priority = 10,             -- set marker priority
-            timeout = 3000,            -- timout for animation
-            threshold = 3,             -- animate if threshold lines jump
+            flyin_effect      = nil,  -- "bottom" or "top"
+            speed             = 25,   -- max is 100 to stick to your current position
+            intervals         = 35,   -- tick interval
+            priority          = 10,   -- set marker priority
+            timeout           = 3000, -- timout for animation
+            threshold         = 3,    -- animate if threshold lines jump
             disable_float_win = true, -- disable on float window
-            enabled_filetypes = nil,   -- example: { "lua", "vim" }
+            enabled_filetypes = nil,  -- example: { "lua", "vim" }
             disabled_filetypes = {
                 "help",
                 "alpha",

@@ -5,7 +5,7 @@ return{
         cmd = "Mason",
         opts = {
             max_concurrent_installers = 4,
-            ui = { border = "none" },
+            ui = { border = "rounded" },
             ensure_installed = {
 
                 -- Formatter

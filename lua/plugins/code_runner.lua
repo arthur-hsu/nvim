@@ -90,8 +90,8 @@ function M.config()
             },
         },
         project_path = "",
-        project = {},
-        prefix = "",
+        project      = {},
+        prefix       = "",
     })
 end
 return M

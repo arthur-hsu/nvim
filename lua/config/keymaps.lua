@@ -1,17 +1,17 @@
 local opts = { noremap = true, silent = true }
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+--    Modes
+-- normal_mode       = "n",
+-- insert_mode       = "i",
+-- visual_mode       = "v",
+-- visual_block_mode = "x",
+-- term_mode         = "t",
+-- command_mode      = "c",
 
 
 local term_opts = { silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap    = vim.api.nvim_set_keymap
 
 
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
@@ -21,24 +21,33 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
 end
 
 vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
-  local view = require("diffview.lib").get_current_view()
+    local view = require("diffview.lib").get_current_view()
 
-  if view then
-    vim.cmd("DiffviewClose")
-  else
-    vim.cmd("DiffviewFileHistory " .. e.args)
-  end
+    if view then
+        vim.cmd("DiffviewClose")
+    else
+        vim.cmd("DiffviewFileHistory " .. e.args)
+    end
 end, { nargs = "*" })
 
 vim.api.nvim_create_user_command("DiffviewToggle", function(e)
-  local view = require("diffview.lib").get_current_view()
+    local view = require("diffview.lib").get_current_view()
 
-  if view then
-    vim.cmd("DiffviewClose")
-  else
-    vim.cmd("DiffviewOpen " .. e.args)
-  end
+    if view then
+        vim.cmd("DiffviewClose")
+    else
+        vim.cmd("DiffviewOpen " .. e.args)
+    end
 end, { nargs = "*" })
+
+vim.api.nvim_create_user_command('Terminal',
+    function ()
+        vim.cmd("terminal")
+        vim.api.nvim_input('i')
+    end
+, {})
+
+vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
 
 keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",             opts)
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                        opts)
@@ -55,6 +64,7 @@ keymap('n', "<F9>",       "<ESC>A<CR><ESC>:Pastify<CR>",          opts)
 keymap('n', "<F10>",      "<cmd>CursorwordToggle<CR>",            opts)
 keymap("n", "<F12>",      "<cmd>DiffviewOpen<CR>",                opts)
 -- keymap("n", "<F12>", ":StartupTime<CR>",opts)
+
 keymap("n", "<TAB>",   ">>",  opts)
 keymap("n", "<S-TAB>", "<<",  opts)
 keymap("v", "<TAB>",   ">gv", opts)
@@ -70,13 +80,6 @@ keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 
 
 
-vim.api.nvim_create_user_command('Terminal',
-    function ()
-        vim.cmd("terminal")
-        vim.api.nvim_input('i')
-    end
-, {})
-vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
 
 
 
@@ -106,23 +109,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-        local opts = { buffer = ev.buf }
+        local lsp_opts = { buffer = ev.buf }
         -- Buffer local mappings.
-
-        vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  opts)
-        vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references <CR>",                                    opts)
-        vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition<CR>",                                      opts)
-        vim.keymap.set('n',          'gh',        vim.lsp.buf.hover,                                                       opts)
-        vim.keymap.set('n',          'gH',        vim.lsp.buf.signature_help,                                              opts)
-        vim.keymap.set('n',          'gi',        vim.lsp.buf.implementation,                                              opts)
-        vim.keymap.set('n',          '<space>wa', vim.lsp.buf.add_workspace_folder,                                        opts)
-        vim.keymap.set('n',          '<space>wr', vim.lsp.buf.remove_workspace_folder,                                     opts)
-        vim.keymap.set('n',          '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-        vim.keymap.set('n',          '<space>rn', "<CMD>lua vim.lsp.buf.rename()<CR>",                                     opts)
-        vim.keymap.set('n',          '<space>sw', "<CMD>Lspsaga outline<CR>",                                              opts)
-        vim.keymap.set('n',          '<space>sf', "<CMD>Lspsaga finder<CR>",                                               opts)
-        vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>",                                          opts)
-        vim.keymap.set('n',          '<space>f',  function() vim.lsp.buf.format { async = true } end,                      opts)
+        vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
+        vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references <CR>",                                    lsp_opts)
+        vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition<CR>",                                      lsp_opts)
+        vim.keymap.set('n',          'gh',        vim.lsp.buf.hover,                                                       lsp_opts)
+        vim.keymap.set('n',          'gH',        vim.lsp.buf.signature_help,                                              lsp_opts)
+        vim.keymap.set('n',          'gi',        vim.lsp.buf.implementation,                                              lsp_opts)
+        vim.keymap.set('n',          '<space>wa', vim.lsp.buf.add_workspace_folder,                                        lsp_opts)
+        vim.keymap.set('n',          '<space>wr', vim.lsp.buf.remove_workspace_folder,                                     lsp_opts)
+        vim.keymap.set('n',          '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, lsp_opts)
+        vim.keymap.set('n',          '<space>rn', "<CMD>lua vim.lsp.buf.rename()<CR>",                                     lsp_opts)
+        vim.keymap.set('n',          '<space>sw', "<CMD>Lspsaga outline<CR>",                                              lsp_opts)
+        vim.keymap.set('n',          '<space>sf', "<CMD>Lspsaga finder<CR>",                                               lsp_opts)
+        vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>",                                          lsp_opts)
+        vim.keymap.set('n',          '<space>f',  function() vim.lsp.buf.format { async = true } end,                      lsp_opts)
     end,
 })
 

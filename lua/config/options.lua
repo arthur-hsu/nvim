@@ -1,67 +1,8 @@
 ---@diagnostic disable: undefined-global
-local opt= vim.opt
-local cmd= vim.cmd
-local g= vim.g
-opt.guifont= "JetBrainsMono Nerd Font Mono:h11"
-opt.buftype= ""
-opt.whichwrap= "b,s,<,>,[,],h,l"
-opt.swapfile= false
-vim.api.nvim_command('filetype plugin indent on')
-opt.termguicolors= true
-g.python_highlight_all= 1
-opt.background= dark
-opt.number= true
-opt.relativenumber= true
-vim.opt.clipboard= "unnamedplus"
-opt.wrap= false
---opt.fileformat= unix
-opt.textwidth= 200
-opt.expandtab= true
-opt.tabstop= 4
-opt.shiftwidth= 4
-opt.softtabstop= 4
-opt.autoindent= true
-opt.autochdir= true
-opt.autoindent= true
--- opt.autowriteall = true
--- opt.autowrite = true
-opt.cursorline= true
-opt.cursorlineopt= 'number'
-opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-opt.foldcolumn= "1"
-opt.signcolumn= "yes"
--- opt.foldnestmax= "2"
-opt.ruler = true
-opt.showcmd= true
-opt.showmatch= true
-opt.scroll= 10
-opt.scrolloff= 4
-cmd("set backspace=indent,eol,start")
-cmd("set mouse=a")
-opt.matchtime= 1
-opt.ignorecase= true
-opt.incsearch= true
-opt.hlsearch= true
-opt.expandtab= true
-opt.autoread= true
-opt.modifiable= true
-opt.laststatus= 0
---opt.iskeyword:append(":")
+local opt = vim.opt
+local cmd = vim.cmd
+local g   = vim.g
 
-g.completeopt= "menu,menuone,noselect"
--- Decrease redraw time
-vim.o.redrawtime= 100
-opt.updatetime=100
-
-vim.o.undofile= true
-vim.opt.undodir= vim.fn.stdpath('state') .. '/undo'
-vim.o.autoread = true
-cmd('set isk-=.')
--- cmd ([[au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif]])
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-    command = "if mode() != 'c' | checktime | endif",
-    pattern = { "*" },
-})
 -- Restore cursor position
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     pattern = { "*" },
@@ -70,3 +11,158 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     end,
 })
 
+-- 设置退格键的行为
+opt.backspace          = {'indent', 'eol', 'start'}
+
+-- 启用鼠标支持
+opt.mouse              = 'a'
+
+-- 设置 GUI 字体
+opt.guifont            = "JetBrainsMono Nerd Font Mono:h11"
+
+-- 设置缓冲区的类型，默认为空
+opt.buftype            = ""
+
+-- 设置在哪些情况下可以跨越行界进行移动
+opt.whichwrap          = "b,s,<,>,[,],h,l"
+
+-- 禁用交换文件
+opt.swapfile           = false
+
+-- 启用真彩色支持
+opt.termguicolors      = true
+
+-- 全局变量，为 Python 代码高亮启用全部功能
+g.python_highlight_all = 1
+
+-- 设置背景类型为暗色
+opt.background         = "dark"
+
+-- 启用行号显示
+opt.number             = true
+
+-- 启用相对行号显示
+opt.relativenumber     = true
+
+-- 设置剪切板模式
+opt.clipboard          = "unnamedplus"
+
+-- 禁用自动换行
+opt.wrap               = false
+
+-- 设置文本宽度限制
+opt.textwidth          = 200
+
+-- 将制表符转换为相应的空格数
+opt.expandtab          = true
+
+-- 设置制表符占用的空格数
+opt.tabstop            = 4
+
+-- 设置自动缩进的空格数
+opt.shiftwidth         = 4
+
+-- 设置软制表符的空格数
+opt.softtabstop        = 4
+
+-- 启用自动缩进
+opt.autoindent         = true
+
+-- 启用自动切换当前目录为当前文件的目录
+opt.autochdir          = true
+
+-- 启用光标所在行高亮
+opt.cursorline         = true
+
+-- 设置光标所在行高亮的选项为行号
+opt.cursorlineopt      = 'number'
+
+-- 设置填充字符，如折叠边界的视觉表示
+opt.fillchars          = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+-- 设置折叠栏的宽度为1
+opt.foldcolumn         = "1"
+
+-- 始终显示签名列
+opt.signcolumn         = "yes"
+
+-- 显示光标位置的状态栏信息
+opt.ruler              = true
+
+-- 显示命令输入的部分命令
+opt.showcmd            = true
+
+-- 输入括号时显示匹配的括号
+opt.showmatch          = true
+
+-- 设置滚动时的行数
+opt.scroll             = 10
+
+-- 设置屏幕上下方至少保留的行数
+opt.scrolloff          = 4
+
+-- 设置显示匹配项的时间(十分之一秒)
+opt.matchtime          = 1
+
+-- 搜索时忽略大小写
+opt.ignorecase         = true
+
+-- 输入搜索词时即时显示搜索结果
+opt.incsearch          = true
+
+-- 高亮显示搜索结果
+opt.hlsearch           = true
+
+-- 将Tab转换为空格
+opt.expandtab          = true
+
+-- 自动读取上次编辑时外部程序修改过的文件
+opt.autoread           = true
+
+-- 允许修改缓冲区内容
+opt.modifiable         = true
+
+-- 不显示状态栏（设置为0时）
+opt.laststatus         = 0
+
+-- 启用撤销文件功能
+opt.undofile           = true
+
+-- 设置撤销文件的保存目录
+opt.undodir            = vim.fn.stdpath('cache') .. '/undo'
+
+-- 自动重新加载外部修改的文件
+opt.autoread           = true
+
+-- 设置补全菜单的行为
+g.completeopt          = "menu,menuone,noselect"
+
+-- 设置弹出菜单的最大高度
+opt.pumheight          = 10
+
+-- 减少重绘时间
+opt.redrawtime         = 100
+
+-- 设置更新时间，影响诸如光标闪烁的特性
+opt.updatetime         = 100
+
+-- 在切换文件前自动保存
+opt.autowrite          = true
+
+-- 从'iskeyword'选项中移除'.'
+opt.iskeyword:remove('.')
+
+
+
+
+-- 设置文件格式为unix
+-- opt.fileformat         = "unix"
+
+-- 写入文件时自动保存所有缓冲区
+-- opt.autowriteall       = true
+
+-- 设置最大折叠嵌套级别为2
+-- opt.foldnestmax        = "2"
+
+-- 向'iskeyword'选项中添加':'
+-- opt.iskeyword:append(":")

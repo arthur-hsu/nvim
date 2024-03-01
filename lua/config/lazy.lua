@@ -23,7 +23,7 @@ require("lazy").setup({
 
         -- colorscheme = {"zephyr"},
         -- colorscheme = {"tokyonight"},
-        --colorscheme = {"nordic"},
+        -- colorscheme = {"nordic"},
         -- colorscheme = {"kanagawa"},
         missing = true
     },
@@ -31,7 +31,7 @@ require("lazy").setup({
     change_detection = {
         -- automatically check for config file changes and reload the ui
         enabled = true,
-        notify = false, -- get a notification when changes are found
+        notify  = false, -- get a notification when changes are found
     },
-    --ui = { border = "rounded" },
+    ui = { border = "rounded" },
 })

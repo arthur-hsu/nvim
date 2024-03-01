@@ -1,6 +1,6 @@
 local M = {
     'https://github.com/nvim-telescope/telescope.nvim',
-    event="VeryLazy",
+    event = "VeryLazy",
     dependencies = {
         "https://github.com/nvim-lua/plenary.nvim",
         "https://github.com/debugloop/telescope-undo.nvim",
@@ -12,11 +12,11 @@ local M = {
 
 function M.config()
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-    --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-    vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
+    vim.keymap.set('n',   '<leader>ff', builtin.find_files,            {})
+    vim.keymap.set('n',   '<leader>fg', builtin.live_grep,             {})
+    vim.keymap.set('n',   '<leader>fb', builtin.buffers,               {})
+    --vim.keymap.set('n', '<leader>fh', builtin.help_tags,             {})
+    vim.keymap.set('n',   '<leader>fr', "<cmd>Telescope oldfiles<CR>", {})
 
     -- vim.keymap.set('n', '<leader>fp', "<cmd>lua require'telescope'.extensions.project.project{}<CR>", {})
     vim.api.nvim_set_keymap(
@@ -25,7 +25,7 @@ function M.config()
         ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
         { noremap = true }
     )
-    local actions = require("telescope.actions")
+    local actions    = require("telescope.actions")
     local fb_actions = require "telescope._extensions.file_browser.actions"
 
     require("telescope").setup({
@@ -38,25 +38,25 @@ function M.config()
             layout_strategy = "flex",
             layout_config = {
                 horizontal = {
-                    height = 0.7,
-                    preview_cutoff = 10,
+                    height          = 0.7,
+                    preview_cutoff  = 10,
                     prompt_position = "bottom",
-                    width = 0.9,
-                    preview_width = 0.6
+                    width           = 0.9,
+                    preview_width   = 0.6
                 },
                 vertical = {
-                    height = 0.9,
-                    preview_cutoff = 10,
+                    height          = 0.9,
+                    preview_cutoff  = 10,
                     prompt_position = "bottom",
-                    width = 0.8,
-                    preview_height = 0.6,
+                    width           = 0.8,
+                    preview_height  = 0.6,
                 },
             },
-            scroll_strategy = "limit",
-            initial_mode = "insert", --normal
-            prompt_prefix = "➤  ",
-            -- path_display = { "tail" },
-            path_display = { "smart" },
+            scroll_strategy       = "limit",
+            initial_mode          = "insert", --normal
+            prompt_prefix         = "➤  ",
+            -- path_display       = { "tail" },
+            path_display          = { "smart" },
             dynamic_preview_title = true,
             -- path_display = function(opts, path)
             --   local tail = require("telescope.utils").path_tail(path)
@@ -125,13 +125,13 @@ function M.config()
                 },
             },
             undo = {
-                use_delta = true,
+                use_delta          = true,
                 use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
                 diff_context_lines = vim.o.scrolloff,
-                entry_format = "state #$ID, $STAT, $TIME",
-                time_format = "",
-                --side_by_side = true,
-                --layout_strategy = "vertical",
+                entry_format       = "state #$ID, $STAT, $TIME",
+                time_format        = "",
+                --side_by_side     = true,
+                --layout_strategy  = "vertical",
                 --layout_config = {
                     --preview_height = 0.8,
                     --},
@@ -139,11 +139,11 @@ function M.config()
                     i = {
                         ["<C-cr>"] = require("telescope-undo.actions").yank_additions,
                         ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-                        ["<cr>"] = require("telescope-undo.actions").restore,
+                        ["<cr>"]   = require("telescope-undo.actions").restore,
                     },
                     n = {
-                        ["y"] = require("telescope-undo.actions").yank_additions,
-                        ["Y"] = require("telescope-undo.actions").yank_deletions,
+                        ["y"]    = require("telescope-undo.actions").yank_additions,
+                        ["Y"]    = require("telescope-undo.actions").yank_deletions,
                         ["<cr>"] = require("telescope-undo.actions").restore,
                     },
                 },

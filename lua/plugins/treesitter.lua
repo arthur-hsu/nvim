@@ -10,8 +10,8 @@ local M = {
 function M.config()
     require("nvim-treesitter.install").compilers = { "gcc", "clang", "mingw" }
     require'nvim-treesitter.configs'.setup {
-        auto_install = true,
-        sync_install = true,
+        auto_install     = true,
+        sync_install     = true,
         ensure_installed = {"python","bash","json",'vimdoc','gitcommit','markdown','markdown_inline','lua'}, -- or all
         highlight = {
             enable = true,
@@ -23,7 +23,7 @@ function M.config()
     }
     -- 开启 Folding
     vim.wo.foldmethod = 'expr'
-    vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-    vim.wo.foldlevel = 99
+    vim.wo.foldexpr   = 'nvim_treesitter#foldexpr()'
+    vim.wo.foldlevel  = 99
 end
 return M

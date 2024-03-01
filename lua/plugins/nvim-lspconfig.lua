@@ -56,12 +56,12 @@ return {
                     },
                 },
                 docker_compose_language_service = {},
-                dockerls ={},
-                html = {},
+                dockerls = {},
+                html     = {},
                 marksman = {},
-                jsonls = {},
-                yamlls = {},
-                bashls ={},
+                jsonls   = {},
+                yamlls   = {},
+                bashls   = {},
                 lua_ls = {
                     -- mason = false, -- set to false if you don't want this server to be installed with mason
                     settings = {
@@ -87,18 +87,17 @@ return {
                     dynamicRegistration = false,
                     lineFoldingOnly = true,
                 }
-                capabilities.textDocument.completion.completionItem.snippetSupport = true
                 capabilities.textDocument.completion.completionItem.resolveSupport = {
                     properties = { "documentation", "detail", "additionalTextEdits" },
                 }
-                
-                capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
-                capabilities.textDocument.completion.completionItem.preselectSupport = true
-                capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-                capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-                capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+                capabilities.textDocument.completion.completionItem.snippetSupport          = true
+                capabilities.textDocument.completion.completionItem.documentationFormat     = { 'markdown', 'plaintext' }
+                capabilities.textDocument.completion.completionItem.preselectSupport        = true
+                capabilities.textDocument.completion.completionItem.insertReplaceSupport    = true
+                capabilities.textDocument.completion.completionItem.labelDetailsSupport     = true
+                capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
                 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-                capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+                capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
 
                 local function setup(server)
                     local server_opts = servers[server] or {}
