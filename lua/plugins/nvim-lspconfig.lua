@@ -26,26 +26,17 @@ return {
                 -- ruff_lsp = {},
                 pyright = {
 
-                    --capabilities = {
-                        --textDocument = {
-                            --publishDiagnostics = {
-                                --tagSupport = {
-                                    --valueSet = {2},
-                                --},
-                            --},
-                        --},
-                    --},
+                    -- capabilities = {
+                    --     textDocument = {
+                    --         publishDiagnostics = {
+                    --             tagSupport = {
+                    --                 valueSet = {2},
+                    --             },
+                    --         },
+                    --     },
+                    -- },
                     settings={
                         python={
-                            -- activeParameter = 1,
-                            -- signatures = { {
-                            --     label = "(root_file_path: Unknown, settings: Unknown) -> None",
-                            --     parameters = { {
-                            --         label = { 1, 24 }
-                            --     }, {
-                            --         label = { 26, 43 }
-                            --     } }
-                            -- } },
 
                             analysis={
                                 diagnosticSeverityOverrides = {
@@ -96,6 +87,18 @@ return {
                     dynamicRegistration = false,
                     lineFoldingOnly = true,
                 }
+                capabilities.textDocument.completion.completionItem.snippetSupport = true
+                capabilities.textDocument.completion.completionItem.resolveSupport = {
+                    properties = { "documentation", "detail", "additionalTextEdits" },
+                }
+                
+                capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+                capabilities.textDocument.completion.completionItem.preselectSupport = true
+                capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+                capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+                capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+                capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+                capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 
                 local function setup(server)
                     local server_opts = servers[server] or {}

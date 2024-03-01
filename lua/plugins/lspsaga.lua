@@ -1,6 +1,7 @@
 local M = {
     'https://github.com/nvimdev/lspsaga.nvim',
     lazy = true,
+    enabled = true,
     --enevt = "InsertEnter",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
@@ -12,14 +13,15 @@ local M = {
 function M.config()
     require('lspsaga').setup({
         ui = {
-            border = 'single',
+            border = 'rounded',
             devicon = true,
             title = true,
-            expand = '⊞',
-            collapse = '⊟',
+            expand = '󰅂',
+            collapse = '󰅀',
             code_action = '💡',
             actionfix = ' ',
-            lines = { '┗', '┣', '┃', '━', '┏' },
+            -- lines = { '┗', '┣', '┃', '━', '┏' },
+            lines = { '╰', '├', '│', '─', '╭' },
             kind = nil,
             imp_sign = '󰳛 ',
         },
@@ -27,7 +29,7 @@ function M.config()
             max_width = 0.9,
             max_height = 0.8,
             open_link = 'gx',
-            open_cmd = '!chrome',
+            open_cmd = '!edge',
         },
         diagnostic = {
             show_code_action = true,
@@ -112,14 +114,14 @@ function M.config()
             project_max_width = 0.5,
             project_max_height = 0.5,
             keys = {
-                quit = '<C-k>',
+                quit = '<C-q>',
                 exec = '<CR>',
                 select = 'x',
             },
         },
         symbol_in_winbar = {
             enable = true,
-            separator = ' › ',
+            separator = '› ',
             hide_keyword = false,
             show_file = true,
             folder_level = 1,

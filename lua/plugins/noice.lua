@@ -1,6 +1,6 @@
 local M = {
     "https://github.com/folke/noice.nvim",
-    -- enabled = false,
+    enabled = true,
     dependencies = {
         'https://github.com/nvim-tree/nvim-web-devicons',
         "https://github.com/MunifTanjim/nui.nvim",
@@ -144,12 +144,12 @@ function M.config()
                 view = "mini",
             },
             override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true, -- override the default lsp markdown formatter with Noice
-                ["vim.lsp.util.stylize_markdown"]                = true, -- override the lsp markdown formatter with Noice
-                ["cmp.entry.get_documentation"]                  = true, -- override cmp documentation with Noice (needs the other options to work)
+                ["vim.lsp.util.convert_input_to_markdown_lines"] =false, -- override the default lsp markdown formatter with Noice
+                ["vim.lsp.util.stylize_markdown"]                =true, -- override the lsp markdown formatter with Noice
+                ["cmp.entry.get_documentation"]                  =false, -- override cmp documentation with Noice (needs the other options to work)
             },
             hover = {
-                enabled = true,
+                enabled = false,
                 silent = true, -- set to true to not show a message if hover is not available
                 view = nil, -- when nil, use defaults from documentation
                 ---"@type NoiceViewOptions"
@@ -158,9 +158,9 @@ function M.config()
             signature = {
                 enabled = false,
                 auto_open = {
-                    enabled = true,
+                    enabled = false,
                     trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-                    luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+                    luasnip = false, -- Will open signature help when jumping to Luasnip insert nodes
                     throttle = 50, -- Debounce lsp signature help request by 50ms
                 },
                 view = nil, -- when nil, use defaults from documentation

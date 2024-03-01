@@ -1,13 +1,14 @@
 return {
     'https://github.com/ray-x/lsp_signature.nvim',
     event = { "BufReadPost", "BufNewFile" },
+    tag = "v0.2.0",
     -- event = "VeryLazy",
     -- enabled = false,
     opts = {
         debug = false, -- set to true to enable debug logging
         log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log", -- log dir when debug is on default is  ~/.cache/nvim/lsp_signature.log
         verbose = false, -- show debug line number
-        bind = false, -- This is mandatory, otherwise border config won't get registered. If you want to hook lspsaga or other signature handler, pls set to false
+        bind = true, -- This is mandatory, otherwise border config won't get registered. If you want to hook lspsaga or other signature handler, pls set to false
         doc_lines = 10, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
         -- set to 0 if you DO NOT want any API comments be shown
         -- This setting only take effect in insert mode, it does not affect signature help in normal
@@ -53,7 +54,7 @@ return {
         padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
 
         transparency = nil, -- disabled by default, allow floating win transparent value 1~100
-        shadow_blend = 100, -- if you using shadow as border use this set the opacity
+        shadow_blend = 36, -- if you using shadow as border use this set the opacity
         shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
         timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
         toggle_key = "<M-x>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
@@ -64,27 +65,27 @@ return {
         select_signature_key = '<M-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
         move_cursor_key = nil, -- imap, use nvim_set_current_win to move cursor between current win and floating
 
-        -- floating_window_off_x = 1, -- adjust float windows x position. can be either a number or function
-        -- floating_window_off_y = 0, -- adjust float windows y position. e.g -2 move window up 2 lines; 2 move down 2 lines can be either number or function, see examples
+        floating_window_off_x = 1, -- adjust float windows x position. can be either a number or function
+        floating_window_off_y = 0, -- adjust float windows y position. e.g -2 move window up 2 lines; 2 move down 2 lines can be either number or function, see examples
 
-        floating_window_off_x = 5, -- adjust float windows x position.
-        floating_window_off_y = function() -- adjust float windows y position. e.g. set to -2 can make floating window move up 2 lines
-            local linenr = vim.api.nvim_win_get_cursor(0)[1] -- buf line number
-            local pumheight = vim.o.pumheight
-            local winline = vim.fn.winline() -- line number in the window
-            local winheight = vim.fn.winheight(0)
-
-            -- window top
-            if winline - 1 < pumheight then
-                  return pumheight
-            end
-
-            -- window bottom
-            if winheight - winline < pumheight then
-                  return -pumheight
-            end
-            return 0
-        end,
+        -- floating_window_off_x = 5, -- adjust float windows x position.
+        -- floating_window_off_y = function() -- adjust float windows y position. e.g. set to -2 can make floating window move up 2 lines
+        --     local linenr = vim.api.nvim_win_get_cursor(0)[1] -- buf line number
+        --     local pumheight = vim.o.pumheight
+        --     local winline = vim.fn.winline() -- line number in the window
+        --     local winheight = vim.fn.winheight(0)
+        --
+        --     -- window top
+        --     if winline - 1 < pumheight then
+        --           return pumheight
+        --     end
+        --
+        --     -- window bottom
+        --     if winheight - winline < pumheight then
+        --           return -pumheight
+        --     end
+        --     return 0
+        -- end,
     },
     config = function(_, opts)
         require'lsp_signature'.setup(opts)
@@ -95,7 +96,6 @@ return {
             end,
             { silent = true, noremap = true, desc = 'toggle signature' }
         )
-
         vim.keymap.set( { 'n' }, '<Leader>k',
             function()
                 vim.lsp.buf.signature_help()
