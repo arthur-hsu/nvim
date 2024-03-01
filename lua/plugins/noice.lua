@@ -1,10 +1,10 @@
 local M = {
-    "https://github.com/folke/noice.nvim",
+    "folke/noice.nvim",
     enabled = true,
     dependencies = {
-        'https://github.com/nvim-tree/nvim-web-devicons',
-        "https://github.com/MunifTanjim/nui.nvim",
-        "https://github.com/rcarriga/nvim-notify",
+        'nvim-tree/nvim-web-devicons',
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
         {
             "rcarriga/nvim-notify",
             config = function ()
@@ -23,19 +23,18 @@ local M = {
                         notification = "%T",
                         notification_history = "%FT%T"
                     },
-                    -- stages = "fade_in_slide_out",
+                    stages = "fade_in_slide_out",
                     -- stages = "fade",
-                    stages = 'static',
-                    timeout = 2000,
+                    -- stages = 'static',
+                    -- timeout = 2000,
                     top_down = true
                 })
-                
             end
         },
         {
-            'https://github.com/mrded/nvim-lsp-notify',
+            'mrded/nvim-lsp-notify',
             event = 'VeryLazy',
-            requires = { 'rcarriga/nvim-notify' },
+            dependencies = { 'rcarriga/nvim-notify' },
             config = function()
                 require('lsp-notify').setup({
                     notify = require('notify'),

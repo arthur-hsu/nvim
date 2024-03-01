@@ -24,7 +24,7 @@ end
 
 
 return {
-    'https://github.com/ray-x/lsp_signature.nvim',
+    'ray-x/lsp_signature.nvim',
     event = { "BufReadPost", "BufNewFile" },
     tag = "v0.2.0",
 

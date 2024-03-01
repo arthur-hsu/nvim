@@ -1,5 +1,5 @@
 local M = {
-    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
     build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })
 	end,
@@ -12,7 +12,7 @@ function M.config()
     require'nvim-treesitter.configs'.setup {
         auto_install     = true,
         sync_install     = true,
-        ensure_installed = {"python","bash","json",'vimdoc','gitcommit','markdown','markdown_inline','lua'}, -- or all
+        ensure_installed = {"python","bash","json",'vimdoc','gitcommit','markdown','markdown_inline','lua','regex'}, -- or all
         highlight = {
             enable = true,
         },

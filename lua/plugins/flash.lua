@@ -1,5 +1,5 @@
 return {
-    "https://github.com/folke/flash.nvim",
+    "folke/flash.nvim",
     -- enabled = false,
     event = "VeryLazy",
     ---@type flash.config

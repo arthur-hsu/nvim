@@ -1,11 +1,11 @@
 local M = {
-    'https://github.com/nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope.nvim',
     event = "VeryLazy",
     dependencies = {
-        "https://github.com/nvim-lua/plenary.nvim",
-        "https://github.com/debugloop/telescope-undo.nvim",
-        "https://github.com/folke/noice.nvim",
-        "https://github.com/nvim-telescope/telescope-file-browser.nvim",
+        "nvim-lua/plenary.nvim",
+        "debugloop/telescope-undo.nvim",
+        "folke/noice.nvim",
+        "nvim-telescope/telescope-file-browser.nvim",
         -- "nvim-telescope/telescope-project.nvim",
     }
 }

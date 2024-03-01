@@ -1,16 +1,6 @@
 return{
     {
-        'https://github.com/github/copilot.vim',
-        event = { "BufReadPost", "BufNewFile" },
-        enabled=false,
-        config = function ()
-            vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
-            vim.g.copilot_no_tab_map = true
-            vim.cmd[[highlight CopilotSuggestion guifg=#96ff00 guibg=#162a33 ctermfg=8]]
-        end,
-    },
-    {
-        "https://github.com/zbirenbaum/copilot.lua",
+        "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = { "BufReadPost", "BufNewFile" },
         --event = "InsertEnter",
@@ -95,10 +85,24 @@ return{
         end,
     },
     {
-        "https://github.com/zbirenbaum/copilot-cmp",
+        "zbirenbaum/copilot-cmp",
         event = { "InsertEnter", "LspAttach" },
-        fix_pairs = true,
-        config = function () require("copilot_cmp").setup() end
+        
+        config = function ()
+            require("copilot_cmp").setup({
+                fix_pairs = true
+            })
+        end
+    },
+    {
+        'github/copilot.vim',
+        event = { "BufReadPost", "BufNewFile" },
+        enabled=false,
+        config = function ()
+            vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
+            vim.g.copilot_no_tab_map = true
+            vim.cmd[[highlight CopilotSuggestion guifg=#96ff00 guibg=#162a33 ctermfg=8]]
+        end,
     },
 
 }

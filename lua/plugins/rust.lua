@@ -1,6 +1,6 @@
 return {
     {
-        'https://github.com/mrcjkb/rustaceanvim',
+        'mrcjkb/rustaceanvim',
         version = '^3', -- Recommended
         ft = { 'rust' },
         dependencies = {

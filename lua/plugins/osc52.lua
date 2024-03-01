@@ -1,5 +1,5 @@
 local M = {
-    'https://github.com/ojroques/nvim-osc52',
+    'ojroques/nvim-osc52',
     event="VeryLazy",
 }
 

@@ -1,5 +1,5 @@
 local M = {
-    'https://github.com/nvimdev/lspsaga.nvim',
+    'nvimdev/lspsaga.nvim',
     lazy = true,
     enabled = true,
     --enevt = "InsertEnter",

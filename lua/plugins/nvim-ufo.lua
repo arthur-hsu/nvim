@@ -1,6 +1,6 @@
 return {
 	{
-		'https://github.com/kevinhwang91/nvim-ufo',
+		'kevinhwang91/nvim-ufo',
         -- enabled=false,
 		event = { 'BufReadPost', 'BufNewFile' },
 		-- stylua: ignore

@@ -1,6 +1,6 @@
 return {
     {
-        "https://github.com/goolord/alpha-nvim",
+        "goolord/alpha-nvim",
         lazy = false,
         event = "VimEnter",
         dependencies = {
@@ -13,7 +13,7 @@ return {
 
             --dashboard.section.header.val = vim.split(nvim_logo, "\n")
             dashboard.section.header.val = require('ascii').art.text.neovim.the_edge
-            
+
             dashboard.section.buttons.val = {
                 -- dashboard.button("S", "󰁯 " .. " Last session", [[:lua require("persistence").load({last = true}) <cr>]]),
                 dashboard.button("n ", " " .. " New file", ":ene <BAR> startinsert <CR>"),
@@ -99,4 +99,5 @@ return {
             
         end
     },
+
 }

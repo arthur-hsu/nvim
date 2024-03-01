@@ -1,6 +1,6 @@
 return     {
         -- NOTE: highlight CursorWord
-        "https://github.com/sontungexpt/stcursorword",
+        "sontungexpt/stcursorword",
         event = "VeryLazy",
         config = function ()
             -- default configuration

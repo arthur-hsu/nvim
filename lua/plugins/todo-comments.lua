@@ -1,6 +1,6 @@
 return {
     {
-        "https://github.com/folke/todo-comments.nvim",
+        "folke/todo-comments.nvim",
         event = "BufRead",
         dependencies = { "nvim-lua/plenary.nvim"},
         -- opts = {

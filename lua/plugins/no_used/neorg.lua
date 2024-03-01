@@ -1,5 +1,5 @@
 return {
-    "https://github.com/nvim-neorg/neorg",
+    "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VimEnter",

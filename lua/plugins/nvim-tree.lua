@@ -1,5 +1,5 @@
 local M = {
-    'https://github.com/nvim-tree/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     enabled = false,
     event = "VeryLazy"

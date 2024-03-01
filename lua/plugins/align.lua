@@ -1,6 +1,6 @@
 return {
     {
-        'https://github.com/junegunn/vim-easy-align',
+        'junegunn/vim-easy-align',
         event = 'VeryLazy',
         config = function ()
             -- Delimiter key (a single keystroke; <Space>, =, :, ., |, &, #, ,) or an arbitrary regular expression followed by <CTRL-X>
@@ -11,8 +11,8 @@ return {
         end
     },
     {
-        'https://github.com/godlygeek/tabular',
-        enable = false,
+        'godlygeek/tabular',
+        enabled = false,
         event = 'VeryLazy',
     },
 }

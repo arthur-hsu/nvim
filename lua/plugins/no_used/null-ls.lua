@@ -1,6 +1,6 @@
 return{
     {
-        "https://github.com/nvimtools/none-ls.nvim",
+        "nvimtools/none-ls.nvim",
         lazy = true,
         enabled = false,
         event = { "BufReadPre", "BufNewFile" },

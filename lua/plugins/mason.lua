@@ -1,7 +1,7 @@
 return{
     {
 
-        "https://github.com/williamboman/mason.nvim",
+        "williamboman/mason.nvim",
         cmd = "Mason",
         opts = {
             max_concurrent_installers = 4,

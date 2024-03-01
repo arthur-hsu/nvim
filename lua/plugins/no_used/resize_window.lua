@@ -1,6 +1,6 @@
 return{
     {
-        'https://github.com/nvim-focus/focus.nvim',
+        'nvim-focus/focus.nvim',
         event = "VeryLazy",
         enabled = false,
         config = function ()
@@ -32,7 +32,7 @@ return{
         end
     },
     {
-        "https://github.com/anuvyklack/windows.nvim",
+        "anuvyklack/windows.nvim",
         dependencies = {
             "anuvyklack/middleclass",
             "anuvyklack/animation.nvim"
