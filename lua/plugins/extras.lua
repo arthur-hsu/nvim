@@ -10,4 +10,25 @@ return {
     { "https://github.com/nathom/filetype.nvim", event = "VimEnter", },
     { 'lithammer/nvim-pylance', lazy=true, enabled = false, },
     { 'https://github.com/dstein64/vim-startuptime', event="VimEnter", enabled = false, },
+    {
+        "https://github.com/vladdoster/remember.nvim",
+        event = "VimEnter",
+        enabled = false,
+        config = function ()
+            require("remember").setup({
+                ignore_buftype = {
+                    "TelescopePrompt",
+                    "alpha",
+                    "mason",
+                    "lazy",
+                    "DiffviewFileHistory",
+                    "DiffviewFiles",
+                    "Trouble",
+                    "lspinfo"
+                },
+                open_folds = true,
+                remember_dont_center = true
+            })
+        end
+    }
 }
