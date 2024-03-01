@@ -18,7 +18,7 @@ return {
             filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
         },
         config = function()
-            vim.api.nvim_set_hl(0, 'Folded', { bold=true,italic=true })
+            vim.api.nvim_set_hl(0, 'Folded', {bold=true,italic=true })
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
                 local suffix = ('  Hide %d lines '):format(endLnum - lnum)
