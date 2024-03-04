@@ -11,6 +11,12 @@ return {
     { 'lithammer/nvim-pylance', lazy=true, enabled = false, },
     { 'dstein64/vim-startuptime', event="VimEnter", enabled = false, },
     {
+        "keaising/im-select.nvim",
+        config = function()
+            require("im_select").setup({})
+        end,
+    },
+    {
         "folke/edgy.nvim",
         event = "VeryLazy",
         enabled = true,
