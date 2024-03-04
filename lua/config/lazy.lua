@@ -22,7 +22,7 @@ require("lazy").setup({
         -- colorscheme = {"material"},
 
         -- colorscheme = {"zephyr"},
-        -- colorscheme = {"tokyonight"},
+        colorscheme = {"tokyonight"},
         -- colorscheme = {"nordic"},
         -- colorscheme = {"kanagawa"},
         missing = true

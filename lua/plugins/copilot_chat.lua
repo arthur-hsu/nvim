@@ -48,12 +48,26 @@ return {
         config = function(_,opts)
             local select = require("CopilotChat.select")
 
+            opts.selection = function(source)
+                local startPos = vim.fn.getpos("'<")
+                local endPos   = vim.fn.getpos("'>")
+                local startLine, startCol = startPos[2], startPos[3]
+                local endLine,   endCol   = endPos[2],   endPos[3]
+
+
+                if startLine ~= endLine or startCol ~= endCol then
+                    return select.visual(source)
+                else
+                    return select.buffer(source)
+                end
+            end
+
             local prompts = {
-                Explain    = { prompt = "解釋這段代碼如何運行。" },
-                FixError   = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
-                Suggestion = { prompt = "請查看以上代碼並提供改進建議。" },
-                Refactor   = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
-                Tests      = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
+                Explain     = { prompt = "解釋這段代碼如何運行。" },
+                FixError    = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
+                Suggestion  = { prompt = "請查看以上代碼並提供改進建議。" },
+                Refactor    = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
+                Tests       = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 Annotations = { prompt = "幫以上代碼加入註解" },
 
                 Commit = {
@@ -67,20 +81,20 @@ return {
                     end,
                 },
             }
-
+            opts.prompts = prompts
+            require("CopilotChat").setup(opts)
 
             local options = {}
             for key, value in pairs(prompts) do
                 table.insert(options, key)
             end
 
-            local pickers = require "telescope.pickers"
-            local finders = require "telescope.finders"
-            local conf = require("telescope.config").values
-            local actions = require "telescope.actions"
+            local pickers      = require "telescope.pickers"
+            local finders      = require "telescope.finders"
+            local conf         = require("telescope.config").values
+            local actions      = require "telescope.actions"
             local action_state = require "telescope.actions.state"
-
-            local Chat_cmd = "CopilotChat"
+            local Chat_cmd     = "CopilotChat"
 
 
             local Telescope_CopilotActions = function(opts)
@@ -121,20 +135,6 @@ return {
                 { nargs = "*", range = true }
             )
 
-            opts.selection = function(source)
-                local startPos = vim.fn.getpos("'<")
-                local endPos   = vim.fn.getpos("'>")
-
-                -- 检查是否有选择文本（即开始和结束位置是否不同）
-                if startPos[2] ~= endPos[2] or startPos[3] ~= endPos[3] then
-                    return select.visual(source)
-                else
-                    return select.buffer(source)
-                end
-            end
-
-            opts.prompts = prompts
-            require("CopilotChat").setup(opts)
         end,
 
         keys = {

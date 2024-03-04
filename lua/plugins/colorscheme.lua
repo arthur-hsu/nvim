@@ -8,6 +8,75 @@ return {
         end
     },
     -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = function()
+    --         return {
+    --             style = "night",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    --             transparent = true,
+    --             hide_inactive_statusline = false,
+    --             lualine_bold = true,
+    --             styles = {
+    --                 comments = { italic = true },
+    --                 keywords = { italic = true },
+    --                 functions = {bold = true},
+    --                 variables = {},
+    --                 sidebars = "transparent",
+    --                 floats = "transparent",
+    --             },
+    --             sidebars = {
+    --                 "qf",
+    --                 "vista_kind",
+    --                 "terminal",
+    --                 "spectre_panel",
+    --                 "startuptime",
+    --                 "Outline",
+    --             },
+    --             on_colors = function(colors)
+    --                 -- colors.hint = colors.orange
+    --                 -- colors.error = "#ff0000"
+    --             end,
+    --             on_highlights = function(hl, c)
+    --                 -- local prompt = "#2d3149"
+    --                 -- hl.TelescopeNormal = {
+    --                 --     bg = c.bg_dark,
+    --                 --     fg = c.fg_dark,
+    --                 -- }
+    --                 -- hl.TelescopeBorder = {
+    --                 --     bg = c.bg_dark,
+    --                 --     fg = c.bg_dark,
+    --                 -- }
+    --                 -- hl.TelescopePromptNormal = {
+    --                 --     bg = prompt,
+    --                 -- }
+    --                 -- hl.TelescopePromptBorder = {
+    --                 --     bg = prompt,
+    --                 --     fg = prompt,
+    --                 -- }
+    --                 -- hl.TelescopePromptTitle = {
+    --                 --     bg = prompt,
+    --                 --     fg = prompt,
+    --                 -- }
+    --                 -- hl.TelescopePreviewTitle = {
+    --                 --     bg = c.bg_dark,
+    --                 --     fg = c.bg_dark,
+    --                 -- }
+    --                 -- hl.TelescopeResultsTitle = {
+    --                 --     bg = c.bg_dark,
+    --                 --     fg = c.bg_dark,
+    --                 -- }
+    --             end,
+    --         }
+    --     end,
+    --     config = function ()
+    --         vim.cmd[[colorscheme tokyonight]]
+    --     end,
+    -- },
+
+
+
+    -- {
     --     'marko-cerovac/material.nvim',
     --     lazy = false,
     --     priority = 1000,
@@ -72,36 +141,4 @@ return {
     --         vim.cmd.colorscheme "material"
     --     end
     -- }
-    -- {
-    --     "folke/tokyonight.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     opts = function()
-    --         return {
-    --             style = "storm",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-    --             transparent = true,
-    --             hide_inactive_statusline = false,
-    --             lualine_bold = true,
-    --             styles = {
-    --                 comments = { italic = true },
-    --                 keywords = { italic = true },
-    --                 functions = {bold = true},
-    --                 variables = {},
-    --                 sidebars = "transparent",
-    --                 floats = "transparent",
-    --             },
-    --             sidebars = {
-    --                 "qf",
-    --                 "vista_kind",
-    --                 "terminal",
-    --                 "spectre_panel",
-    --                 "startuptime",
-    --                 "Outline",
-    --             },
-    --         }
-    --     end,
-    --     config = function ()
-    --         vim.cmd[[colorscheme tokyonight]]
-    --     end,
-    -- },
 }

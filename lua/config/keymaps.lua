@@ -50,7 +50,7 @@ vim.api.nvim_create_user_command('Msg', function () require('telescope').extensi
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
-    keymap("n", "rc", ":Telescope file_browser path=$home/.config/nvim/lua<cr>", opts)
+    keymap("n", "rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<cr>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
 end
