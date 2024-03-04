@@ -50,10 +50,10 @@ return {
 
             local prompts = {
                 Explain    = { prompt = "解釋這段代碼如何運行。" },
-                FixError   = { prompt = "請解釋下面文字中的錯誤並提供解決方案。" },
-                Suggestion = { prompt = "請查看以下程式碼並提供改進建議。" },
-                Refactor   = { prompt = "請重構以下程式碼以提高其清晰度和可讀性。" },
-                Tests      = { prompt = "簡要說明所選程式碼的工作原理，然後產生單元測試。" },
+                FixError   = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
+                Suggestion = { prompt = "請查看以上代碼並提供改進建議。" },
+                Refactor   = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
+                Tests      = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 Annotations = { prompt = "幫以上代碼加入註解" },
 
                 Commit = {
