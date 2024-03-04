@@ -1,3 +1,6 @@
+local prompt = function(input)
+    local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+end
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
@@ -51,6 +54,7 @@ return {
                 Suggestion = { prompt = "請查看以下程式碼並提供改進建議。" },
                 Refactor   = { prompt = "請重構以下程式碼以提高其清晰度和可讀性。" },
                 Tests      = { prompt = "簡要說明所選程式碼的工作原理，然後產生單元測試。" },
+                Annotations = { prompt = "幫以上代碼加入註解" },
 
                 Commit = {
                     prompt = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
@@ -63,6 +67,59 @@ return {
                     end,
                 },
             }
+
+
+            local options = {}
+            for key, value in pairs(prompts) do
+                table.insert(options, key)
+            end
+
+            local pickers = require "telescope.pickers"
+            local finders = require "telescope.finders"
+            local conf = require("telescope.config").values
+            local actions = require "telescope.actions"
+            local action_state = require "telescope.actions.state"
+
+            local Chat_cmd = "CopilotChat"
+
+
+            local Telescope_CopilotActions = function(opts)
+                opts = opts or {}
+                pickers.new(opts, {
+                    prompt_title = "Select Copilot prompt",
+                    finder = finders.new_table {
+                        results = options
+                    },
+                    sorter = conf.generic_sorter(opts),
+                    attach_mappings = function(prompt_bufnr, map)
+                        actions.select_default:replace(function()
+                            actions.close(prompt_bufnr)
+                            local selection = action_state.get_selected_entry()
+                            local choice = selection[1]
+
+                            if choice ~= nil then
+                                local msg = ""
+                                -- Find the item message base on the choice
+                                for item, body in pairs(prompts) do
+                                    if item == choice then
+                                        msg = body.prompt
+                                        break
+                                    end
+                                end
+                                local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
+                                local Ask_msg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, ".. msg
+                                require("CopilotChat").ask(Ask_msg)
+                            end
+                        end)
+                        return true
+                    end,
+                }):find()
+            end
+
+            vim.api.nvim_create_user_command("CopilotActions",
+                function() Telescope_CopilotActions(require("telescope.themes").get_dropdown{}) end,
+                { nargs = "*", range = true }
+            )
 
             opts.selection = function(source)
                 local startPos = vim.fn.getpos("'<")
@@ -95,21 +152,23 @@ return {
             {
                 '<leader>ccp',
                 function()
-                    require("CopilotChat.code_actions").show_prompt_actions()
+                    -- require("CopilotChat.code_actions").show_prompt_actions()
+                    vim.cmd("CopilotActions")
                 end,
                 desc = " CopilotChat - Prompt actions",
                 mode = {"n","v","x"}
             },
-            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",             desc = " CopilotChat - Open chat",                      mode = {"n",  "v", "x"} },
-            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",            desc = " CopilotChat - Close chat",                     mode = {"n",  "v", "x"} },
-            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",           desc = " CopilotChat - Toggle chat",                    mode = {"n",  "v", "x"} },
-            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",            desc = " CopilotChat - Reset chat",                     mode = {"n",  "v", "x"} },
-            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",        desc = " CopilotChat - Show diff",                      mode = {"n",  "v", "x"} },
+            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = " CopilotChat - Open chat",          mode = {"n", "v", "x"} },
+            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = " CopilotChat - Close chat",         mode = {"n", "v", "x"} },
+            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = " CopilotChat - Toggle chat",        mode = {"n", "v", "x"} },
+            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",       desc = " CopilotChat - Reset chat",         mode = {"n", "v", "x"} },
+            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",   desc = " CopilotChat - Show diff",          mode = {"n", "v", "x"} },
 
-            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",          desc = " CopilotChat - Explain code",                   mode = {"n",  "v", "x"} },
-            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",         desc = " CopilotChat - Fix Error",                      mode = {"n",  "v", "x"} },
-            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",       desc = " CopilotChat - Provide suggestion",             mode = {"n",  "v", "x"} },
-            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",         desc = " CopilotChat - Refactor code",                  mode = {"n",  "v", "x"} },
+            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",     desc = " CopilotChat - Explain code",       mode = {"n", "v", "x"} },
+            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",    desc = " CopilotChat - Fix Error",          mode = {"n", "v", "x"} },
+            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",  desc = " CopilotChat - Provide suggestion", mode = {"n", "v", "x"} },
+            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",    desc = " CopilotChat - Refactor code",      mode = {"n", "v", "x"} },
+            { '<leader>ccA', "<cmd>CopilotChatAnnotations<cr>", desc = " CopilotChat - Add a comment",      mode = {"n", "v", "x"} },
         }
     },
 }
