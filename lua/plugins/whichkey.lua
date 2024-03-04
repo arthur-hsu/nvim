@@ -4,6 +4,7 @@ local M = {
         vim.o.timeout = true
         vim.o.timeoutlen = 320
     end,
+    -- enabled = false,
     event = 'VeryLazy',
 }
 
@@ -56,7 +57,7 @@ function M.config()
         },
         layout = {
             height  = { min = 4, max = 15 }, -- min and max height of the columns
-            width   = { min = 10, max = 20 }, -- min and max width of the columns
+            width   = { min = 30, max = 60 }, -- min and max width of the columns
             spacing = 3, -- spacing between columns
             align   = 'center', -- align columns left, center or right
         },

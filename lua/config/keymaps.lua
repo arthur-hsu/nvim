@@ -1,4 +1,3 @@
-local opts = { noremap = true, silent = true }
 --    Modes
 -- normal_mode       = "n",
 -- insert_mode       = "i",
@@ -8,18 +7,15 @@ local opts = { noremap = true, silent = true }
 -- command_mode      = "c",
 
 
-local term_opts = { silent = true }
+
+
+
 
 -- Shorten function name
 local keymap    = vim.api.nvim_set_keymap
 
 
-if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
-    keymap("n", "rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<CR>", opts)
-elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-    keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
-end
-
+-- Custom Commands
 vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
     local view = require("diffview.lib").get_current_view()
 
@@ -46,14 +42,26 @@ vim.api.nvim_create_user_command('Terminal',
         vim.api.nvim_input('i')
     end
 , {})
-
 vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
+---------------------------------------------------------------------
+
+
+
+local opts = { noremap = true, silent = true }
+local term_opts = { silent = true }
+if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
+    keymap("n", "rc", ":Telescope file_browser path=$home/.config/nvim/lua<cr>", opts)
+elseif vim.loop.os_uname().sysname == 'Windows_NT' then
+    keymap("n", "rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
+end
+
+
 
 keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",             opts)
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                        opts)
 keymap("n", "<leader>mc", "<cmd>Mason<CR>",                       opts)
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",     opts)
-keymap("n", "<F2>",       "<cmd>DiffviewFileHistoryToggle<CR>",              opts)
+keymap("n", "<F2>",       "<cmd>DiffviewFileHistoryToggle<CR>",   opts)
 keymap("n", "<F3>",       "<cmd>Telescope<cr>",                   opts)
 keymap('n', '<F4>',       '<Cmd>TodoTelescope<CR>',               opts)
 keymap("n", "<F5>",       ":RunCode<CR>",                         opts)
@@ -75,7 +83,7 @@ keymap("v", "<",       "<gv", opts)
 keymap("v", "<M-c>", "y", opts)
 keymap("n", "<C-s>", ":w<CR>", opts)
 keymap("n", "<C-z>", "<C-o><C-o>", opts)
-keymap("i", "<C-s>", "<esc>:w<CR>", opts)
+-- keymap("i", "<C-s>", "<esc>:w<CR>", opts)
 keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 
 
@@ -112,8 +120,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local lsp_opts = { buffer = ev.buf }
         -- Buffer local mappings.
         vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
-        vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references <CR>",                                    lsp_opts)
-        vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition<CR>",                                      lsp_opts)
+        vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references theme=ivy<CR>",                           lsp_opts)
+        vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition <CR>",                                     lsp_opts)
         vim.keymap.set('n',          'gh',        vim.lsp.buf.hover,                                                       lsp_opts)
         vim.keymap.set('n',          'gH',        vim.lsp.buf.signature_help,                                              lsp_opts)
         vim.keymap.set('n',          'gi',        vim.lsp.buf.implementation,                                              lsp_opts)

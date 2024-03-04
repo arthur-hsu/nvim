@@ -11,24 +11,18 @@ return {
     { 'lithammer/nvim-pylance', lazy=true, enabled = false, },
     { 'dstein64/vim-startuptime', event="VimEnter", enabled = false, },
     {
-        "vladdoster/remember.nvim",
-        event = "VimEnter",
-        enabled = false,
-        config = function ()
-            require("remember").setup({
-                ignore_buftype = {
-                    "TelescopePrompt",
-                    "alpha",
-                    "mason",
-                    "lazy",
-                    "DiffviewFileHistory",
-                    "DiffviewFiles",
-                    "Trouble",
-                    "lspinfo"
+        "folke/edgy.nvim",
+        event = "VeryLazy",
+        enabled = true,
+        opts = {
+            -- Refer to my configuration here https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/edgy.lua
+            right = {
+                {
+                    title = "CopilotChat.nvim", -- Title of the window
+                    ft = "copilot-chat", -- This is custom file type from CopilotChat.nvim
+                    size = { width = 0.4 }, -- Width of the window
                 },
-                open_folds = true,
-                remember_dont_center = true
-            })
-        end
+            },
+        },
     }
 }
