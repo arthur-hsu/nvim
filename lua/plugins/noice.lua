@@ -148,7 +148,7 @@ function M.config()
                 ["cmp.entry.get_documentation"]                  = true, -- override cmp documentation with Noice (needs the other options to work)
             },
             hover = {
-                enabled = false,
+                enabled = true,
                 silent = true, -- set to true to not show a message if hover is not available
                 view = nil, -- when nil, use defaults from documentation
                 ---"@type NoiceViewOptions"
