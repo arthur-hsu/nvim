@@ -54,7 +54,6 @@ return {
                 local startLine, startCol = startPos[2], startPos[3]
                 local endLine,   endCol   = endPos[2],   endPos[3]
 
-
                 if startLine ~= endLine or startCol ~= endCol then
                     return select.visual(source)
                 else
@@ -63,19 +62,25 @@ return {
             end
 
             local prompts = {
-                Explain     = { prompt = "解釋這段代碼如何運行。" },
-                FixError    = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
-                Suggestion  = { prompt = "請查看以上代碼並提供改進建議的sample code。" },
-                Annotations = { prompt = "幫以上代碼加入註解" },
-                Refactor    = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
-                Tests       = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
-                Commit = {
-                    prompt = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-                    selection = select.gitdiff,
+                QuickChat             = {selection = select.unnamed },
+                QuickChatWithFiletype = {},
+                Explain               = { prompt = "解釋這段代碼如何運行。" },
+                FixError              = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
+                Suggestion            = { prompt = "請查看以上代碼並提供改進建議的sample code。" },
+                Annotations           = { prompt = "幫以上代碼加入註解" },
+                Refactor              = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
+                Tests                 = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
+                FixDiagnostic = {
+                    prompt = 'Please assist with the following diagnostic issue in file:',
+                    selection = select.diagnostics,
                 },
-                CommitStaged = {
-                    prompt = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-                    selection = function(source)
+                Commit                = {
+                    prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+                    selection         = select.gitdiff,
+                },
+                CommitStaged          = {
+                    prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+                    selection         = function(source)
                         return select.gitdiff(source, true)
                     end,
                 },
@@ -93,15 +98,9 @@ return {
             
             -- NOTE: So we need to create an ordered list.
             local options = {
-                "Quick Chat",
-                "Quick Chat with filetype",
-                "Explain",
-                "FixError",
-                "Suggestion",
-                "Annotations",
-                "Refactor",
-                "Tests",
-                "Commit",
+                "QuickChat",    "QuickChatWithFiletype", "Explain",
+                "FixError",     "Suggestion",            "Annotations",
+                "Refactor",     "Tests",                 "Commit",
                 "CommitStaged",
             }
 
@@ -112,7 +111,7 @@ return {
             local actions      = require "telescope.actions"
             local action_state = require "telescope.actions.state"
             local Chat_cmd     = "CopilotChat"
-
+            local Chat_prompts = require("CopilotChat").prompts()
 
             local Telescope_CopilotActions = function(opts)
                 opts = opts or {}
@@ -124,32 +123,41 @@ return {
                     attach_mappings = function(prompt_bufnr, map)
                         actions.select_default:replace(function()
                             actions.close(prompt_bufnr)
-                            local selection = action_state.get_selected_entry()
-                            local choice = selection[1]
+                            local selected = action_state.get_selected_entry()
+                            local choice = selected[1]
                             local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
                             local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
-                            if string.find(choice, 'Quick Chat') then
-                                local input = vim.fn.input("Quick Chat: ")
-                                if string.find(choice, 'with filetype') then
-                                    Ask_msg = FiletypeMsg .. input
-                                else
-                                    Ask_msg = input
+
+                            local msg = nil
+                            local selection = nil
+                            -- Find the item message and selection base on the choice
+                            for item, body in pairs(Chat_prompts) do
+                                if item == choice then
+                                    msg = body.prompt
+                                    selection = body.selection
+                                    break
                                 end
-                                if input ~= "" then
-                                    require("CopilotChat").ask(Ask_msg)
-                                end
-                            else
-                                local msg = ""
-                                -- Find the item message base on the choice
-                                for item, body in pairs(prompts) do
-                                    if item == choice then
-                                        msg = body.prompt
-                                        break
-                                    end
-                                end
-                                local Ask_msg = FiletypeMsg .. msg
-                                require("CopilotChat").ask(Ask_msg)
                             end
+                            -- If the choice is QuickChat or QuickChatWithFiletype, open the input dialog
+                            if msg == nil then
+                                local input = vim.fn.input("Quick Chat: ")
+                                if input ~= "" then
+                                    msg = input
+                                end
+                            end
+                            -- If the choice is QuickChat, set the selection to nil
+                            if choice == 'QuickChat' then
+                                Ask_msg = msg
+                                selection = function () return nil end
+                            else
+                                Ask_msg = FiletypeMsg .. msg
+                                if selection == nil then
+                                    selection = opts.selection
+                                    print("selection is nil")
+                                end
+                            end
+
+                            require("CopilotChat").ask(Ask_msg,{ selection = selection })
                         end)
                         return true
                     end,
