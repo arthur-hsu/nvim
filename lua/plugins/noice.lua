@@ -33,7 +33,6 @@ local M = {
         },
         {
             'mrded/nvim-lsp-notify',
-            event = 'VeryLazy',
             dependencies = { 'rcarriga/nvim-notify' },
             config = function()
                 require('lsp-notify').setup({
@@ -45,6 +44,16 @@ local M = {
                 })
             end
         },
+        {
+            "smjonas/inc-rename.nvim",
+            config = function()
+                require("inc_rename").setup()
+                vim.keymap.set("n", "<space>rn", function()
+                    return ":IncRename " .. vim.fn.expand("<cword>")
+                end, { expr = true })
+            end,
+        }
+
     },
     event="VeryLazy",
 }
@@ -61,7 +70,7 @@ function M.config()
             lsp_doc_border        = true, -- add a border to hover docs and signature help
             bottom_search         = false, -- use a classic bottom cmdline for search
             long_message_to_split = false, -- long messages will be sent to a split
-            inc_rename            = false, -- enables an input dialog for inc-rename.nvim
+            inc_rename            = true, -- enables an input dialog for inc-rename.nvim
         },
         cmdline = {
             enabled = true, -- enables the Noice cmdline UI

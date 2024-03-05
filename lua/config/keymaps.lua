@@ -128,7 +128,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n',          '<space>wa', vim.lsp.buf.add_workspace_folder,                                        lsp_opts)
         vim.keymap.set('n',          '<space>wr', vim.lsp.buf.remove_workspace_folder,                                     lsp_opts)
         vim.keymap.set('n',          '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, lsp_opts)
-        vim.keymap.set('n',          '<space>rn', "<CMD>lua vim.lsp.buf.rename()<CR>",                                     lsp_opts)
         vim.keymap.set('n',          '<space>sw', "<CMD>Lspsaga outline<CR>",                                              lsp_opts)
         vim.keymap.set('n',          '<space>sf', "<CMD>Lspsaga finder<CR>",                                               lsp_opts)
         vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>",                                          lsp_opts)
