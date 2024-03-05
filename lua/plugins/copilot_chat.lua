@@ -65,11 +65,10 @@ return {
             local prompts = {
                 Explain     = { prompt = "解釋這段代碼如何運行。" },
                 FixError    = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
-                Suggestion  = { prompt = "請查看以上代碼並提供改進建議。" },
+                Suggestion  = { prompt = "請查看以上代碼並提供改進建議的sample code。" },
+                Annotations = { prompt = "幫以上代碼加入註解" },
                 Refactor    = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
                 Tests       = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
-                Annotations = { prompt = "幫以上代碼加入註解" },
-
                 Commit = {
                     prompt = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     selection = select.gitdiff,
@@ -84,10 +83,28 @@ return {
             opts.prompts = prompts
             require("CopilotChat").setup(opts)
 
-            local options = {}
-            for key, value in pairs(prompts) do
-                table.insert(options, key)
-            end
+            -- NOTE: This function creates an unordered list.
+            -- local options = {}
+            -- table.insert(options, "Quick Chat")
+            -- table.insert(options, "Quick Chat with file type")
+            -- for key, value in pairs(prompts) do
+            --     table.insert(options, key)
+            -- end
+            
+            -- NOTE: So we need to create an ordered list.
+            local options = {
+                "Quick Chat",
+                "Quick chat with file type",
+                "Explain",
+                "FixError",
+                "Suggestion",
+                "Annotations",
+                "Refactor",
+                "Tests",
+                "Commit",
+                "CommitStaged",
+            }
+
 
             local pickers      = require "telescope.pickers"
             local finders      = require "telescope.finders"
@@ -101,17 +118,28 @@ return {
                 opts = opts or {}
                 pickers.new(opts, {
                     prompt_title = "Select Copilot prompt",
-                    finder = finders.new_table {
-                        results = options
-                    },
+                    finder = finders.new_table { results = options },
                     sorter = conf.generic_sorter(opts),
+
                     attach_mappings = function(prompt_bufnr, map)
                         actions.select_default:replace(function()
                             actions.close(prompt_bufnr)
                             local selection = action_state.get_selected_entry()
                             local choice = selection[1]
-
-                            if choice ~= nil then
+                            local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
+                            local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
+                            if string.find(choice, 'Quick Chat') then
+                                local input = vim.fn.input("Quick Chat: ")
+                                if string.find(choice, 'with file type') then
+                                    Ask_msg = FiletypeMsg .. input
+                                else
+                                    Ask_msg = input
+                                end
+                                if input ~= "" then
+                                    require("CopilotChat").ask(Ask_msg)
+                                    return
+                                end
+                            else
                                 local msg = ""
                                 -- Find the item message base on the choice
                                 for item, body in pairs(prompts) do
@@ -120,8 +148,7 @@ return {
                                         break
                                     end
                                 end
-                                local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
-                                local Ask_msg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, ".. msg
+                                local Ask_msg = FiletypeMsg .. msg
                                 require("CopilotChat").ask(Ask_msg)
                             end
                         end)
@@ -131,7 +158,7 @@ return {
             end
 
             vim.api.nvim_create_user_command("CopilotActions",
-                function() Telescope_CopilotActions(require("telescope.themes").get_dropdown{}) end,
+                function() Telescope_CopilotActions(require("telescope.themes").get_dropdown{ selection_caret = " " }) end,
                 { nargs = "*", range = true }
             )
 

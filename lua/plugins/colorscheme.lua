@@ -13,7 +13,7 @@ return {
     --     priority = 1000,
     --     opts = function()
     --         return {
-    --             style = "night",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    --             style = "day",        ---- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
     --             transparent = true,
     --             hide_inactive_statusline = false,
     --             lualine_bold = true,
