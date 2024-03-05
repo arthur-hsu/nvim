@@ -94,7 +94,7 @@ return {
             -- NOTE: So we need to create an ordered list.
             local options = {
                 "Quick Chat",
-                "Quick chat with file type",
+                "Quick Chat with filetype",
                 "Explain",
                 "FixError",
                 "Suggestion",
@@ -130,14 +130,13 @@ return {
                             local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
                             if string.find(choice, 'Quick Chat') then
                                 local input = vim.fn.input("Quick Chat: ")
-                                if string.find(choice, 'with file type') then
+                                if string.find(choice, 'with filetype') then
                                     Ask_msg = FiletypeMsg .. input
                                 else
                                     Ask_msg = input
                                 end
                                 if input ~= "" then
                                     require("CopilotChat").ask(Ask_msg)
-                                    return
                                 end
                             else
                                 local msg = ""
