@@ -28,7 +28,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     tag = "v0.2.0",
 
-    -- event = "VeryLazy",
     -- enabled = false,
     opts = {
         debug     = false,                                           -- set to true to enable debug logging
