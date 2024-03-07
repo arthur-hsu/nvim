@@ -1,6 +1,3 @@
-local prompt = function(input)
-    local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-end
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
