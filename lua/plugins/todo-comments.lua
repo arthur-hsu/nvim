@@ -9,6 +9,8 @@ return {
             require('todo-comments').setup({
                 keywords = {
                     tag = { icon = "󰌕 ", color = "tag",alt = { "RAW" } },
+                    IMPORTANT = { icon = "󰂵 ", color = "error",alt = { "Important" } },
+                    
                     FIX = {
                         icon = " ", -- icon used for the sign, and in search results
                         color = "error", -- can be a hex color, or a named color (see below)
@@ -40,6 +42,13 @@ return {
                 -- note:
                 colors = {
                     tag = {'tag', '#FFD700'},
+                    actionItem = { "ActionItem", "#A0CC00" },
+                    argumentation = { "Argument", "#8C268C" },
+                    default = { "Identifier", "#999999" },
+                    error = { "LspDiagnosticsDefaultError", "ErrorMsg", "#DC2626" },
+                    idea = { "IdeaMsg", "#FDFF74" },
+                    info = { "LspDiagnosticsDefaultInformation", "#2563EB" },
+                    warning = { "LspDiagnosticsDefaultWarning", "WarningMsg", "#FB8F24" },
                 },
                 search = {
                     command = "rg",
