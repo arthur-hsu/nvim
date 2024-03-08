@@ -7,7 +7,6 @@ return {
             "nvim-tree/nvim-web-devicons",
             { 'MaximilianLloyd/ascii.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
         },
-        --lazy = false,
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
 

@@ -2,6 +2,7 @@ return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         branch = "canary",
+        -- enabled = false,
         event = "VeryLazy",
         dependencies = {
             { "zbirenbaum/copilot.lua" },                 -- or github/copilot.vim
@@ -21,7 +22,6 @@ return {
             separator = '---',                            -- Separator to use in chat
             window = {
                 layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
-                                                          -- Options below only apply to floating windows
                 relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
                 border = 'rounded',                       -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
                 width = 0.8,                              -- fractional width of parent

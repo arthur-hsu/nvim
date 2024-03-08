@@ -10,8 +10,8 @@ return {
                 -- configuration goes here, for example:
                 relculright = true,
                 separator = " ",
-                ft_ignore = nil,       -- lua table with 'filetype' values for which 'statuscolumn' will be unset
-                bt_ignore = {"copilot_chat"},       -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+                -- ft_ignore = {"markdown"},     -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+                -- bt_ignore = {"copilot_chat"}, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
                 segments = {
                     -- { sign = { name = { "smoothcursor" },text={ "smoothcursor" } } },
                     { text = { builtin.foldfunc},click = "v:lua.ScFa" },
