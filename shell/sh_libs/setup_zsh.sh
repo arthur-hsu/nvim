@@ -12,7 +12,7 @@ alias nvi="nvim"
 alias nvimrc="cd ~/.config/nvim"
 alias cat="batcat --style=plain"
 alias exa="exa --icons"
-alias tre="exa --long --tree --level=3"
+alias tre="exa --long --tree --level=3 --ignore-glob='__pycache__'"
 alias ls="exa -s type"
 alias ll="exa -all -l -s type"
 alias d="docker"
@@ -20,10 +20,6 @@ alias dc="docker-compose"
 alias fd="fdfind"
 alias top="bpytop"
 
-deactivate(){
-    pyenv deactivate
-    export pypath=$(pyenv which python)
-}
 activate(){
     pyenv activate "$1"
     export pypath=$(pyenv which python)
@@ -51,6 +47,8 @@ plugins=(\
     sudo\
     kubectl\
     helm\
+    docker\
+    docker-compose\
 )' ~/.zshrc
 
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
