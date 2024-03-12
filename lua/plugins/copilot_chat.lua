@@ -92,7 +92,7 @@ return {
             -- for key, value in pairs(prompts) do
             --     table.insert(options, key)
             -- end
-            
+
             -- NOTE: So we need to create an ordered list.
             local options = {
                 "QuickChat",    "QuickChatWithFiletype", "Explain",
@@ -143,7 +143,7 @@ return {
                                 end
                             end
                             -- If the choice is QuickChat, set the selection to nil
-                            if choice == 'QuickChat' then
+                            if choice == 'QuickChat' or string.find(choice, 'Commit') then
                                 Ask_msg = msg
                                 selection = function () return nil end
                             else
