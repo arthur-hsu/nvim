@@ -1,6 +1,6 @@
 return{
     {
-        'TobinPalmer/pastify.nvim',
+        'arthur-hsu/pastify.nvim',
         ft = { "markdown" },
         event = "VeryLazy",
         cmd = { 'Pastify' },
