@@ -17,7 +17,9 @@ alias ls="exa -s type"
 alias ll="exa -all -l -s type"
 alias d="docker"
 alias dc="docker-compose"
-alias fd="fdfind"
+alias fd="fdfind -i"
+alias rg="rg --ignore-case -p"
+
 alias top="bpytop"
 
 activate(){
