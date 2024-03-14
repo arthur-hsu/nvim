@@ -20,6 +20,7 @@ if [ "$#" -gt 0 ]; then
 fi
 
 debian_version=$(cat /etc/debian_version)
+echo "debian_version: $debian_version"
 case "$debian_version" in
     12*)
         ver=$(python -V)
