@@ -12,7 +12,7 @@ function M.config()
     require'nvim-treesitter.configs'.setup {
         auto_install     = true,
         sync_install     = true,
-        ensure_installed = {"python","bash","json",'vimdoc','gitcommit','markdown','markdown_inline','lua','regex'}, -- or all
+        ensure_installed = {"python","bash","json",'vimdoc','markdown', 'markdown_inline','lua','regex'}, -- or all
         highlight = {
             enable = true,
         },
@@ -20,6 +20,7 @@ function M.config()
             enable = true,
             disable = {'lua'},
         },
+        ignore_install = { "gitcommit" },
     }
     -- 开启 Folding
     vim.wo.foldmethod = 'expr'
