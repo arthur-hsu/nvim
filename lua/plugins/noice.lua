@@ -164,7 +164,7 @@ function M.config()
                 opts = {}, -- merged with defaults from documentation
             },
             signature = {
-                enabled = false,
+                enabled = true,
                 auto_open = {
                     enabled  = true,
                     trigger  = true,  -- Automatically show signature help when typing a trigger character from the LSP
@@ -194,9 +194,24 @@ function M.config()
                 },
             },
         },
+        markdown = {
+            hover = {
+                ["|(%S-)|"] = vim.cmd.help, -- vim help links
+                ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+            },
+            highlights = {
+                ["|%S-|"] = "@text.reference",
+                ["@%S+"] = "@parameter",
+                ["^%s*(Parameters:)"] = "@text.title",
+                ["^%s*(Return:)"] = "@text.title",
+                ["^%s*(See also:)"] = "@text.title",
+                ["{%S-}"] = "@parameter",
+            },
+        },
         throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
         ---"@type NoiceConfigViews"
         ---@see section on views
+
         views = {
             -- notify = { replace = true },
         },
@@ -226,5 +241,7 @@ function M.config()
             return "<c-b>"
         end
     end, { silent = true, expr = true })
+    require("telescope").load_extension("noice")
+
 end
 return M

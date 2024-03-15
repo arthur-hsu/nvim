@@ -4,7 +4,7 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "debugloop/telescope-undo.nvim",
-        "folke/noice.nvim",
+        -- "folke/noice.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
         -- "tsakirist/telescope-lazy.nvim"
         -- "nvim-telescope/telescope-project.nvim",
@@ -172,7 +172,6 @@ return {
             },
         })
         require("telescope").load_extension("undo")
-        require("telescope").load_extension("noice")
         require("telescope").load_extension("file_browser")
         -- require("telescope").load_extension("lazy")
         -- require('telescope').load_extension('project')

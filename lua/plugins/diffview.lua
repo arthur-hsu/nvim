@@ -39,13 +39,13 @@ function M.config()
                     winbar_info = false,                      -- See ':h diffview-config-view.x.winbar_info'
                 },
                 merge_tool = {
-                                                              -- Config for conflicted files in diff views during a merge or rebase.
+                    -- Config for conflicted files in diff views during a merge or rebase.
                     layout              = "diff3_horizontal",
                     disable_diagnostics = true,               -- Temporarily disable diagnostics for conflict buffers while in the view.
                     winbar_info         = true,               -- See ':h diffview-config-view.x.winbar_info'
                 },
                 file_history = {
-                                                              -- Config for changed files in file history views.
+                    -- Config for changed files in file history views.
                     layout      = "diff2_horizontal",
                     winbar_info = false,                      -- See ':h diffview-config-view.x.winbar_info'
                 },
@@ -79,7 +79,7 @@ function M.config()
                 },
                 win_config = {                                -- See ':h diffview-config-win_config'
                     position = "bottom",
-                    height   = 16,
+                    height   = 14,
                     win_opts = {}
                 },
             },
