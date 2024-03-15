@@ -13,7 +13,15 @@ return {
     },
     config = function()
         require("flash").setup({
+            search = {
+                label = {
+                    uppercase = false,
+                }
+            },
             modes = {
+                search = {
+                    enabled = false,
+                },
                 char = {
                     enabled = true,
                     keys = { "f", "F", ";", "," },
@@ -38,8 +46,10 @@ return {
         vim.api.nvim_set_hl(0, "FlashBackdrop",   { link = "Comment" })
         vim.api.nvim_set_hl(0, "FlashMatch",      { link = "Search" })
         vim.api.nvim_set_hl(0, "FlashCurrent",    { link = "CurSearch" })
-        vim.api.nvim_set_hl(0, "FlashLabel",      { fg = "#C8D3F5", bg = "#FF007C", bold = true })
-        vim.api.nvim_set_hl(0, "FlashCursor",     { fg = "#C8D3F5", bg = "#88D97B", bold = true })
+        vim.api.nvim_set_hl(0, "FlashLabel",      { bg = "#e1e1fc", fg = "#FF007C", bold = true ,italic=true})
+        -- vim.api.nvim_set_hl(0, "FlashLabel",      { bg = "#00ff83", fg = "#FF007C", bold = true ,italic=true})
+
+        vim.api.nvim_set_hl(0, "FlashCursor",     { fg = "#b3b8f5", bg = "#88D97B", bold = true })
         vim.api.nvim_set_hl(0, "FlashPrompt",     { link= "MsgArea" })
         vim.api.nvim_set_hl(0, "FlashPromptIcon", { link= "Special" })
     end,
