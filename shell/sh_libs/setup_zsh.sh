@@ -23,6 +23,7 @@ alias l="exa -s type -l"
 alias ll="exa -all -l -s type"
 alias d="docker"
 alias dc="docker-compose"
+alias rg="rg --ignore-case -p"
 alias top="bpytop"
 
 activate(){
