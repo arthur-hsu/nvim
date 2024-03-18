@@ -1,5 +1,6 @@
 local M = {
     'CRAG666/code_runner.nvim',
+    dependencies= {"CRAG666/betterTerm.nvim"},
     event="VeryLazy",
 }
 
@@ -16,8 +17,7 @@ end
 function M.config()
     require('code_runner').setup({
         -- choose default mode (valid term, tab, float, toggle)
-        mode = "term",
-        --mode = "term",
+        mode = "better_term",
         -- Focus on runner window(only works on toggle, term and tab mode)
         focus = true,
         -- startinsert (see ':h inserting-ex')
@@ -27,17 +27,10 @@ function M.config()
             --  Position to open the terminal, this option is ignored if mode ~= term
             position = "bot",
             -- window size, this option is ignored if mode == tab
-            size = 12,
+            size = 14,
         },
         float = {
             close_key = "<C-c>",
-            -- Window border (see ':h nvim_open_win')
-                    --• "none": No border (default).
-                    --• "single": A single line box.
-                    --• "double": A double line box.
-                    --• "rounded": Like "single", but with rounded corners ("╭" etc.).
-                    --• "solid": Adds padding by a single whitespace cell.
-                    --• "shadow": A drop shadow effect by blending with the background.
             border = "rounded",
             -- Num from `0 - 1` for measurements
             height = 0.3,
@@ -54,7 +47,7 @@ function M.config()
         },
         better_term = { -- Toggle mode replacement
             clean = false, -- Clean terminal before launch
-            number = 10, -- Use nil for dynamic number and set init
+            number = nil, -- Use nil for dynamic number and set init
             init = nil,
         },
         filetype_path = "",
@@ -93,6 +86,9 @@ function M.config()
         project      = {},
         prefix       = "",
     })
+    vim.keymap.set("n", "<leader>e", function()
+  require("betterTerm").send(require("code_runner.commands").get_filetype_command(), 1, { clean = false, interrupt = true })
+end, { desc = "Excute File"})
 end
 return M
 
