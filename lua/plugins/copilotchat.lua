@@ -72,12 +72,12 @@ return {
                     selection = select.diagnostics,
                 },
                 Commit                = {
-                    prompt = '總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     selection         = select.gitdiff,
                 },
                 CommitStaged          = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-                    prompt = '總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     selection         = function(source)
                         return select.gitdiff(source, true)
                     end,
