@@ -23,6 +23,12 @@ vim.diagnostic.config({
     -- underline = {severity = {min = vim.diagnostic.severity.WARN}},
     update_in_insert = false,
     severity_sort = true,
+    float = {
+        border = 'rounded',
+        show_header = false,
+        source = "always",  -- Or "if_many"
+        focusable = false,
+    }
     --float = {
         --severity = { min = vim.diagnostic.severity.WARN },
         --show_header = true,

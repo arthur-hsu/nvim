@@ -61,22 +61,23 @@ return {
             local prompts = {
                 QuickChat             = {selection = select.unnamed },
                 QuickChatWithFiletype = {},
-                Explain               = { prompt = "解釋這段代碼如何運行。" },
-                FixError              = { prompt = "請解釋以上代碼中的錯誤並提供解決方案。" },
-                Suggestion            = { prompt = "請查看以上代碼並提供改進建議的sample code。" },
-                Annotations           = { prompt = "幫以上代碼加入註解" },
-                Refactor              = { prompt = "請重構以上代碼以提高其清晰度和可讀性。" },
-                Tests                 = { prompt = "簡要說明以上代碼的工作原理，然後產生單元測試。" },
+                Explain               = { prompt = "/COPILOT_EXPLAIN 解釋這段代碼如何運行。" },
+                FixError              = { prompt = "/COPILOT_FIX 請解釋以上代碼中的錯誤並提供解決方案。" },
+                Suggestion            = { prompt = "/COPILOT_REFACTOR 請查看以上代碼並提供改進建議的sample code。" },
+                Annotations           = { prompt = "/COPILOT_REFACTOR 為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
+                Refactor              = { prompt = "/COPILOT_REFACTOR 請重構以上代碼以提高其清晰度和可讀性。" },
+                Tests                 = { prompt = "/COPILOT_TESTS 簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 FixDiagnostic = {
-                    prompt = 'Please assist with the following diagnostic issue in file:',
+                    prompt = '/COPILOT_FIX Please assist with the following diagnostic issue in file:',
                     selection = select.diagnostics,
                 },
                 Commit                = {
-                    prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+                    prompt = '總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     selection         = select.gitdiff,
                 },
                 CommitStaged          = {
-                    prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+                    -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+                    prompt = '總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     selection         = function(source)
                         return select.gitdiff(source, true)
                     end,
@@ -143,11 +144,15 @@ return {
                                 end
                             end
                             -- If the choice is QuickChat, set the selection to nil
-                            if choice == 'QuickChat' or string.find(choice, 'Commit') then
+                            if choice == 'QuickChat' then
                                 Ask_msg = msg
                                 selection = function () return nil end
                             else
-                                Ask_msg = FiletypeMsg .. msg
+                                if string.find(choice, "Commit") then
+                                    Ask_msg = msg
+                                else
+                                    Ask_msg = FiletypeMsg .. msg
+                                end
                                 if selection == nil then
                                     selection = opts.selection
                                     -- print("selection is nil")
