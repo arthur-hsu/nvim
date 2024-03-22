@@ -2,6 +2,7 @@ return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         branch = "canary",
+        commit = '76afea1a90178b2cddda5d1c305eeabe05748a02',
         -- enabled = false,
         event = "VeryLazy",
         dependencies = {
