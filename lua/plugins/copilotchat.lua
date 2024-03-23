@@ -2,8 +2,6 @@ return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         branch = "canary",
-        commit = '76afea1a90178b2cddda5d1c305eeabe05748a02',
-        -- enabled = false,
         event = "VeryLazy",
         dependencies = {
             { "zbirenbaum/copilot.lua" },                 -- or github/copilot.vim
@@ -11,16 +9,6 @@ return {
             { "nvim-telescope/telescope.nvim" },          -- for telescope help actions (optional)
         },
         opts = {
-            model = 'gpt-4',                              -- GPT model to use
-            temperature = 0.1,                            -- GPT temperature
-            debug = false,                                -- Enable debug logging
-            show_user_selection = true,                   -- Shows user selection in chat
-            show_system_prompt = false,                   -- Shows system prompt in chat
-            show_folds = true,                            -- Shows folds for sections in chat
-            clear_chat_on_new_prompt = false,             -- Clears chat on every new prompt
-            auto_follow_cursor = true,                    -- Auto-follow cursor in chat
-            name = 'CopilotChat',                         -- Name to use in chat
-            separator = '---',                            -- Separator to use in chat
             window = {
                 layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
                 relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
@@ -34,12 +22,35 @@ return {
                 zindex = 1,                               -- determines if window is on top or below other floating windows
             },
             mappings = {
-                close = "q",                              -- Close chat
-                reset = "<C-l>",                          -- Clear the chat buffer
-                complete = "<Tab>",                       -- Change to insert mode and press tab to get the completion
-                submit_prompt = "<CR>",                   -- Submit question to Copilot Chat
-                accept_diff = "<C-a>",                    -- Accept the diff
-                show_diff = "<C-s>",                      -- Show the diff
+                complete = {
+                    detail = 'Use @<Tab> or /<Tab> for options.',
+                    insert ='<Tab>',
+                },
+                close = {
+                    normal = 'q',
+                    insert = '<C-c>'
+                },
+                reset = {
+                    normal ='<C-l>',
+                    insert = '<C-l>'
+                },
+                submit_prompt = {
+                    normal = '<CR>',
+                    insert = '<C-m>'
+                },
+                accept_diff = {
+                    normal = '<C-a>',
+                    insert = '<C-a>'
+                },
+                show_diff = {
+                    normal = 'gd'
+                },
+                show_system_prompt = {
+                    normal = 'gp'
+                },
+                show_user_selection = {
+                    normal = 'gs'
+                },
             },
         },
 
@@ -72,14 +83,14 @@ return {
                     prompt = '/COPILOT_FIX Please assist with the following diagnostic issue in file:',
                     selection = select.diagnostics,
                 },
-                Commit                = {
+                Commit = {
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    selection         = select.gitdiff,
+                    selection = select.gitdiff,
                 },
-                CommitStaged          = {
+                CommitStaged = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    selection         = function(source)
+                    selection = function(source)
                         return select.gitdiff(source, true)
                     end,
                 },

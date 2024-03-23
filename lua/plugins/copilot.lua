@@ -3,11 +3,11 @@ return{
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = { "BufReadPost", "BufNewFile" },
-        --event = "InsertEnter",
+        -- event = "InsertEnter",
         config = function()
             require("copilot").setup({
                 panel = {
-                    enabled      = false,
+                    enabled      = true,
                     auto_refresh = true,
                     keymap = {
                         jump_prev = "[[",
@@ -35,15 +35,16 @@ return{
                     },
                 },
                 filetypes = {
-                    yaml      = false,
-                    markdown  = true,
-                    help      = false,
-                    gitcommit = false,
-                    gitrebase = false,
-                    hgcommit  = false,
-                    svn       = false,
-                    cvs       = false,
-                    ["."]     = false,
+                    ['*'] = true,
+                    -- yaml      = true,
+                    -- markdown  = true,
+                    -- help      = false,
+                    -- gitcommit = true,
+                    -- gitrebase = false,
+                    -- hgcommit  = false,
+                    -- svn       = false,
+                    -- cvs       = false,
+                    -- ["."]     = true,
                 },
                 copilot_node_command = 'node', -- Node.js version must be > 16.x
                 server_opts_overrides = {
@@ -56,7 +57,20 @@ return{
                     },
                 }
             })
-            --local cmp     = require 'cmp'
+            -- -- auto_trigger
+            -- local cmp = require 'cmp'
+            -- cmp.event:on("menu_opened", function()
+            --     vim.b.copilot_suggestion_hidden = true
+            -- end)
+            --
+            -- cmp.event:on("menu_closed", function()
+            --     vim.b.copilot_suggestion_hidden = false
+            -- end)
+
+
+
+
+
             --local copilot = require 'copilot.suggestion'
             --local luasnip = require 'luasnip'
             --local function set_trigger(trigger)

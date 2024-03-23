@@ -1,7 +1,7 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    enabled = true,
+    event = { "InsertEnter", "CmdlineEnter" },
+    ebabled = true,
     dependencies = {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
@@ -23,7 +23,8 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "zbirenbaum/copilot-cmp",
         -- "hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
-        'rafamadriz/friendly-snippets'
+        'rafamadriz/friendly-snippets',
+        'petertriho/cmp-git'
     },
     config = function()
         local cmp = require("cmp")
@@ -58,7 +59,6 @@ return {
                 priority_weight = 2,
                 comparators = {
                     require("copilot_cmp.comparators").prioritize,
-
                     -- Below is the default comparitor list and order for nvim-cmp
                     cmp.config.compare.offset,
                     -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -106,6 +106,14 @@ return {
                 },
                 }
             }),
+        })
+        -- Set configuration for specific filetype.
+        cmp.setup.filetype('gitcommit', {
+            sources = cmp.config.sources({
+                { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+            }, {
+                { name = 'buffer' },
+            })
         })
     end
 }

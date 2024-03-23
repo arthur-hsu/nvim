@@ -31,8 +31,23 @@ local M = {
             }
         },
         {
+            "j-hui/fidget.nvim",
+            event = "VeryLazy",
+            dependencies = { "rcarriga/nvim-notify", },
+            config = function()
+                local fidget = require("fidget")
+                fidget.setup({
+                    notification = {
+                        override_vim_notify = vim.notify
+                    }
+                })
+            end
+        },
+        {
             'mrded/nvim-lsp-notify',
             dependencies = { 'rcarriga/nvim-notify' },
+            -- events = "UIEnter",
+            enabled=false,
             opts = {
                 icons = {
                     spinner = { "⣷" , "⣯", "⣟", "⡿", "⢿", "⣻", "⣽", "⣾" },
@@ -53,7 +68,6 @@ local M = {
                 end, { expr = true })
             end,
         }
-
     },
     event="VeryLazy",
 }

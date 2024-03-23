@@ -19,10 +19,8 @@ pluginKeys.cmp = function(cmp)
     end
     return {
         -- 上一个
-        ["<C-p>"]  = cmp.mapping.select_prev_item(),
         ["<up>"]   = cmp.mapping.select_prev_item(),
         -- 下一个
-        ["<C-n>"]  = cmp.mapping.select_next_item(),
         ["<down>"] = cmp.mapping.select_next_item(),
         -- 出现补全
         ["<C -,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -55,28 +53,69 @@ pluginKeys.cmp = function(cmp)
         end, { "i", "s" }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                -- cmp.select_next_item()
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-                -- cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+            if cmp.visible() and has_words_before() then
+                if #cmp.get_entries() == 1 then
+                    -- cmp.confirm({ select = true })
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                else
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                end
+            elseif has_words_before() then
+                cmp.complete()
+                if #cmp.get_entries() == 1 then
+                    cmp.confirm({ select = true })
+                end
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            -- elseif has_words_before() then
-            --     cmp.complete()
             else
                 fallback()
             end
         end, { "i", "s" }),
-        
-        --["<Tab>"] = vim.schedule_wrap(
-            --function(fallback)
-                --if cmp.visible() and has_words_before() then
-                    --cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                --else
-                    --fallback()
-                --end
-            --end
-        --),
+
+        -- -- cmd line mapping
+        -- ['<Tab>'] = {
+        --     c = function(_)
+        --         if cmp.visible() then
+        --             if #cmp.get_entries() == 1 then
+        --                 cmp.confirm({ select = true })
+        --             else
+        --                 cmp.select_next_item()
+        --             end
+        --         else
+        --             cmp.complete()
+        --             if #cmp.get_entries() == 1 then
+        --                 cmp.confirm({ select = true })
+        --             end
+        --         end
+        --     end,
+        -- }
+
+
+
+        -- -- Raw tab
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() and has_words_before() then
+        --         cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+        --         -- cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        --     elseif luasnip.expand_or_jumpable() then
+        --         luasnip.expand_or_jump()
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i", "s" }),
+
+
+
+        -- -- Copilot cmp recommend
+        -- ["<Tab>"] = vim.schedule_wrap(
+        --     function(fallback)
+        --         if cmp.visible() and has_words_before() then
+        --             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        --         else
+        --             fallback()
+        --         end
+        --     end
+        -- ),
     }
 end
 
