@@ -50,6 +50,7 @@ return {
                                     reportArgumentType         = "none",
                                     reportOperatorIssue        = "none",
                                     reportOptionalSubscript    = "none",
+                                    reportOptionalIterable     = "none",
                                 }
                             }
                         }
