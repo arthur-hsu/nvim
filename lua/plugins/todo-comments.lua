@@ -19,7 +19,7 @@ return {
                     },
                     TODO = { icon = " ", color = "info" },
                     HACK = { icon = " ", color = "warning" },
-                    WARN = { icon = " ", color = "warning",   alt = { "WARNING",  "XXX" } },
+                    WARN = { icon = " ", color = "warning",   alt = { "WARNING",  "XXX", "WORKAROUND" } },
                     PERF = { icon = " ", alt = { "OPTIM",     "PERFORMANCE",      "OPTIMIZE" } },
                     NOTE = { icon = " ", color = "info",      alt = { "INFO" } },
                     TEST = { icon = "⏲ ", color = "test",      alt = { "TESTING",  "PASSED",       "FAILED" } },
