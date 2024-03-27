@@ -13,9 +13,12 @@ return{
         branch='development',
         -- enabled=false,
         config = function ()
-            require('ultimate-autopair').setup({
+                require('ultimate-autopair').setup({
                 -- multi=false,
-                tabout={enable=true},
+                tabout={multi = true},
+                -- extensions = {
+                --     alpha= { no_python = true},
+                -- },
 
                 -- internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
                 --     {'[',']',fly=true,dosuround=true,newline=true,space=true},
@@ -30,9 +33,10 @@ return{
                 --     {'"""','"""',newline=true,ft={'python'}},
                 --     {"'''","'''",newline=true,ft={'python'}},
                 -- },
+
                 config_internal_pairs={
-                    {'`','`',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex','latex'},multiline=false},
-                    -- {'"','"',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
+                    {'`','`', suround=true, cond=function(fn) return not fn.in_lisp() or fn.in_string() end, alpha=true,nft={'tex','latex'},multiline=false},
+                    {'"','"', alpha = true },
                 }
             })
             local function ls_name_from_event(event)
