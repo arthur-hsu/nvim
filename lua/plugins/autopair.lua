@@ -11,6 +11,7 @@ return{
         'altermo/ultimate-autopair.nvim',
         event={'InsertEnter','CmdlineEnter'},
         branch='development',
+        -- enabled=false,
         config = function ()
             require('ultimate-autopair').setup({
                 -- multi=false,
@@ -31,37 +32,38 @@ return{
                 -- },
                 config_internal_pairs={
                     {'`','`',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex','latex'},multiline=false},
+                    {'"','"',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
                 }
             })
-            local function ls_name_from_event(event)
-                return event.entry.source.source.client.config.name
-            end
-            local cmp=require('cmp')
-            local Kind=cmp.lsp.CompletionItemKind
-            -- Add parenthesis on completion confirmation
-            cmp.event:on(
-            'confirm_done',
-            function(event)
-                local ok, ls_name = pcall(ls_name_from_event, event)
-                -- vim.print(ls_name)
-
-                if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
-                    return
-                end
-
-                local completion_kind = event.entry:get_completion_item().kind
-                if vim.tbl_contains({ Kind.Function, Kind.Method }, completion_kind) then
-                    local left = vim.api.nvim_replace_termcodes('<Left>', true, true, true)
-                    vim.api.nvim_feedkeys('()' .. left, 'n', false)
-                end
-            end)
-
+            -- local function ls_name_from_event(event)
+            --     return event.entry.source.source.client.config.name
+            -- end
+            -- local cmp=require('cmp')
+            -- local Kind=cmp.lsp.CompletionItemKind
+            -- -- Add parenthesis on completion confirmation
+            -- cmp.event:on(
+            -- 'confirm_done',
+            -- function(event)
+            --     local ok, ls_name = pcall(ls_name_from_event, event)
+            --     -- vim.print(ls_name)
+            --
+            --     if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
+            --         return
+            --     end
+            --
+            --     local completion_kind = event.entry:get_completion_item().kind
+            --     if vim.tbl_contains({ Kind.Function, Kind.Method }, completion_kind) then
+            --         local left = vim.api.nvim_replace_termcodes('<Left>', true, true, true)
+            --         vim.api.nvim_feedkeys('()' .. left, 'n', false)
+            --     end
+            -- end
+            -- )
         end
     },
     {
         "windwp/nvim-autopairs",
-        event   = 'VeryLazy',
-        enabled = false,
+        event={'InsertEnter','CmdlineEnter'},
+        -- enabled = false,
         config = function ()
             require('nvim-autopairs').setup({
                 fast_wrap = {},
@@ -76,8 +78,8 @@ return{
             })
             ------------------------------------------------------
             -- use treesitter to check for a pair.
-            local npairs = require("nvim-autopairs")
-            local Rule = require('nvim-autopairs.rule')
+            local npairs   = require("nvim-autopairs")
+            local Rule     = require('nvim-autopairs.rule')
             local ts_conds = require('nvim-autopairs.ts-conds')
             -- press % => %% only while inside a comment or string
             npairs.add_rules({
@@ -86,10 +88,24 @@ return{
                 Rule("$", "$", "lua")
                 :with_pair(ts_conds.is_not_ts_node({'function'}))
             })
-            local cmp = require("cmp")
             -- If you want insert `(` after select function or method item
+            local cmp = require("cmp")
             local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on('confirm_done',cmp_autopairs.on_confirm_done())
+            local function ls_name_from_event(event)
+                return event.entry.source.source.client.config.name
+            end
+            cmp.event:on('confirm_done', function(event)
+                local ok, ls_name = pcall(ls_name_from_event, event)
+                -- vim.print(ls_name)
+
+                if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
+                    return
+                end
+                cmp_autopairs.on_confirm_done()
+            end)
+            for _,i in ipairs(npairs.config.rules) do
+                i.key_map=nil
+            end
         end
     }
 }
