@@ -32,38 +32,38 @@ return{
                 -- },
                 config_internal_pairs={
                     {'`','`',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex','latex'},multiline=false},
-                    {'"','"',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
+                    -- {'"','"',suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
                 }
             })
-            -- local function ls_name_from_event(event)
-            --     return event.entry.source.source.client.config.name
-            -- end
-            -- local cmp=require('cmp')
-            -- local Kind=cmp.lsp.CompletionItemKind
-            -- -- Add parenthesis on completion confirmation
-            -- cmp.event:on(
-            -- 'confirm_done',
-            -- function(event)
-            --     local ok, ls_name = pcall(ls_name_from_event, event)
-            --     -- vim.print(ls_name)
-            --
-            --     if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
-            --         return
-            --     end
-            --
-            --     local completion_kind = event.entry:get_completion_item().kind
-            --     if vim.tbl_contains({ Kind.Function, Kind.Method }, completion_kind) then
-            --         local left = vim.api.nvim_replace_termcodes('<Left>', true, true, true)
-            --         vim.api.nvim_feedkeys('()' .. left, 'n', false)
-            --     end
-            -- end
-            -- )
+            local function ls_name_from_event(event)
+                return event.entry.source.source.client.config.name
+            end
+            local cmp=require('cmp')
+            local Kind=cmp.lsp.CompletionItemKind
+            -- Add parenthesis on completion confirmation
+            cmp.event:on(
+            'confirm_done',
+            function(event)
+                local ok, ls_name = pcall(ls_name_from_event, event)
+                -- vim.print(ls_name)
+
+                if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
+                    return
+                end
+
+                local completion_kind = event.entry:get_completion_item().kind
+                if vim.tbl_contains({ Kind.Function, Kind.Method }, completion_kind) then
+                    local left = vim.api.nvim_replace_termcodes('<Left>', true, true, true)
+                    vim.api.nvim_feedkeys('()' .. left, 'n', false)
+                end
+            end
+            )
         end
     },
     {
         "windwp/nvim-autopairs",
         event={'InsertEnter','CmdlineEnter'},
-        -- enabled = false,
+        enabled = false,
         config = function ()
             require('nvim-autopairs').setup({
                 fast_wrap = {},
@@ -103,9 +103,6 @@ return{
                 end
                 cmp_autopairs.on_confirm_done()
             end)
-            for _,i in ipairs(npairs.config.rules) do
-                i.key_map=nil
-            end
         end
     }
 }
