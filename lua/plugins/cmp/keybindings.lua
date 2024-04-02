@@ -29,11 +29,12 @@ pluginKeys.cmp = function(cmp)
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        
+
         ["<CR>"] = cmp.mapping({
             i = function(fallback)
                 if cmp.visible() and cmp.get_active_entry() then
                     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+
                 else
                     fallback()
                 end
@@ -54,11 +55,12 @@ pluginKeys.cmp = function(cmp)
 
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
-                if #cmp.get_entries() == 1 then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-                else
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-                end
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                -- if #cmp.get_entries() == 1 then
+                --     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+                -- else
+                --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                -- end
             elseif has_words_before() then
                 cmp.complete()
                 if #cmp.get_entries() == 1 then
