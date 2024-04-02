@@ -18,10 +18,31 @@ pluginKeys.cmp = function(cmp)
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
     end
     return {
-        -- 上一个
-        ["<up>"]   = cmp.mapping.select_prev_item(),
-        -- 下一个
-        ["<down>"] = cmp.mapping.select_next_item(),
+        -- -- 上一个
+        -- ["<up>"]   = cmp.mapping.select_prev_item(),
+        -- -- 下一个
+        -- ["<down>"] = cmp.mapping.select_next_item(),
+
+        ["<up>"] = cmp.mapping(function(fallback)
+            if cmp.visible() and has_words_before() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<down>"] = cmp.mapping(function(fallback)
+            if cmp.visible() and has_words_before() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+
+
+
+
         -- 出现补全
         ["<C -,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- 取消
