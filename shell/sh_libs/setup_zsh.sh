@@ -14,7 +14,7 @@ alias nvimrc="cd ~/.config/nvim"
 alias cat="batcat --style=plain"
 
 alias fd="fdfind -i"
-alias rg="rg --ignore-case -p"
+alias rg="rg --ignore-case"
 
 alias exa="exa --icons"
 alias tre="exa --long --tree --level=3 --ignore-glob='__pycache__'"
