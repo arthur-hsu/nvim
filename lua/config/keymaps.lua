@@ -1,4 +1,4 @@
---    Modes
+-- Modes
 -- normal_mode       = "n",
 -- insert_mode       = "i",
 -- visual_mode       = "v",
