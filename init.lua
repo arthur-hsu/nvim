@@ -8,7 +8,7 @@ end
 
 local ver = vim.version()  -- Correctly fetch version information
 -- You need to use `ver.minor` instead of `vim.minor` since the version info is stored in `ver`
-if ver.minor > 9 then
+if ver.minor < 9 then
     if vim.g.vscode then
         -- VSCode extension
         require "config.options"
