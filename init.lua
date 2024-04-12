@@ -6,18 +6,19 @@ elseif vim.loop.os_uname().sysname == 'Darwin' then
 --     vim.g.python3_host_prog= "/home/arthur/.pyenv/versions/3.11.7/bin/python"
 end
 
-local ver = vim.version()  -- Correctly fetch version information
--- You need to use `ver.minor` instead of `vim.minor` since the version info is stored in `ver`
-if ver.minor < 9 then
+local ver = vim.version()
+-- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
+
+if ver.minor >= 9 then
     if vim.g.vscode then
         -- VSCode extension
         require "config.options"
     else
         -- ordinary Neovim
-        require "config.diagnostic"
         require "config.lazy"
-        require "config.keymaps"
         require "config.options"
+        require "config.keymaps"
+        require "config.diagnostic"
         vim.cmd("TransparentEnable")
     end
 else
