@@ -8,7 +8,7 @@ end
 
 local ver = vim.version()  -- Correctly fetch version information
 -- You need to use `ver.minor` instead of `vim.minor` since the version info is stored in `ver`
-if ver.minor > 10 then
+if ver.minor > 9 then
     if vim.g.vscode then
         -- VSCode extension
         require "config.options"
@@ -42,5 +42,5 @@ else
     keymap("i", "<C-s>", "<esc>:w<CR>", opts)
     keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
     cmd('filetype plugin indent on')
-    cmd('colorscheme habamax')
+    -- cmd('colorscheme habamax')
 end
