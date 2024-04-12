@@ -43,5 +43,6 @@ else
     keymap("i", "<C-s>", "<esc>:w<CR>", opts)
     keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
     cmd('filetype plugin indent on')
+    cmd('set nu! rnu!')
     -- cmd('colorscheme habamax')
 end
