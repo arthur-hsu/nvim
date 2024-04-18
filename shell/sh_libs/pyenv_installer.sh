@@ -4,7 +4,7 @@ pyenv update
 cat <<'EOF' | tee -a ~/.zshrc
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 source $(pyenv root)/completions/pyenv.zsh
 EOF
 
