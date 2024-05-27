@@ -59,7 +59,13 @@ return {
                         .. "."
                         .. vim.version().patch
                     local plugins = "             " .. stats.count .. "plugins        " .. ms .. "ms"
-                    local datetime = os.date(" %Y/%m/%d        %H:%M            %a")
+                    os.setlocale("en_US.UTF-8")
+                    local day = os.date("%Y/%m/%d")
+                    local now = os.date("%H:%M")
+                    local weekday = os.date("%A")
+                    local datetime = " " .. day .. "         " .. now .. "            " .. weekday
+                    
+                    -- local datetime = os.date(" %Y/%m/%d        %H:%M            %a")
                     local footer = version .. plugins .. '\n \n'..datetime  .. "\n"
                     dashboard.section.footer.val = footer
                     pcall(vim.cmd.AlphaRedraw)
