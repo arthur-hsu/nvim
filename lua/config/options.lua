@@ -152,8 +152,22 @@ opt.autowrite          = true
 -- 从'iskeyword'选项中移除'.'
 opt.iskeyword:remove('.')
 
+-- 允許markdown文件中的標示符號轉譯
+opt.conceallevel       = 3
 
+-- 在normal和visual模式下隱藏標示符號
+opt.concealcursor      = 'nv'
 
+-- 設置guicursor
+opt.guicursor:append("n-v-c:blinkon500-blinkoff500")
+opt.guicursor:append("i-ci:ver40-iCursor-blinkon500-blinkoff500")
+opt.guicursor:append("r-cr-o:hor20-blinkon500-blinkoff500")
+-- vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+--   callback = function () vim.lsp.inlay_hint(true) end,
+-- })
+-- vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+--   callback = function () vim.lsp.inlay_hint(false) end,
+-- })
 
 -- 设置文件格式为unix
 -- opt.fileformat         = "unix"

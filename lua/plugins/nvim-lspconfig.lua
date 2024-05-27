@@ -42,15 +42,17 @@ return {
                                 diagnosticSeverityOverrides = {
                                     --typeCheckingMode = 'off',
                                     --reportUndefinedVariable = "none",
-                                    reportMissingImports       = "none",
-                                    reportUnusedVariable       = "none",
-                                    reportUnboundVariable      = "none",
-                                    reportGeneralTypeIssues    = "none",
-                                    reportOptionalMemberAccess = "none",
-                                    reportArgumentType         = "none",
-                                    reportOperatorIssue        = "none",
-                                    reportOptionalSubscript    = "none",
-                                    reportOptionalIterable     = "none",
+                                    reportMissingImports             = "none",
+                                    reportUnusedVariable             = "none",
+                                    reportUnboundVariable            = "none",
+                                    reportGeneralTypeIssues          = "none",
+                                    reportOptionalMemberAccess       = "none",
+                                    reportArgumentType               = "none",
+                                    reportOperatorIssue              = "none",
+                                    reportOptionalSubscript          = "none",
+                                    reportOptionalIterable           = "none",
+                                    reportIncompatibleMethodOverride = "none",
+                                    reportCallIssue                  = "none"
                                 }
                             }
                         }
