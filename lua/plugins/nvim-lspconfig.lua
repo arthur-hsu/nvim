@@ -52,7 +52,8 @@ return {
                                     reportOptionalSubscript          = "none",
                                     reportOptionalIterable           = "none",
                                     reportIncompatibleMethodOverride = "none",
-                                    reportCallIssue                  = "none"
+                                    reportCallIssue                  = "none",
+                                    reportPrivateImportUsage         = "none",
                                 }
                             }
                         }
