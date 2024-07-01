@@ -22,6 +22,8 @@ alias ls="exa -s type"
 alias l="exa -s type -l"
 alias ll="exa -all -l -s type"
 alias top="bpytop"
+alias d="docker"
+alias dc="docker-compose"
 
 activate(){
     pyenv activate "$1"
