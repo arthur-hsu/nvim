@@ -29,19 +29,18 @@ return {
                 end,
             })
         end
-        local builtin = require('telescope.builtin')
         local wk = require("which-key")
-        wk.register({
-            ["<leader>f"] = {
-                name = "find",
-                f = { "<cmd>Telescope find_files<cr>",                                 "Find File" },
-                r = { "<cmd>Telescope oldfiles<cr>",                                   "Open Recent File" },
-                n = { "<cmd>enew<cr>",                                                 "New File" },
-                g = { "<cmd>Telescope live_grep<cr>",                                  "Grep File" },
-                b = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Open Buffer" },
-                h = { "<cmd>Telescope help_tags<cr>",                                  "Help Tags" },
-            },
-        })
+        wk.add(
+            {
+                { "<leader>f", group = "find" },
+                { "<leader>fb", "<cmd>Telescope file_browser path=%:p:help select_buffer=true<cr>", desc = "Open Buffer" },
+                { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+                { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep File" },
+                { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+                { "<leader>fn", "<cmd>enew<cr>", desc = "New File" },
+                { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
+            }
+        )
 
         local actions    = require("telescope.actions")
         local fb_actions = require "telescope._extensions.file_browser.actions"

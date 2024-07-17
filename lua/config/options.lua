@@ -156,7 +156,7 @@ opt.iskeyword:remove('.')
 opt.conceallevel       = 3
 
 -- 在normal和visual模式下隱藏標示符號
-opt.concealcursor      = 'nv'
+opt.concealcursor      = 'n'
 
 -- 設置guicursor
 opt.guicursor:append("n-v-c:blinkon500-blinkoff500")

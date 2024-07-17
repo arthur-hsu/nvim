@@ -49,25 +49,7 @@ return     {
                 -- fg = '#b3b8f5',
             },
         })
-        -- define a variable to store the current state of the cursorword highlight
-        local cursorword_highlight_enabled = true
-
-        -- Toggle the cursorword highlight
-        function ToggleCursorWordHighlight()
-            if cursorword_highlight_enabled then
-                -- If the current state is enabled, then execute the disable command
-                vim.cmd('CursorwordDisable')
-                cursorword_highlight_enabled = false
-            else
-                -- Else, execute the enable command
-                vim.cmd('CursorwordEnable')
-                cursorword_highlight_enabled = true
-            end
-        end
-        -- Register the `CursorwordToggle` command
-        vim.api.nvim_create_user_command('CursorwordToggle', ToggleCursorWordHighlight, {})
-        vim.cmd('CursorwordToggle')
-
+        vim.cmd('Cursorword disable')
         end
 }
 

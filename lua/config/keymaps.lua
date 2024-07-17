@@ -69,7 +69,7 @@ keymap("n", "<F6>",       "<cmd>DiffviewFileHistoryToggle %<CR>", opts)
 keymap("n", "<F7>",       "<cmd>Telescope undo<cr>",              opts)
 keymap("n", "<F8>",       "<cmd>TroubleToggle<cr>",               opts)
 keymap('n', "<F9>",       "<ESC>A<CR><ESC>:Pastify<CR>",          opts)
-keymap('n', "<F10>",      "<cmd>CursorwordToggle<CR>",            opts)
+keymap('n', "<F10>",      "<cmd>Cursorword toggle<CR>",            opts)
 keymap("n", "<F12>",      "<cmd>DiffviewOpen<CR>",                opts)
 -- keymap("n", "<F12>", ":StartupTime<CR>",opts)
 
