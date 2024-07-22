@@ -12,7 +12,7 @@ function M.config()
     require'nvim-treesitter.configs'.setup {
         auto_install     = true,
         sync_install     = true,
-        ensure_installed = {"python","bash","json",'vimdoc','markdown', 'markdown_inline','lua','regex'}, -- or all
+        ensure_installed = {"python","bash","json","vim","vimdoc","markdown", "markdown_inline","lua","regex"}, -- or all
         highlight = {
             enable = true,
         },
