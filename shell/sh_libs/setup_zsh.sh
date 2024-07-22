@@ -57,6 +57,7 @@ cp ~/.config/nvim/shell/sh_libs/.p10k.zsh ~
 
 cat <<'EOF' | sudo tee -a ~/.zshrc
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:/sbin
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 EOF
