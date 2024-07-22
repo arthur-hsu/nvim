@@ -1,4 +1,13 @@
 #!/usr/bin/sh
+sudo apt update
+sudo apt install -y gpg
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+sudo apt update
+sudo apt install -y eza
+
 sudo apt install -y zsh
 # 安装 Oh My Zsh
 echo 'y'| sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -16,11 +25,11 @@ alias cat="batcat --style=plain"
 alias fd="fdfind -i"
 alias rg="rg --ignore-case"
 
-alias exa="exa --icons"
-alias tre="exa --long --tree --level=3 --ignore-glob='__pycache__'"
-alias ls="exa -s type"
-alias l="exa -s type -l"
-alias ll="exa -all -l -s type"
+alias eza="eza --icons"
+alias tre="eza --long --tree --level=3 --ignore-glob='__pycache__'"
+alias ls="eza -s type"
+alias l="eza -s type -l"
+alias ll="eza -all -l -s type"
 alias top="bpytop"
 alias d="docker"
 alias dc="docker-compose"
