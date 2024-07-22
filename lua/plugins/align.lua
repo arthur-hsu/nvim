@@ -8,6 +8,8 @@ return {
             xmap ga <Plug>(EasyAlign)
             nmap ga <Plug>(EasyAlign)
             ]])
+            -- vim.g.easy_align_ignore_groups = { 'Comment', 'String' }
+            vim.g.easy_align_ignore_groups = { 'Comment' }
         end
     },
     {

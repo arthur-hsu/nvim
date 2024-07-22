@@ -16,6 +16,7 @@ return{
                 require('ultimate-autopair').setup({
                 -- multi=false,
                 tabout={multi = true},
+                pair_cmap=false,
                 -- extensions = {
                 --     alpha= { no_python = true},
                 -- },
