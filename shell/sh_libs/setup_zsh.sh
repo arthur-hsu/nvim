@@ -38,6 +38,10 @@ activate(){
     pyenv activate "$1"
     export pypath=$(pyenv which python)
 }
+ifip() {
+    ifconfig | awk 'BEGIN { iface="" } /^[a-z]/ { iface=$1 } /inet / { print iface "\n" $0 "\n" }'
+}
+
 EOF
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
