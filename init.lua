@@ -31,6 +31,8 @@ else
     opt.foldcolumn = "0"
     opt.signcolumn = "no"
     opt.laststatus = 0
+    opt.writebackup = false
+    opt.swapfile = false
     keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
     keymap("n", "<TAB>",   ">>",  opts)
     keymap("n", "<S-TAB>", "<<",  opts)

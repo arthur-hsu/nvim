@@ -29,6 +29,9 @@ opt.whichwrap          = "b,s,<,>,[,],h,l"
 -- 禁用交换文件
 opt.swapfile           = false
 
+-- 禁用寫入備份文件
+opt.writebackup        = false
+
 -- 启用真彩色支持
 opt.termguicolors      = true
 
