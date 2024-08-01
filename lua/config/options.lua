@@ -29,6 +29,9 @@ opt.whichwrap          = "b,s,<,>,[,],h,l"
 -- 禁用交换文件
 opt.swapfile           = false
 
+-- 禁用寫入備份文件
+opt.writebackup        = false
+
 -- 启用真彩色支持
 opt.termguicolors      = true
 
@@ -156,7 +159,7 @@ opt.iskeyword:remove('.')
 opt.conceallevel       = 3
 
 -- 在normal和visual模式下隱藏標示符號
-opt.concealcursor      = 'n'
+opt.concealcursor      = 'nc'
 
 -- 設置guicursor
 opt.guicursor:append("n-v-c:blinkon500-blinkoff500")
