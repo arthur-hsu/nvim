@@ -156,10 +156,10 @@ opt.autowrite          = true
 opt.iskeyword:remove('.')
 
 -- 允許markdown文件中的標示符號轉譯
-opt.conceallevel       = 3
+opt.conceallevel       = 1
 
 -- 在normal和visual模式下隱藏標示符號
-opt.concealcursor      = 'nc'
+opt.concealcursor      = 'n'
 
 -- 設置guicursor
 opt.guicursor:append("n-v-c:blinkon500-blinkoff500")
