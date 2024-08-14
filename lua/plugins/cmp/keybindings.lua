@@ -83,9 +83,13 @@ pluginKeys.cmp = function(cmp)
                 --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
                 -- end
             elseif has_words_before() then
-                cmp.complete()
-                if #cmp.get_entries() == 1 then
-                    cmp.confirm({ select = true })
+                if cmp.visible() then
+                    cmp.complete()
+                    if #cmp.get_entries() == 1 then
+                        cmp.confirm({ select = true })
+                    end
+                else
+                    fallback()
                 end
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()

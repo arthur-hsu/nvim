@@ -35,10 +35,10 @@ return{
                 --     {"'''","'''",newline=true,ft={'python'}},
                 -- },
 
-                config_internal_pairs={
-                    {'`','`', suround=true, cond=function(fn) return not fn.in_lisp() or fn.in_string() end, alpha=true,nft={'tex','latex'},multiline=false},
-                    {'"','"', alpha = true },
-                }
+                -- config_internal_pairs={
+                --     {'`','`', suround=true, cond=function(fn) return not fn.in_lisp() or fn.in_string() end, alpha=true,nft={'tex','latex'},multiline=false},
+                --     {'"','"', alpha = true },
+                -- }
             })
             local function ls_name_from_event(event)
                 return event.entry.source.source.client.config.name
