@@ -51,7 +51,9 @@ return {
                     i = {
                         ["<A-s>"] = flash,
                     },
-                    n = { s = flash },
+                    n = {
+                        ["s"] = flash
+                    },
                 },
                 layout_strategy = "flex",
                 layout_config = {
