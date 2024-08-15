@@ -5,15 +5,19 @@ return {
         dependencies = {
             "kevinhwang91/nvim-hlslens",
             config = function()
+                vim.api.nvim_set_hl(0, "HlSearchLens", { link = "DiagnosticVirtualTextInfo" })
+                vim.api.nvim_set_hl(0, "HlSearchLensNear", { link = "BufferLineIndicatorSelected" })
                 require("hlslens").setup({
+                    -- override_lens = function(render, posList, nearest, idx, relIdx)
+                    -- end,
                     override_lens = function(render, posList, nearest, idx, relIdx)
                         local sfw = vim.v.searchforward == 1
                         local indicator, text, chunks
                         local absRelIdx = math.abs(relIdx)
                         if absRelIdx > 1 then
-                            indicator = ('%d%s'):format(absRelIdx, sfw ~= (relIdx > 1) and '▲' or '▼')
+                            indicator = ('%d%s'):format(absRelIdx, sfw ~= (relIdx > 1) and ' ▲' or ' ▼')
                         elseif absRelIdx == 1 then
-                            indicator = sfw ~= (relIdx == 1) and '▲' or '▼'
+                            indicator = sfw ~= (relIdx == 1) and ' ▲' or ' ▼'
                         else
                             indicator = ''
                         end
@@ -37,6 +41,41 @@ return {
                         require("scrollbar.handlers.search").handler.show(plist.start_pos)
                     end,
                 })
+
+                local hlslens = require('hlslens')
+                if hlslens then
+                    local overrideLens = function(render, posList, nearest, idx, relIdx)
+                        local _ = relIdx
+                        local lnum, col = unpack(posList[idx])
+
+                        local text, chunks
+                        if nearest then
+                            text = ('  %d/%d'):format(idx, #posList)
+                            chunks = {{' ', 'Ignore'}, {text, 'VM_Extend'}}
+                        else
+                            text = ('  %d'):format(idx)
+                            chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
+                        end
+                        render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+                    end
+                    local lensBak
+                    local config = require('hlslens.config')
+                    local gid = vim.api.nvim_create_augroup('VMlens', {})
+                    vim.api.nvim_create_autocmd('User', {
+                        pattern = {'visual_multi_start', 'visual_multi_exit'},
+                        group = gid,
+                        callback = function(ev)
+                            if ev.match == 'visual_multi_start' then
+                                lensBak = config.override_lens
+                                config.override_lens = overrideLens
+                            else
+                                config.override_lens = lensBak
+                            end
+                            hlslens.start()
+                        end
+                    })
+                end
+
 
                 -- vim.cmd([[
                 -- augroup scrollbar_search_hide
