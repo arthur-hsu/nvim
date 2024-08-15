@@ -78,9 +78,11 @@ return {
                 },
                 excluded_buftypes = {
                     "terminal",
+                    "nofile"
                 },
                 excluded_filetypes = {
-                    "DiffviewFilePanel",
+                    "DiffviewFiles",
+                    "DiffviewFileHistory",
                     "TelescopePrompt",
                     "cmp_docs",
                     "cmp_menu",

@@ -11,7 +11,7 @@ return{
         'altermo/ultimate-autopair.nvim',
         event={'InsertEnter','CmdlineEnter'},
         branch='development',
-        enabled=false,
+        -- enabled=false,
         config = function ()
             require('ultimate-autopair').setup({
                 -- multi=false,
