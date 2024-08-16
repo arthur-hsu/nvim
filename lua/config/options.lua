@@ -152,7 +152,7 @@ opt.iskeyword:remove('.')
 opt.conceallevel       = 1
 
 -- 在normal和visual模式下隱藏標示符號
-opt.concealcursor      = 'n'
+opt.concealcursor      = 'nc'
 
 -- 設置guicursor
 vim.o.guicursor = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor-blinkon500-blinkoff500,r-cr-o:hor20-blinkon500-blinkoff500"

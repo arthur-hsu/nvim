@@ -12,8 +12,11 @@ return {
     { 'dstein64/vim-startuptime', event="VimEnter", enabled = false, },
     {
         "keaising/im-select.nvim",
+        event = "VeryLazy",
         config = function()
-            require("im_select").setup()
+            require("im_select").setup({
+                set_previous_events = {},
+            })
         end,
     },
     {

@@ -109,16 +109,34 @@ vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d',       vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d',       vim.diagnostic.goto_next)
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
+        local bufnr = ev.buf
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        vim.bo[bufnr].bufhidden = 'hide'
+
         -- Enable completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        local function desc(description)
+            return { noremap = true, silent = true, buffer = bufnr, desc = description }
+        end
+
+        local range_formatting = function()
+            local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+            local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+            vim.lsp.buf.format({
+                range = {
+                    ["start"] = { start_row, 0 },
+                    ["end"]   = { end_row, 0 },
+                },
+                async = true,
+            })
+        end
 
         local lsp_opts = { buffer = ev.buf }
-        -- Buffer local mappings.
         vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
         vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references theme=ivy<CR>",                           lsp_opts)
         vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition <CR>",                                     lsp_opts)
@@ -132,9 +150,39 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n',          '<space>sf', "<CMD>Lspsaga finder<CR>",                                               lsp_opts)
         vim.keymap.set({ 'n', 'v' }, '<SPACE>ca', "<CMD>Lspsaga code_action<CR>",                                          lsp_opts)
         vim.keymap.set('n',          '<space>f',  function() vim.lsp.buf.format { async = true } end,                      lsp_opts)
+        vim.keymap.set('v',          '<space>f',  range_formatting,                                                        {buffer = ev.buf, desc = '[lsp] Range Formatting' })
+
+        if client.server_capabilities.inlayHintProvider then
+            vim.keymap.set('n', '<space>h', function()
+                -- local current_setting = vim.lsp.inlay_hint.is_enabled()
+                local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+                vim.lsp.inlay_hint.enable(not is_enabled, {bufnr = bufnr})
+            end, desc('[lsp] toggle inlay hints'))
+        end
+
+        -- Auto-refresh code lenses
+        if not client then
+            return
+        end
+        local function buf_refresh_codeLens()
+            vim.schedule(function()
+                if client.server_capabilities.codeLensProvider then
+                    vim.lsp.codelens.refresh()
+                    return
+                end
+            end)
+        end
+        local group = vim.api.nvim_create_augroup(string.format('lsp-%s-%s', bufnr, client.id), {})
+        if client.server_capabilities.codeLensProvider then
+            vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost', 'TextChanged' }, {
+                group = group,
+                callback = buf_refresh_codeLens,
+                buffer = bufnr,
+            })
+            buf_refresh_codeLens()
+        end
     end,
 })
-
 
 
 

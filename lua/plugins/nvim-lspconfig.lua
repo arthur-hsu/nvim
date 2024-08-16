@@ -28,7 +28,7 @@ return {
                     init_options = {
                         settings = {
                             lint = {
-                                ignore = {"F541"}
+                                ignore = { "F541", "F401" }
                             }
                         }
                     }
@@ -64,7 +64,7 @@ return {
                         python={
                             analysis = {
                                 typeCheckingMode = 'basic',
-                                ignore = { '*' },
+                                -- ignore = { '*' },
                                 diagnosticSeverityOverrides = {
                                     reportUndefinedVariable          = "none",
                                     reportUnusedImport               = "none",
