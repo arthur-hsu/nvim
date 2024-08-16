@@ -19,6 +19,7 @@ if ver.minor >= 9 then
         require "config.options"
         require "config.keymaps"
         require "config.diagnostic"
+        require "config.autocmd"
         vim.cmd("TransparentEnable")
     end
 else

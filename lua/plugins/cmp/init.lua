@@ -51,7 +51,7 @@ return {
                 { name = 'buffer',group_index = 3 },
             }),
             window = {
-                completion = cmp.config.window.bordered(),
+                completion    = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered()
             },
             mapping = require("plugins.cmp.keybindings").cmp(cmp),
@@ -74,7 +74,7 @@ return {
             },
             formatting = {
                 expandable_indicator = true,
-                fields = { cmp.ItemField.Abbr, cmp.ItemField.Kind },
+                fields = { cmp.ItemField.Abbr, cmp.ItemField.Kind, cmp.ItemField.Menu },
                 -- fields = { cmp.ItemField.Abbr },
                 format = require("lspkind").cmp_format({
                     with_text = true, -- do not show text alongside icons

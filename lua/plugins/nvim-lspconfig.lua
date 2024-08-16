@@ -13,6 +13,7 @@ return {
             -- options for vim.diagnostic.config()
             -- Automatically format on save
             autoformat = true,
+            single_file_support = true,
             -- options for vim.lsp.buf.format
             -- `bufnr` and `filter` is handled by the LazyVim formatter,
             -- but can be also overriden when specified
@@ -23,25 +24,50 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
-                -- ruff_lsp = {},
+                ruff = {
+                    init_options = {
+                        settings = {
+                            lint = {
+                                ignore = {"F541"}
+                            }
+                        }
+                    }
+                },
                 pyright = {
-
-                    -- capabilities = {
-                    --     textDocument = {
-                    --         publishDiagnostics = {
-                    --             tagSupport = {
-                    --                 valueSet = {2},
-                    --             },
-                    --         },
-                    --     },
+                    capabilities = {
+                        textDocument = {
+                            publishDiagnostics = {
+                                tagSupport = {
+                                    valueSet = {2},
+                                },
+                            },
+                        },
+                    },
+                    -- handlers = {
+                    --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+                    --         local new_diagnostics = {}
+                    --         for _, diagnostic in ipairs(result.diagnostics) do
+                    --             if not string.find(diagnostic.message, "is not accessed") then
+                    --                 table.insert(new_diagnostics, diagnostic)
+                    --             end
+                    --         end
+                    --         -- 更新结果中的诊断列表
+                    --         result.diagnostics = new_diagnostics
+                    --         -- 调用默认的处理函数
+                    --         vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
+                    --     end,
                     -- },
                     settings={
+                        pyright = {
+                            disableOrganizeImports = true,
+                        },
                         python={
-
-                            analysis={
+                            analysis = {
+                                typeCheckingMode = 'basic',
+                                ignore = { '*' },
                                 diagnosticSeverityOverrides = {
-                                    --typeCheckingMode = 'off',
-                                    --reportUndefinedVariable = "none",
+                                    reportUndefinedVariable          = "none",
+                                    reportUnusedImport               = "none",
                                     reportMissingImports             = "none",
                                     reportUnusedVariable             = "none",
                                     reportUnboundVariable            = "none",
@@ -54,6 +80,7 @@ return {
                                     reportIncompatibleMethodOverride = "none",
                                     reportCallIssue                  = "none",
                                     reportPrivateImportUsage         = "none",
+                                    reportAttributeAccessIssue       = "none",
                                 }
                             }
                         }
@@ -102,10 +129,31 @@ return {
                 capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
                 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
                 capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
+                local function dump(o)
+                    if type(o) == 'table' then
+                        local s = '{ '
+                        for k,v in pairs(o) do
+                            if type(k) ~= 'number' then k = '"'..k..'"' end
+                            s = s .. '['..k..'] = ' .. dump(v) .. ','
+                        end
+                        return s .. '} '
+                    else
+                        return tostring(o)
+                    end
+                end
 
                 local function setup(server)
                     local server_opts = servers[server] or {}
+                    if server == 'ruff' then
+                        -- Disable hover in favor of Pyright
+                        capabilities.hoverProvider = false
+                        -- print(dump(capabilities))
+                    elseif server == 'pyright' then
+                        capabilities.textDocument.completion.completionItem.tagSupport.valueSet= { 2 }
+                    end
                     server_opts.capabilities = capabilities
+
+
                     if opts.setup[server] then
                         if opts.setup[server](server, server_opts) then
                             return

@@ -3,13 +3,6 @@ local opt = vim.opt
 local cmd = vim.cmd
 local g   = vim.g
 
--- Restore cursor position
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-    pattern = { "*" },
-    callback = function()
-        vim.api.nvim_exec('silent! normal! g`"zv', false)
-    end,
-})
 
 -- 设置退格键的行为
 opt.backspace          = {'indent', 'eol', 'start'}
@@ -162,14 +155,13 @@ opt.conceallevel       = 1
 opt.concealcursor      = 'n'
 
 -- 設置guicursor
-opt.guicursor:append("n-v-c:blinkon500-blinkoff500")
-opt.guicursor:append("i-ci:ver40-iCursor-blinkon500-blinkoff500")
-opt.guicursor:append("r-cr-o:hor20-blinkon500-blinkoff500")
+vim.o.guicursor = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor-blinkon500-blinkoff500,r-cr-o:hor20-blinkon500-blinkoff500"
+
 -- vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
---   callback = function () vim.lsp.inlay_hint(true) end,
+--   callback = function () vim.lsp.inlay_hint(0,true) end,
 -- })
 -- vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
---   callback = function () vim.lsp.inlay_hint(false) end,
+--   callback = function () vim.lsp.inlay_hint(0,false) end,
 -- })
 
 -- 设置文件格式为unix

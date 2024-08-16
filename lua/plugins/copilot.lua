@@ -2,8 +2,8 @@ return{
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
-        event = { "BufReadPost", "BufNewFile" },
-        -- event = "InsertEnter",
+        -- event = { "BufReadPost", "BufNewFile" },
+        event = "InsertEnter",
         config = function()
             require("copilot").setup({
                 panel = {
@@ -101,7 +101,7 @@ return{
     {
         "zbirenbaum/copilot-cmp",
         event = { "InsertEnter", "LspAttach" },
-        
+
         config = function ()
             require("copilot_cmp").setup({
                 fix_pairs = true
