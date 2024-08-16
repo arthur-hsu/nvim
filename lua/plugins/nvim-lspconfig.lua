@@ -28,7 +28,13 @@ return {
                     init_options = {
                         settings = {
                             lint = {
-                                ignore = { "F541", "F401" }
+                                ignore = {
+                                    "F541",
+                                    "F401",
+                                    "E401",
+                                    "E701",
+                                    "F841",
+                                }
                             }
                         }
                     }
@@ -43,6 +49,7 @@ return {
                             },
                         },
                     },
+                    -- for Disable "XXX" is not accessed
                     -- handlers = {
                     --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
                     --         local new_diagnostics = {}

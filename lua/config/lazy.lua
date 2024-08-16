@@ -12,10 +12,20 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 -- Configure lazy.nvim
+
+local gen_spec_list = function ()
+        local tbl = {}
+        local os_name = vim.loop.os_uname().sysname
+        table.insert(tbl, { import = "plugins" })
+        if os_name == "Darwin" then
+            table.insert(tbl, { import = "macos" })
+        end
+        return tbl
+end
+local spec_list = gen_spec_list()
+
 require("lazy").setup({
-    spec = {
-        { import = "plugins" },
-    },
+    spec = spec_list,
     concurrency = 24,
     defaults = { lazy = true, version = nil },
     install = {
