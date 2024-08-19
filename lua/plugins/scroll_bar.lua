@@ -97,6 +97,10 @@ return {
                         color_nr  = nil, -- cterm
                         highlight = "Search",
                     },
+                    Info = {
+                        text = {""},
+                    },
+                    Hint = {text = {""}}
                 },
                 excluded_buftypes = {
                     "terminal",
@@ -113,7 +117,7 @@ return {
                 },
                 handlers = {
                     cursor     = true,
-                    diagnostic = false,
+                    diagnostic = true,
                     gitsigns   = true, -- Requires gitsigns
                     handle     = true,
                     search     = true, -- Requires hlslens
