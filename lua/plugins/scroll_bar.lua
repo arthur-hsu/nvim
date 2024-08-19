@@ -90,17 +90,16 @@ return {
                 marks = {
                     Search = {
                         text      = { "-" },
-                        priority  = 1,
-                        gui       = nil,
-                        color     = "#31a8ff",
-                        cterm     = nil,
-                        color_nr  = nil, -- cterm
                         highlight = "Search",
                     },
                     Info = {
-                        text = {""},
+                        text      = { " " },
+                        highlight = "CursorColumn",
                     },
-                    Hint = {text = {""}}
+                    Hint = {
+                        text      = { " " },
+                        highlight = "CursorColumn",
+                    }
                 },
                 excluded_buftypes = {
                     "terminal",
