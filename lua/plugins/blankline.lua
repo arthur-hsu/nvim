@@ -48,7 +48,7 @@ return {
             -- indent = { highlight = highlight, char = "▏" ,},
             indent = { highlight = highlight, char = "│" ,},
             scope ={
-                enabled          = true,
+                enabled          = false,
                 highlight        = { "CurrentScope"},
                 char             = "┃", -- ┃ ║
                 show_start       = false,

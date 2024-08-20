@@ -77,12 +77,12 @@ return {
                 end
 
 
-                -- vim.cmd([[
-                -- augroup scrollbar_search_hide
-                -- autocmd!
-                -- autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
-                -- augroup END
-                -- ]])
+                vim.cmd([[
+                augroup scrollbar_search_hide
+                autocmd!
+                autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
+                augroup END
+                ]])
             end,
         },
         config = function()
@@ -123,8 +123,8 @@ return {
                     ale        = false, -- Requires ALE
                 },
             })
-            require("scrollbar.handlers.gitsigns").setup()
             require("scrollbar.handlers.search").setup()
+            require("scrollbar.handlers.gitsigns").setup()
         end,
     }
 }
