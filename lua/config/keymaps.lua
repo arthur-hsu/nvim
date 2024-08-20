@@ -14,7 +14,6 @@
 -- Shorten function name
 local keymap    = vim.api.nvim_set_keymap
 
-
 -- Custom Commands
 vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
     local view = require("diffview.lib").get_current_view()
@@ -47,6 +46,7 @@ vim.api.nvim_create_user_command('Msg', function () require('telescope').extensi
 
 
 
+
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
@@ -57,21 +57,20 @@ end
 
 
 
-keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",             opts)
-keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                        opts)
-keymap("n", "<leader>mc", "<cmd>Mason<CR>",                       opts)
-keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",     opts)
-keymap("n", "<F2>",       "<cmd>DiffviewFileHistoryToggle %<CR>", opts)
-keymap("n", "<F3>",       "<cmd>Telescope<cr>",                   opts)
-keymap('n', '<F4>',       '<Cmd>TodoTelescope<CR>',               opts)
-keymap("n", "<F5>",       ":RunCode<CR>",                         opts)
-keymap("n", "<F6>",       "<cmd>DiffviewFileHistoryToggle %<CR>", opts)
-keymap("n", "<F7>",       "<cmd>Telescope undo<cr>",              opts)
-keymap("n", "<F8>",       "<cmd>DiffviewOpen<CR>",                opts)
-keymap('n', "<F9>",       "<cmd>Cursorword toggle<CR>",           opts)
-keymap('n', "<F10>",      "<ESC>A<CR><ESC>:Pastify<CR>",          opts)
-keymap("n", "<F12>",      "<cmd>TroubleToggle<cr>",               opts)
--- keymap("n", "<F12>", ":StartupTime<CR>",opts)
+keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",                                         opts )
+keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                                                    opts )
+keymap("n", "<leader>mc", "<cmd>Mason<CR>",                                                   opts )
+keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",                                 opts )
+keymap("n", "<F2>",       "<cmd>Telescope file_browser path=%:p:help select_buffer=true<cr>", opts )
+keymap("n", "<F3>",       "<cmd>Telescope<cr>",                                               opts )
+keymap('n', '<F4>',       '<cmd>TodoTelescope<CR>',                                           opts )
+keymap("n", "<F5>",       "<cmd>RunCode<CR>",                                                 opts )
+keymap("n", "<F6>",       "<cmd>Telescope undo<cr>",                                          opts )
+keymap("n", "<F7>",       "<cmd>DiffviewFileHistoryToggle %<CR>",                             opts )
+keymap("n", "<F8>",       "<cmd>DiffviewToggle<CR>",                                          opts )
+keymap('n', "<F9>",       "<cmd>Cursorword toggle<CR>",                                       opts )
+keymap('n', "<F10>",      "<ESC>A<CR><ESC>:Pastify<CR>",                                      opts )
+keymap("n", "<F12>",      "<cmd>Telescope diagnostics<cr>",                                   opts )
 
 keymap("n", "<TAB>",   ">>",  opts)
 keymap("n", "<S-TAB>", "<<",  opts)

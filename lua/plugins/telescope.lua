@@ -30,6 +30,7 @@ return {
             })
         end
         local wk = require("which-key")
+
         wk.add(
             {
                 { "<leader>f", group = "find" },
@@ -52,7 +53,8 @@ return {
                         ["<A-s>"] = flash,
                     },
                     n = {
-                        ["s"] = flash
+                        ["s"] = flash,
+                        ["<C-c>"] = actions.close
                     },
                 },
                 layout_strategy = "flex",
