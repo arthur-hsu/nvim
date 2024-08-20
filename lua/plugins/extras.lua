@@ -7,6 +7,7 @@ return {
         end
     },
     { 'nvim-tree/nvim-web-devicons', lazy = true, },
+    { 'echasnovski/mini.nvim', lazy=true },
     { "nathom/filetype.nvim", event = "VimEnter", },
     { 'lithammer/nvim-pylance', lazy=true, enabled = false, },
     { 'dstein64/vim-startuptime', event="VimEnter", enabled = false, },
