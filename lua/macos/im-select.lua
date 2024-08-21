@@ -7,5 +7,5 @@ return {
                 set_previous_events = {},
             })
         end,
-    },
+    }
 }
