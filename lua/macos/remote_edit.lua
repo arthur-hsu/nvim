@@ -3,8 +3,33 @@ return {
         'chipsenkbeil/distant.nvim',
         branch = 'v0.3',
         event = "VeryLazy",
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
         config = function()
-            require('distant'):setup()
+            require('distant'):setup({
+                keymap = {
+                    ui = {
+                        main = {
+                            connections = {
+                                -- kill = '<C-K>',
+                                -- toggle_info = '<C-I>'
+                            }
+                        }
+                    }
+                }
+            })
+            require('telescope').load_extension('distant')
+            local wk = require("which-key")
+
+            wk.add(
+            {
+                { "<leader>f", group = "find" },
+                { "<leader>fd", "<cmd>Telescope distant search<cr>", desc = "Open distant search" },
+            }
+            )
+
+
             -- NOTE: This is a workaround for install distant client
             -- For server install use: 
             --      ssh user@domain 'curl -L https://sh.distant.dev | sh -s -- --on-conflict overwrite'
