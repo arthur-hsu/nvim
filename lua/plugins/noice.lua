@@ -29,7 +29,10 @@ local M = {
                 -- stages = 'static',
                 timeout = 300,
                 top_down = true
-            }
+            },
+            config = function()
+                vim.notify = require("notify")
+            end
         },
         {
             "j-hui/fidget.nvim",
