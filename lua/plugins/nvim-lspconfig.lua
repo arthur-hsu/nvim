@@ -41,15 +41,6 @@ return {
                     }
                 },
                 pyright = {
-                    capabilities = {
-                        textDocument = {
-                            publishDiagnostics = {
-                                tagSupport = {
-                                    valueSet = {2},
-                                },
-                            },
-                        },
-                    },
                     -- for Disable "XXX" is not accessed
                     -- handlers = {
                     --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
@@ -158,7 +149,6 @@ return {
                     if server == 'ruff' then
                         -- Disable hover in favor of Pyright
                         capabilities.hoverProvider = false
-                        -- print(dump(capabilities))
                     elseif server == 'pyright' then
                         capabilities.textDocument.completion.completionItem.tagSupport.valueSet= { 2 }
                     end

@@ -18,8 +18,8 @@ if ver.minor >= 9 then
         require "config.lazy"
         require "config.options"
         require "config.keymaps"
-        require "config.diagnostic"
         require "config.autocmd"
+        require "config.diagnostic"
         vim.cmd("TransparentEnable")
     end
 else
