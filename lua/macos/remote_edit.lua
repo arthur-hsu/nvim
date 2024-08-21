@@ -2,6 +2,7 @@ return {
     {
         'chipsenkbeil/distant.nvim',
         branch = 'v0.3',
+        disable = true,
         event = "VeryLazy",
         dependencies = {
             'nvim-telescope/telescope.nvim',
