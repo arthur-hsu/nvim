@@ -107,17 +107,39 @@ return {
                         local accept = require("CopilotChat").config.mappings.accept_diff.normal
                         vim.api.nvim_input(accept)
                     else
-                        local quit = require("CopilotChat").config.mappings.close.normal
-                        vim.api.nvim_input(quit)
+
                         local file_path = "/tmp/copilot_commit_msg"
                         local file = io.open(file_path, "w")
                         file:write(result)
                         file:close()
+
+                        local add = "git add -A"
+                        local commit = "git commit -F " .. file_path
+                        local push = "git push"
+
+                        local cmd = ""
+
                         if not staged then
-                            vim.cmd("!git add -A")
+                            cmd = add .. " && "
                         end
-                        vim.cmd("!git commit -F " .. file_path)
-                        vim.cmd("!git push")
+                        local commit_cmd = cmd .. commit .. " && " .. push
+                        local notify = require("notify")
+                        local handle
+                        handle = vim.loop.spawn("sh", {
+                            args = { "-c", commit_cmd },
+                            stdio = { nil, nil, nil },
+                        }, function(code, signal)
+                            handle:close()
+                            if code == 0 then
+                                notify("commit success", "info", { title = "Git commit" })
+                            else
+                                notify(commit_cmd .. "\n".."commit fail, return code: " .. code .. " signal: " .. signal, "error",
+                                { title = "Git commit" })
+                            end
+                        end)
+
+                        local quit = require("CopilotChat").config.mappings.close.normal
+                        vim.api.nvim_input(quit)
                     end
                 end
 
