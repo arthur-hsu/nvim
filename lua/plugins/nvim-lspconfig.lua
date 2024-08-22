@@ -131,16 +131,22 @@ return {
                 capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
                 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
                 capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
-                local function dump(o)
-                    if type(o) == 'table' then
-                        local s = '{ '
-                        for k,v in pairs(o) do
-                            if type(k) ~= 'number' then k = '"'..k..'"' end
-                            s = s .. '['..k..'] = ' .. dump(v) .. ','
+                local function print_table(t, indent)
+                    indent = indent or 0
+                    local indentStr = string.rep("  ", indent)
+
+                    if type(t) ~= "table" then
+                        print(indentStr .. tostring(t))
+                        return
+                    end
+
+                    for key, value in pairs(t) do
+                        if type(value) == "table" then
+                            print(indentStr .. tostring(key) .. ":")
+                            print_table(value, indent + 1)
+                        else
+                            print(indentStr .. tostring(key) .. ": " .. tostring(value))
                         end
-                        return s .. '} '
-                    else
-                        return tostring(o)
                     end
                 end
 

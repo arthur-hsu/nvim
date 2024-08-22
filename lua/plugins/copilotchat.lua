@@ -88,6 +88,41 @@ return {
 
                 return result, separator_line_start, separator_line_finish, line_count
             end
+
+            local commit_callback = function(response, source, staged)
+                local bufnr = source.bufnr
+                local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+                local lines = {}
+                for line in response:gmatch("[^\r\n]+") do
+                    table.insert(lines, line)
+                end
+
+                local res = find_lines_between_separator(lines, '^```%w*$', true)
+                local result = table.concat(res, "\n")
+
+                local input = vim.fn.input(result.."\n───────────────────────────────────────────────────\n" .."auto commit?(y/n)" )
+                if string.match(input, 'y') then
+                    if string.match(buftype, 'gitcommit') then
+                        vim.cmd("!git commit -a " .. result)
+                        local accept = require("CopilotChat").config.mappings.accept_diff.normal
+                        vim.api.nvim_input(accept)
+                    else
+                        local quit = require("CopilotChat").config.mappings.close.normal
+                        vim.api.nvim_input(quit)
+                        local file_path = "/tmp/copilot_commit_msg"
+                        local file = io.open(file_path, "w")
+                        file:write(result)
+                        file:close()
+                        if not staged then
+                            vim.cmd("!git add -A")
+                        end
+                        vim.cmd("!git commit -F " .. file_path)
+                        vim.cmd("!git push")
+                    end
+                end
+
+            end
+
             local select = require("CopilotChat.select")
 
             opts.selection = function(source)
@@ -106,19 +141,6 @@ return {
             local prompts = {
                 QuickChat             = {
                     selection = select.unnamed,
-                    -- selection = function(source)
-                    --     local buftype = source.bufnr
-                    --     local filetype = source.filetype
-                    --     local filename = source.filename
-                    --     print(buftype .. ' ' .. filetype .. ' ' .. filename)
-                    --     return select.unnamed
-                    -- end,
-                    callback = function (response, source)
-                        local buftype = source.bufnr
-                        -- local filetype = source.filetype
-                        print(buftype .. ' ' ..  ' ' .. "")
-                        -- print(response)
-                    end
                 },
 
                     -- selection = select.unnamed },
@@ -136,40 +158,14 @@ return {
                 Commit = {
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     selection = select.gitdiff,
+                    callback = function (response, source)
+                        commit_callback(response, source, false)
+                    end
                 },
                 CommitStaged = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     -- prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。',
-                    callback = function(response, source)
-                        local bufnr = source.bufnr
-                        local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-                        local lines = {}
-                        for line in response:gmatch("[^\r\n]+") do
-                            table.insert(lines, line)
-                        end
-
-                        local res = find_lines_between_separator(lines, '^```%w*$', true)
-                        local result = table.concat(res, "\n")
-
-                        local input = vim.fn.input(result.."\n───────────────────────────────────────\n" .."auto commit?(y/n)" )
-                        if string.match(input, 'y') then
-                            if string.match(buftype, 'gitcommit') then
-                                vim.cmd("!git commit -a " .. result)
-                                local accept = require("CopilotChat").mappings.normal.accept_diff
-                                vim.api.nvim_input(accept)
-                            else
-                                local file_path = "/tmp/copilot_commit_msg"
-                                local file = io.open(file_path, "w")
-                                file:write(result)
-                                file:close()
-                                vim.cmd("!git add -A")
-                                vim.cmd("!git commit -F " .. file_path)
-                                vim.cmd("!git push")
-                            end
-                        end
-
-                    end,
                     selection = function(source)
                         local bufnr = source.bufnr
                         local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
@@ -178,6 +174,9 @@ return {
                         else
                             return select.gitdiff(source, true)
                         end
+                    end,
+                    callback = function (response, source)
+                        commit_callback(response, source, true)
                     end,
                 },
             }
