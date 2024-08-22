@@ -131,9 +131,9 @@ return {
                         }, function(code, signal)
                             handle:close()
                             if code == 0 then
-                                notify("commit success", "info", { title = "Git commit" })
+                                notify("commit success\n───────────────────────────────────────────────────\n".. result, "info", { title = "Git commit" })
                             else
-                                notify(commit_cmd .. "\n".."commit fail, return code: " .. code .. " signal: " .. signal, "error",
+                                notify("commit fail, return code: " .. code .. " signal: " .. signal, "error",
                                 { title = "Git commit" })
                             end
                         end)
