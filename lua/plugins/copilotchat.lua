@@ -55,6 +55,39 @@ return {
         },
 
         config = function(_,opts)
+            local function find_lines_between_separator(lines, pattern, at_least_one)
+                local line_count = #lines
+                -- print("Line count:", line_count)
+                local separator_line_start = 1
+                local separator_line_finish = line_count
+                local found_one = false
+
+                -- Find the last occurrence of the separator
+                for i = line_count, 1, -1 do -- Reverse the loop to start from the end
+                    local line = lines[i]
+                    if string.find(line, pattern) then
+                        if i < (separator_line_finish + 1) and (not at_least_one or found_one) then
+                            separator_line_start = i + 1
+                            break -- Exit the loop as soon as the condition is met
+                        end
+
+                        found_one = true
+                        separator_line_finish = i - 1
+                    end
+                end
+
+                if at_least_one and not found_one then
+                    return {}, 1, 1, 0
+                end
+
+                -- Extract everything between the last and next separator
+                local result = {}
+                for i = separator_line_start, separator_line_finish do
+                    table.insert(result, lines[i])
+                end
+
+                return result, separator_line_start, separator_line_finish, line_count
+            end
             local select = require("CopilotChat.select")
 
             opts.selection = function(source)
@@ -71,7 +104,24 @@ return {
             end
 
             local prompts = {
-                QuickChat             = {selection = select.unnamed },
+                QuickChat             = {
+                    selection = select.unnamed,
+                    -- selection = function(source)
+                    --     local buftype = source.bufnr
+                    --     local filetype = source.filetype
+                    --     local filename = source.filename
+                    --     print(buftype .. ' ' .. filetype .. ' ' .. filename)
+                    --     return select.unnamed
+                    -- end,
+                    callback = function (response, source)
+                        local buftype = source.bufnr
+                        -- local filetype = source.filetype
+                        print(buftype .. ' ' ..  ' ' .. "")
+                        -- print(response)
+                    end
+                },
+
+                    -- selection = select.unnamed },
                 QuickChatWithFiletype = {},
                 Explain               = { prompt = "/COPILOT_EXPLAIN 解釋這段代碼如何運行。" },
                 FixError              = { prompt = "/COPILOT_FIX 請解釋以上代碼中的錯誤並提供解決方案。" },
@@ -90,8 +140,44 @@ return {
                 CommitStaged = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    -- prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。',
+                    callback = function(response, source)
+                        local bufnr = source.bufnr
+                        local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+                        local lines = {}
+                        for line in response:gmatch("[^\r\n]+") do
+                            table.insert(lines, line)
+                        end
+
+                        local res = find_lines_between_separator(lines, '^```%w*$', true)
+                        local result = table.concat(res, "\n")
+
+                        local input = vim.fn.input(result.."\n───────────────────────────────────────\n" .."auto commit?(y/n)" )
+                        if string.match(input, 'y') then
+                            if string.match(buftype, 'gitcommit') then
+                                vim.cmd("!git commit -a " .. result)
+                                local accept = require("CopilotChat").mappings.normal.accept_diff
+                                vim.api.nvim_input(accept)
+                            else
+                                local file_path = "/tmp/copilot_commit_msg"
+                                local file = io.open(file_path, "w")
+                                file:write(result)
+                                file:close()
+                                vim.cmd("!git add -A")
+                                vim.cmd("!git commit -F " .. file_path)
+                                vim.cmd("!git push")
+                            end
+                        end
+
+                    end,
                     selection = function(source)
-                        return select.gitdiff(source, true)
+                        local bufnr = source.bufnr
+                        local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+                        if string.match(buftype, 'gitcommit') then
+                            return opts.selection(source)
+                        else
+                            return select.gitdiff(source, true)
+                        end
                     end,
                 },
             }
@@ -138,13 +224,15 @@ return {
                             local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
                             local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
 
-                            local msg = nil
+                            local msg       = nil
                             local selection = nil
+                            local callback  = nil
                             -- Find the item message and selection base on the choice
                             for item, body in pairs(Chat_prompts) do
                                 if item == choice then
                                     msg = body.prompt
                                     selection = body.selection
+                                    callback = body.callback
                                     break
                                 end
                             end
@@ -171,7 +259,7 @@ return {
                                 end
                             end
 
-                            require("CopilotChat").ask(Ask_msg,{ selection = selection })
+                            require("CopilotChat").ask(Ask_msg,{ selection = selection, callback = callback })
                         end)
                         return true
                     end,
