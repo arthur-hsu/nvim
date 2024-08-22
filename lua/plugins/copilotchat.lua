@@ -1,3 +1,103 @@
+local function find_lines_between_separator(lines, pattern, at_least_one)
+    local line_count = #lines
+    -- print("Line count:", line_count)
+    local separator_line_start = 1
+    local separator_line_finish = line_count
+    local found_one = false
+
+    -- Find the last occurrence of the separator
+    for i = line_count, 1, -1 do             -- Reverse the loop to start from the end
+        local line = lines[i]
+        if string.find(line, pattern) then
+            if i < (separator_line_finish + 1) and (not at_least_one or found_one) then
+                separator_line_start = i + 1
+                break             -- Exit the loop as soon as the condition is met
+            end
+
+            found_one = true
+            separator_line_finish = i - 1
+        end
+    end
+
+    if at_least_one and not found_one then
+        return {}, 1, 1, 0
+    end
+
+    -- Extract everything between the last and next separator
+    local result = {}
+    for i = separator_line_start, separator_line_finish do
+        table.insert(result, lines[i])
+    end
+
+    return result, separator_line_start, separator_line_finish, line_count
+end
+
+local commit_callback = function(response, source, staged)
+    local bufnr = source.bufnr
+    local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+    local notify = require("notify")
+    local accept = require("CopilotChat").config.mappings.accept_diff.normal
+    local quit = require("CopilotChat").config.mappings.close.normal
+    local lines = {}
+    for line in response:gmatch("[^\r\n]+") do
+        table.insert(lines, line)
+    end
+
+    local res = find_lines_between_separator(lines, '^```%w*$', true)
+    local linecount = #res
+    local result = table.concat(res, "\n")
+    if linecount == 0 then
+        notify("No commit msg", "error", { title = "Git commit" })
+        vim.api.nvim_input(quit)
+        return
+    end
+
+    local input = vim.fn.input(result .. "\n───────────────────────────────────────────────────\n" .. "auto commit?(y/n)")
+    if string.match(input, 'y') then
+        if string.match(buftype, 'gitcommit') then
+            vim.api.nvim_input(accept)
+            vim.api.nvim_input(quit)
+        else
+            local tmpfile = "/tmp/copilot_commit_msg"
+            local file = io.open(tmpfile, "w")
+            if not file then
+                notify("Failed to open file: " .. tmpfile, "error", { title = "Git commit" })
+                vim.api.nvim_input(quit)
+                return
+            end
+            file:write(result)
+            file:close()
+
+            local add = "git add -A"
+            local commit = "git commit -F " .. tmpfile
+            local push = "git push"
+
+            local cmd = ""
+
+            if not staged then
+                cmd = add .. " && "
+            end
+            local commit_cmd = cmd .. commit .. " && " .. push
+            local handle
+            handle = vim.loop.spawn("sh", {
+                args = { "-c", commit_cmd },
+                stdio = { nil, nil, nil },
+            }, function(code, signal)
+                handle:close()
+                if code == 0 then
+                    notify("commit success\n───────────────────────────────────────────────────\n" .. result, "info",
+                        { title = "Git commit" })
+                else
+                    notify("commit fail, return code: " .. code .. " signal: " .. signal, "error",
+                        { title = "Git commit" })
+                end
+            end)
+            vim.api.nvim_input(quit)
+        end
+    end
+end
+
+
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
@@ -55,95 +155,6 @@ return {
         },
 
         config = function(_,opts)
-            local function find_lines_between_separator(lines, pattern, at_least_one)
-                local line_count = #lines
-                -- print("Line count:", line_count)
-                local separator_line_start = 1
-                local separator_line_finish = line_count
-                local found_one = false
-
-                -- Find the last occurrence of the separator
-                for i = line_count, 1, -1 do -- Reverse the loop to start from the end
-                    local line = lines[i]
-                    if string.find(line, pattern) then
-                        if i < (separator_line_finish + 1) and (not at_least_one or found_one) then
-                            separator_line_start = i + 1
-                            break -- Exit the loop as soon as the condition is met
-                        end
-
-                        found_one = true
-                        separator_line_finish = i - 1
-                    end
-                end
-
-                if at_least_one and not found_one then
-                    return {}, 1, 1, 0
-                end
-
-                -- Extract everything between the last and next separator
-                local result = {}
-                for i = separator_line_start, separator_line_finish do
-                    table.insert(result, lines[i])
-                end
-
-                return result, separator_line_start, separator_line_finish, line_count
-            end
-
-            local commit_callback = function(response, source, staged)
-                local bufnr = source.bufnr
-                local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-                local lines = {}
-                for line in response:gmatch("[^\r\n]+") do
-                    table.insert(lines, line)
-                end
-
-                local res = find_lines_between_separator(lines, '^```%w*$', true)
-                local result = table.concat(res, "\n")
-
-                local input = vim.fn.input(result.."\n───────────────────────────────────────────────────\n" .."auto commit?(y/n)" )
-                if string.match(input, 'y') then
-                    if string.match(buftype, 'gitcommit') then
-                        vim.cmd("!git commit -a " .. result)
-                        local accept = require("CopilotChat").config.mappings.accept_diff.normal
-                        vim.api.nvim_input(accept)
-                    else
-
-                        local file_path = "/tmp/copilot_commit_msg"
-                        local file = io.open(file_path, "w")
-                        file:write(result)
-                        file:close()
-
-                        local add = "git add -A"
-                        local commit = "git commit -F " .. file_path
-                        local push = "git push"
-
-                        local cmd = ""
-
-                        if not staged then
-                            cmd = add .. " && "
-                        end
-                        local commit_cmd = cmd .. commit .. " && " .. push
-                        local notify = require("notify")
-                        local handle
-                        handle = vim.loop.spawn("sh", {
-                            args = { "-c", commit_cmd },
-                            stdio = { nil, nil, nil },
-                        }, function(code, signal)
-                            handle:close()
-                            if code == 0 then
-                                notify("commit success\n───────────────────────────────────────────────────\n".. result, "info", { title = "Git commit" })
-                            else
-                                notify("commit fail, return code: " .. code .. " signal: " .. signal, "error",
-                                { title = "Git commit" })
-                            end
-                        end)
-
-                        local quit = require("CopilotChat").config.mappings.close.normal
-                        vim.api.nvim_input(quit)
-                    end
-                end
-
-            end
 
             local select = require("CopilotChat.select")
 
