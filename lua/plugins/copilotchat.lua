@@ -86,13 +86,15 @@ local commit_callback = function(response, source, staged)
             end
             local commit_cmd = cmd .. commit .. " && " .. push
             local _title = "Git commit"
-            local first_notify = notify( "Committing changes in backend ...", "info", {
+            local windows_height = string.rep("\n", total_lines-1)
+
+            local first_notify = notify( "Committing changes in backend ...".. windows_height, "info", {
                 title = _title,
                 icon = "",
-                -- on_open = function(win)
-                --     local buf = vim.api.nvim_win_get_buf(win)
-                --     -- vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-                -- end
+                on_open = function(win)
+                    local buf = vim.api.nvim_win_get_buf(win)
+                    vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+                end
             })
             local handle
             handle = vim.loop.spawn(
