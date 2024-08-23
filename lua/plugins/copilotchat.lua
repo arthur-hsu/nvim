@@ -86,10 +86,8 @@ local commit_callback = function(response, source, staged)
             end
             local commit_cmd = cmd .. commit .. " && " .. push
             local _title = "Git commit"
-            local height = total_lines -1
-            local windows_height = string.rep("\n", height)
 
-            local first_notify = notify( "Committing changes in backend ...".. windows_height, "info", {
+            local first_notify = notify( "Committing changes in backend ...".. separator .. result, "info", {
                 title = _title,
                 icon = "",
                 on_open = function(win)
