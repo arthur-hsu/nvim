@@ -147,6 +147,9 @@ return {
             { "nvim-telescope/telescope.nvim" },          -- for telescope help actions (optional)
         },
         opts = {
+            question_header = '  User ', -- Header to use for user questions
+            answer_header = '  Copilot ', -- Header to use for AI answers
+            error_header = '  Error ', -- Header to use for errors
             window = {
                 layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
                 relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
@@ -193,6 +196,7 @@ return {
         },
 
         config = function(_,opts)
+            vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
 
             local select = require("CopilotChat.select")
 
@@ -213,8 +217,6 @@ return {
                 QuickChat             = {
                     selection = select.unnamed,
                 },
-
-                    -- selection = select.unnamed },
                 QuickChatWithFiletype = {},
                 Explain               = { prompt = "/COPILOT_EXPLAIN 解釋這段代碼如何運行。" },
                 FixError              = { prompt = "/COPILOT_FIX 請解釋以上代碼中的錯誤並提供解決方案。" },
