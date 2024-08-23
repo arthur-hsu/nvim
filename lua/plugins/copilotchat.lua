@@ -60,7 +60,7 @@ local commit_callback = function(response, source, staged)
     end
     local separator = "\n" .. string.rep("─", max_line) .. "\n"
     local input = vim.fn.input("Commit message" .. separator .. result .. separator .. "auto commit? (y/n)")
-    if string.match(input, 'y') then
+    if string.match(input, '^[yY]$') then
         if string.match(buftype, 'gitcommit') then
             vim.api.nvim_input(accept)
             vim.api.nvim_input(quit)
@@ -104,8 +104,7 @@ local commit_callback = function(response, source, staged)
                     handle:close()
                     os.remove(tmpfile)
                     if code == 0 then
-                        local message = result
-                        notify(message, "info", {
+                        notify( result, "info", {
                             title = "Git commit success",
                             icon = "",
                             replace = first_notify,
@@ -113,12 +112,11 @@ local commit_callback = function(response, source, staged)
                                 local buf = vim.api.nvim_win_get_buf(win)
                                 vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
                             end
-
                         })
                     else
                         local message = "return code:" .. code .. " signal: " .. signal
                         notify(message, "error", {
-                            title = "Commit fail",
+                            title = "Git commit fail",
                             icon = "",
                             replace = first_notify,
                             on_open = function(win)
@@ -133,7 +131,7 @@ local commit_callback = function(response, source, staged)
             vim.api.nvim_input(quit)
         end
     else
-        notify("Commit abort", "info", { title = "Git commit" })
+        notify("Abort", "info", { icon = "", title = "Git commit" })
     end
 end
 
@@ -238,7 +236,6 @@ return {
                 CommitStaged = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    -- prompt = '使用中文總結這次提交的更改，並使用 commitizen 慣例編寫提交消息。確保標題最多 50 個字符，消息在 72 個字符處換行。',
                     selection = function(source)
                         local bufnr = source.bufnr
                         local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
@@ -265,12 +262,7 @@ return {
             -- end
 
             -- NOTE: So we need to create an ordered list.
-            local options = {
-                "QuickChat",    "QuickChatWithFiletype", "Explain",
-                "FixError",     "Suggestion",            "Annotations",
-                "Refactor",     "Tests",                 "Commit",
-                "CommitStaged",
-            }
+            local options = { "QuickChat", "QuickChatWithFiletype", "Commit", "CommitStaged", "Explain", "FixError", "Suggestion", "Annotations", "Refactor", "Tests" }
 
 
             local pickers      = require "telescope.pickers"
