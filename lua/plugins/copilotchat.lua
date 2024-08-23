@@ -89,10 +89,10 @@ local commit_callback = function(response, source, staged)
             local first_notify = notify( "Committing changes in backend ...", "info", {
                 title = _title,
                 icon = "",
-                on_open = function(win)
-                    local buf = vim.api.nvim_win_get_buf(win)
-                    vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-                end
+                -- on_open = function(win)
+                --     local buf = vim.api.nvim_win_get_buf(win)
+                --     -- vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+                -- end
             })
             local handle
             handle = vim.loop.spawn(
