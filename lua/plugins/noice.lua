@@ -1,6 +1,7 @@
 local M = {
     "folke/noice.nvim",
     enabled = true,
+    -- NOTE: workaround for #923 [ https://github.com/folke/noice.nvim/issues/923 ]
     version = "4.4.7",
     dependencies = {
         'nvim-tree/nvim-web-devicons',
