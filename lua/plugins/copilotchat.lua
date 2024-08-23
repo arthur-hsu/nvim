@@ -87,8 +87,8 @@ local commit_callback = function(response, source, staged)
             local commit_cmd = cmd .. commit .. " && " .. push
             local _title = "Git commit"
 
-            local first_notify = notify( "Committing changes in backend ...".. separator .. result, "info", {
-                title = _title,
+            local first_notify = notify( separator .. result, "info", {
+                title = "Git committing changes in backend ...",
                 icon = "",
                 on_open = function(win)
                     local buf = vim.api.nvim_win_get_buf(win)
@@ -105,11 +105,11 @@ local commit_callback = function(response, source, staged)
                     handle:close()
                     os.remove(tmpfile)
                     if code == 0 then
-                        local message = "Commit success" .. separator .. result
-                        notify(message, "info", { title = _title, icon = "", replace = first_notify })
+                        local message = separator .. result
+                        notify(message, "info", { title = "Git commit success", icon = "", replace = first_notify })
                     else
-                        local message = "Commit fail, return code: " .. code .. " signal: " .. signal
-                        notify(message, "error", { title = _title, icon = "", replace = first_notify })
+                        local message = "return code:" .. code .. " signal: " .. signal
+                        notify(message, "error", { title = "Commit fail" , icon = "", replace = first_notify })
                     end
                 end
             )
