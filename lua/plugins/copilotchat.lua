@@ -85,21 +85,26 @@ local commit_callback = function(response, source, staged)
                 cmd = add .. " && "
             end
             local commit_cmd = cmd .. commit .. " && " .. push
-            local handle
-            handle = vim.loop.spawn("sh", {
-                args = { "-c", commit_cmd },
-                stdio = { nil, nil, nil },
-            }, function(code, signal)
-                handle:close()
-                os.remove(tmpfile)
-                if code == 0 then
-                    notify("Commit success".. separator .. result, "info",
-                        { title = "Git commit" })
-                else
-                    notify("Commit fail, return code: " .. code .. " signal: " .. signal, "error",
-                        { title = "Git commit" })
+            local _title = "Git commit"
+            notify( "Committing changes in backend ...", "info", {
+                title = _title,
+                on_open = function()
+                    local handle
+                    handle = vim.loop.spawn("sh", {
+                        args = { "-c", commit_cmd },
+                        stdio = { nil, nil, nil },
+                    }, function(code, signal)
+                        handle:close()
+                        os.remove(tmpfile)
+                        if code == 0 then
+                            notify("Commit success".. separator .. result, "info", { title = "Git commit" })
+                        else
+                            notify("Commit fail, return code: " .. code .. " signal: " .. signal, "error", { title = _title })
+                        end
+                    end)
                 end
-            end)
+                               
+            })
             vim.api.nvim_input(quit)
         end
     else
