@@ -88,22 +88,28 @@ local commit_callback = function(response, source, staged)
             local _title = "Git commit"
             notify( "Committing changes in backend ...", "info", {
                 title = _title,
-                on_open = function()
+                icon = "",
+                on_open = function(win)
+                    local buf = vim.api.nvim_win_get_buf(win)
+                    vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
                     local handle
                     handle = vim.loop.spawn("sh", {
-                        args = { "-c", commit_cmd },
-                        stdio = { nil, nil, nil },
-                    }, function(code, signal)
-                        handle:close()
-                        os.remove(tmpfile)
-                        if code == 0 then
-                            notify("Commit success".. separator .. result, "info", { title = "Git commit" })
-                        else
-                            notify("Commit fail, return code: " .. code .. " signal: " .. signal, "error", { title = _title })
+                            args  = { "-c", commit_cmd },
+                            stdio = { nil, nil, nil },
+                        },
+                        function(code, signal)
+                            handle:close()
+                            os.remove(tmpfile)
+                            if code == 0 then
+                                local message = "Commit success" .. separator .. result
+                                notify(nil, "info", { replace = message })
+                            else
+                                local message = "Commit fail, return code: " .. code .. " signal: " .. signal
+                                notify(nil, "error", { replace = message })
+                            end
                         end
-                    end)
+                    )
                 end
-                               
             })
             vim.api.nvim_input(quit)
         end
