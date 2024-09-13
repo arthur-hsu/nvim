@@ -190,6 +190,19 @@ function M.config()
         cond = conditions.buffer_not_empty,
         color = function () return { fg = (file_detial('color') or mode_color[vim.fn.mode()]), gui = 'bold',bg='None' } end
     }
+    ins_left {
+        function ()
+            local arrow = require('arrow.statusline')
+            local text = arrow.text_for_statusline_with_icons()
+            return text
+        end,
+        cond = function ()
+            local arrow = require('arrow.statusline')
+            local is_on_arrow_file = arrow.is_on_arrow_file()
+            return is_on_arrow_file ~= nil
+        end,
+        color = function () return { fg = (file_detial('color') or mode_color[vim.fn.mode()]), gui = 'bold',bg='None' } end
+    }
 
     -- Location & Progress --
     ins_left { 'location', color = { fg = colors.yellow, bg='None' } }
