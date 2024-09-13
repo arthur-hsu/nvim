@@ -31,7 +31,9 @@ esac
 
 
 
-./sh_libs/setup_nvim.sh "$user_password"
+./sh_libs/setup_nvim.sh
+./nvim_installer.sh "$user_password"
+
 ./sh_libs/setup_zsh.sh
 ./sh_libs/pyenv_installer.sh
 sudo apt-get install -y expect
