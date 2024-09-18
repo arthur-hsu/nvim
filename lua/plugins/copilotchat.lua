@@ -154,7 +154,7 @@ return {
                 layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
                 relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
                 border = 'rounded',                       -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-                width = 0.8,                              -- fractional width of parent
+                width = 0.5,                              -- fractional width of parent
                 height = 0.6,                             -- fractional height of parent
                 row = nil,                                -- row position of the window, default is centered
                 col = nil,                                -- column position of the window, default is centered
@@ -199,19 +199,6 @@ return {
             vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
 
             local select = require("CopilotChat.select")
-
-            opts.selection = function(source)
-                local startPos = vim.fn.getpos("'<")
-                local endPos   = vim.fn.getpos("'>")
-                local startLine, startCol = startPos[2], startPos[3]
-                local endLine,   endCol   = endPos[2],   endPos[3]
-
-                if startLine ~= endLine or startCol ~= endCol then
-                    return select.visual(source)
-                else
-                    return select.buffer(source)
-                end
-            end
 
             local prompts = {
                 QuickChat             = {
@@ -275,7 +262,7 @@ return {
             local Chat_cmd     = "CopilotChat"
             local Chat_prompts = require("CopilotChat").prompts()
 
-            local Telescope_CopilotActions = function(opts)
+            local Telescope_CopilotActions = function(opts, mode)
                 opts = opts or {}
                 pickers.new(opts, {
                     prompt_title = "Select Copilot prompt",
@@ -296,9 +283,9 @@ return {
                             -- Find the item message and selection base on the choice
                             for item, body in pairs(Chat_prompts) do
                                 if item == choice then
-                                    msg = body.prompt
+                                    msg       = body.prompt
                                     selection = body.selection
-                                    callback = body.callback
+                                    callback  = body.callback
                                     break
                                 end
                             end
@@ -320,7 +307,11 @@ return {
                                     Ask_msg = FiletypeMsg .. msg
                                 end
                                 if selection == nil then
-                                    selection = opts.selection
+                                    if mode == 'normal' then
+                                        selection = select.buffer
+                                    else
+                                        selection = select.visual
+                                    end
                                     -- print("selection is nil")
                                 end
                             end
@@ -333,8 +324,11 @@ return {
             end
 
             vim.api.nvim_create_user_command("CopilotActions",
-                function() Telescope_CopilotActions(require("telescope.themes").get_dropdown{ selection_caret = " " }) end,
-                { nargs = "*", range = true }
+                function(args)
+                    local mode = string.lower(args.args)
+                    Telescope_CopilotActions(require("telescope.themes").get_dropdown { selection_caret = " " }, mode)
+                end,
+                { nargs = 1, range = true, complete = function() return { "normal", "visual" } end, }
             )
 
         end,
@@ -354,11 +348,21 @@ return {
             {
                 '<leader>ccp',
                 function()
-                    -- require("CopilotChat.code_actions").show_prompt_actions()
-                    vim.cmd("CopilotActions")
+                    vim.api.nvim_command('y')
+                    vim.api.nvim_command('normal v')
+                    vim.cmd("CopilotActions visual")
                 end,
                 desc = " CopilotChat - Prompt actions",
-                mode = {"n","v","x"}
+                mode = {"v", "x"}
+            },
+            {
+                '<leader>ccp',
+                function()
+                    -- require("CopilotChat.code_actions").show_prompt_actions()
+                    vim.cmd("CopilotActions normal")
+                end,
+                desc = " CopilotChat - Prompt actions",
+                mode = {"n"}
             },
             { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = " CopilotChat - Open chat",          mode = {"n", "v", "x"} },
             { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = " CopilotChat - Close chat",         mode = {"n", "v", "x"} },
