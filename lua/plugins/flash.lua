@@ -7,7 +7,7 @@ return {
         { "s",     mode = { "n" },      function () require("flash").jump()              end , desc = "flash" },
         { "S",     mode = { "n" },      function () require("flash").treesitter()        end , desc = "flash treesitter" },
         { "<C-s>", mode = { "x", "o" }, function () require("flash").jump()              end , desc = "flash" },
-        { "<c-s>", mode = { "c" },      function () require("flash").toggle()            end , desc = "toggle flash search" },
+        { "<C-s>", mode = { "c" },      function () require("flash").toggle()            end , desc = "toggle flash search" },
         -- { "r",     mode = "o",               function() require("flash").remote()            end , desc = "remote flash" },
         -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end , desc = "treesitter search" },
     },
@@ -24,7 +24,7 @@ return {
                 },
                 char = {
                     enabled = true,
-                    keys = { "f", "F", ";", "," },
+                    keys = { "f", "F" },
                     ---@alias Flash.CharActions table<string, "next" | "prev" | "right" | "left">
                     -- The direction for `prev` and `next` is determined by the motion.
                     -- `left` and `right` are always left and right.
@@ -41,6 +41,14 @@ return {
                         }
                     end
                 }
+            },
+            label = {
+                style = "inline",
+                rainbow = {
+                    enabled = true,
+                    -- number between 1 and 9
+                    shade = 7,
+                },
             }
         })
         vim.api.nvim_set_hl(0, "FlashBackdrop",   { link = "Comment" })

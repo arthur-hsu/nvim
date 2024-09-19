@@ -211,7 +211,7 @@ return {
                 Annotations           = { prompt = "/COPILOT_REFACTOR 為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
                 Refactor              = { prompt = "/COPILOT_REFACTOR 請重構以上代碼以提高其清晰度和可讀性。" },
                 Tests                 = { prompt = "/COPILOT_TESTS 簡要說明以上代碼的工作原理，然後產生單元測試。" },
-                Translate             = { prompt = "將英文翻譯成繁體中文, 或是將中文翻譯成英文 回答中不需要包含行數" },
+                Translate             = { prompt = "將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
                 FixDiagnostic = {
                     prompt = '/COPILOT_FIX Please assist with the following diagnostic issue in file:',
                     selection = select.diagnostics,
