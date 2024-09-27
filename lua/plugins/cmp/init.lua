@@ -79,6 +79,7 @@ return {
                 format = require("lspkind").cmp_format({
                     with_text = true, -- do not show text alongside icons
                     maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    show_labelDetails = true,
                     before = function (entry, vim_item)
                         -- Source
                         vim_item.menu = "["..string.upper(entry.source.name).."]"
