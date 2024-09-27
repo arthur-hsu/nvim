@@ -22,7 +22,6 @@ return {
         },
         "hrsh7th/cmp-nvim-lua",
         "zbirenbaum/copilot-cmp",
-        -- "hrsh7th/cmp-nvim-lsp-signature-help",     --require("luasnip.loaders.from_vscode").lazy_load()
         'rafamadriz/friendly-snippets',
         'petertriho/cmp-git'
     },
@@ -43,7 +42,6 @@ return {
                 end,
             },
             sources = cmp.config.sources({
-                --{ name = 'nvim_lsp_signature_help' },
                 { name = "path" },
                 { name = "copilot",group_index=1 },
                 { name = "nvim_lsp", group_index = 2 },

@@ -1,8 +1,5 @@
 local M = {
     "folke/noice.nvim",
-    enabled = true,
-    -- NOTE: workaround for #923 [ https://github.com/folke/noice.nvim/issues/923 ]
-    version = "4.4.7",
     dependencies = {
         'nvim-tree/nvim-web-devicons',
         "MunifTanjim/nui.nvim",
@@ -220,12 +217,12 @@ function M.config()
                 ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
             },
             highlights = {
-                ["|%S-|"] = "@text.reference",
-                ["@%S+"] = "@parameter",
+                ["|%S-|"]             = "@text.reference",
+                ["@%S+"]              = "@parameter",
                 ["^%s*(Parameters:)"] = "@text.title",
-                ["^%s*(Return:)"] = "@text.title",
-                ["^%s*(See also:)"] = "@text.title",
-                ["{%S-}"] = "@parameter",
+                ["^%s*(Return:)"]     = "@text.title",
+                ["^%s*(See also:)"]   = "@text.title",
+                ["{%S-}"]             = "@parameter",
             },
         },
         throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.

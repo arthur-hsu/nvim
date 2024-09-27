@@ -4,7 +4,6 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "debugloop/telescope-undo.nvim",
-        -- "folke/noice.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
         -- "tsakirist/telescope-lazy.nvim"
         -- "nvim-telescope/telescope-project.nvim",

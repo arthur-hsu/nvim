@@ -12,7 +12,7 @@ return {
         opts = {
             -- options for vim.diagnostic.config()
             -- Automatically format on save
-            autoformat = true,
+            -- autoformat = true,
             single_file_support = true,
             -- options for vim.lsp.buf.format
             -- `bufnr` and `filter` is handled by the LazyVim formatter,
@@ -115,10 +115,11 @@ return {
             ---@param opts PluginLspOpts
             config = function(plugin, opts)
                 local servers = opts.servers
+                -- local capabilities = vim.lsp.protocol.make_client_capabilities()
                 local capabilities = require("cmp_nvim_lsp").default_capabilities()
                 capabilities.textDocument.foldingRange = {
                     dynamicRegistration = false,
-                    lineFoldingOnly = true,
+                    lineFoldingOnly     = true,
                 }
                 capabilities.textDocument.completion.completionItem.snippetSupport = true
                 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -131,24 +132,6 @@ return {
                 capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
                 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
                 capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
-                local function print_table(t, indent)
-                    indent = indent or 0
-                    local indentStr = string.rep("  ", indent)
-
-                    if type(t) ~= "table" then
-                        print(indentStr .. tostring(t))
-                        return
-                    end
-
-                    for key, value in pairs(t) do
-                        if type(value) == "table" then
-                            print(indentStr .. tostring(key) .. ":")
-                            print_table(value, indent + 1)
-                        else
-                            print(indentStr .. tostring(key) .. ": " .. tostring(value))
-                        end
-                    end
-                end
 
                 local function setup(server)
                     local server_opts = servers[server] or {}
@@ -190,6 +173,6 @@ return {
                 end
                 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
                 require("mason-lspconfig").setup_handlers({ setup })
-            end,
+            end
         },
     }
