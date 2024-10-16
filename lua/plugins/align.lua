@@ -2,6 +2,7 @@ return {
     {
         'junegunn/vim-easy-align',
         event = 'VeryLazy',
+        -- dependencies = {'altermo/ultimate-autopair.nvim'},
         config = function ()
             -- Delimiter key (a single keystroke; <Space>, =, :, ., |, &, #, ,) or an arbitrary regular expression followed by <CTRL-X>
             vim.cmd([[

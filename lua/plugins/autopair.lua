@@ -9,18 +9,34 @@ return{
     },
     {
         'altermo/ultimate-autopair.nvim',
-        event={'InsertEnter','CmdlineEnter'},
+        -- event={'InsertEnter','CmdlineEnter'},
+        event="VeryLazy",
+        dependencies = {'junegunn/vim-easy-align'},
         branch='development',
         -- branch='v0.6',
         -- enabled=false,
         config = function ()
             require('ultimate-autopair').setup({
-                {'``','``',fly=true,dosuround=true,newline=true,space=false, ft={'python'}},
                 pair_cmap=false,
                 tabout = {
                     enable = true,
                     hopout = true,
                 },
+
+                internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
+                    {'[',']',fly=true,dosuround=true,newline=true,space=true},
+                    {'(',')',fly=true,dosuround=true,newline=true,space=true},
+                    {'{','}',fly=true,dosuround=true,newline=true,space=true},
+                    {'"','"',suround=true,multiline=false},
+                    {"'","'",suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
+                    {'`','`',cond=function(fn) return not fn.in_lisp() or fn.in_string() end,nft={'tex'},multiline=false},
+                    {'``',"''",ft={'tex'}},
+                    {'```','```',newline=true,ft={'markdown'}},
+                    {'<!--','-->',ft={'markdown','html'},space=true},
+                    {'"""','"""',newline=true,ft={'python'}},
+                    {"'''","'''",newline=true,ft={'python'}},
+                },
+                {'``','``',fly=true,dosuround=true,newline=true,space=false, ft={'python'}},
             })
 
             local function ls_name_from_event(event) return event.entry.source.source.client.config.name end
