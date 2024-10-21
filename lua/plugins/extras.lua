@@ -20,5 +20,18 @@ return {
             -- calling `setup` is optional for customization
             require("fzf-lua").setup({})
         end
+    },
+    {
+        'hat0uma/csvview.nvim',
+        event = "VeryLazy",
+        ft = { "csv" },
+        config = function()
+            require('csvview').setup({
+                view = {
+                    spacing      = 0,
+                    display_mode = "border",
+                }
+            })
+        end
     }
 }
