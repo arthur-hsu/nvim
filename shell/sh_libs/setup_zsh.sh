@@ -33,6 +33,7 @@ alias ll="eza -all -l -s type --ignore-glob='__pycache__'"
 alias top="bpytop"
 alias d="docker"
 alias dc="docker-compose"
+alias minicom="minicom -O timestamp=extended"
 
 activate(){
     pyenv activate "$1"
