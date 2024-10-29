@@ -24,16 +24,16 @@ if ver.minor >= 9 then
     end
 else
     require "config.options"
-    local opt    = vim.opt
-    local cmd    = vim.cmd
-    local g      = vim.g
-    local keymap = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-    opt.foldcolumn = "0"
-    opt.signcolumn = "no"
-    opt.laststatus = 0
+    local opt       = vim.opt
+    local cmd       = vim.cmd
+    local g         = vim.g
+    local keymap    = vim.api.nvim_set_keymap
+    local opts      = { noremap = true, silent = true }
+    opt.foldcolumn  = "0"
+    opt.signcolumn  = "no"
+    opt.laststatus  = 0
     opt.writebackup = false
-    opt.swapfile = false
+    opt.swapfile    = false
     keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
     keymap("n", "<TAB>",   ">>",  opts)
     keymap("n", "<S-TAB>", "<<",  opts)
