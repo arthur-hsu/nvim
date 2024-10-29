@@ -2,7 +2,6 @@ return{
     {
         'arthur-hsu/pastify.nvim',
         ft = { "markdown","toml" },
-        event = "VeryLazy",
         cmd = { 'Pastify' },
         config = function ()
             require('pastify').setup {
@@ -10,7 +9,7 @@ return{
                     absolute_path = false, -- use absolute or relative path to the working directory
                     apikey        = 'c88b2f2193424aa23e2b6f870d544176', -- Api key, required for online saving
                     local_path    = '/screenshot/', -- The path to put local files in, ex ~/Projects/<name>/assets/images/<imgname>.png
-                    save          = 'online', -- Either 'local' or 'online'
+                    save          = 'local', -- Either 'local' or 'online'
                 },
                 ft = { -- Custom snippets for different filetypes, will replace $IMG$ with the image url
                     html     = '<img src="$IMG$" alt="">',
@@ -23,7 +22,6 @@ return{
     {
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
-        event = "VeryLazy",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         build = function() vim.fn["mkdp#util#install"]() end,
         config = function()
