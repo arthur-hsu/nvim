@@ -6,11 +6,6 @@
 -- term_mode         = "t",
 -- command_mode      = "c",
 
-
-
-
-
-
 -- Shorten function name
 local keymap    = vim.api.nvim_set_keymap
 
@@ -57,7 +52,6 @@ end
 
 
 
-keymap("n", "<leader>jq", "<cmd>%!jq --indent 4<CR>",                                         opts )
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                                                    opts )
 keymap("n", "<leader>mc", "<cmd>Mason<CR>",                                                   opts )
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",                                 opts )
