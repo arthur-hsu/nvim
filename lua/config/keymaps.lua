@@ -62,7 +62,7 @@ keymap("n", "<F5>",       "<cmd>RunCode<CR>",                                   
 keymap("n", "<F6>",       "<cmd>Telescope undo<cr>",                                          opts )
 keymap("n", "<F7>",       "<cmd>DiffviewFileHistoryToggle %<CR>",                             opts )
 keymap("n", "<F8>",       "<cmd>DiffviewToggle<CR>",                                          opts )
-keymap('n', "<F9>",       "<cmd>Cursorword toggle<CR>",                                       opts )
+keymap('n', "<F9>",       "<cmd>IlluminateToggle<CR>",                                       opts )
 keymap('n', "<F10>",      "<ESC>A<CR><ESC>:Pastify<CR>",                                      opts )
 keymap("n", "<F12>",      "<cmd>Telescope diagnostics<cr>",                                   opts )
 

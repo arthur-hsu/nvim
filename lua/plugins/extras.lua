@@ -23,7 +23,6 @@ return {
     },
     {
         'hat0uma/csvview.nvim',
-        -- event = "VeryLazy",
         ft = { "csv" },
         config = function()
             require('csvview').setup({
@@ -36,10 +35,10 @@ return {
     },
     {
         "theKnightsOfRohan/csvlens.nvim",
+        ft = { "csv" },
         dependencies = {
             "akinsho/toggleterm.nvim"
         },
-        ft = { "csv" },
         config = true,
         opts = { --[[ Place your opts here ]] }
     }
