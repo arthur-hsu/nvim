@@ -147,6 +147,7 @@ return {
             { "nvim-telescope/telescope.nvim" },          -- for telescope help actions (optional)
         },
         opts = {
+            debug = false,
             question_header = '  User ',                 -- Header to use for user questions
             answer_header   = '  Copilot ',              -- Header to use for AI answers
             error_header    = '  Error ',                -- Header to use for errors
