@@ -1,7 +1,8 @@
 return {
     {
         'norcalli/nvim-colorizer.lua',
-        event = { "BufReadPost", "BufNewFile" },
+        -- event = { "BufReadPost", "BufNewFile" },
+        event = "VeryLazy",
         config = function ()
             require("colorizer").attach_to_buffer(0, {names = false, mode = "background", css = true})
         end

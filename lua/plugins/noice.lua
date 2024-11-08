@@ -35,7 +35,7 @@ local M = {
         {
             "j-hui/fidget.nvim",
             event = "VeryLazy",
-            dependencies = { "rcarriga/nvim-notify", },
+            dependencies = {"rcarriga/nvim-notify"},
             config = function()
                 local fidget = require("fidget")
                 fidget.setup({

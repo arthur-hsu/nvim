@@ -4,7 +4,8 @@ local M = {
         require("nvim-treesitter.install").update({ with_sync = true })
     end,
     --enabled =false,
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
 }
 
 function M.config()

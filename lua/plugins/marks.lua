@@ -1,6 +1,7 @@
 return {
     "otavioschwanck/arrow.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     opts = {
         show_icons = true,
         leader_key = ';',    -- Recommended to be a single key

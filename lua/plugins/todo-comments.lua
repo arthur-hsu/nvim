@@ -1,7 +1,8 @@
 return {
     {
         "folke/todo-comments.nvim",
-        event = "BufRead",
+        -- event = "BufRead",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim"},
         -- opts = {
         -- },

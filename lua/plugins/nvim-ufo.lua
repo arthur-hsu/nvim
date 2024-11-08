@@ -1,8 +1,8 @@
 return {
 	{
 		'kevinhwang91/nvim-ufo',
-        -- enabled=false,
-		event = { 'BufReadPost', 'BufNewFile' },
+		-- event = { 'BufReadPost', 'BufNewFile' },
+        event = "VeryLazy",
 		-- stylua: ignore
         keys = {
 			{ 'zR', function() require('ufo').openAllFolds() end },

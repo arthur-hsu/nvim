@@ -1,7 +1,7 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
-    ebabled = true,
+    -- event = { "InsertEnter", "CmdlineEnter" },
+    event = "VeryLazy",
     dependencies = {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",

@@ -1,13 +1,13 @@
 return {
+    { 'MaximilianLloyd/ascii.nvim',lazy = true, dependencies = { 'MunifTanjim/nui.nvim', lazy = true } },
     {
         "goolord/alpha-nvim",
-        lazy = false,
         event = "VimEnter",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            { 'MaximilianLloyd/ascii.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
-        },
-        opts = function()
+        config = function()
+            if vim.fn.argc() == 1 then
+                return
+            end
+
             local dashboard = require("alpha.themes.dashboard")
 
             --dashboard.section.header.val = vim.split(nvim_logo, "\n")
@@ -27,25 +27,6 @@ return {
                 -- dashboard.button("l", " 󰒲" .. " Lazy", ":Lazy<CR>"),
             }
             dashboard.opts.layout[1].val = #dashboard.section.buttons.val
-
-            --dashboard.section.header.opts.hl = "AlphaHeader"
-            --dashboard.section.buttons.opts.hl = "AlphaButtons"
-            --dashboard.section.footer.opts.hl = "AlphaFooter"
-            return dashboard
-        end,
-        config = function(_, dashboard)
-            -- close Lazy and re-open when the dashboard is ready
-            if vim.o.filetype == "lazy" then
-                vim.cmd.close()
-                vim.api.nvim_create_autocmd("User", {
-                    pattern = "AlphaReady",
-                    callback = function()
-                        require("lazy").show()
-                    end,
-                })
-            end
-
-            require("alpha").setup(dashboard.opts)
 
             vim.api.nvim_create_autocmd("User", {
                 pattern = "LazyVimStarted",
@@ -71,6 +52,17 @@ return {
                     pcall(vim.cmd.AlphaRedraw)
                 end,
             })
+            -- close Lazy and re-open when the dashboard is ready
+            -- if vim.o.filetype == "lazy" then
+            --     vim.cmd.close()
+            --     vim.api.nvim_create_autocmd("User", {
+            --         pattern = "AlphaReady",
+            --         callback = function()
+            --             require("lazy").show()
+            --         end,
+            --     })
+            -- end
+            require("alpha").setup(dashboard.config)
         end,
     },
     {
