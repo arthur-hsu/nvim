@@ -4,6 +4,7 @@ local M = {
     -- event = { "BufReadPost", "BufNewFile" },
     event = "VeryLazy",
     dependencies = {
+        'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons'      -- optional
     }

@@ -6,7 +6,7 @@ local M = {
     --enabled =false,
     -- event = { "BufReadPost", "BufNewFile" },
     -- event = { "VeryLazy", "BufReadPost", "BufNewFile" },
-    event = "VeryLazy",
+    event = {"VeryLazy"}
 }
 
 function M.config()

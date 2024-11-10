@@ -111,8 +111,8 @@ return {
     -- lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = {"VeryLazy" , "BufReadPre", "BufNewFile" },
-        -- event = "VeryLazy",
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        -- event = "LazyFile",
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             "williamboman/mason.nvim",
@@ -200,6 +200,10 @@ return {
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         event = "VeryLazy",
+
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
         config = function()
             local ensure_installed = {} ---@type string[]
 

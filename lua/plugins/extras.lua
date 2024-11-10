@@ -7,10 +7,8 @@ return {
             require("colorizer").attach_to_buffer(0, {names = false, mode = "background", css = true})
         end
     },
-    { 'nvim-tree/nvim-web-devicons', lazy = true, },
-    { 'echasnovski/mini.nvim', lazy=true },
-    { "nathom/filetype.nvim", event = "VimEnter", },
-    { 'lithammer/nvim-pylance', lazy=true, enabled = false, },
+    { 'nvim-tree/nvim-web-devicons'},
+    { 'echasnovski/mini.nvim'},
     { 'dstein64/vim-startuptime', event="VimEnter", enabled = false, },
     {
         "ibhagwan/fzf-lua",
