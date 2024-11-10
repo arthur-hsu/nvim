@@ -1,7 +1,8 @@
 return{
     {
         'arthur-hsu/pastify.nvim',
-        ft = { "markdown","toml" },
+        -- ft = { "markdown" },
+        event = "VeryLazy",
         cmd = { 'Pastify' },
         config = function ()
             require('pastify').setup {
