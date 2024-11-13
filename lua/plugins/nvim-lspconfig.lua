@@ -111,8 +111,10 @@ return {
     -- lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-        -- event = "LazyFile",
+        lazy= true,
+        -- event = "VeryLazy",
+        -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        -- event = "BufEnter",
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             "williamboman/mason.nvim",
@@ -199,7 +201,7 @@ return {
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        event = "VeryLazy",
+        event = "LspAttach",
 
         dependencies = {
             "neovim/nvim-lspconfig",

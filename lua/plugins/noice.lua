@@ -72,6 +72,7 @@ local M = {
         }
     },
     event="VeryLazy",
+    -- enabled = false,
 }
 
 function M.config()

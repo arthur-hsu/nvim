@@ -1,7 +1,9 @@
 return {
     {
         "RRethy/vim-illuminate",
-        event = "VeryLazy",
+        lazy = true,
+        cmd = { "IlluminateToggle" },
+        -- event = "VeryLazy",
         -- event = { "BufReadPost", "BufNewFile" },
 
         config = function()

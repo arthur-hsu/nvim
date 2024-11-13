@@ -74,9 +74,8 @@ local M = {
         'nvim-tree/nvim-web-devicons',
         {
             "jonahgoldwastaken/copilot-status.nvim",
-            dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
+            -- dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
             lazy = true,
-            event = "VeryLazy",
             config = function ()
                 require('copilot_status').setup({
                     icons = {
@@ -93,6 +92,9 @@ local M = {
 
     },
     event="VeryLazy",
+    -- event = { "BufReadPost", "BufNewFile" },
+    -- lazy = false,
+    -- enabled = false,
 }
 
 function M.config()

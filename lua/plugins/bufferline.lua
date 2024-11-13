@@ -2,6 +2,7 @@ local M = {
     'akinsho/bufferline.nvim',
     dependencies = {'nvim-tree/nvim-web-devicons'},
     event="VeryLazy",
+    -- event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()

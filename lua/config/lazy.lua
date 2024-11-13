@@ -45,3 +45,20 @@ require("lazy").setup({
     },
     ui = { border = "rounded" },
 })
+
+local enter_load = function()
+   require("lazy").load({
+       plugins={
+           "nvim-treesitter",
+           "bufferline.nvim",
+           "statuscol.nvim",
+           "indent-blankline.nvim",
+           "lualine.nvim",
+           "nvim-lspconfig",
+           "lspsaga.nvim",
+       }
+   })
+   vim.cmd[[LspStart]]
+end
+vim.api.nvim_create_autocmd("UIEnter", {callback= enter_load})
+-- vim.api.nvim_create_autocmd("UIEnter", {pattern="*.md", callback=function() require"lazy.loader".load({plugins={"pastify.nvim"}}) end })

@@ -1,8 +1,9 @@
 local M = {
     'nvimdev/lspsaga.nvim',
-    --enevt = "InsertEnter",
+    -- enevt = "InsertEnter",
     -- event = { "BufReadPost", "BufNewFile" },
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    -- event = "LspAttach",
     dependencies = {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter', -- optional
@@ -126,7 +127,7 @@ function M.config()
             show_file    = true,
             folder_level = 1,
             color_mode   = true,
-            dely         = 300,
+            delay        = 300,
         },
         outline = {
             win_position     = 'right',

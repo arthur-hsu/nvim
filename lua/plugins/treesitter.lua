@@ -3,10 +3,12 @@ local M = {
     build = function()
         require("nvim-treesitter.install").update({ with_sync = true })
     end,
-    --enabled =false,
+    -- enabled =false,
     -- event = { "BufReadPost", "BufNewFile" },
     -- event = { "VeryLazy", "BufReadPost", "BufNewFile" },
-    event = {"VeryLazy"}
+    -- event = {"VeryLazy"}
+    -- event = "LspAttach",
+    lazy = true,
 }
 
 function M.config()

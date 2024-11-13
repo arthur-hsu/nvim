@@ -2,7 +2,6 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     -- event = { "BufReadPost", "BufNewFile" },
-    event = "VeryLazy",
     dependencies = {
         {
             'HiPhish/rainbow-delimiters.nvim',
@@ -43,7 +42,7 @@ return {
             vim.api.nvim_set_hl(0, "CurrentScope",  { fg = "#6fe77c"})
         end)
 
-
+        
         require("ibl").setup({
             -- indent = { highlight = highlight, char = "▎" },
             -- indent = { highlight = highlight, char = "▏" ,},
