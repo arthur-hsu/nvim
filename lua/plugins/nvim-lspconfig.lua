@@ -201,7 +201,7 @@ return {
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         opts = function ()
             local ensure_installed = {} ---@type string[]
 
