@@ -27,7 +27,7 @@ function M.config()
             --  Position to open the terminal, this option is ignored if mode ~= term
             position = "bot",
             -- window size, this option is ignored if mode == tab
-            size = 14,
+            size = 20,
         },
         float = {
             close_key = "<C-c>",

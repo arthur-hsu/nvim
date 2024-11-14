@@ -57,7 +57,7 @@ keymap("n", "<leader>mc", "<cmd>Mason<CR>",                                     
 keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>",                                 opts )
 keymap("n", "<F2>",       "<cmd>Telescope file_browser path=%:p:help select_buffer=true<cr>", opts )
 keymap("n", "<F3>",       "<cmd>Telescope<cr>",                                               opts )
-keymap('n', '<F4>',       '<cmd>TodoTelescope<CR>',                                           opts )
+keymap('n', '<F4>',       '<cmd>TodoFzfLua<CR>',                                           opts )
 keymap("n", "<F5>",       "<cmd>RunCode<CR>",                                                 opts )
 keymap("n", "<F6>",       "<cmd>Telescope undo<CR>",                                          opts )
 keymap("n", "<F7>",       "<cmd>DiffviewFileHistoryToggle %<CR>",                             opts )

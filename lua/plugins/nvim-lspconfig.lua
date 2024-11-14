@@ -201,12 +201,8 @@ return {
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        event = "LspAttach",
-
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-        config = function()
+        event = "VimEnter",
+        opts = function ()
             local ensure_installed = {} ---@type string[]
 
             for server, server_opts in pairs(servers_config) do
@@ -216,7 +212,14 @@ return {
                 ensure_installed[#ensure_installed + 1] = lint
             end
 
-            require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_update = true })
+            return {
+                ensure_installed = ensure_installed,
+            }
+        end,
+
+        config = function(_, opts)
+            require("mason-tool-installer").setup(opts)
+            vim.cmd[[MasonToolsUpdate]]
         end
     }
 }
