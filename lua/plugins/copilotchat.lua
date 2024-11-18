@@ -203,40 +203,70 @@ return {
             local select = require("CopilotChat.select")
 
             local prompts = {
-                QuickChat             = {
-                    selection = select.unnamed,
-                },
+                QuickChat             = {},
                 QuickChatWithFiletype = {},
-                Explain               = { prompt = "/COPILOT_EXPLAIN 解釋這段代碼如何運行。" },
-                FixError              = { prompt = "/COPILOT_FIX 請解釋以上代碼中的錯誤並提供解決方案。" },
-                Suggestion            = { prompt = "/COPILOT_REFACTOR 請查看以上代碼並提供改進建議的sample code。" },
-                Annotations           = { prompt = "/COPILOT_REFACTOR 為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
-                Refactor              = { prompt = "/COPILOT_REFACTOR 請重構以上代碼以提高其清晰度和可讀性。" },
-                Tests                 = { prompt = "/COPILOT_TESTS 簡要說明以上代碼的工作原理，然後產生單元測試。" },
-                Translate             = { prompt = "將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
-                FixDiagnostic = {
-                    prompt = '/COPILOT_FIX Please assist with the following diagnostic issue in file:',
-                    selection = select.diagnostics,
+                Explain               = { prompt = "> /COPILOT_EXPLAIN\n\n解釋這段代碼如何運行。" },
+                FixError              = { prompt = "> /COPILOT_GENERATE\n\n請解釋以上代碼中的錯誤並提供解決方案。" },
+                Suggestion            = { prompt = "> /COPILOT_GENERATE\n\n請查看以上代碼並提供改進建議的sample code。" },
+                Annotations           = { prompt = "> /COPILOT_GENERATE\n\n為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
+                Refactor              = { prompt = "> /COPILOT_GENERATE\n\n請重構以上代碼以提高其清晰度和可讀性。" },
+                Tests                 = { prompt = "> /COPILOT_GENERATE\n\n簡要說明以上代碼的工作原理，然後產生單元測試。" },
+                Translate             = { prompt = "> /COPILOT_GENERATE\n\n將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
+                Review                = {
+                    prompt = '> /COPILOT_REVIEW\n\nReview the selected code.',
+                    callback = function(response, source)
+                        local diagnostics = {}
+                        for line in response:gmatch('[^\r\n]+') do
+                            if line:find('^line=') then
+                                local start_line = nil
+                                local end_line = nil
+                                local message = nil
+                                local single_match, message_match = line:match('^line=(%d+): (.*)$')
+                                if not single_match then
+                                    local start_match, end_match, m_message_match = line:match(
+                                    '^line=(%d+)-(%d+): (.*)$')
+                                    if start_match and end_match then
+                                        start_line = tonumber(start_match)
+                                        end_line = tonumber(end_match)
+                                        message = m_message_match
+                                    end
+                                else
+                                    start_line = tonumber(single_match)
+                                    end_line = start_line
+                                    message = message_match
+                                end
+
+                                if start_line and end_line then
+                                    table.insert(diagnostics, {
+                                        lnum = start_line - 1,
+                                        end_lnum = end_line - 1,
+                                        col = 0,
+                                        message = message,
+                                        severity = vim.diagnostic.severity.WARN,
+                                        source = 'Copilot Review',
+                                    })
+                                end
+                            end
+                        end
+                        vim.diagnostic.set(
+                            vim.api.nvim_create_namespace('copilot_diagnostics'),
+                            source.bufnr,
+                            diagnostics
+                        )
+                    end,
+                },
+                Fix = {
+                    prompt = '> /COPILOT_GENERATE\n\nPlease assist with the following diagnostic issue in file:',
                 },
                 Commit = {
-                    prompt = '使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    selection = select.gitdiff,
+                    prompt = '> #git:unstaged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     callback = function (response, source)
                         commit_callback(response, source, false)
                     end
                 },
                 CommitStaged = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-                    prompt = '使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    selection = function(source)
-                        local bufnr = source.bufnr
-                        local buftype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-                        if string.match(buftype, 'gitcommit') then
-                            return opts.selection(source)
-                        else
-                            return select.gitdiff(source, true)
-                        end
-                    end,
+                    prompt = '#git:unstaged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
                     callback = function (response, source)
                         commit_callback(response, source, true)
                     end,
@@ -254,7 +284,7 @@ return {
             -- end
 
             -- NOTE: So we need to create an ordered list.
-            local options = { "QuickChat", "QuickChatWithFiletype", "Translate", "Commit", "CommitStaged", "Explain", "FixError", "Suggestion", "Annotations", "Refactor", "Tests" }
+            local options = { "QuickChat", "QuickChatWithFiletype", "Translate", "Commit", "CommitStaged", "Explain", "Fix", "Suggestion", "Annotations", "Refactor", "Review", "Tests" }
 
 
             local pickers      = require "telescope.pickers"
@@ -346,7 +376,7 @@ return {
                         require("CopilotChat").ask(input)
                     end
                 end,
-                desc = " CopilotChat - Quick chat",
+                desc = "CopilotChat - Quick chat",
                 mode = {"n","v","x"}
             },
             {
@@ -356,7 +386,7 @@ return {
                     vim.api.nvim_command('normal v')
                     vim.cmd("CopilotActions visual")
                 end,
-                desc = " CopilotChat - Prompt actions",
+                desc = "CopilotChat - Prompt actions",
                 mode = {"v", "x"}
             },
             {
@@ -365,20 +395,20 @@ return {
                     -- require("CopilotChat.code_actions").show_prompt_actions()
                     vim.cmd("CopilotActions normal")
                 end,
-                desc = " CopilotChat - Prompt actions",
+                desc = "CopilotChat - Prompt actions",
                 mode = {"n"}
             },
-            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = " CopilotChat - Open chat",          mode = {"n", "v", "x"} },
-            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = " CopilotChat - Close chat",         mode = {"n", "v", "x"} },
-            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = " CopilotChat - Toggle chat",        mode = {"n", "v", "x"} },
-            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",       desc = " CopilotChat - Reset chat",         mode = {"n", "v", "x"} },
-            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",   desc = " CopilotChat - Show diff",          mode = {"n", "v", "x"} },
+            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = "CopilotChat - Open chat",          mode = {"n", "v", "x"} },
+            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = "CopilotChat - Close chat",         mode = {"n", "v", "x"} },
+            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = "CopilotChat - Toggle chat",        mode = {"n", "v", "x"} },
+            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",       desc = "CopilotChat - Reset chat",         mode = {"n", "v", "x"} },
+            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",   desc = "CopilotChat - Show diff",          mode = {"n", "v", "x"} },
 
-            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",     desc = " CopilotChat - Explain code",       mode = {"n", "v", "x"} },
-            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",    desc = " CopilotChat - Fix Error",          mode = {"n", "v", "x"} },
-            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",  desc = " CopilotChat - Provide suggestion", mode = {"n", "v", "x"} },
-            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",    desc = " CopilotChat - Refactor code",      mode = {"n", "v", "x"} },
-            { '<leader>ccA', "<cmd>CopilotChatAnnotations<cr>", desc = " CopilotChat - Add a comment",      mode = {"n", "v", "x"} },
+            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",     desc = "CopilotChat - Explain code",       mode = {"n", "v", "x"} },
+            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",    desc = "CopilotChat - Fix Error",          mode = {"n", "v", "x"} },
+            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",  desc = "CopilotChat - Provide suggestion", mode = {"n", "v", "x"} },
+            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",    desc = "CopilotChat - Refactor code",      mode = {"n", "v", "x"} },
+            { '<leader>ccA', "<cmd>CopilotChatAnnotations<cr>", desc = "CopilotChat - Add a comment",      mode = {"n", "v", "x"} },
         }
     },
 }
