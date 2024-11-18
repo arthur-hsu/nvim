@@ -52,7 +52,6 @@ end
 local copilot_status = function (scope)
     local status = require("copilot_status").status_string()
     return scope[status]
-    
 end
 
 local conditions = {

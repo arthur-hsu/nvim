@@ -50,12 +50,14 @@ local enter_load = function()
    require("lazy").load({
        plugins={
            "nvim-treesitter",
+           "gitsigns.nvim",
            "bufferline.nvim",
            "statuscol.nvim",
-           "indent-blankline.nvim",
-           "lualine.nvim",
            "nvim-lspconfig",
-           "lspsaga.nvim",
+           -- "lspsaga.nvim",
+           "lualine.nvim",
+           "indent-blankline.nvim",
+           "copilot.lua",
        }
    })
    vim.cmd[[LspStart]]
