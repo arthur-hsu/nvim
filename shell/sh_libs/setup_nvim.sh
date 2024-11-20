@@ -23,7 +23,7 @@ sudo apt-get install nodejs -y
 sudo apt-get install npm -y
 
 sudo apt-get install -y ninja-build gettext cmake unzip curl bpytop;
-sudo apt install -y ripgrep fd-find bat tldr exa xclip
+sudo apt install -y ripgrep fd-find bat tldr xclip
 
 
 sudo pip3 install neovim

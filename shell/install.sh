@@ -23,7 +23,7 @@ debian_version=$(cat /etc/debian_version)
 echo "debian_version: $debian_version"
 case "$debian_version" in
     12*)
-        ver=$(python -V)
+        ver=$(python3 -V)
         version=$(echo "$ver" | awk '{ match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH) }')
         sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/EXTERNALLY-MANAGED.bk
         ;;
