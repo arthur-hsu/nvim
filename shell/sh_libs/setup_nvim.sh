@@ -26,7 +26,7 @@ cd ~/Documents/ &&\
 cd - || exit
 
 sudo apt-get install -y ninja-build gettext cmake unzip curl bpytop python3-pip
-sudo apt install -y ripgrep fd-find bat tldr xclip
+sudo apt install -y ripgrep fd-find bat tldr xclip python3.12-venv
 
 pip3 install neovim
 
