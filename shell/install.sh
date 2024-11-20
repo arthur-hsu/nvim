@@ -38,7 +38,8 @@ esac
 ./sh_libs/setup_zsh.sh
 ./sh_libs/pyenv_installer.sh
 sudo apt-get install -y expect
-chmod +x change_shell.exp ; ./change_shell.exp "$user_password"
+echo "$user_password" | chsh -s /bin/zsh
+# chmod +x change_shell.exp ; ./change_shell.exp "$user_password"
 
 # greetings and require rebooting system to take effect.
 echo "System will reboot in 3 seconds to take effect." 
