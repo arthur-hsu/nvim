@@ -54,7 +54,7 @@ local enter_load = function()
            "bufferline.nvim",
            "statuscol.nvim",
            "nvim-lspconfig",
-           -- "lspsaga.nvim",
+           "lspsaga.nvim",
            "lualine.nvim",
            "indent-blankline.nvim",
            "copilot.lua",

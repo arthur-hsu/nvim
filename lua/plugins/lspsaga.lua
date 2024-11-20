@@ -4,6 +4,8 @@ local M = {
     -- event = { "BufReadPost", "BufNewFile" },
     -- event = "VeryLazy",
     -- event = "LspAttach",
+    cmd = { "Lspsaga" },
+    
     dependencies = {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter', -- optional
