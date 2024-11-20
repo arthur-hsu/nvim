@@ -7,6 +7,7 @@ if [ ! -d "$lxterminal_config_folder" ]; then
     mkdir -p "$lxterminal_config_folder"
 fi
 cp ./sh_libs/lxterminal.conf ~/.config/lxterminal/lxterminal.conf
+dconf load /org/gnome/terminal/legacy/profiles:/ < ./sh_libs/gnome-terminal.conf
 
 printf "Enter password: "
 stty -echo
