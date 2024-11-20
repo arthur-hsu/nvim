@@ -17,6 +17,7 @@ if ver.minor >= 9 then
         -- ordinary Neovim
         require "config.lazy"
         require "config.options"
+        vim.opt.cmdheight = 0
         require "config.keymaps"
         require "config.autocmd"
         require "config.diagnostic"
@@ -47,6 +48,6 @@ else
     keymap("i", "<C-s>", "<esc>:w<CR>", opts)
     keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
     cmd('filetype plugin indent on')
-    cmd('set nu! rnu!')
+    cmd('set rnu!')
     -- cmd('colorscheme habamax')
 end

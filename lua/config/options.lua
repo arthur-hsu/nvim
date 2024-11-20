@@ -120,7 +120,6 @@ opt.modifiable         = true
 
 -- 不显示状态栏（设置为0时）
 opt.laststatus         = 0
-opt.cmdheight          = 0
 
 -- 启用撤销文件功能
 opt.undofile           = true
