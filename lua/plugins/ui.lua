@@ -1,8 +1,11 @@
 return {
-    { 'MaximilianLloyd/ascii.nvim',lazy = true, dependencies = { 'MunifTanjim/nui.nvim', lazy = true } },
     {
         "goolord/alpha-nvim",
         event = "VimEnter",
+        -- enabled = false,
+        dependencies = {
+            { 'MaximilianLloyd/ascii.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
+        },
         config = function()
             if vim.fn.argc() == 1 then
                 return

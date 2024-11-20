@@ -3,35 +3,35 @@ local M = {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
         "MunifTanjim/nui.nvim",
-        {
-            "rcarriga/nvim-notify",
-            events = "VeryLazy",
-            opts = {
-                background_colour = "NotifyBackground",
-                fps = 60,
-                level = vim.log.levels.INFO,
-                -- level = 2,
-                --minimum_width = 50,
-                -- Built-in renderers:
-                -- "default" "minimal" "simple" "compact" "wrapped-compact"
-                -- max_width = 200,
-                -- max_height = 10,
-
-                render = "default",
-                time_formats = {
-                    notification = "%T",
-                    notification_history = "%FT%T"
-                },
-                stages = "fade_in_slide_out",
-                -- stages = "fade",
-                -- stages = 'static',
-                timeout = 300,
-                top_down = true
-            },
-            config = function()
-                vim.notify = require("notify")
-            end
-        },
+        -- {
+        --     "rcarriga/nvim-notify",
+        --     events = "VeryLazy",
+        --     opts = {
+        --         background_colour = "NotifyBackground",
+        --         fps = 60,
+        --         level = vim.log.levels.INFO,
+        --         -- level = 2,
+        --         --minimum_width = 50,
+        --         -- Built-in renderers:
+        --         -- "default" "minimal" "simple" "compact" "wrapped-compact"
+        --         -- max_width = 200,
+        --         -- max_height = 10,
+        --
+        --         render = "default",
+        --         time_formats = {
+        --             notification = "%T",
+        --             notification_history = "%FT%T"
+        --         },
+        --         stages = "fade_in_slide_out",
+        --         -- stages = "fade",
+        --         -- stages = 'static',
+        --         timeout = 300,
+        --         top_down = true
+        --     },
+        --     config = function()
+        --         vim.notify = require("notify")
+        --     end
+        -- },
         {
             "j-hui/fidget.nvim",
             event = "VeryLazy",
