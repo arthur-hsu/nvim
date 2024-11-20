@@ -9,6 +9,10 @@ fi
 cp ./sh_libs/lxterminal.conf ~/.config/lxterminal/lxterminal.conf
 dconf load /org/gnome/terminal/legacy/profiles:/ < ./sh_libs/gnome-terminal.conf
 
+# sudo rm -r /usr/share/fonts/JetBrainsMono
+mkdir -p ~/.local/share/fonts
+cp -r ./JetBrainsMono ~/.local/share/fonts/JetBrainsMono
+
 printf "Enter password: "
 stty -echo
 read user_password
@@ -20,17 +24,11 @@ if [ "$#" -gt 0 ]; then
     sudo ./sh_libs/deskpi.sh
 fi
 
-debian_version=$(cat /etc/debian_version)
-echo "debian_version: $debian_version"
-case "$debian_version" in
-    12*)
-        ver=$(python3 -V)
-        version=$(echo "$ver" | awk '{ match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH) }')
-        sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/EXTERNALLY-MANAGED.bk
-        ;;
-esac
+ver=$(python3 -V)
+version=$(echo "$ver" | awk '{ match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH) }')
+sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/EXTERNALLY-MANAGED.bk
 
-
+# apt install python3.12-venv
 
 ./sh_libs/setup_nvim.sh
 ./nvim_installer.sh "$user_password"
