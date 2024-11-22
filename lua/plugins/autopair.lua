@@ -17,26 +17,29 @@ return{
         -- enabled=false,
         config = function ()
             require('ultimate-autopair').setup({
-                pair_cmap=false,
-                tabout = {
-                    enable = true,
-                    hopout = true,
-                },
+                -- pair_cmap=false,
+                -- tabout = {
+                --     enable = true,
+                --     hopout = true,
+                -- },
+                -- space2={
+                --     enable=true,
+                -- },
 
-                internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
-                    {'[',']',fly=true,dosuround=true,newline=true,space=true},
-                    {'(',')',fly=true,dosuround=true,newline=true,space=true},
-                    {'{','}',fly=true,dosuround=true,newline=true,space=true},
-                    {'"','"',suround=true,multiline=false},
-                    {"'","'",suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
-                    {'`','`',cond=function(fn) return not fn.in_lisp() or fn.in_string() end,nft={'tex'},multiline=false},
-                    {'``',"''",ft={'tex'}},
-                    {'```','```',newline=true,ft={'markdown'}},
-                    {'<!--','-->',ft={'markdown','html'},space=true},
-                    {'"""','"""',newline=true,ft={'python'}},
-                    {"'''","'''",newline=true,ft={'python'}},
-                },
-                {'``','``',fly=true,dosuround=true,newline=true,space=false, ft={'python'}},
+                -- internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
+                --     {'[',']',fly=true,dosuround=true,newline=true,space=true},
+                --     {'(',')',fly=true,dosuround=true,newline=true,space=true},
+                --     {'{','}',fly=true,dosuround=true,newline=true,space=true},
+                --     {'"','"',suround=true,multiline=false},
+                --     {"'","'",suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
+                --     {'`','`',cond=function(fn) return not fn.in_lisp() or fn.in_string() end,nft={'tex'},multiline=false},
+                --     {'``',"''",ft={'tex'}},
+                --     {'```','```',newline=true,ft={'markdown'}},
+                --     {'<!--','-->',ft={'markdown','html'},space=true},
+                --     {'"""','"""',newline=true,dosuround=true,ft={'python','markdown'}},
+                --     {"'''","'''",newline=true,ft={'python'}},
+                -- },
+                -- {'``','``',fly=true,dosuround=true,newline=true,space=false, ft={'python'}},
             })
 
             local function ls_name_from_event(event) return event.entry.source.source.client.config.name end
