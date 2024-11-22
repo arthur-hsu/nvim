@@ -11,5 +11,6 @@ return {
         quickfile = { enabled = true },
         statuscolumn = { enabled = false },
         words = { enabled = false },
+        terminal = { enabled = true },
     },
 }

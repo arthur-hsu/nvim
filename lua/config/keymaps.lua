@@ -30,12 +30,6 @@ vim.api.nvim_create_user_command("DiffviewToggle", function(e)
     end
 end, { nargs = "*" })
 
-vim.api.nvim_create_user_command('Terminal',
-    function ()
-        vim.cmd("terminal")
-        vim.api.nvim_input('i')
-    end
-, {})
 vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
 ---------------------------------------------------------------------
 
@@ -59,7 +53,7 @@ keymap("n", "<F2>",       "<cmd>Telescope file_browser path=%:p:help select_buff
 keymap("n", "<F3>",       "<cmd>Telescope<cr>",                                               opts )
 keymap('n', '<F4>',       '<cmd>TodoFzfLua<CR>',                                              opts )
 keymap("n", "<F5>",       "<cmd>RunCode<CR>",                                                 opts )
-keymap("n", "<F6>",       "<cmd>Telescope undo<CR>",                                          opts )
+keymap("n", "<F6>",       "<cmd>lua Snacks.terminal.toggle()<CR>",                            opts )
 keymap("n", "<F7>",       "<cmd>DiffviewFileHistoryToggle %<CR>",                             opts )
 keymap("n", "<F8>",       "<cmd>DiffviewToggle<CR>",                                          opts )
 keymap('n', "<F9>",       "<cmd>IlluminateToggle<CR>",                                        opts )
