@@ -48,7 +48,7 @@ return {
                     local now = os.date("%H:%M")
                     local weekday = os.date("%A")
                     local datetime = " " .. day .. "         " .. now .. "            " .. weekday
-                    
+
                     -- local datetime = os.date(" %Y/%m/%d        %H:%M            %a")
                     local footer = version .. plugins .. '\n \n'..datetime  .. "\n"
                     dashboard.section.footer.val = footer
@@ -100,7 +100,7 @@ return {
                 },
             })
             require('transparent').clear_prefix('lualine')
-            
+            vim.cmd("TransparentEnable")
         end
     },
 

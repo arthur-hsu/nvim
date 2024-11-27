@@ -26,10 +26,6 @@ function M.config()
         },
         ignore_install   = { "gitcommit" },
     }
-    -- 开启 Folding
-    vim.wo.foldmethod = 'expr'
-    vim.wo.foldexpr   = 'nvim_treesitter#foldexpr()'
-    vim.wo.foldlevel  = 99
 end
 
 return M

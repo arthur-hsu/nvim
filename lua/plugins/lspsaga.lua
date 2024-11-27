@@ -8,7 +8,7 @@ local M = {
     
     dependencies = {
         'neovim/nvim-lspconfig',
-        'nvim-treesitter/nvim-treesitter', -- optional
+        -- 'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons'      -- optional
     }
 }

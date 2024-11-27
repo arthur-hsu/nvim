@@ -79,6 +79,15 @@ opt.fillchars          = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- 设置折叠栏的宽度为1
 opt.foldcolumn         = "1"
 
+-- -- 设置折叠方式为expr
+vim.wo.foldmethod      = 'expr'
+
+-- 设置折叠表达式
+vim.wo.foldexpr        = 'nvim_treesitter#foldexpr()'
+
+-- 设置折叠等级
+vim.wo.foldlevel       = 99
+
 -- 始终显示签名列
 opt.signcolumn         = "yes"
 
@@ -155,7 +164,7 @@ opt.autowrite          = true
 opt.concealcursor      = 'nc'
 
 -- 設置guicursor
-vim.o.guicursor = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor-blinkon500-blinkoff500,r-cr-o:hor20-blinkon500-blinkoff500"
+vim.o.guicursor        = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor-blinkon500-blinkoff500,r-cr-o:hor20-blinkon500-blinkoff500"
 
 -- 设置文件格式为unix
 -- opt.fileformat         = "unix"

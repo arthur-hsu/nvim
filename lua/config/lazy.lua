@@ -26,6 +26,7 @@ local spec_list = gen_spec_list()
 
 require("lazy").setup({
     spec = spec_list,
+    -- spec = {},
     concurrency = 24,
     defaults = { lazy = true, version = nil },
     install = {
@@ -64,4 +65,3 @@ local enter_load = function()
    vim.cmd[[LspStart]]
 end
 vim.api.nvim_create_autocmd("UIEnter", {callback= enter_load})
--- vim.api.nvim_create_autocmd("UIEnter", {pattern="*.md", callback=function() require"lazy.loader".load({plugins={"pastify.nvim"}}) end })
