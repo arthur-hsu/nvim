@@ -1,7 +1,8 @@
 return {
     {
         'petertriho/nvim-scrollbar',
-        lazy = true,
+        -- lazy = true,
+        event = "VeryLazy",
         dependencies = {
             "kevinhwang91/nvim-hlslens",
             config = function()
