@@ -1,7 +1,7 @@
 local M = {
     'mg979/vim-visual-multi',
     event="VeryLazy",
-    enabled = false,
+    -- enabled = false,
     init = function()
         vim.g.VM_maps = {
              -- ["I BS"]      = '',
