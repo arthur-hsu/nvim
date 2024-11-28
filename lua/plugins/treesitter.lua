@@ -8,7 +8,7 @@ local M = {
     -- event = { "VeryLazy", "BufReadPost", "BufNewFile" },
     -- event = {"VeryLazy"}
     -- event = "LspAttach",
-    lazy = true,
+    -- lazy = true,
 }
 
 function M.config()
