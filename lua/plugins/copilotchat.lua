@@ -152,6 +152,7 @@ return {
             question_header = '  User ',                 -- Header to use for user questions
             answer_header   = '  Copilot ',              -- Header to use for AI answers
             error_header    = '  Error ',                -- Header to use for errors
+            chat_autocomplete = false,
             window = {
                 layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
                 relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
@@ -200,7 +201,6 @@ return {
         config = function(_,opts)
             vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
 
-            local select = require("CopilotChat.select")
 
             local prompts = {
                 QuickChat             = {},
@@ -212,49 +212,6 @@ return {
                 Refactor              = { prompt = "> /COPILOT_GENERATE\n\n請重構以上代碼以提高其清晰度和可讀性。" },
                 Tests                 = { prompt = "> /COPILOT_GENERATE\n\n簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 Translate             = { prompt = "> /COPILOT_GENERATE\n\n將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
-                Review                = {
-                    prompt = '> /COPILOT_REVIEW\n\nReview the selected code.',
-                    callback = function(response, source)
-                        local diagnostics = {}
-                        for line in response:gmatch('[^\r\n]+') do
-                            if line:find('^line=') then
-                                local start_line = nil
-                                local end_line = nil
-                                local message = nil
-                                local single_match, message_match = line:match('^line=(%d+): (.*)$')
-                                if not single_match then
-                                    local start_match, end_match, m_message_match = line:match(
-                                    '^line=(%d+)-(%d+): (.*)$')
-                                    if start_match and end_match then
-                                        start_line = tonumber(start_match)
-                                        end_line = tonumber(end_match)
-                                        message = m_message_match
-                                    end
-                                else
-                                    start_line = tonumber(single_match)
-                                    end_line = start_line
-                                    message = message_match
-                                end
-
-                                if start_line and end_line then
-                                    table.insert(diagnostics, {
-                                        lnum = start_line - 1,
-                                        end_lnum = end_line - 1,
-                                        col = 0,
-                                        message = message,
-                                        severity = vim.diagnostic.severity.WARN,
-                                        source = 'Copilot Review',
-                                    })
-                                end
-                            end
-                        end
-                        vim.diagnostic.set(
-                            vim.api.nvim_create_namespace('copilot_diagnostics'),
-                            source.bufnr,
-                            diagnostics
-                        )
-                    end,
-                },
                 Fix = {
                     prompt = '> /COPILOT_GENERATE\n\nPlease assist with the following diagnostic issue in file:',
                 },
@@ -284,86 +241,87 @@ return {
             -- end
 
             -- NOTE: So we need to create an ordered list.
-            local options = { "QuickChat", "QuickChatWithFiletype", "Translate", "Commit", "CommitStaged", "Explain", "Fix", "Suggestion", "Annotations", "Refactor", "Review", "Tests" }
-
-
-            local pickers      = require "telescope.pickers"
-            local finders      = require "telescope.finders"
-            local conf         = require("telescope.config").values
-            local actions      = require "telescope.actions"
-            local action_state = require "telescope.actions.state"
-            local Chat_cmd     = "CopilotChat"
-            local Chat_prompts = require("CopilotChat").prompts()
-
-            local Telescope_CopilotActions = function(opts, mode)
-                opts = opts or {}
-                pickers.new(opts, {
-                    prompt_title = "Select Copilot prompt",
-                    finder = finders.new_table { results = options },
-                    sorter = conf.generic_sorter(opts),
-
-                    attach_mappings = function(prompt_bufnr, map)
-                        actions.select_default:replace(function()
-                            actions.close(prompt_bufnr)
-                            local selected = action_state.get_selected_entry()
-                            local choice = selected[1]
-                            local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
-                            local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
-
-                            local msg       = nil
-                            local selection = nil
-                            local callback  = nil
-                            -- Find the item message and selection base on the choice
-                            for item, body in pairs(Chat_prompts) do
-                                if item == choice then
-                                    msg       = body.prompt
-                                    selection = body.selection
-                                    callback  = body.callback
-                                    break
-                                end
-                            end
-                            -- If the choice is QuickChat or QuickChatWithFiletype, open the input dialog
-                            if msg == nil then
-                                local input = vim.fn.input("Quick Chat: ")
-                                if input ~= "" then
-                                    msg = input
-                                end
-                            end
-                            -- If the choice is QuickChat, set the selection to nil
-                            if choice == 'QuickChat' then
-                                Ask_msg = msg
-                                selection = function () return nil end
-                            else
-                                if string.find(choice, "Commit") or string.find(choice, "Translate") then
-                                    Ask_msg = msg
-                                else
-                                    Ask_msg = FiletypeMsg .. msg
-                                end
-
-                                if selection == nil then
-                                    if mode == 'normal' then
-                                        selection = select.buffer
-                                    else
-                                        selection = select.visual
-                                    end
-                                    -- print("selection is nil")
-                                end
-                            end
-
-                            require("CopilotChat").ask(Ask_msg,{ selection = selection, callback = callback })
-                        end)
-                        return true
-                    end,
-                }):find()
-            end
-
-            vim.api.nvim_create_user_command("CopilotActions",
-                function(args)
-                    local mode = string.lower(args.args)
-                    Telescope_CopilotActions(require("telescope.themes").get_dropdown { selection_caret = " " }, mode)
-                end,
-                { nargs = 1, range = true, complete = function() return { "normal", "visual" } end, }
-            )
+            -- local options = { "QuickChat", "QuickChatWithFiletype", "Translate", "Commit", "CommitStaged", "Explain", "Fix", "Suggestion", "Annotations", "Refactor", "Review", "Tests" }
+            --
+            --
+            -- local pickers      = require "telescope.pickers"
+            -- local finders      = require "telescope.finders"
+            -- local conf         = require("telescope.config").values
+            -- local actions      = require "telescope.actions"
+            -- local action_state = require "telescope.actions.state"
+            -- local Chat_cmd     = "CopilotChat"
+            -- local Chat_prompts = require("CopilotChat").prompts()
+            --
+            -- local select = require("CopilotChat.select")
+            -- local Telescope_CopilotActions = function(opts, mode)
+            --     opts = opts or {}
+            --     pickers.new(opts, {
+            --         prompt_title = "Select Copilot prompt",
+            --         finder = finders.new_table { results = options },
+            --         sorter = conf.generic_sorter(opts),
+            --
+            --         attach_mappings = function(prompt_bufnr, map)
+            --             actions.select_default:replace(function()
+            --                 actions.close(prompt_bufnr)
+            --                 local selected = action_state.get_selected_entry()
+            --                 local choice = selected[1]
+            --                 local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
+            --                 local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
+            --
+            --                 local msg       = nil
+            --                 local selection = nil
+            --                 local callback  = nil
+            --                 -- Find the item message and selection base on the choice
+            --                 for item, body in pairs(Chat_prompts) do
+            --                     if item == choice then
+            --                         msg       = body.prompt
+            --                         selection = body.selection
+            --                         callback  = body.callback
+            --                         break
+            --                     end
+            --                 end
+            --                 -- If the choice is QuickChat or QuickChatWithFiletype, open the input dialog
+            --                 if msg == nil then
+            --                     local input = vim.fn.input("Quick Chat: ")
+            --                     if input ~= "" then
+            --                         msg = input
+            --                     end
+            --                 end
+            --                 -- If the choice is QuickChat, set the selection to nil
+            --                 if choice == 'QuickChat' then
+            --                     Ask_msg = msg
+            --                     selection = function () return nil end
+            --                 else
+            --                     if string.find(choice, "Commit") or string.find(choice, "Translate") then
+            --                         Ask_msg = msg
+            --                     else
+            --                         Ask_msg = FiletypeMsg .. msg
+            --                     end
+            --
+            --                     if selection == nil then
+            --                         if mode == 'normal' then
+            --                             selection = select.buffer
+            --                         else
+            --                             selection = select.visual
+            --                         end
+            --                         -- print("selection is nil")
+            --                     end
+            --                 end
+            --
+            --                 require("CopilotChat").ask(Ask_msg,{ selection = selection, callback = callback })
+            --             end)
+            --             return true
+            --         end,
+            --     }):find()
+            -- end
+            --
+            -- vim.api.nvim_create_user_command("CopilotActions",
+            --     function(args)
+            --         local mode = string.lower(args.args)
+            --         Telescope_CopilotActions(require("telescope.themes").get_dropdown { selection_caret = " " }, mode)
+            --     end,
+            --     { nargs = 1, range = true, complete = function() return { "normal", "visual" } end, }
+            -- )
 
         end,
 
@@ -380,24 +338,35 @@ return {
                 mode = {"n","v","x"}
             },
             {
-                '<leader>ccp',
+                "<leader>ccp",
                 function()
-                    vim.api.nvim_command('y')
-                    vim.api.nvim_command('normal v')
-                    vim.cmd("CopilotActions visual")
+                    local actions = require("CopilotChat.actions")
+                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
                 end,
                 desc = "CopilotChat - Prompt actions",
-                mode = {"v", "x"}
+                mode = {"n", "v", "x"}
             },
-            {
-                '<leader>ccp',
-                function()
-                    -- require("CopilotChat.code_actions").show_prompt_actions()
-                    vim.cmd("CopilotActions normal")
-                end,
-                desc = "CopilotChat - Prompt actions",
-                mode = {"n"}
-            },
+
+
+            -- {
+            --     '<leader>ccp',
+            --     function()
+            --         vim.api.nvim_command('y')
+            --         vim.api.nvim_command('normal v')
+            --         vim.cmd("CopilotActions visual")
+            --     end,
+            --     desc = "CopilotChat - Prompt actions",
+            --     mode = {"v", "x"}
+            -- },
+            -- {
+            --     '<leader>ccp',
+            --     function()
+            --         -- require("CopilotChat.code_actions").show_prompt_actions()
+            --         vim.cmd("CopilotActions normal")
+            --     end,
+            --     desc = "CopilotChat - Prompt actions",
+            --     mode = {"n"}
+            -- },
             { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = "CopilotChat - Open chat",          mode = {"n", "v", "x"} },
             { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = "CopilotChat - Close chat",         mode = {"n", "v", "x"} },
             { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = "CopilotChat - Toggle chat",        mode = {"n", "v", "x"} },
