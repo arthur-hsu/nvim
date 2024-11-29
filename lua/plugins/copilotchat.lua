@@ -5,12 +5,12 @@ local function find_lines_between_separator(lines, pattern, at_least_one)
     local found_one             = false
 
     -- Find the last occurrence of the separator
-    for i = line_count, 1, -1 do             -- Reverse the loop to start from the end
+    for i = line_count, 1, -1 do -- Reverse the loop to start from the end
         local line = lines[i]
         if string.find(line, pattern) then
             if i < (separator_line_finish + 1) and (not at_least_one or found_one) then
                 separator_line_start = i + 1
-                break             -- Exit the loop as soon as the condition is met
+                break -- Exit the loop as soon as the condition is met
             end
 
             found_one = true
@@ -79,14 +79,14 @@ local commit_callback = function(response, source, staged)
             local commit = "git commit -F " .. tmpfile
             local push   = "git push"
 
-            local cmd = ""
+            local cmd    = ""
 
             if not staged then
                 cmd = add .. " && "
             end
             local commit_cmd = cmd .. commit .. " && " .. push
 
-            local first_notify = notify( result, "info", {
+            local first_notify = notify(result, "info", {
                 title = "Git committing changes in backend ...",
                 icon = "",
                 on_open = function(win)
@@ -104,7 +104,7 @@ local commit_callback = function(response, source, staged)
                     handle:close()
                     os.remove(tmpfile)
                     if code == 0 then
-                        notify( result, "info", {
+                        notify(result, "info", {
                             title = "Git commit success",
                             icon = "",
                             replace = first_notify,
@@ -142,187 +142,75 @@ return {
         branch = "canary",
         event = "VeryLazy",
         dependencies = {
-            { "zbirenbaum/copilot.lua" },                 -- or github/copilot.vim
-            { "nvim-lua/plenary.nvim" },                  -- for curl, log wrapper
-            { "nvim-telescope/telescope.nvim" },          -- for telescope help actions (optional)
+            { "zbirenbaum/copilot.lua" },        -- or github/copilot.vim
+            { "nvim-lua/plenary.nvim" },         -- for curl, log wrapper
+            { "nvim-telescope/telescope.nvim" }, -- for telescope help actions (optional)
         },
         opts = {
-            debug = false,
-            log_level = "fatal",
-            question_header = '  User ',                 -- Header to use for user questions
-            answer_header   = '  Copilot ',              -- Header to use for AI answers
-            error_header    = '  Error ',                -- Header to use for errors
+            debug             = false,
+            log_level         = "fatal",
+            question_header   = '  User ', -- Header to use for user questions
+            answer_header     = '  Copilot ', -- Header to use for AI answers
+            error_header      = '  Error ', -- Header to use for errors
             chat_autocomplete = false,
-            window = {
-                layout = 'vertical',                      -- 'vertical', 'horizontal', 'float'
-                relative = 'editor',                      -- 'editor', 'win', 'cursor', 'mouse'
-                border = 'rounded',                       -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-                width = 0.5,                              -- fractional width of parent
-                height = 0.6,                             -- fractional height of parent
-                row = nil,                                -- row position of the window, default is centered
-                col = nil,                                -- column position of the window, default is centered
-                title = '  CopilotChat ',                -- title of chat window
-                footer = nil,                             -- footer of chat window
-                zindex = 1,                               -- determines if window is on top or below other floating windows
+            window            = {
+                border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+                width = 0.5, -- fractional width of parent
+                height = 0.6, -- fractional height of parent
+                title = '  CopilotChat ', -- title of chat window
             },
-            mappings = {
-                complete = {
-                    detail = 'Use @<Tab> or /<Tab> for options.',
-                    insert ='<Tab>',
-                },
-                close = {
-                    normal = 'q',
-                    insert = '<C-c>'
-                },
-                reset = {
-                    normal ='<C-l>',
-                    insert = '<C-l>'
-                },
-                submit_prompt = {
-                    normal = '<CR>',
-                    insert = '<C-m>'
-                },
+            mappings          = {
                 accept_diff = {
                     normal = '<C-a>',
                     insert = '<C-a>'
                 },
-                show_diff = {
-                    normal = 'gd'
-                },
-                show_system_prompt = {
-                    normal = 'gp'
-                },
-                show_user_selection = {
-                    normal = 'gs'
-                },
             },
         },
 
-        config = function(_,opts)
+        config = function(_, opts)
             vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
-
-
+            local select = require("CopilotChat.select")
             local prompts = {
                 QuickChat             = {},
                 QuickChatWithFiletype = {},
                 Explain               = { prompt = "> /COPILOT_EXPLAIN\n\n解釋這段代碼如何運行。" },
-                FixError              = { prompt = "> /COPILOT_GENERATE\n\n請解釋以上代碼中的錯誤並提供解決方案。" },
                 Suggestion            = { prompt = "> /COPILOT_GENERATE\n\n請查看以上代碼並提供改進建議的sample code。" },
                 Annotations           = { prompt = "> /COPILOT_GENERATE\n\n為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
                 Refactor              = { prompt = "> /COPILOT_GENERATE\n\n請重構以上代碼以提高其清晰度和可讀性。" },
                 Tests                 = { prompt = "> /COPILOT_GENERATE\n\n簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 Translate             = { prompt = "> /COPILOT_GENERATE\n\n將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
-                Fix = {
+                Fix                   = {
                     prompt = '> /COPILOT_GENERATE\n\nPlease assist with the following diagnostic issue in file:',
                 },
-                Commit = {
-                    prompt = '> #git:unstaged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    callback = function (response, source)
+                Commit                = {
+                    prompt =
+                    '> #git:unstaged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    callback = function(response, source)
                         commit_callback(response, source, false)
                     end
                 },
-                CommitStaged = {
+                CommitStaged          = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-                    prompt = '> #git:staged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
-                    callback = function (response, source)
+                    prompt =
+                    '> #git:staged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    callback = function(response, source)
                         commit_callback(response, source, true)
                     end,
                 },
             }
             opts.prompts = prompts
             require("CopilotChat").setup(opts)
+            vim.api.nvim_create_autocmd('BufEnter', {
+                pattern = 'copilot-*',
+                callback = function()
+                    vim.opt_local.relativenumber = true
 
-            -- NOTE: This function creates an unordered list.
-            -- local options = {}
-            -- table.insert(options, "Quick Chat")
-            -- table.insert(options, "Quick Chat with file type")
-            -- for key, value in pairs(prompts) do
-            --     table.insert(options, key)
-            -- end
-
-            -- NOTE: So we need to create an ordered list.
-            -- local options = { "QuickChat", "QuickChatWithFiletype", "Translate", "Commit", "CommitStaged", "Explain", "Fix", "Suggestion", "Annotations", "Refactor", "Review", "Tests" }
-            --
-            --
-            -- local pickers      = require "telescope.pickers"
-            -- local finders      = require "telescope.finders"
-            -- local conf         = require("telescope.config").values
-            -- local actions      = require "telescope.actions"
-            -- local action_state = require "telescope.actions.state"
-            -- local Chat_cmd     = "CopilotChat"
-            -- local Chat_prompts = require("CopilotChat").prompts()
-            --
-            -- local select = require("CopilotChat.select")
-            -- local Telescope_CopilotActions = function(opts, mode)
-            --     opts = opts or {}
-            --     pickers.new(opts, {
-            --         prompt_title = "Select Copilot prompt",
-            --         finder = finders.new_table { results = options },
-            --         sorter = conf.generic_sorter(opts),
-            --
-            --         attach_mappings = function(prompt_bufnr, map)
-            --             actions.select_default:replace(function()
-            --                 actions.close(prompt_bufnr)
-            --                 local selected = action_state.get_selected_entry()
-            --                 local choice = selected[1]
-            --                 local get_type = vim.api.nvim_buf_get_option(0, 'filetype')
-            --                 local FiletypeMsg = Chat_cmd .. " " .. "這是一段 ".. get_type .. " 代碼, "
-            --
-            --                 local msg       = nil
-            --                 local selection = nil
-            --                 local callback  = nil
-            --                 -- Find the item message and selection base on the choice
-            --                 for item, body in pairs(Chat_prompts) do
-            --                     if item == choice then
-            --                         msg       = body.prompt
-            --                         selection = body.selection
-            --                         callback  = body.callback
-            --                         break
-            --                     end
-            --                 end
-            --                 -- If the choice is QuickChat or QuickChatWithFiletype, open the input dialog
-            --                 if msg == nil then
-            --                     local input = vim.fn.input("Quick Chat: ")
-            --                     if input ~= "" then
-            --                         msg = input
-            --                     end
-            --                 end
-            --                 -- If the choice is QuickChat, set the selection to nil
-            --                 if choice == 'QuickChat' then
-            --                     Ask_msg = msg
-            --                     selection = function () return nil end
-            --                 else
-            --                     if string.find(choice, "Commit") or string.find(choice, "Translate") then
-            --                         Ask_msg = msg
-            --                     else
-            --                         Ask_msg = FiletypeMsg .. msg
-            --                     end
-            --
-            --                     if selection == nil then
-            --                         if mode == 'normal' then
-            --                             selection = select.buffer
-            --                         else
-            --                             selection = select.visual
-            --                         end
-            --                         -- print("selection is nil")
-            --                     end
-            --                 end
-            --
-            --                 require("CopilotChat").ask(Ask_msg,{ selection = selection, callback = callback })
-            --             end)
-            --             return true
-            --         end,
-            --     }):find()
-            -- end
-            --
-            -- vim.api.nvim_create_user_command("CopilotActions",
-            --     function(args)
-            --         local mode = string.lower(args.args)
-            --         Telescope_CopilotActions(require("telescope.themes").get_dropdown { selection_caret = " " }, mode)
-            --     end,
-            --     { nargs = 1, range = true, complete = function() return { "normal", "visual" } end, }
-            -- )
-
+                    -- C-p to print last response
+                    vim.keymap.set('n', '<C-p>', function()
+                        print(require("CopilotChat").response())
+                    end, { buffer = true, remap = true })
+                end
+            })
         end,
 
         keys = {
@@ -335,49 +223,28 @@ return {
                     end
                 end,
                 desc = "CopilotChat - Quick chat",
-                mode = {"n","v","x"}
+                mode = { "n", "v", "x" }
             },
             {
-                "<leader>ccp",
+                '<leader>ccp',
                 function()
                     local actions = require("CopilotChat.actions")
                     require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
                 end,
                 desc = "CopilotChat - Prompt actions",
-                mode = {"n", "v", "x"}
+                mode = { "n", "v", "x" }
             },
+            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = "CopilotChat - Open chat",          mode = { "n", "v", "x" } },
+            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = "CopilotChat - Close chat",         mode = { "n", "v", "x" } },
+            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = "CopilotChat - Toggle chat",        mode = { "n", "v", "x" } },
+            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",       desc = "CopilotChat - Reset chat",         mode = { "n", "v", "x" } },
+            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",   desc = "CopilotChat - Show diff",          mode = { "n", "v", "x" } },
 
-
-            -- {
-            --     '<leader>ccp',
-            --     function()
-            --         vim.api.nvim_command('y')
-            --         vim.api.nvim_command('normal v')
-            --         vim.cmd("CopilotActions visual")
-            --     end,
-            --     desc = "CopilotChat - Prompt actions",
-            --     mode = {"v", "x"}
-            -- },
-            -- {
-            --     '<leader>ccp',
-            --     function()
-            --         -- require("CopilotChat.code_actions").show_prompt_actions()
-            --         vim.cmd("CopilotActions normal")
-            --     end,
-            --     desc = "CopilotChat - Prompt actions",
-            --     mode = {"n"}
-            -- },
-            { '<leader>cco', "<cmd>CopilotChatOpen<cr>",        desc = "CopilotChat - Open chat",          mode = {"n", "v", "x"} },
-            { '<leader>ccq', "<cmd>CopilotChatClose<cr>",       desc = "CopilotChat - Close chat",         mode = {"n", "v", "x"} },
-            { '<leader>cct', "<cmd>CopilotChatToggle<cr>",      desc = "CopilotChat - Toggle chat",        mode = {"n", "v", "x"} },
-            { '<leader>ccR', "<cmd>CopilotChatReset<cr>",       desc = "CopilotChat - Reset chat",         mode = {"n", "v", "x"} },
-            { '<leader>ccD', "<cmd>CopilotChatDebugInfo<cr>",   desc = "CopilotChat - Show diff",          mode = {"n", "v", "x"} },
-
-            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",     desc = "CopilotChat - Explain code",       mode = {"n", "v", "x"} },
-            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",    desc = "CopilotChat - Fix Error",          mode = {"n", "v", "x"} },
-            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",  desc = "CopilotChat - Provide suggestion", mode = {"n", "v", "x"} },
-            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",    desc = "CopilotChat - Refactor code",      mode = {"n", "v", "x"} },
-            { '<leader>ccA', "<cmd>CopilotChatAnnotations<cr>", desc = "CopilotChat - Add a comment",      mode = {"n", "v", "x"} },
+            { '<leader>cce', "<cmd>CopilotChatExplain<cr>",     desc = "CopilotChat - Explain code",       mode = { "n", "v", "x" } },
+            { '<leader>ccT', "<cmd>CopilotChatFixError<cr>",    desc = "CopilotChat - Fix Error",          mode = { "n", "v", "x" } },
+            { '<leader>ccr', "<cmd>CopilotChatSuggestion<cr>",  desc = "CopilotChat - Provide suggestion", mode = { "n", "v", "x" } },
+            { '<leader>ccF', "<cmd>CopilotChatRefactor<cr>",    desc = "CopilotChat - Refactor code",      mode = { "n", "v", "x" } },
+            { '<leader>ccA', "<cmd>CopilotChatAnnotations<cr>", desc = "CopilotChat - Add a comment",      mode = { "n", "v", "x" } },
         }
     },
 }
