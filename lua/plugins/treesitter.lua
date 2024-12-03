@@ -16,7 +16,7 @@ function M.config()
     require 'nvim-treesitter.configs'.setup {
         auto_install     = true,
         sync_install     = true,
-        ensure_installed = { "python", "bash", "json", "vim", "vimdoc", "markdown", "markdown_inline", "lua", "regex" }, -- or all
+        ensure_installed = { "python", "bash", "json", "vim", "vimdoc", "markdown", "markdown_inline", "lua", "regex", "gitcommit", "diff" }, -- or all
         highlight        = {
             enable = true,
         },
@@ -24,7 +24,7 @@ function M.config()
             enable = true,
             disable = { 'lua' },
         },
-        ignore_install   = { "gitcommit" },
+        -- ignore_install   = { "gitcommit" },
     }
 end
 

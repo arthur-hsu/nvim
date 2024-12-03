@@ -24,12 +24,6 @@ if [ "$#" -gt 0 ]; then
     sudo ./sh_libs/deskpi.sh
 fi
 
-ver=$(python3 -V)
-version=$(echo "$ver" | awk '{ match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH) }')
-sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/EXTERNALLY-MANAGED.bk
-
-# apt install python3.12-venv
-
 ./sh_libs/setup_nvim.sh
 ./nvim_installer.sh "$user_password"
 
