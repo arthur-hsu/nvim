@@ -123,7 +123,7 @@ function M.config()
             },
         },
         symbol_in_winbar = {
-            enable       = true,
+            enable       = false,
             separator    = '› ',
             hide_keyword = false,
             show_file    = true,
