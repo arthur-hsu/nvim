@@ -80,3 +80,4 @@ fb_actions.open = function(prompt_bufnr)
   actions.close(prompt_bufnr)
 end
 ```
+
