@@ -27,6 +27,8 @@ fi
 cd /tmp/neovim || exit
 LastTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
 
+echo "LastTag: $LastTag"
+
 if [ "$LastTag" = "$latest_pkg" ]; then
     echo "Use current deb file"
     cd ~/.config/nvim/shell/nvim_deb || exit
@@ -43,6 +45,7 @@ else
     deb_file="neovim_${version}_$system_.deb"
     # echo "$user_password" | sudo -S dpkg -i "$deb_file"
     tag=$(git describe --tags --match "v*" --abbrev=0)
+    sudo chown 1000:1000 "$deb_file"
     mv "$deb_file" ~/.config/nvim/shell/nvim_deb/neovim_"$tag"_"$system_".deb 
     echo "Install finish"
     cd ~/.config/nvim/shell/nvim_deb || exit

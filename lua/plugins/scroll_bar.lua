@@ -91,7 +91,7 @@ return {
                 marks = {
                     Search = {
                         text      = { "-" },
-                        highlight = "Search",
+                        highlight = "CurSearch",
                     },
                     Info = {
                         text      = { " " },
