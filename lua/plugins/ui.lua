@@ -91,7 +91,7 @@ return {
                     "done_style",
                     "WarningMsg",
                     "group_style",
-                    "icon_style"
+                    "icon_style",
                 },
                 -- table: groups you don't want to clear
                 exclude_groups = {

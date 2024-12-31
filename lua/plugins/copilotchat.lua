@@ -34,7 +34,7 @@ end
 local commit_callback = function(response, source, staged)
     local bufnr    = source.bufnr
     local buftype  = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-    local notify   = require("notify")
+    local notify   = vim.notify
     local accept   = require("CopilotChat").config.mappings.accept_diff.normal
     local quit     = require("CopilotChat").config.mappings.close.normal
     local showdiff = require("CopilotChat").config.mappings.show_diff.normal
