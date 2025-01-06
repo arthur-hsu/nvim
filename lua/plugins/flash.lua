@@ -8,8 +8,8 @@ return {
         { "S",     mode = { "n" },      function () require("flash").treesitter()        end , desc = "flash treesitter" },
         { "<C-s>", mode = { "x", "o" }, function () require("flash").jump()              end , desc = "flash" },
         { "<C-s>", mode = { "c" },      function () require("flash").toggle()            end , desc = "toggle flash search" },
-        -- { "r",     mode = "o",               function() require("flash").remote()            end , desc = "remote flash" },
-        -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end , desc = "treesitter search" },
+        { "r",     mode = "o",               function() require("flash").remote()            end , desc = "remote flash" },
+        { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end , desc = "treesitter search" },
     },
     config = function()
         require("flash").setup({

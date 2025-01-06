@@ -4,7 +4,7 @@ local M = {
     -- enabled = false,
     init = function()
         vim.g.VM_maps = {
-             -- ["I BS"]      = '',
+            -- ["I BS"]      = "",
             ["Goto Next"] = "",
             ["Goto Prev"] = ""
         }
