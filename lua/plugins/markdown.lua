@@ -1,8 +1,11 @@
 return {
     {
         "tadmccorkle/markdown.nvim",
-        enabled = false,
+        enabled = true,
         ft = { "markdown" },
+        config = function ()
+            require("markdown").setup()
+        end
     },
     {
         "SCJangra/table-nvim",
@@ -10,22 +13,22 @@ return {
         enabled = true,
         opts = {
             padd_column_separators = true, -- Insert a space around column separators.
-            mappings = {           -- next and prev work in Normal and Insert mode. All other mappings work in Normal mode.
+            mappings = {                   -- next and prev work in Normal and Insert mode. All other mappings work in Normal mode.
                 -- next = '<TAB>',    -- Go to next cell.
                 -- prev = '<S-TAB>',  -- Go to previous cell.
-                next = '<A-]>',    -- Go to next cell.
-                prev = '<A-[>',  -- Go to previous cell.
-                insert_row_up = '<A-k>', -- Insert a row above the current row.
-                insert_row_down = '<A-j>', -- Insert a row below the current row.
-                move_row_up = '<A-S-k>', -- Move the current row up.
-                move_row_down = '<A-S-j>', -- Move the current row down.
-                insert_column_left = '<A-h>', -- Insert a column to the left of current column.
+                next = '<A-]>',                -- Go to next cell.
+                prev = '<A-[>',                -- Go to previous cell.
+                insert_row_up = '<A-k>',       -- Insert a row above the current row.
+                insert_row_down = '<A-j>',     -- Insert a row below the current row.
+                move_row_up = '<A-S-k>',       -- Move the current row up.
+                move_row_down = '<A-S-j>',     -- Move the current row down.
+                insert_column_left = '<A-h>',  -- Insert a column to the left of current column.
                 insert_column_right = '<A-l>', -- Insert a column to the right of current column.
-                move_column_left = '<A-S-h>', -- Move the current column to the left.
+                move_column_left = '<A-S-h>',  -- Move the current column to the left.
                 move_column_right = '<A-S-l>', -- Move the current column to the right.
-                insert_table = '<A-t>', -- Insert a new table.
-                insert_table_alt = '<A-S-t>', -- Insert a new table that is not surrounded by pipes.
-                delete_column = '<A-d>', -- Delete the column under cursor.
+                insert_table = '<A-t>',        -- Insert a new table.
+                insert_table_alt = '<A-S-t>',  -- Insert a new table that is not surrounded by pipes.
+                delete_column = '<A-d>',       -- Delete the column under cursor.
             }
         }
     },
@@ -37,7 +40,31 @@ return {
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
-        opts = {},
+        opts = {
+            render_modes = true,
+        },
+        config = function(_, opts)
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#76A2F6", bg = "#23273B", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#DEB06D", bg = "#2D282C", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#9DCD66", bg = "#252C2C", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#15C19E", bg = "#182931", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#BA99F7", bg = "#29273A", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#9B80D0", bg = "#262336", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#76A2F6", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = "#DEB06D", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = "#9DCD66", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = "#15C19E", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = "#BA99F7", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = "#9B80D0", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH1", { fg = "#76A2F6", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH2", { fg = "#DEB06D", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH3", { fg = "#9DCD66", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH4", { fg = "#15C19E", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH5", { fg = "#BA99F7", bold = true })
+            vim.api.nvim_set_hl(0, "MarkdownH6", { fg = "#9B80D0", bold = true })
+            
+            require('render-markdown').setup(opts)
+        end
     },
     {
         'arthur-hsu/pastify.nvim',

@@ -1,4 +1,9 @@
--- if vim.loop.os_uname().sysname == 'Windows_NT' then
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+    vim.opt.shell = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    vim.opt.shellcmdflag = "-command"
+    vim.opt.shellquote = "\""
+    vim.opt.shellxquote = ""
+end
 --     vim.g.python3_host_prog= "C:\\Users\\arthur\\.pyenv\\pyenv-win\\versions\\3.11.7\\python.exe"
 -- elseif vim.loop.os_uname().sysname == 'Darwin' then
 --     vim.g.python3_host_prog= "/Users/arthur/.pyenv/versions/3.11.7/bin/python"

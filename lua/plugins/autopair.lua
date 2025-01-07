@@ -32,6 +32,9 @@ return{
                 },
 
                 {'``','``',fly=true,suround=true,dosuround=true,newline=true,space=false, ft={'python'}},
+                -- {'*','*',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
+                -- {'**','**',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
+                -- {'***','***',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
                 internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
                     {'[',']',fly=true,dosuround=true,newline=true,space=true},
                     {'(',')',fly=true,dosuround=true,newline=true,space=true},

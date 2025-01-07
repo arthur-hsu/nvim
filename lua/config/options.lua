@@ -3,6 +3,8 @@ local opt = vim.opt
 local cmd = vim.cmd
 local g   = vim.g
 
+-- Disable the perl provider support
+g.loaded_perl_provider = 0
 
 -- 设置退格键的行为
 opt.backspace          = {'indent', 'eol', 'start'}
