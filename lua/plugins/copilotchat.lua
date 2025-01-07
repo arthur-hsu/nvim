@@ -34,7 +34,8 @@ end
 local commit_callback = function(response, source, staged)
     local bufnr    = source.bufnr
     local buftype  = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
-    local notify   = vim.notify
+    -- local notify   = vim.notify
+    local notify   = require("notify")
     local accept   = require("CopilotChat").config.mappings.accept_diff.normal
     local quit     = require("CopilotChat").config.mappings.close.normal
     local showdiff = require("CopilotChat").config.mappings.show_diff.normal
@@ -65,7 +66,7 @@ local commit_callback = function(response, source, staged)
             vim.api.nvim_input(accept)
             vim.api.nvim_input(quit)
         else
-            local tmpfile = "/tmp/copilot_commit_msg"
+            local tmpfile = vim.fn.stdpath("cache") .. "/copilot_commit_msg"
             local file = io.open(tmpfile, "w")
             if not file then
                 notify("Failed to open file: " .. tmpfile, "error", { title = "Git commit" })
@@ -85,6 +86,7 @@ local commit_callback = function(response, source, staged)
                 cmd = add .. " && "
             end
             local commit_cmd = cmd .. commit .. " && " .. push
+            print(commit_cmd)
 
             local first_notify = notify(result, "info", {
                 title = "Git committing changes in backend ...",

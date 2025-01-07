@@ -85,7 +85,7 @@ return {
     {
         -- NOTE: highlight CursorWord
         "sontungexpt/stcursorword",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         config = function()
             -- default configuration

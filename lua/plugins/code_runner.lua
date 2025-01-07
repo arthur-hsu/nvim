@@ -10,8 +10,7 @@ local function python()
     if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
         return "python3 -u"
     elseif vim.loop.os_uname().sysname == 'Windows_NT' then
-        -- return "python -u"
-        return  "python -u '$dir/$fileName'"
+        return "python -u "
     end
 end
 
@@ -75,7 +74,7 @@ function M.config()
                 "-o $fileNameWithoutExt &&",
                 "$dir/$fileNameWithoutExt",
             },
-            python = python(),
+            -- python = python(),
             sh = "bash",
             rust = {
                 "cd $dir &&",

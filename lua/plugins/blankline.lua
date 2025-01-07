@@ -52,6 +52,10 @@ return {
                     show_end         = false,
                     show_exact_scope = false,
                     include          = { node_type = { ["*"] = { "*" } } }
+                },
+                exclude = {
+                    filetypes = { "lazy" },
+                    -- buftypes  = { "terminal" },
                 }
             })
             -- Toggle indent-blankline when entering visual mode

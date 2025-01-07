@@ -28,6 +28,8 @@ return {
             vim.keymap.set('n', '[;', dropbar_api.goto_context_start, { desc = 'Go to start of current context' })
             vim.keymap.set('n', '];', dropbar_api.select_next_context, { desc = 'Select next context' })
             vim.ui.select = require('dropbar.utils.menu').select
+            -- vim.api.nvim_set_hl(0, 'DropBarMenuHoverIcon', { bg = '#1f2335' })
+            vim.api.nvim_set_hl(0, 'DropBarMenuHoverIcon', {})
         end
     }
 }
