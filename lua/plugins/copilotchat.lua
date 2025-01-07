@@ -83,9 +83,9 @@ local commit_callback = function(response, source, staged)
             local cmd    = ""
 
             if not staged then
-                cmd = add .. " ; "
+                cmd = add .. " && "
             end
-            local commit_cmd = cmd .. commit .. " ; " .. push
+            local commit_cmd = cmd .. commit .. " && " .. push
             print(commit_cmd)
 
             local first_notify = notify(result, "info", {
@@ -97,10 +97,18 @@ local commit_callback = function(response, source, staged)
                 end
             })
             local handle
+            -- local git_cmd = commit_cmd:match("^(%S+)")  -- %S+ 匹配非空白字符
+            --
+            -- -- 后面的参数部分
+            -- local args_str = commit_cmd:sub(#git_cmd + 1)  -- 提取 "git" 后的部分
+            -- print("Command:", git_cmd)
+            -- print("Remaining arguments:", args_str)
+            local stdout = vim.loop.new_pipe(false)
+            local stderr = vim.loop.new_pipe(false)
             handle = vim.loop.spawn(
-                "sh", {
-                    args  = { "-c", commit_cmd },
-                    stdio = { nil, nil, nil },
+                "Invoke-Expression", {
+                    args  = { commit_cmd },
+                    stdio = { nil, stdout, stderr },
                 },
                 function(code, signal)
                     handle:close()
@@ -116,6 +124,7 @@ local commit_callback = function(response, source, staged)
                             end
                         })
                     else
+
                         local message = "return code:" .. code .. " signal: " .. signal
                         notify(message, "error", {
                             title = "Git commit fail",
@@ -126,6 +135,13 @@ local commit_callback = function(response, source, staged)
                                 vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
                             end
                         })
+                        vim.loop.read_start(stdout, function(err, data)
+                            if data then print("STDOUT:", data) end
+                        end)
+
+                        vim.loop.read_start(stderr, function(err, data)
+                            if data then print("STDERR:", data) end
+                        end)
                     end
                 end
             )
