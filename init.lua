@@ -10,6 +10,7 @@
 -- --     vim.g.python3_host_prog= "/home/arthur/.pyenv/versions/3.11.7/bin/python"
 -- end
 
+
 local ver = vim.version()
 -- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
 
