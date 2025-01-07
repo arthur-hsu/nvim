@@ -83,9 +83,9 @@ local commit_callback = function(response, source, staged)
             local cmd    = ""
 
             if not staged then
-                cmd = add .. " && "
+                cmd = add .. " ; "
             end
-            local commit_cmd = cmd .. commit .. " && " .. push
+            local commit_cmd = cmd .. commit .. " ; " .. push
             print(commit_cmd)
 
             local first_notify = notify(result, "info", {
