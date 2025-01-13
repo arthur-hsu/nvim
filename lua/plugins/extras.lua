@@ -9,7 +9,6 @@ return {
     },
     {"rcarriga/nvim-notify"},
     { 'nvim-tree/nvim-web-devicons' },
-    { 'echasnovski/mini.nvim' },
     {
         "ibhagwan/fzf-lua",
         -- optional for icon support

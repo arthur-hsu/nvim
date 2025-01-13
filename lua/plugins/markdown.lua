@@ -55,6 +55,11 @@ return {
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         opts = {
             render_modes = true,
+            code = {
+                width = 'block',
+                left_pad = 2,
+                right_pad = 4,
+            },
         },
         config = function(_, opts)
             vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#76A2F6", bg = "#23273B", bold = true })
@@ -75,7 +80,10 @@ return {
             vim.api.nvim_set_hl(0, "MarkdownH4", { fg = "#15C19E", bold = true })
             vim.api.nvim_set_hl(0, "MarkdownH5", { fg = "#BA99F7", bold = true })
             vim.api.nvim_set_hl(0, "MarkdownH6", { fg = "#9B80D0", bold = true })
+            -- vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#14161E", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1d1f26", bold = true })
             
+            -- 73797e
             require('render-markdown').setup(opts)
         end
     },
