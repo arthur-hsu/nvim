@@ -1,7 +1,6 @@
 return {
     {
         'xorid/asciitree.nvim',
-        lazy = true,
         cmd = { 'AsciiTree', 'AsciiTreeUndo' },
         opt = {
             depth = 2,
@@ -17,7 +16,6 @@ return {
     },
     {
         "tadmccorkle/markdown.nvim",
-        enabled = true,
         ft = { "markdown" },
         config = function ()
             require("markdown").setup()
@@ -56,41 +54,37 @@ return {
         opts = {
             render_modes = true,
             code = {
-                width = 'block',
-                left_pad = 2,
+                width     = 'block',
+                left_pad  = 2,
                 right_pad = 4,
             },
         },
         config = function(_, opts)
-            vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#76A2F6", bg = "#23273B", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#DEB06D", bg = "#2D282C", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#9DCD66", bg = "#252C2C", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#15C19E", bg = "#182931", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#BA99F7", bg = "#29273A", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#9B80D0", bg = "#262336", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#76A2F6", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = "#DEB06D", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = "#9DCD66", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = "#15C19E", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = "#BA99F7", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = "#9B80D0", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH1", { fg = "#76A2F6", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH2", { fg = "#DEB06D", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH3", { fg = "#9DCD66", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH4", { fg = "#15C19E", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH5", { fg = "#BA99F7", bold = true })
-            vim.api.nvim_set_hl(0, "MarkdownH6", { fg = "#9B80D0", bold = true })
-            -- vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#14161E", bold = true })
-            vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1d1f26", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#76A2F6", bg = "#23273B" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#DEB06D", bg = "#2D282C" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#9DCD66", bg = "#252C2C" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#15C19E", bg = "#182931" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#BA99F7", bg = "#29273A" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#9B80D0", bg = "#262336" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1",   { fg = "#76A2F6" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2",   { fg = "#DEB06D" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3",   { fg = "#9DCD66" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4",   { fg = "#15C19E" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5",   { fg = "#BA99F7" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6",   { fg = "#9B80D0" })
+            vim.api.nvim_set_hl(0, "MarkdownH1",         { fg = "#76A2F6" })
+            vim.api.nvim_set_hl(0, "MarkdownH2",         { fg = "#DEB06D" })
+            vim.api.nvim_set_hl(0, "MarkdownH3",         { fg = "#9DCD66" })
+            vim.api.nvim_set_hl(0, "MarkdownH4",         { fg = "#15C19E" })
+            vim.api.nvim_set_hl(0, "MarkdownH5",         { fg = "#BA99F7" })
+            vim.api.nvim_set_hl(0, "MarkdownH6",         { fg = "#9B80D0" })
+            vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1d1f26" })
             
-            -- 73797e
             require('render-markdown').setup(opts)
         end
     },
     {
         'arthur-hsu/pastify.nvim',
-        -- ft = { "markdown" },
-        -- event = "VeryLazy",
         cmd = { 'Pastify' },
         config = function()
             require('pastify').setup {
@@ -110,7 +104,6 @@ return {
     },
     {
         "iamcco/markdown-preview.nvim",
-        -- ft = { "markdown" },
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         build = function() vim.fn["mkdp#util#install"]() end,
         config = function()
