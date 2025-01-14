@@ -1,16 +1,24 @@
+vim.api.nvim_set_hl(0, "AvanteIncoming", { bg = "#304753" })
 return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = "*", -- set this to "*" if you want to always pull the latest change, false to update on release
     opts = {
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-        provider = "copilot",            -- Recommend using Claude
+        provider = "copilot",                  -- Recommend using Claude
         auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
         claude = {
             endpoint = "https://api.anthropic.com",
             model = "claude-3-5-sonnet-20241022",
             temperature = 0,
             max_tokens = 4096,
+        },
+        highlights = {
+            ---@type AvanteConflictHighlights
+            diff = {
+                current = "RenderMarkdownCode",
+                incoming = "AvanteIncoming",
+            },
         },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -21,9 +29,9 @@ return {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
         --- The below dependencies are optional,
-        "hrsh7th/nvim-cmp",        -- autocompletion for avante commands and mentions
+        "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua",  -- for providers='copilot'
+        "zbirenbaum/copilot.lua",      -- for providers='copilot'
         {
             -- support for image pasting
             "HakonHarnes/img-clip.nvim",
