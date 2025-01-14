@@ -47,11 +47,12 @@ return {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        ft = { 'markdown' },
+        ft = { "markdown", "Avante" },
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         opts = {
+            file_types = { "markdown", "Avante" },
             render_modes = true,
             code = {
                 width     = 'block',
@@ -80,7 +81,6 @@ return {
             vim.api.nvim_set_hl(0, "MarkdownH6",         { fg = "#9B80D0" })
             vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1d1f26" })
             
-            require('render-markdown').setup(opts)
         end
     },
     {

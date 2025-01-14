@@ -17,7 +17,7 @@ local gen_spec_list = function ()
         local tbl = {}
         local os_name = vim.loop.os_uname().sysname
         table.insert(tbl, { import = "plugins" })
-        if os_name == "Darwin" then
+        if os_name == "Darwin" or os_name == "Windows_NT" then
             table.insert(tbl, { import = "macos" })
         end
         return tbl
