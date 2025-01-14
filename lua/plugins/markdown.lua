@@ -80,7 +80,7 @@ return {
             vim.api.nvim_set_hl(0, "MarkdownH5",         { fg = "#BA99F7" })
             vim.api.nvim_set_hl(0, "MarkdownH6",         { fg = "#9B80D0" })
             vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#1d1f26" })
-            
+            require('render-markdown').setup(opts)
         end
     },
     {
