@@ -11,8 +11,7 @@
 -- end
 
 
-local ver = vim.version()
--- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
+local ver = vim.version() -- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
 
 if ver.minor >= 9 then
     if vim.g.vscode then
@@ -40,17 +39,17 @@ else
     opt.writebackup = false
     opt.swapfile    = false
     keymap("n", "<leader>nh", "<cmd>let @/ = ''<CR><cmd>noh<CR>", opts)
-    keymap("n", "<TAB>",   ">>",  opts)
-    keymap("n", "<S-TAB>", "<<",  opts)
-    keymap("v", "<TAB>",   ">gv", opts)
-    keymap("v", ">",       ">gv", opts)
-    keymap("v", "<S-TAB>", "<gv", opts)
-    keymap("v", "<",       "<gv", opts)
-    keymap("v", "<M-c>", "y", opts)
-    keymap("n", "<C-s>", ":w<CR>", opts)
-    keymap("n", "<C-z>", "<C-o><C-o>", opts)
-    keymap("i", "<C-s>", "<esc>:w<CR>", opts)
-    keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
+    keymap("n", "<TAB>",      ">>",                               opts)
+    keymap("n", "<S-TAB>",    "<<",                               opts)
+    keymap("v", "<TAB>",      ">gv",                              opts)
+    keymap("v", ">",          ">gv",                              opts)
+    keymap("v", "<S-TAB>",    "<gv",                              opts)
+    keymap("v", "<",          "<gv",                              opts)
+    keymap("v", "<M-c>",      "y",                                opts)
+    keymap("n", "<C-s>",      ":w<CR>",                           opts)
+    keymap("n", "<C-z>",      "<C-o><C-o>",                       opts)
+    keymap("i", "<C-s>",      "<esc>:w<CR>",                      opts)
+    keymap("i", "<C-z>",      "<esc><C-o><C-o>",                  opts)
     cmd('filetype plugin indent on')
     -- cmd('set nu! rnu!')
     -- cmd('colorscheme habamax')

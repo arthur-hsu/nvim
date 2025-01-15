@@ -30,7 +30,7 @@ vim.api.nvim_create_user_command("DiffviewToggle", function(e)
     end
 end, { nargs = "*" })
 
-vim.api.nvim_create_user_command('Msg', function () require('telescope').extensions.notify.notify() end, {})
+vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history() end, {})
 ---------------------------------------------------------------------
 
 
@@ -38,6 +38,7 @@ vim.api.nvim_create_user_command('Msg', function () require('telescope').extensi
 
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
+Snacks.notify(vim.loop.os_uname().sysname)
 if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
     keymap("n", "<leader>rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<cr>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
