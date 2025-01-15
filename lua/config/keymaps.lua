@@ -38,8 +38,7 @@ vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history
 
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
-Snacks.notify(vim.loop.os_uname().sysname)
-if vim.loop.os_uname().sysname == 'Linux' or 'Darwin' then
+if vim.loop.os_uname().sysname == 'Linux' or vim.loop.os_uname().sysname == 'Darwin' then
     keymap("n", "<leader>rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<cr>", opts)
 elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "<leader>rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
