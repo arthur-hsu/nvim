@@ -29,15 +29,7 @@ require("lazy").setup({
     -- spec = {},
     concurrency = 24,
     defaults = { lazy = true, version = nil },
-    install = {
-        -- colorscheme = {"material"},
-
-        -- colorscheme = {"zephyr"},
-        -- colorscheme = {"tokyonight"},
-        -- colorscheme = {"nordic"},
-        -- colorscheme = {"kanagawa"},
-        missing = true
-    },
+    install = { missing = true },
     checker = { enabled = true, notify = false },
     change_detection = {
         -- automatically check for config file changes and reload the ui

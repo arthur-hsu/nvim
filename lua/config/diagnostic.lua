@@ -14,9 +14,6 @@ sign({name = 'DiagnosticSignHint', text = '󰝶 '})
 
 vim.diagnostic.config({
     virtual_text = false,
-    -- virtual_text = {
-    --     severity = { min = vim.diagnostic.severity.WARN }
-    -- },
     signs = {
         severity = { min = vim.diagnostic.severity.WARN }
     },
@@ -29,6 +26,9 @@ vim.diagnostic.config({
         source = "always",  -- Or "if_many"
         focusable = false,
     }
+    -- virtual_text = {
+    --     severity = { min = vim.diagnostic.severity.WARN }
+    -- },
     --float = {
         --severity = { min = vim.diagnostic.severity.WARN },
         --show_header = true,
