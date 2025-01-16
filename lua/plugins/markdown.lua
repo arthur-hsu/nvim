@@ -128,18 +128,11 @@ return {
         "toppair/peek.nvim",
         cmd = { "PeekOpen", "PeekClose" },
         ft = { "markdown"},
-        build = function()
-            -- local platform = vim.loop.os_uname().sysname
-            -- -- local tmpdir = vim.fn.stdpath("cache")
-            -- if platform == "Windows_NT" then
-            --     vim.cmd("!irm https://deno.land/install.ps1 | iex")
-            -- else
-            --     vim.cmd("!curl -fsSL https://deno.land/install.sh | sh")
-            -- end
-            return "deno task --quiet build:fast"
-        end,
+        build = "deno task --quiet build:fast",
         config = function()
-            require("peek").setup()
+            require("peek").setup({
+                app = "browser"
+            })
             vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
             vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
         end,
