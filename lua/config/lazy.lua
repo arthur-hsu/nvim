@@ -27,14 +27,20 @@ local spec_list = gen_spec_list()
 require("lazy").setup({
     spec = spec_list,
     -- spec = {},
-    concurrency = 24,
     defaults = { lazy = true, version = nil },
     install = { missing = true },
-    checker = { enabled = true, notify = false },
+    checker = {
+        -- automatically check for plugin updates
+        enabled = true,
+        concurrency = nil, ---@type number? set to 1 to check for updates very slowly
+        notify = true,    -- get a notification when new updates are found
+        frequency = 86400, -- check for updates every hour
+        check_pinned = false, -- check for pinned packages that can't be updated
+    },
     change_detection = {
         -- automatically check for config file changes and reload the ui
         enabled = true,
-        notify  = false, -- get a notification when changes are found
+        notify  = true, -- get a notification when changes are found
     },
     ui = { border = "rounded" },
 })
