@@ -150,8 +150,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 local function check_and_update()
     local has_update = require("lazy.status").has_updates()
     if has_update then
-        Snacks.notify("Updates available")
-        require("lazy").update({ show = true, concurrency = 5 })
+        print("Updates available")
+        require("lazy").update({ show = false, concurrency = 10 })
     end
 end
 
@@ -160,7 +160,7 @@ local async = require("plenary.async")
 -- 非同步執行，並加上暫停
 local function run_async_update()
     async.run(function()
-        async.util.sleep(1000) -- 時間以毫秒為單位
+        async.util.sleep(10000) -- 時間以毫秒為單位
         -- 執行檢查和更新邏輯
         check_and_update()
     end)
@@ -169,7 +169,7 @@ end
 
 
 -- Automatically update plugins
-if os_name ~= "Windows_NT" then
+-- if os_name ~= "Windows_NT" then
     vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
         group = augroup("autoupdate"),
@@ -177,6 +177,6 @@ if os_name ~= "Windows_NT" then
             run_async_update()
         end,
     })
-end
+-- end
 
 
