@@ -1,5 +1,6 @@
 local M = {
     "folke/noice.nvim",
+    tag = "v4.7.0",
     dependencies = {
         'nvim-tree/nvim-web-devicons',
         "MunifTanjim/nui.nvim",

@@ -33,7 +33,7 @@ require("lazy").setup({
         -- automatically check for plugin updates
         enabled = true,
         concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-        notify = true,    -- get a notification when new updates are found
+        notify = false,    -- get a notification when new updates are found
         frequency = 86400, -- check for updates every hour
         check_pinned = false, -- check for pinned packages that can't be updated
     },
@@ -46,21 +46,21 @@ require("lazy").setup({
 })
 
 local enter_load = function()
-   require("lazy").load({
-       plugins={
-           -- "dropbar.nvim",
-           "nvim-treesitter",
-           "gitsigns.nvim",
-           "bufferline.nvim",
-           "statuscol.nvim",
-           "snacks.nvim",
-           "nvim-lspconfig",
-           "lspsaga.nvim",
-           "lualine.nvim",
-           "indent-blankline.nvim",
-           "copilot.lua",
-       }
-   })
-   vim.cmd[[LspStart]]
+    require("lazy").load({
+        plugins = {
+            -- "dropbar.nvim",
+            "nvim-treesitter",
+            "gitsigns.nvim",
+            "bufferline.nvim",
+            "statuscol.nvim",
+            "snacks.nvim",
+            "nvim-lspconfig",
+            "lspsaga.nvim",
+            "lualine.nvim",
+            "indent-blankline.nvim",
+            "copilot.lua",
+        }
+    })
+    vim.cmd [[LspStart]]
 end
 vim.api.nvim_create_autocmd("UIEnter", {callback= enter_load})
