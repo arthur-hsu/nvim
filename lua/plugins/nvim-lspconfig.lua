@@ -1,8 +1,5 @@
-
 local Linter_and_Formatter = {
     -- Formatter
-    --"pylint",
-    --"flake8",
     "stylua",
     "prettier",
     "shfmt",
@@ -10,7 +7,6 @@ local Linter_and_Formatter = {
     "codelldb",
     -- Linter
     "eslint_d",
-    -- "standardrb",
     "golangci-lint",
     "shellcheck",
     "markdownlint",
@@ -18,7 +14,7 @@ local Linter_and_Formatter = {
 }
 
 local servers_config = {
-    ruff = {
+    ruff                            = {
         init_options = {
             settings = {
                 lint = {
@@ -34,7 +30,7 @@ local servers_config = {
             }
         }
     },
-    pyright = {
+    pyright                         = {
         -- for Disable "XXX" is not accessed
         -- handlers = {
         --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
@@ -50,11 +46,11 @@ local servers_config = {
         --         vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
         --     end,
         -- },
-        settings={
+        settings = {
             pyright = {
                 disableOrganizeImports = true,
             },
-            python={
+            python = {
                 analysis = {
                     typeCheckingMode = 'basic',
                     -- ignore = { '*' },
@@ -80,13 +76,32 @@ local servers_config = {
         },
     },
     docker_compose_language_service = {},
-    dockerls = {},
-    emmet_language_server = {},
-    marksman = {},
-    jsonls   = {},
-    yamlls   = {},
-    bashls   = {},
-    lua_ls = {
+    dockerls                        = {},
+    emmet_language_server           = {
+        filetypes = {
+            'css',
+            'eruby',
+            'html',
+            'htmldjango',
+            'javascriptreact',
+            'less',
+            'pug',
+            'sass',
+            'scss',
+            'typescriptreact',
+            'htmlangular',
+            'markdown',
+        },
+
+    },
+    html = {
+        filetypes = { 'html', 'templ', "markdown" },
+    },
+    marksman                        = {},
+    jsonls                          = {},
+    yamlls                          = {},
+    bashls                          = {},
+    lua_ls                          = {
         -- mason = false, -- set to false if you don't want this server to be installed with mason
         settings = {
             Lua = {
@@ -111,7 +126,7 @@ return {
     -- lspconfig
     {
         "neovim/nvim-lspconfig",
-        lazy= true,
+        lazy = true,
         -- event = "VeryLazy",
         -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         -- event = "BufEnter",
@@ -138,17 +153,17 @@ return {
             servers = servers_config,
             setup = {},
         },
-            ---@param opts PluginLspOpts
+        ---@param opts PluginLspOpts
         config = function(plugin, opts)
-            local servers = opts.servers
+            local servers                                                               = opts.servers
             -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            capabilities.textDocument.foldingRange = {
+            local capabilities                                                          = require("cmp_nvim_lsp").default_capabilities()
+            capabilities.textDocument.foldingRange                                      = {
                 dynamicRegistration = false,
                 lineFoldingOnly     = true,
             }
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-            capabilities.textDocument.completion.completionItem.resolveSupport = {
+            capabilities.textDocument.completion.completionItem.snippetSupport          = true
+            capabilities.textDocument.completion.completionItem.resolveSupport          = {
                 properties = { "documentation", "detail", "additionalTextEdits" },
             }
             capabilities.textDocument.completion.completionItem.documentationFormat     = { 'markdown', 'plaintext' }
@@ -161,11 +176,15 @@ return {
 
             local function setup_handler(server)
                 local server_opts = servers[server] or {}
+                server_opts.on_attach = function (client, bufnr)
+                    -- print('Attached to client', client.name, bufnr)
+                    vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
+                end
                 if server == 'ruff' then
                     -- Disable hover in favor of Pyright
                     capabilities.hoverProvider = false
                 elseif server == 'pyright' then
-                    capabilities.textDocument.completion.completionItem.tagSupport.valueSet= { 2 }
+                    capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
                 end
                 server_opts.capabilities = capabilities
 
@@ -202,7 +221,7 @@ return {
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         event = "VeryLazy",
-        opts = function ()
+        opts = function()
             local ensure_installed = {} ---@type string[]
 
             for server, server_opts in pairs(servers_config) do
@@ -219,7 +238,7 @@ return {
 
         config = function(_, opts)
             require("mason-tool-installer").setup(opts)
-            vim.cmd[[MasonToolsUpdate]]
+            vim.cmd [[MasonToolsUpdate]]
         end
     }
 }

@@ -6,6 +6,11 @@ return {
     dependencies = {
         {"L3MON4D3/LuaSnip", build = "make install_jsregexp"},
         "saadparwaiz1/cmp_luasnip",
+
+
+
+        -- 'hrsh7th/cmp-vsnip',
+        -- 'hrsh7th/vim-vsnip',
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -24,12 +29,12 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "zbirenbaum/copilot-cmp",
         'rafamadriz/friendly-snippets',
-        'petertriho/cmp-git'
+        'petertriho/cmp-git',
     },
     config = function()
         local cmp = require("cmp")
-        require("luasnip.loaders.from_vscode").lazy_load()
         vim.api.nvim_set_hl(0, "CmpItemKindcopilot", { fg = "#31A8FF", bg = "None" })
+        require("luasnip.loaders.from_vscode").lazy_load()
         cmp.setup({
             experimental = {
                 ghost_text = false,
@@ -39,7 +44,9 @@ return {
             -- },
             snippet = {
                 expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
+                    -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                    vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
                 end,
             },
             sources = cmp.config.sources({
@@ -82,7 +89,14 @@ return {
                     show_labelDetails = true,
                     before = function (entry, vim_item)
                         -- Source
-                        vim_item.menu = "["..string.upper(entry.source.name).."]"
+                        local lspserver_name = nil
+                        if entry.source.name == 'nvim_lsp' then
+                            -- Display which LSP servers this item came from.
+                            lspserver_name = entry.source.source.client.name
+                        else
+                            lspserver_name = entry.source.name
+                        end
+                        vim_item.menu = string.upper(lspserver_name)
                         return vim_item
                     end
                 })
