@@ -168,6 +168,9 @@ opt.concealcursor      = 'nc'
 -- 設置guicursor
 vim.o.guicursor        = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor-blinkon500-blinkoff500,r-cr-o:hor20-blinkon500-blinkoff500"
 
+-- 禁用拼字檢查
+opt.spell              = false
+
 -- 设置文件格式为unix
 -- opt.fileformat         = "unix"
 
