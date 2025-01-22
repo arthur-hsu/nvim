@@ -176,10 +176,10 @@ return {
 
             local function setup_handler(server)
                 local server_opts = servers[server] or {}
-                server_opts.on_attach = function (client, bufnr)
-                    -- print('Attached to client', client.name, bufnr)
-                    vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
-                end
+                -- server_opts.on_attach = function (client, bufnr)
+                --     -- print('Attached to client', client.name, bufnr)
+                --     vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
+                -- end
                 if server == 'ruff' then
                     -- Disable hover in favor of Pyright
                     capabilities.hoverProvider = false

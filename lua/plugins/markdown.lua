@@ -17,6 +17,7 @@ return {
     {
         "tadmccorkle/markdown.nvim",
         ft = { "markdown" },
+        -- enabled = false,
         config = function()
             require("markdown").setup()
         end
@@ -47,6 +48,7 @@ return {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
+        -- enabled = false,
         ft = { "markdown", "Avante" },
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
