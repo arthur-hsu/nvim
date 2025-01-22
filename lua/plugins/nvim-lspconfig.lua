@@ -81,7 +81,7 @@ local servers_config = {
     },
     docker_compose_language_service = {},
     dockerls = {},
-    html     = {},
+    emmet_language_server = {},
     marksman = {},
     jsonls   = {},
     yamlls   = {},

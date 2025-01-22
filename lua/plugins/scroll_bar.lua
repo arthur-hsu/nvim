@@ -4,6 +4,7 @@ return {
         -- lazy = true,
         event = "VeryLazy",
         dependencies = {
+            {
             "kevinhwang91/nvim-hlslens",
             config = function()
                 vim.api.nvim_set_hl(0, "HlSearchLens", { link = "DiagnosticVirtualTextInfo" })
@@ -85,6 +86,10 @@ return {
                 augroup END
                 ]])
             end,
+            },
+            {
+                'haya14busa/vim-asterisk',
+            }
         },
         config = function()
             require("scrollbar").setup({
@@ -126,6 +131,15 @@ return {
             })
             require("scrollbar.handlers.search").setup()
             require("scrollbar.handlers.gitsigns").setup()
+            vim.api.nvim_set_keymap('n', '#', [[<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>]], {})
+            vim.api.nvim_set_keymap('n', 'g*', [[<Plug>(asterisk-gz*)<Cmd>lua require('hlslens').start()<CR>]], {})
+            vim.api.nvim_set_keymap('n', 'g#', [[<Plug>(asterisk-gz#)<Cmd>lua require('hlslens').start()<CR>]], {})
+
+            vim.api.nvim_set_keymap('x', '*', [[<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>]], {})
+            vim.api.nvim_set_keymap('x', '#', [[<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>]], {})
+            vim.api.nvim_set_keymap('x', 'g*', [[<Plug>(asterisk-gz*)<Cmd>lua require('hlslens').start()<CR>]], {})
+            vim.api.nvim_set_keymap('x', 'g#', [[<Plug>(asterisk-gz#)<Cmd>lua require('hlslens').start()<CR>]], {})
+
         end,
     }
 }
