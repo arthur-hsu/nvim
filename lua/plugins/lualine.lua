@@ -37,6 +37,7 @@ local mode_color = {
     ['r?'] = colors.cyan,
     ['!']  = colors.red,
     t      = colors.red,
+    multi  = colors.blue,
 }
 
 local file_detial = function (scope)
@@ -158,7 +159,12 @@ function M.config()
     ins_left {
         -- mode component
         function()
-            local mode = vim.fn.mode()
+            local mode
+            if vim.b.visual_multi ~= nil then
+                mode = 'multi'
+            else
+                mode = vim.fn.mode()
+            end
             Mode_text = {
                 n      = 'NORMAL',
                 i      = 'INSERT',
@@ -168,20 +174,29 @@ function M.config()
                 [''] = 'V-BLOCK',
                 R      = 'REPLACE',
                 t      = 'TERMINAL',
+                multi  = 'MULTI-LINE',
             }
             Mode_icon= {
                 n      = '',
-                i      = '',
+                i      = '',
                 c      = '',
                 v      = '󰯍',  -- 󰓡 󰡎 󰯍 󰝡 
                 V      = '󰯎',  -- 󰓢 󰡏 󰯎 󰕏 
                 [''] = '',
                 R      = '',
                 t      = '',
+                multi  = '󰷫',
             }
             return " "..Mode_icon[mode].." "..( Mode_text[mode] or mode )
         end,
-        color = function() return { fg = mode_color[vim.fn.mode()],gui = 'bold',bg='None' } end,
+        color = function()
+            local mode
+            if vim.b.visual_multi ~= nil then
+                mode = 'multi'
+            else
+                mode = vim.fn.mode()
+            end
+            return { fg = mode_color[mode],gui = 'bold',bg='None' } end,
         padding = { right = 1 },
     }
 
