@@ -6,10 +6,22 @@ return {
         opts = {
             bigfile      = { enabled = true },
             quickfile    = { enabled = true },
-            statuscolumn = { enabled = false },
+            statuscolumn = {
+                left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+                right = { "fold", "git" }, -- priority of signs on the right (high to low)
+                folds = {
+                    open = true, -- show open fold icons
+                    git_hl = true, -- use Git Signs hl for fold icons
+                },
+                git = {
+                    -- patterns to match Git signs
+                    patterns = { "GitSign", "MiniDiffSign" },
+                },
+                refresh = 50, -- refresh at most every 50ms
+            },
             words        = { enabled = false },
             terminal     = { enabled = true },
-            scroll = {
+            scroll       = {
                 animate = {
                     duration = { step = 15, total = 250 },
                     easing = "linear",
@@ -17,14 +29,15 @@ return {
                 spamming = 10, -- threshold for spamming detection
                 -- what buffers to animate
                 filter = function(buf)
-                    return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= "terminal"
+                    return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and
+                        vim.bo[buf].buftype ~= "terminal"
                 end,
             },
-            notifier = {
+            notifier     = {
                 enabled = true,
                 timeout = 3000,
             },
-            dashboard = {
+            dashboard    = {
                 enabled = false,
                 bo = {
                     -- filetype = "alpha",

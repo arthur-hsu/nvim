@@ -3,7 +3,6 @@ return {
         --NOTE: For beautiful sign column
         "luukvbaal/statuscol.nvim",
         -- event = 'VimEnter',
-        lazy = true,
         config = function()
             local builtin = require("statuscol.builtin")
             require("statuscol").setup({
