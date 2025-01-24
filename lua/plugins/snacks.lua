@@ -1,48 +1,11 @@
-vim.api.nvim_set_hl(0, "SnacksDashboardTitle", { link = "RainbowViolet" })
 local styles = {
     dashboard = {
-        zindex = 10,
-        height = 0,
-        width = 0,
-        bo = {
-            bufhidden = "wipe",
-            buftype = "nofile",
-            buflisted = false,
-            filetype = "snacks_dashboard",
-            swapfile = false,
-            undofile = false,
-        },
         wo = {
-            colorcolumn = "",
-            cursorcolumn = false,
-            cursorline = false,
-            foldmethod = "marker",
-            list = false,
-            number = false,
-            relativenumber = false,
-            sidescrolloff = 0,
-            signcolumn = "no",
-            spell = false,
-            statuscolumn = "",
-            statusline = "",
-            winbar = "",
-            winhighlight = "Normal:SnacksDashboardNormal,NormalFloat:SnacksDashboardNormal",
-            wrap = false,
+            foldmethod     = "marker",
         }
     }
 }
 
-
-local sharp = [[
-                                                                   
-      ████ ██████           █████      ██                    
-     ███████████             █████                            
-     █████████ ███████████████████ ███   ███████████  
-    █████████  ███    █████████████ █████ ██████████████  
-   █████████ ██████████ █████████ █████ █████ ████ █████  
- ███████████ ███    ███ █████████ █████ █████ ████ █████ 
-██████  █████████████████████ ████ █████ █████ ████ ██████
-]]
 local the_edge =[[
    ▄   ▄███▄   ████▄     ▄   ▄█ █▀▄▀█
     █  █▀   ▀  █   █      █  ██ █ █ █
@@ -63,13 +26,14 @@ return {
         words        = { enabled = false },
         terminal     = { enabled = true },
         indent       = {
-            -- enabled = false,
+            enabled = false,
             indent = {
                 priority = 1,
                 enabled = true,       -- enable indent guides
                 char = "│",
                 only_scope = false,   -- only show indent guides of the scope
-                only_current = false, -- only show indent guides in the current window
+                only_current = true, -- only show indent guides in the current window
+                -- hl = highlight,
                 hl = {
                     "SnacksIndent1",
                     "SnacksIndent2",
@@ -87,7 +51,7 @@ return {
                 -- char = "┃",
                 char = "│",
                 underline = false,    -- underline the start of the scope
-                only_current = false, -- only show scope in the current window
+                only_current = true, -- only show scope in the current window
                 hl = "CurrentScope", ---@type string|string[] hl group for scopes
             },
         },

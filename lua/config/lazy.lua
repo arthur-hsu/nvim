@@ -48,15 +48,13 @@ require("lazy").setup({
 local enter_load = function()
     require("lazy").load({
         plugins = {
-            "transparent.nvim",
             "nvim-treesitter",
-            "gitsigns.nvim",
             "bufferline.nvim",
+            "lualine.nvim",
+            "gitsigns.nvim",
             -- "snacks.nvim",
             "nvim-lspconfig",
             "lspsaga.nvim",
-            "lualine.nvim",
-            "indent-blankline.nvim",
             "copilot.lua",
         }
     })

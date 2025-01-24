@@ -13,6 +13,7 @@ vim.api.nvim_set_hl(0, "RainbowGreen",  { fg = "#98C379" })
 vim.api.nvim_set_hl(0, "RainbowCyan",   { fg = "#56B6C2" })
 vim.api.nvim_set_hl(0, "RainbowRed",    { fg = "#E06C75" })
 vim.api.nvim_set_hl(0, "CurrentScope",  { fg = "#6FE77C" })
+
 return {
     {
         'HiPhish/rainbow-delimiters.nvim',
@@ -29,7 +30,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        enabled = false,
+        event = "VeryLazy",
         main = "ibl",
         dependencies = {},
         config = function()
@@ -51,7 +52,7 @@ return {
                 -- indent = { highlight = highlight, char = "▏" ,},
                 indent = { highlight = highlight, char = "│", },
                 scope = {
-                    enabled          = false,
+                    enabled          = true,
                     highlight        = { "CurrentScope" },
                     char             = "┃", -- ┃ ║
                     show_start       = false,
