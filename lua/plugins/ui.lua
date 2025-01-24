@@ -70,6 +70,8 @@ return {
     },
     {
         'https://github.com/xiyaowong/transparent.nvim',
+        priority = 999,
+        lazy = false,
         config= function ()
             require("transparent").setup({ -- Optional, you don't have to run setup.
                 groups = { -- table: default groups
@@ -97,6 +99,7 @@ return {
                 },
             })
             require('transparent').clear_prefix('lualine')
+            require('transparent').clear_prefix('BufferLine')
             vim.cmd("TransparentEnable")
         end
     },
