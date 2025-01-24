@@ -63,7 +63,7 @@ return {
         words        = { enabled = false },
         terminal     = { enabled = true },
         indent       = {
-            enabled = true,
+            -- enabled = false,
             indent = {
                 priority = 1,
                 enabled = true,       -- enable indent guides
@@ -92,6 +92,7 @@ return {
             },
         },
         statuscolumn = {
+            -- enabled = false,
             left    = { "fold", "git" }, -- priority of signs on the right (high to low)
             right   = { "sign" },        -- priority of signs on the left (high to low)
             folds   = {
@@ -121,6 +122,7 @@ return {
             timeout = 3000,
         },
         dashboard    = {
+            -- enabled = false,
             preset = {
                 header = the_edge,
                 keys = {
