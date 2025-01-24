@@ -2,7 +2,7 @@ return {
     {
         "goolord/alpha-nvim",
         event = "VimEnter",
-        enabled = true,
+        enabled = false,
         dependencies = {
             { 'MaximilianLloyd/ascii.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
         },

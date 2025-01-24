@@ -53,7 +53,7 @@ local enter_load = function()
             "gitsigns.nvim",
             "bufferline.nvim",
             -- "statuscol.nvim",
-            "snacks.nvim",
+            -- "snacks.nvim",
             "nvim-lspconfig",
             "lspsaga.nvim",
             "lualine.nvim",

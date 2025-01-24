@@ -6,25 +6,32 @@ local highlight = {
     "RainbowRed",
     "RainbowCyan",
 }
+vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#CB85E0" })
+vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+vim.api.nvim_set_hl(0, "RainbowBlue",   { fg = "#61AFEF" })
+vim.api.nvim_set_hl(0, "RainbowGreen",  { fg = "#98C379" })
+vim.api.nvim_set_hl(0, "RainbowCyan",   { fg = "#56B6C2" })
+vim.api.nvim_set_hl(0, "RainbowRed",    { fg = "#E06C75" })
+vim.api.nvim_set_hl(0, "CurrentScope",  { fg = "#6FE77C" })
 return {
     {
+        'HiPhish/rainbow-delimiters.nvim',
+        event = "VeryLazy",
+        opts = function()
+            return {
+                highlight = highlight
+            }
+        end,
+        config = function(_, opts)
+            require 'rainbow-delimiters.setup'.setup(opts)
+            require('rainbow-delimiters').enable()
+        end,
+    },
+    {
         "lukas-reineke/indent-blankline.nvim",
+        enabled = false,
         main = "ibl",
         dependencies = {
-            {
-                'HiPhish/rainbow-delimiters.nvim',
-                event = "VeryLazy",
-                opts = function()
-                    local rainbow_delimiters = require 'rainbow-delimiters'
-                    return {
-                        highlight = highlight
-                    }
-                end,
-                config = function(_, opts)
-                    require 'rainbow-delimiters.setup'.setup(opts)
-                    require('rainbow-delimiters').enable()
-                end,
-            },
         },
         config = function()
             local hooks = require "ibl.hooks"

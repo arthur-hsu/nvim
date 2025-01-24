@@ -1,10 +1,3 @@
-
-
-
-
--- 本地变量
-
-
 local pluginKeys = {}
 local luasnip = require("luasnip")
 -- nvim-cmp 自动补全
