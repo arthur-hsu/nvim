@@ -6,6 +6,17 @@ local styles = {
     }
 }
 
+
+local cmd = function()
+    local platform = vim.loop.os_uname().sysname
+    if platform == "Windows_NT" then
+        return 'python ' .. '"' .. vim.fn.stdpath('config') .. "\\shell\\matrix.py".. '"'
+    else
+        return "python3 " .. vim.fn.stdpath("config") .. "/shell/matrix.py"
+    end
+end
+
+
 local the_edge =[[
    ▄   ▄███▄   ████▄     ▄   ▄█ █▀▄▀█
     █  █▀   ▀  █   █      █  ██ █ █ █
@@ -106,7 +117,7 @@ return {
                 {
                     section = "terminal",
                     random = 10,
-                    cmd = "python3 /home/arthur/.config/nvim/shell/matrix.py",
+                    cmd = cmd(),
                     pane = 2,
                     padding = 1,
                     height = 8,
