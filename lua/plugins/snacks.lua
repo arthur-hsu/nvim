@@ -106,7 +106,7 @@ return {
                 {
                     section = "terminal",
                     random = 10,
-                    cmd = "echo ''",
+                    cmd = "python3 /home/arthur/.config/nvim/shell/matrix.py",
                     pane = 2,
                     padding = 1,
                     height = 8,
