@@ -6,9 +6,9 @@ return {
         "arthur-hsu/zephyr-nvim",
         lazy = false,
         priority = 1000,
-        -- config = function ()
-        --     color_register("zephyr")
-        -- end
+        config = function ()
+            color_register("zephyr")
+        end
     },
     {
         "olimorris/onedarkpro.nvim",
@@ -28,7 +28,7 @@ return {
         },
         config = function(_, opts)
             require("onedarkpro").setup(opts)
-            color_register("onedark_dark")
+            -- color_register("onedark_dark")
         end
 
     },

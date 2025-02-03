@@ -155,13 +155,13 @@ class Matrix(list):
 @app.command()
 def start(
     speed: int = typer.Option(
-        100, "--speed", "-s", help="Percentage of normal rain speed"
+        70, "--speed", "-s", help="Percentage of normal rain speed"
     ),
     glitches: int = typer.Option(
-        100, "--glitches", "-g", help="Percentage of normal glitch amount"
+        200, "--glitches", "-g", help="Percentage of normal glitch amount"
     ),
     frequency: int = typer.Option(
-        100, "--frequency", "-f", help="Percentage of normal drop frequency"
+        40, "--frequency", "-f", help="Percentage of normal drop frequency"
     ),
 ):
     """Start the matrix rain"""
