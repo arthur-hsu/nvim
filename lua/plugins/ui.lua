@@ -1,3 +1,4 @@
+
 return {
     {
         "goolord/alpha-nvim",
@@ -91,6 +92,12 @@ return {
                     "WarningMsg",
                     "group_style",
                     "icon_style",
+                    "FloatTitle",
+                    "WhichKeyNormal",
+                    "TelescopeBorder",
+                    "TelescopeNormal",
+                    "TelescopePromptBorder",
+                    "TelescopeResultsDiffChange"
                 },
                 -- table: groups you don't want to clear
                 exclude_groups = {
@@ -100,6 +107,8 @@ return {
             })
             require('transparent').clear_prefix('lualine')
             require('transparent').clear_prefix('BufferLine')
+            require('transparent').clear_prefix('Snacks')
+            -- require('transparent').clear_prefix('TeleScope')
             vim.cmd("TransparentEnable")
         end
     },

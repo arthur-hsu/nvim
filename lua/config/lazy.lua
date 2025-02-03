@@ -28,7 +28,11 @@ require("lazy").setup({
     spec = spec_list,
     -- spec = {},
     defaults = { lazy = true, version = nil },
-    install = { missing = true },
+    install = {
+        missing = true,
+        colorscheme = { "vim" },
+        -- colorscheme = { "zephyr" },
+    },
     checker = {
         -- automatically check for plugin updates
         enabled = true,
