@@ -1,7 +1,6 @@
 return {
     {
         "nvimtools/none-ls.nvim",
-        -- enabled = false,
         event = "VeryLazy",
         dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },
         opts = function()
@@ -16,7 +15,7 @@ return {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.markdownlint,
                     null_ls.builtins.formatting.shfmt,
-                    null_ls.builtins.diagnostics.markdownlint
+                    -- null_ls.builtins.diagnostics.markdownlint
 
                 },
             }
