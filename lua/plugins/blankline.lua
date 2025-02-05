@@ -61,7 +61,8 @@ return {
                     include          = { node_type = { ["*"] = { "*" } } }
                 },
                 exclude = {
-                    filetypes = { "lazy" },
+                    filetypes = { "lazy", "git" },
+
                     -- buftypes  = { "terminal" },
                 }
             })
