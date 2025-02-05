@@ -72,23 +72,23 @@ local servers_config = {
     },
     docker_compose_language_service = {},
     dockerls                        = {},
-    emmet_language_server           = {
-        filetypes = {
-            'css',
-            'eruby',
-            'html',
-            'htmldjango',
-            'javascriptreact',
-            'less',
-            'pug',
-            'sass',
-            'scss',
-            'typescriptreact',
-            'htmlangular',
-            'markdown',
-        },
-
-    },
+    -- emmet_language_server           = {
+    --     filetypes = {
+    --         'css',
+    --         'eruby',
+    --         'html',
+    --         'htmldjango',
+    --         'javascriptreact',
+    --         'less',
+    --         'pug',
+    --         'sass',
+    --         'scss',
+    --         'typescriptreact',
+    --         'htmlangular',
+    --         'markdown',
+    --     },
+    --
+    -- },
     html = {
         filetypes = { 'html', 'templ', "markdown" },
     },

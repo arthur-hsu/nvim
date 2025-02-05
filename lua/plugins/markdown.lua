@@ -58,6 +58,7 @@ return {
             render_modes = true,
             code = {
                 width     = 'block',
+                sign      = false,
                 left_pad  = 2,
                 right_pad = 4,
             },

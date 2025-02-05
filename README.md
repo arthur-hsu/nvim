@@ -6,6 +6,9 @@ git clone --depth=1 https://github.com/arthur-hsu/nvim.git ~/.config/nvim
 cd .config/nvim/shell &&\
   chmod +x *.sh;./install.sh
 ```
+
+
+
 ---
 ## Terminal字體設定
 
