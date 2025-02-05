@@ -3,14 +3,9 @@ local Linter_and_Formatter = {
     "stylua",
     "prettier",
     "shfmt",
-    "jq",
-    "codelldb",
+
     -- Linter
-    "eslint_d",
-    "golangci-lint",
-    "shellcheck",
     "markdownlint",
-    "yamllint",
 }
 
 local servers_config = {
