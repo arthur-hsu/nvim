@@ -30,8 +30,6 @@ require("lazy").setup({
     defaults = { lazy = true, version = nil },
     install = {
         missing = true,
-        colorscheme = { "vim" },
-        -- colorscheme = { "zephyr" },
     },
     checker = {
         -- automatically check for plugin updates

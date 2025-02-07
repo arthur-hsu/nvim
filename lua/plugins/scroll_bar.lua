@@ -121,6 +121,8 @@ return {
                     "cmp_menu",
                     "noice",
                     "prompt",
+                    "lazy",
+                    "snacks_dashboard"
                 },
                 handlers = {
                     cursor     = true,

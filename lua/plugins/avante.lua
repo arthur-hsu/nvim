@@ -30,8 +30,14 @@ return {
         },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    build = function()
+        local platform = vim.loop.os_uname().sysname
+        if platform == "Windows_NT" then
+            return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+        else
+            return "make"
+        end
+    end,
     dependencies = {
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
