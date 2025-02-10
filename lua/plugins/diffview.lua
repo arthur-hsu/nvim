@@ -1,39 +1,6 @@
 return {
 	"sindrets/diffview.nvim",
 	event = "VeryLazy",
-	keymaps = {
-		file_panel = {
-			{
-				"n",
-				"cc",
-				function()
-					vim.ui.input({ prompt = "Commit message: " }, function(msg)
-						if not msg then
-							return
-						end
-						local results = vim.system({ "git", "commit", "-m", msg }, { text = true }):wait()
-
-						if results.code ~= 0 then
-							vim.notify(
-								"Commit failed with the message: \n"
-									.. vim.trim(results.stdout .. "\n" .. results.stderr),
-								vim.log.levels.ERROR,
-								{ title = "Commit" }
-							)
-						else
-							vim.notify(results.stdout, vim.log.levels.INFO, { title = "Commit" })
-						end
-					end)
-				end,
-			},
-			{
-				"n",
-				"ca",
-				"<Cmd>sp <bar> wincmd J <bar> term git commit -amend<CR>",
-				{ desc = "Amend the last commit" },
-			},
-		},
-	},
 	config = function()
 		local actions = require("diffview.actions")
 		vim.cmd("au BufWinEnter diffview://*/log/*/commit_log nnoremap <buffer> q     <Cmd>q<CR>")
@@ -478,6 +445,35 @@ return {
 					},
 					{ "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close DiffView" } },
 					{ "n", "<esc>", "<Cmd>DiffviewClose<CR>", { desc = "Close DiffView" } },
+                    {
+                        "n",
+                        "cc",
+                        function()
+                            vim.ui.input({ prompt = "Commit message: " }, function(msg)
+                                if not msg then
+                                    return
+                                end
+                                local results = vim.system({ "git", "commit", "-m", msg }, { text = true }):wait()
+
+                                if results.code ~= 0 then
+                                    vim.notify(
+                                    "Commit failed with the message: \n"
+                                    .. vim.trim(results.stdout .. "\n" .. results.stderr),
+                                    vim.log.levels.ERROR,
+                                    { title = "Commit" }
+                                    )
+                                else
+                                    vim.notify(results.stdout, vim.log.levels.INFO, { title = "Commit" })
+                                end
+                            end)
+                        end,
+                    },
+                    {
+                        "n",
+                        "ca",
+                        "<Cmd>sp <bar> wincmd J <bar> term git commit -amend<CR>",
+                        { desc = "Amend the last commit" },
+                    }
 				},
 				file_history_panel = {
 					{ "n", "g!", actions.options, { desc = "Open the option panel" } },
