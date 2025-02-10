@@ -2,8 +2,6 @@ return{
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
-        -- event = { "BufReadPost", "BufNewFile" },
-        -- event = "InsertEnter",
         event = "VeryLazy",
         config = function()
             require("copilot").setup({
@@ -37,15 +35,6 @@ return{
                 },
                 filetypes = {
                     ['*'] = true,
-                    -- yaml      = true,
-                    -- markdown  = true,
-                    -- help      = false,
-                    -- gitcommit = true,
-                    -- gitrebase = false,
-                    -- hgcommit  = false,
-                    -- svn       = false,
-                    -- cvs       = false,
-                    -- ["."]     = true,
                 },
                 copilot_node_command = 'node', -- Node.js version must be > 16.x
                 server_opts_overrides = {

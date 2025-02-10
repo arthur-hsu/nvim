@@ -1,20 +1,5 @@
 local os_name = vim.loop.os_uname().sysname
 
--- Automatically open diagnostics
--- vim.api.nvim_create_autocmd("CursorHold", {
---     buffer = vim.api.nvim_get_current_buf(),
---     callback = function()
---         local opts = {
---             focusable = false,
---             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
---             border = 'rounded',
---             source = 'always',
---             prefix = ' ',
---             scope = 'cursor',
---         }
---         vim.diagnostic.open_float(nil, opts)
---     end
--- })
 
 -- This file is automatically loaded by lazyvim.config.init.
 local function augroup(name)

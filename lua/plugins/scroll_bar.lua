@@ -4,6 +4,7 @@ return {
         -- lazy = true,
         event = "VeryLazy",
         dependencies = {
+            { 'haya14busa/vim-asterisk'},
             {
                 "kevinhwang91/nvim-hlslens",
                 config = function()
@@ -78,17 +79,13 @@ return {
                         })
                     end
 
-
                     vim.cmd([[
-                augroup scrollbar_search_hide
-                autocmd!
-                autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
-                augroup END
-                ]])
+                        augroup scrollbar_search_hide
+                        autocmd!
+                        autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
+                        augroup END
+                    ]])
                 end,
-            },
-            {
-                'haya14busa/vim-asterisk',
             }
         },
         config = function()
