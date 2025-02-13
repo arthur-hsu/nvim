@@ -232,7 +232,7 @@ return {
 		ins_left({
             "progress",
             color = { fg = colors.yellow, bg = "None" },
-			-- cond = conditions.buffer_not_empty,
+			cond = conditions.buffer_not_empty,
         })
 
 		-- Insert mid section. You can make any number of sections in neovim :)
