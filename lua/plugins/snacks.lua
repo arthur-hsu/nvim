@@ -70,8 +70,8 @@ local dashboard = {
             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
             { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
             { icon = " ", key = "s", desc = "Restore Session" --[[ , section = "session" ]], action = ":lua require('persistence').load()" },
-            { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+            { icon = " ", key = "q", desc = "Quit", action = ":q" },
         }
     },
     sections = {
@@ -110,6 +110,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+        animate      = { enabled = true },
         styles       = styles,
         bigfile      = { enabled = true },
         quickfile    = { enabled = true },
