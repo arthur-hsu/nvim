@@ -119,7 +119,8 @@ return {
                     "noice",
                     "prompt",
                     "lazy",
-                    "snacks_dashboard"
+                    "snacks_dashboard",
+                    "markdown",
                 },
                 handlers = {
                     cursor     = true,

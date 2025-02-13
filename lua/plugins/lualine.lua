@@ -201,6 +201,7 @@ return {
 				}
 			end,
 		})
+
 		ins_left({
 			function()
 				local arrow = require("arrow.statusline")
@@ -222,8 +223,30 @@ return {
 		})
 
 		-- Location & Progress --
-		ins_left({ "location", color = { fg = colors.yellow, bg = "None" } })
-		ins_left({ "progress", color = { fg = colors.yellow, bg = "None" } })
+		ins_left({
+            "location",
+            color = { fg = colors.yellow, bg = "None" },
+            cond = function()
+				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
+					return false
+                else
+                    return true
+				end
+            end
+        })
+		ins_left({
+            "progress",
+            color = { fg = colors.yellow, bg = "None" },
+            cond = function()
+				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
+					return false
+                else
+                    return true
+				end
+            end
+        })
 
 		-- Insert mid section. You can make any number of sections in neovim :)
 		-- for lualine it's any number greater then 2
@@ -233,14 +256,15 @@ return {
 				return "%="
 			end,
 		}) -- Must be here
+
 		ins_left({
 			-- Lsp server name .
 			function()
 				local msg = " "
 				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 				local clients = vim.lsp.get_active_clients()
-				if buf_ft == "alpha" then
-					return "          " .. "Practice makes perfect."
+				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
+					return "                 " .. "Practice makes perfect."
 				end
 				if next(clients) == nil then
 					return msg
