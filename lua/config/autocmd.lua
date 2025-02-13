@@ -136,8 +136,6 @@ local function check_and_update()
     if has_update then
         Snacks.notifier("Updates available", "info", {title = "Lazy"})
         require("lazy").update({ show = false, concurrency = 10 })
-    -- else
-    --     Snacks.notifier("No updates available", "info", {title = "Lazy"})
     end
 end
 
@@ -152,8 +150,6 @@ local function run_async_update()
     end)
 end
 
-
-
 vim.api.nvim_create_autocmd("User", {
     pattern = "LazyVimStarted",
     group = augroup("autoupdate"),
@@ -161,4 +157,3 @@ vim.api.nvim_create_autocmd("User", {
         run_async_update()
     end,
 })
-

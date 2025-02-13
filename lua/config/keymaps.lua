@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("DiffviewToggle", function(e)
 end, { nargs = "*" })
 
 vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history() end, {})
-vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard() end, {})
+vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open() end, {})
 ---------------------------------------------------------------------
 
 

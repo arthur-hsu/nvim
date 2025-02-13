@@ -1,43 +1,43 @@
 local colors = {
-	bg = "#202328",
-	fg = "#BBC2CF",
-	yellow = "#F7C251",
-	cyan = "#008080",
-	darkblue = "#081633",
-	green = "#88D97B",
-	orange = "#FEA405",
-	violet = "#A9A1E1",
-	magenta = "#C678DD",
-	lightblue = "#61AFEF",
-	blue = "#31A8FF",
-	red = "#E95678",
-	offline = "#B3DEEF",
-	bg_visual = "#89C0CF",
+	bg           = "#202328",
+	fg           = "#BBC2CF",
+	yellow       = "#F7C251",
+	cyan         = "#008080",
+	darkblue     = "#081633",
+	green        = "#88D97B",
+	orange       = "#FEA405",
+	violet       = "#A9A1E1",
+	magenta      = "#C678DD",
+	lightblue    = "#61AFEF",
+	blue         = "#31A8FF",
+	red          = "#E95678",
+	offline      = "#B3DEEF",
+	bg_visual    = "#89C0CF",
 	light_purple = "#B3B8F5",
-	mac = "#A9B3B9",
+	mac          = "#A9B3B9",
 }
 
 local mode_color = {
-	n = colors.magenta,
-	i = colors.green,
-	v = colors.blue,
-	V = colors.blue,
-	c = colors.magenta,
-	no = colors.red,
-	s = colors.orange,
-	S = colors.orange,
+	n      = colors.magenta,
+	i      = colors.green,
+	v      = colors.blue,
+	V      = colors.blue,
+	c      = colors.magenta,
+	no     = colors.red,
+	s      = colors.orange,
+	S      = colors.orange,
 	[""] = colors.orange,
-	ic = colors.yellow,
-	R = colors.violet,
-	Rv = colors.violet,
-	cv = colors.red,
-	ce = colors.red,
-	r = colors.cyan,
-	rm = colors.cyan,
+	ic     = colors.yellow,
+	R      = colors.violet,
+	Rv     = colors.violet,
+	cv     = colors.red,
+	ce     = colors.red,
+	r      = colors.cyan,
+	rm     = colors.cyan,
 	["r?"] = colors.cyan,
-	["!"] = colors.red,
-	t = colors.red,
-	multi = colors.blue,
+	["!"]  = colors.red,
+	t      = colors.red,
+	multi  = colors.blue,
 }
 
 local file_detial = function(scope)
@@ -185,6 +185,7 @@ return {
 				return { fg = mode_color[mode], gui = "bold", bg = "None" }
 			end,
 			padding = { right = 1 },
+			cond = conditions.buffer_not_empty,
 		})
 
 		-- Filename & Icon --
@@ -226,26 +227,12 @@ return {
 		ins_left({
             "location",
             color = { fg = colors.yellow, bg = "None" },
-            cond = function()
-				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
-					return false
-                else
-                    return true
-				end
-            end
+			cond = conditions.buffer_not_empty,
         })
 		ins_left({
             "progress",
             color = { fg = colors.yellow, bg = "None" },
-            cond = function()
-				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
-					return false
-                else
-                    return true
-				end
-            end
+			cond = conditions.buffer_not_empty,
         })
 
 		-- Insert mid section. You can make any number of sections in neovim :)
@@ -264,7 +251,7 @@ return {
 				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 				local clients = vim.lsp.get_active_clients()
 				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
-					return "                 " .. "Practice makes perfect."
+					return "        " .. "Practice makes perfect"
 				end
 				if next(clients) == nil then
 					return msg
@@ -323,11 +310,15 @@ return {
 		ins_right({
 			"o:encoding", -- option component same as &encoding in viml
 			fmt = string.upper, -- I'm not sure why it's upper case either ;)
-			cond = conditions.hide_in_width,
+			-- cond = conditions.hide_in_width,
+			cond = conditions.buffer_not_empty,
 			color = { fg = colors.yellow, gui = "bold", bg = "None" },
 		})
 		-- File format --
-		ins_right({ "filetype" })
+		ins_right({
+            "filetype",
+			cond = conditions.buffer_not_empty,
+        })
 
 		-- Lazy status --
 		ins_right({
@@ -345,18 +336,18 @@ return {
 			function()
 				local os_icons = {
 					["Windows_NT"] = "",
-					["Darwin"] = "",
-					["Debian"] = "",
-					["Ubuntu"] = "",
+					["Darwin"]     = "",
+					["Debian"]     = "",
+					["Ubuntu"]     = "",
 				}
 				return (os_icons[os] or "")
 			end,
 			color = function()
 				local os_color = {
 					["Windows_NT"] = { fg = "#087CD5", bg = "None" },
-					["Darwin"] = { fg = colors.mac, bg = "None" },
-					["Debian"] = { fg = "#D91857", bg = "None" },
-					["Ubuntu"] = { fg = "#DD4814", bg = "None" },
+					["Darwin"]     = { fg = colors.mac, bg = "None" },
+					["Debian"]     = { fg = "#D91857", bg = "None" },
+					["Ubuntu"]     = { fg = "#DD4814", bg = "None" },
 				}
 				return (os_color[os] or { fg = "#88D97B", bg = "None" })
 			end,
@@ -373,10 +364,10 @@ return {
 		ins_right({
 			function()
 				local icons = {
-					["idle"] = " ",
+					["idle"]    = " ",
 					["warning"] = " ",
 					["loading"] = " ",
-					["error"] = " ",
+					["error"]   = " ",
 					["offline"] = " ",
 				}
 				return copilot_status(icons) or icons["error"]
@@ -387,10 +378,10 @@ return {
 			end,
 			color = function()
 				local copilot_colours = {
-					["idle"] = { fg = colors.blue, bg = "None" },
-					["warning"] = { fg = colors.orange, bg = "None" },
-					["loading"] = { fg = colors.green, bg = "None" },
-					["error"] = { fg = colors.red, bg = "None" },
+					["idle"]    = { fg = colors.blue,    bg = "None" },
+					["warning"] = { fg = colors.orange,  bg = "None" },
+					["loading"] = { fg = colors.green,   bg = "None" },
+					["error"]   = { fg = colors.red,     bg = "None" },
 					["offline"] = { fg = colors.offline, bg = "None" },
 				}
 				return copilot_status(copilot_colours) or copilot_colours["error"]
