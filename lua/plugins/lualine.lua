@@ -251,7 +251,7 @@ return {
 				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 				local clients = vim.lsp.get_active_clients()
 				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
-					return "                 " .. "Practice makes perfect."
+					return "        " .. "Practice makes perfect"
 				end
 				if next(clients) == nil then
 					return msg
@@ -310,11 +310,15 @@ return {
 		ins_right({
 			"o:encoding", -- option component same as &encoding in viml
 			fmt = string.upper, -- I'm not sure why it's upper case either ;)
-			cond = conditions.hide_in_width,
+			-- cond = conditions.hide_in_width,
+			cond = conditions.buffer_not_empty,
 			color = { fg = colors.yellow, gui = "bold", bg = "None" },
 		})
 		-- File format --
-		ins_right({ "filetype" })
+		ins_right({
+            "filetype",
+			cond = conditions.buffer_not_empty,
+        })
 
 		-- Lazy status --
 		ins_right({
@@ -332,18 +336,18 @@ return {
 			function()
 				local os_icons = {
 					["Windows_NT"] = "",
-					["Darwin"] = "",
-					["Debian"] = "",
-					["Ubuntu"] = "",
+					["Darwin"]     = "",
+					["Debian"]     = "",
+					["Ubuntu"]     = "",
 				}
 				return (os_icons[os] or "")
 			end,
 			color = function()
 				local os_color = {
 					["Windows_NT"] = { fg = "#087CD5", bg = "None" },
-					["Darwin"] = { fg = colors.mac, bg = "None" },
-					["Debian"] = { fg = "#D91857", bg = "None" },
-					["Ubuntu"] = { fg = "#DD4814", bg = "None" },
+					["Darwin"]     = { fg = colors.mac, bg = "None" },
+					["Debian"]     = { fg = "#D91857", bg = "None" },
+					["Ubuntu"]     = { fg = "#DD4814", bg = "None" },
 				}
 				return (os_color[os] or { fg = "#88D97B", bg = "None" })
 			end,
@@ -360,10 +364,10 @@ return {
 		ins_right({
 			function()
 				local icons = {
-					["idle"] = " ",
+					["idle"]    = " ",
 					["warning"] = " ",
 					["loading"] = " ",
-					["error"] = " ",
+					["error"]   = " ",
 					["offline"] = " ",
 				}
 				return copilot_status(icons) or icons["error"]
@@ -374,10 +378,10 @@ return {
 			end,
 			color = function()
 				local copilot_colours = {
-					["idle"] = { fg = colors.blue, bg = "None" },
-					["warning"] = { fg = colors.orange, bg = "None" },
-					["loading"] = { fg = colors.green, bg = "None" },
-					["error"] = { fg = colors.red, bg = "None" },
+					["idle"]    = { fg = colors.blue,    bg = "None" },
+					["warning"] = { fg = colors.orange,  bg = "None" },
+					["loading"] = { fg = colors.green,   bg = "None" },
+					["error"]   = { fg = colors.red,     bg = "None" },
 					["offline"] = { fg = colors.offline, bg = "None" },
 				}
 				return copilot_status(copilot_colours) or copilot_colours["error"]
