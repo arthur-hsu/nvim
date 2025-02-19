@@ -45,7 +45,8 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
     keymap("n", "<leader>rc", ":Telescope file_browser path=$HOME\\AppData\\Local\\nvim\\lua<CR>", opts)
 end
 
-
+-- Disable cmd history keymap
+vim.api.nvim_set_keymap("n", "q:", "<Nop>", { noremap = true, silent = true })
 
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                                                    opts )
 keymap("n", "<leader>mc", "<cmd>Mason<CR>",                                                   opts )

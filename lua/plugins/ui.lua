@@ -94,10 +94,10 @@ return {
                     "icon_style",
                     "FloatTitle",
                     "WhichKeyNormal",
-                    "TelescopeBorder",
-                    "TelescopeNormal",
-                    "TelescopePromptBorder",
-                    "TelescopeResultsDiffChange"
+                    -- "TelescopeBorder",
+                    -- "TelescopeNormal",
+                    -- "TelescopePromptBorder",
+                    -- "TelescopeResultsDiffChange"
                 },
                 -- table: groups you don't want to clear
                 exclude_groups = {

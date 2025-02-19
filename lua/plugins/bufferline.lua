@@ -19,7 +19,8 @@ return {
 				left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
 				middle_mouse_command = "vertical sbuffer %d", -- can be a string | function, | false see "Mouse actions"
 				indicator = {
-					icon = " 󱕅 ", -- , 󱕅 , 󱎂  󰺹       this should be omitted if indicator style is not 'icon'
+					-- icon = " 󱕅 ", -- , 󱕅 , 󱎂  󰺹       this should be omitted if indicator style is not 'icon'
+					icon = "",
 					style = "icon",
 				},
 				highlights = {},

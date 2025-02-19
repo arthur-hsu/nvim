@@ -1,7 +1,6 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
-        event = "BufRead",
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
@@ -22,7 +21,7 @@ return {
             }
         end,
     },
-    {"nvim-treesitter/playground", event = "BufRead"},
+    {"nvim-treesitter/playground", event = "VeryLazy"},
     {
         "windwp/nvim-ts-autotag",
         ft = { "astro", "glimmer", "handlebars", "html", "javascript", "jsx", "markdown", "php", "rescript", "svelte", "tsx", "twig", "typescript", "vue", "xml" },
