@@ -175,12 +175,10 @@ return {
                 --     -- print('Attached to client', client.name, bufnr)
                 --     vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
                 -- end
-                if server == 'ruff' then
-                    -- Disable hover in favor of Pyright
-                    capabilities.hoverProvider = false
-                elseif server == 'pyright' then
+                if server == 'pyright' then
                     capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
                 end
+                
                 server_opts.capabilities = capabilities
 
 

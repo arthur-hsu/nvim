@@ -54,7 +54,6 @@ local enter_load = function()
             "bufferline.nvim",
             "lualine.nvim",
             "gitsigns.nvim",
-            -- "snacks.nvim",
             "nvim-lspconfig",
             "lspsaga.nvim",
             "copilot.lua",

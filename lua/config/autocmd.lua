@@ -1,11 +1,9 @@
 local os_name = vim.loop.os_uname().sysname
 
-
 -- This file is automatically loaded by lazyvim.config.init.
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
-
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -102,7 +100,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = augroup("wrap_spell"),
     pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
     callback = function()
-        vim.opt_local.wrap  = false
+        vim.opt_local.wrap = false
         vim.opt_local.spell = false
     end,
 })
@@ -128,13 +126,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
-
-
 -- 包裝函數
 local function check_and_update()
     local has_update = require("lazy.status").has_updates()
     if has_update then
-        Snacks.notifier("Updates available", "info", {title = "Lazy"})
+        Snacks.notifier("Updates available", "info", { title = "Lazy" })
         require("lazy").update({ show = false, concurrency = 10 })
     end
 end
@@ -156,4 +152,19 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         run_async_update()
     end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client == nil then
+            return
+        end
+        if client.name == "ruff" then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+        end
+    end,
+    desc = "LSP: Disable hover capability from Ruff",
 })
