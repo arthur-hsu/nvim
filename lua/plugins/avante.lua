@@ -7,7 +7,7 @@ return {
     opts = {
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         provider = "copilot",           -- Recommend using Claude
-        auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+        auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
         claude = {
             endpoint = "https://api.anthropic.com",
             model = "claude-3-5-sonnet-20241022",
@@ -34,8 +34,21 @@ return {
             enable_token_counting            = true,
             enable_cursor_planning_mode      = false,
         },
+        mappings = {
+            --- @class AvanteConflictMappings
+            diff = {
+                ours = "co",
+                theirs = "ca",
+                all_theirs = "cA",
+                both = "cb",
+                cursor = "cc",
+                next = "]x",
+                prev = "[x",
+            },
+        },
     },
-    build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
+    build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+        or "make",
     dependencies = {
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
