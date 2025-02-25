@@ -12,7 +12,7 @@ return {
     },
     {
         "olimorris/onedarkpro.nvim",
-        lazy = false,
+        event = "VeryLazy",
         priority = 1000, -- Ensure it loads first
         opts = {
                 highlights = {
