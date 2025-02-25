@@ -7,6 +7,8 @@ return {
 			extra_groups = { -- If you want to add some groups to be transparent. eg: { 'Pmenu', 'CocFloating' }
                 "NormalFloat",
                 "FloatBorder",
+                "CursorLine",
+                
 			},
 			excludes = {
             }, -- If you want to excludes from default transparent groups. eg: { 'LineNr' }
