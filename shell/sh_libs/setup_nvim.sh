@@ -15,10 +15,7 @@ sudo apt-get update
 sudo apt-get install nodejs -y
 sudo apt-get install npm -y
 
-mkdir -p ~/Documents/
-cd ~/Documents/ &&\
-    npm install neovim
-cd - || exit
+sudo npm install -g neovim yarn
 
 sudo apt-get install -y ninja-build gettext cmake unzip curl bpytop python3-pip
 sudo apt install -y ripgrep fd-find bat tldr xclip python3-venv
