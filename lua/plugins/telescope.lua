@@ -52,7 +52,7 @@ return {
                         ["<A-s>"] = flash,
                     },
                     n = {
-                        ["s"] = flash,
+                        ["A-s"] = flash,
                         ["<C-c>"] = actions.close
                     },
                 },
