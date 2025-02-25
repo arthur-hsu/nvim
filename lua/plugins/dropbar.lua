@@ -21,8 +21,19 @@ return {
             'nvim-telescope/telescope-fzf-native.nvim',
             build = 'make'
         },
-        config = function()
-            require('dropbar').setup()
+        opts = {
+            menu = {
+                scrollbar = {
+                    enable = true,
+                    background = false,
+                },
+                win_configs = {
+                    border = "rounded"
+                }
+            }
+        },
+        config = function(_, opts)
+            require('dropbar').setup(opts)
             local dropbar_api = require('dropbar.api')
             vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
             vim.keymap.set('n', '[;', dropbar_api.goto_context_start, { desc = 'Go to start of current context' })
