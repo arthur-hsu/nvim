@@ -11,6 +11,7 @@ return {
                 
 			},
 			excludes = {
+                "PmenuSbar"
             }, -- If you want to excludes from default transparent groups. eg: { 'LineNr' }
 		},
 	},

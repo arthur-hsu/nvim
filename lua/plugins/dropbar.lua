@@ -1,19 +1,5 @@
 return {
     {
-        "utilyre/barbecue.nvim",
-        name = "barbecue",
-        version = "*",
-        event = "VeryLazy",
-        enabled = false,
-        dependencies = {
-            "SmiteshP/nvim-navic",
-            "nvim-tree/nvim-web-devicons", -- optional dependency
-        },
-        opts = {
-            -- configurations go here
-        },
-    },
-    {
         'Bekaboo/dropbar.nvim',
         -- optional, but required for fuzzy finder support
         event = "VeryLazy",
@@ -25,11 +11,12 @@ return {
             menu = {
                 scrollbar = {
                     enable = true,
-                    background = false,
+                    background = true,
                 },
                 win_configs = {
                     border = "rounded"
-                }
+                },
+                hover = false,
             }
         },
         config = function(_, opts)
@@ -42,5 +29,19 @@ return {
             -- vim.api.nvim_set_hl(0, 'DropBarMenuHoverIcon', { bg = '#1f2335' })
             vim.api.nvim_set_hl(0, 'DropBarMenuHoverIcon', {})
         end
+    },
+    {
+        "utilyre/barbecue.nvim",
+        name = "barbecue",
+        version = "*",
+        event = "VeryLazy",
+        enabled = false,
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons", -- optional dependency
+        },
+        opts = {
+            -- configurations go here
+        },
     }
 }

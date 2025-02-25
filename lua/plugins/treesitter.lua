@@ -29,10 +29,8 @@ return {
             vim.api.nvim_set_hl(0, "@constant.builtin",        { fg = color.yellow })
             vim.api.nvim_set_hl(0, "@constructor",             { fg = color.yellow })
             
-            -- vim.api.nvim_set_hl(0, "@self", { bold = true })
         end,
     },
-    {"nvim-treesitter/playground", event = "VeryLazy"},
     {
         "windwp/nvim-ts-autotag",
         ft = { "astro", "glimmer", "handlebars", "html", "javascript", "jsx", "markdown", "php", "rescript", "svelte", "tsx", "twig", "typescript", "vue", "xml" },
@@ -57,5 +55,6 @@ return {
                 -- },
             })
         end,
-    }
+    },
+    {"nvim-treesitter/playground", event = "VeryLazy", enabled = false},
 }
