@@ -19,6 +19,17 @@ return {
                 },
                 -- ignore_install   = { "gitcommit" },
             }
+            local color = require("zephyr")
+            vim.api.nvim_set_hl(0, "@type.builtin",            { fg = color.yellow })
+            vim.api.nvim_set_hl(0, "@variable.builtin",        { fg = color.red })
+            vim.api.nvim_set_hl(0, "@variable.builtin.python", { fg = color.red, italic = true })
+            vim.api.nvim_set_hl(0, "@module",                  { fg = color.yellow })
+            vim.api.nvim_set_hl(0, "@boolean",                 { fg = color.magenta, bold = true })
+            vim.api.nvim_set_hl(0, "@function.builtin",        { fg = color.yellow })
+            vim.api.nvim_set_hl(0, "@constant.builtin",        { fg = color.yellow })
+            vim.api.nvim_set_hl(0, "@constructor",             { fg = color.yellow })
+            
+            -- vim.api.nvim_set_hl(0, "@self", { bold = true })
         end,
     },
     {"nvim-treesitter/playground", event = "VeryLazy"},
