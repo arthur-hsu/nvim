@@ -107,37 +107,26 @@ return {
         end
     },
     {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        -- build = function() vim.fn["mkdp#util#install"]() end,
-        build = "cd app && npm install && git restore .",
-        init = function()
-            vim.g.mkdp_filetypes = { "markdown" }
-        end,
-        ft = { "markdown" },
-        config = function()
-            vim.keymap.set('n', '<leader>md', "<CMD>MarkdownPreviewToggle<CR>", { noremap = true, silent = true })
-            vim.g.mkdp_auto_close        = true
-            vim.g.mkdp_open_to_the_world = false
-            vim.g.mkdp_open_ip           = "127.0.0.1"
-            vim.g.mkdp_port              = "8888"
-            --vim.g.mkdp_browser         = ""
-            vim.g.mkdp_echo_preview_url  = false
-            vim.g.mkdp_page_title        = "${name}"
-            vim.g.mkdp_theme             = 'dark'
-        end
-    },
-    {
         "toppair/peek.nvim",
         cmd = { "PeekOpen", "PeekClose" },
         ft = { "markdown"},
+        keys = {
+            { "<leader>md", mode = { "n" }, function() vim.cmd('PeekToggle') end , desc = "Markdown preview" },
+        },
         build = "deno task --quiet build:fast",
         config = function()
             require("peek").setup({
-                app = "browser"
+                app = "browser",
             })
-            vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-            vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+            local toggle = function()
+                local is_open = require("peek").is_open()
+                if is_open then
+                    require("peek").close()
+                else
+                    require("peek").open()
+                end
+            end
+            vim.api.nvim_create_user_command("PeekToggle", toggle, {})
         end,
     },
 

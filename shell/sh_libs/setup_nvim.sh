@@ -26,7 +26,6 @@ sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/E
 
 pip3 install neovim
 
-
-
+curl -fsSL https://deno.land/install.sh | sh
 
 
