@@ -51,13 +51,12 @@ local enter_load = function()
     require("lazy").load({
         plugins = {
             "transparent.nvim",
-            "nvim-treesitter",
-            "bufferline.nvim",
             "lualine.nvim",
-            "gitsigns.nvim",
+            "bufferline.nvim",
+
+            "nvim-treesitter",
             "nvim-lspconfig",
-            "lspsaga.nvim",
-            "copilot.lua",
+            "dropbar.nvim",
         }
     })
     vim.cmd [[LspStart]]
