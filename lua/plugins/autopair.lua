@@ -14,49 +14,48 @@ return {
         branch='development',
         -- branch='v0.6',
         -- enabled=false,
-        config = function ()
-            require('ultimate-autopair').setup({
-                -- pair_cmap=false,
-                multiline=true,
-                tabout = {
-                    enable = true,
-                    hopout = true,
-                },
-                space2={
-                    enable=true,
-                },
-                close = {  -- *ultimate-autopair-map-close-config*
-                    enable = true,
-                    map = '<A-]>', --string or table
-                    cmap = '<A-]>', --string or table
-                },
+        opts = {
+            -- pair_cmap=false,
+            multiline=true,
+            tabout = {
+                enable = true,
+                hopout = true,
+            },
+            space2={
+                enable=true,
+            },
+            close = {  -- *ultimate-autopair-map-close-config*
+                enable = true,
+                map = '<A-]>', --string or table
+                cmap = '<A-]>', --string or table
+            },
 
-                {'``','``',fly=true,suround=true,dosuround=true,newline=true,space=false, ft={'python'}},
-                -- {'*','*',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
-                -- {'**','**',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
-                -- {'***','***',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
-                internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
-                    {'[',']',fly=true,dosuround=true,newline=true,space=true},
-                    {'(',')',fly=true,dosuround=true,newline=true,space=true},
-                    {'{','}',fly=true,dosuround=true,newline=true,space=true},
-                    {'"','"',suround=true,multiline=false},
-                    {"'","'",suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
-                    {'`','`',cond=function(fn) return not fn.in_lisp() or fn.in_string() end,nft={'tex'},multiline=false},
-                    {'``',"''",ft={'tex'}},
-                    {'```','```',newline=true,ft={'markdown'}},
-                    {'<!--','-->',ft={'markdown','html'},space=true},
-                    {'"""','"""',newline=true,ft={'python'}},
-                    {"'''","'''",newline=true,ft={'python'}},
-                },
-                config_internal_pairs={
-                     --{'{','}',suround=true},
-                    {'"','"',newline=true,multiline=true},
-                    {"'","'",newline=true,multiline=true},
-                    {'```','```',newline=true,multiline=true},
-                },
-
-
-            })
+            {'``','``',fly=true,suround=true,dosuround=true,newline=true,space=false, ft={'python'}},
+            -- {'*','*',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
+            -- {'**','**',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
+            -- {'***','***',suround=true,dosuround=true,newline=true,space=false, ft={'markdown'}},
+            internal_pairs={-- *ultimate-autopair-pairs-default-pairs*
+                {'[',']',fly=true,dosuround=true,newline=true,space=true},
+                {'(',')',fly=true,dosuround=true,newline=true,space=true},
+                {'{','}',fly=true,dosuround=true,newline=true,space=true},
+                {'"','"',suround=true,multiline=false},
+                {"'","'",suround=true,cond=function(fn) return not fn.in_lisp() or fn.in_string() end,alpha=true,nft={'tex'},multiline=false},
+                {'`','`',cond=function(fn) return not fn.in_lisp() or fn.in_string() end,nft={'tex'},multiline=false},
+                {'``',"''",ft={'tex'}},
+                {'```','```',newline=true,ft={'markdown'}},
+                {'<!--','-->',ft={'markdown','html'},space=true},
+                {'"""','"""',newline=true,ft={'python'}},
+                {"'''","'''",newline=true,ft={'python'}},
+            },
+            config_internal_pairs={
+                --{'{','}',suround=true},
+                {'"','"',newline=true,multiline=true},
+                {"'","'",newline=true,multiline=true},
+                {'```','```',newline=true,multiline=true},
+            }
+        },
+        config = function (_, opts)
+            require('ultimate-autopair').setup(opts)
 
             local function ls_name_from_event(event) return event.entry.source.source.client.config.name end
             local cmp=require('cmp')

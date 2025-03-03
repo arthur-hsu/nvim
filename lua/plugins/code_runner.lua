@@ -1,4 +1,4 @@
-return  {
+return {
 	"CRAG666/code_runner.nvim",
 	dependencies = { "CRAG666/betterTerm.nvim" },
 	event = "VeryLazy",

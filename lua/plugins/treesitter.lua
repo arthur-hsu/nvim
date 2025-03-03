@@ -55,6 +55,5 @@ return {
                 -- },
             })
         end,
-    },
-    {"nvim-treesitter/playground", event = "VeryLazy", enabled = false},
+    }
 }

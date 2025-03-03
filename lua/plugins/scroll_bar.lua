@@ -7,43 +7,44 @@ return {
 			{ "haya14busa/vim-asterisk" },
 			{
 				"kevinhwang91/nvim-hlslens",
-				config = function()
+                opts = {
+                    -- override_lens = function(render, posList, nearest, idx, relIdx)
+                    -- end,
+                    override_lens = function(render, posList, nearest, idx, relIdx)
+                        local sfw = vim.v.searchforward == 1
+                        local indicator, text, chunks
+                        local absRelIdx = math.abs(relIdx)
+                        if absRelIdx > 1 then
+                            indicator = ("%d%s"):format(absRelIdx, sfw ~= (relIdx > 1) and " ▲" or " ▼")
+                        elseif absRelIdx == 1 then
+                            indicator = sfw ~= (relIdx == 1) and " ▲" or " ▼"
+                        else
+                            indicator = ""
+                        end
+
+                        local lnum, col = unpack(posList[idx])
+                        if nearest then
+                            local cnt = #posList
+                            if indicator ~= "" then
+                                text = (" [%s %d/%d]"):format(indicator, idx, cnt)
+                            else
+                                text = (" [%d/%d]"):format(idx, cnt)
+                            end
+                            chunks = { { " " }, { text, "HlSearchLensNear" } }
+                        else
+                            text = (" [%s %d]"):format(indicator, idx)
+                            chunks = { { " " }, { text, "HlSearchLens" } }
+                        end
+                        render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+                    end,
+                    build_position_cb = function(plist, _, _, _)
+                        require("scrollbar.handlers.search").handler.show(plist.start_pos)
+                    end,
+				},
+				config = function(_, opts)
 					vim.api.nvim_set_hl(0, "HlSearchLens", { link = "DiagnosticVirtualTextInfo" })
 					vim.api.nvim_set_hl(0, "HlSearchLensNear", { link = "BufferLineIndicatorSelected" })
-					require("hlslens").setup({
-						-- override_lens = function(render, posList, nearest, idx, relIdx)
-						-- end,
-						override_lens = function(render, posList, nearest, idx, relIdx)
-							local sfw = vim.v.searchforward == 1
-							local indicator, text, chunks
-							local absRelIdx = math.abs(relIdx)
-							if absRelIdx > 1 then
-								indicator = ("%d%s"):format(absRelIdx, sfw ~= (relIdx > 1) and " ▲" or " ▼")
-							elseif absRelIdx == 1 then
-								indicator = sfw ~= (relIdx == 1) and " ▲" or " ▼"
-							else
-								indicator = ""
-							end
-
-							local lnum, col = unpack(posList[idx])
-							if nearest then
-								local cnt = #posList
-								if indicator ~= "" then
-									text = (" [%s %d/%d]"):format(indicator, idx, cnt)
-								else
-									text = (" [%d/%d]"):format(idx, cnt)
-								end
-								chunks = { { " " }, { text, "HlSearchLensNear" } }
-							else
-								text = (" [%s %d]"):format(indicator, idx)
-								chunks = { { " " }, { text, "HlSearchLens" } }
-							end
-							render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
-						end,
-						build_position_cb = function(plist, _, _, _)
-							require("scrollbar.handlers.search").handler.show(plist.start_pos)
-						end,
-					})
+					require("hlslens").setup(opts)
 
 					local hlslens = require("hlslens")
 					if hlslens then
@@ -88,54 +89,55 @@ return {
 				end,
 			},
 		},
-		config = function()
-			require("scrollbar").setup({
-				handle = {
-					blend = 70, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-					color = "#B3B8F5",
-				},
+        opts = {
+            handle = {
+                blend = 70, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+                color = "#B3B8F5",
+            },
 
-				marks = {
-					Search = {
-						text = { "-" },
-						highlight = "HlSearchLensNear",
-					},
-					Info = {
-						text = { " " },
-						highlight = "CursorColumn",
-						priority = 99,
-					},
-					Hint = {
-						text = { " " },
-						highlight = "CursorColumn",
-						priority = 99,
-					},
-				},
-				excluded_buftypes = {
-					"terminal",
-					"nofile",
-				},
-				excluded_filetypes = {
-					"DiffviewFiles",
-					"DiffviewFileHistory",
-					"TelescopePrompt",
-					"cmp_docs",
-					"cmp_menu",
-					"noice",
-					"prompt",
-					"lazy",
-					"snacks_dashboard",
-					"markdown",
-				},
-				handlers = {
-					cursor = true,
-					diagnostic = true,
-					gitsigns = true, -- Requires gitsigns
-					handle = true,
-					search = true, -- Requires hlslens
-					ale = false, -- Requires ALE
-				},
-			})
+            marks = {
+                Search = {
+                    text = { "-" },
+                    highlight = "HlSearchLensNear",
+                },
+                Info = {
+                    text = { " " },
+                    highlight = "CursorColumn",
+                    priority = 99,
+                },
+                Hint = {
+                    text = { " " },
+                    highlight = "CursorColumn",
+                    priority = 99,
+                },
+            },
+            excluded_buftypes = {
+                "terminal",
+                "nofile",
+            },
+            excluded_filetypes = {
+                "DiffviewFiles",
+                "DiffviewFileHistory",
+                "TelescopePrompt",
+                "cmp_docs",
+                "cmp_menu",
+                "noice",
+                "prompt",
+                "lazy",
+                "snacks_dashboard",
+                "markdown",
+            },
+            handlers = {
+                cursor = true,
+                diagnostic = true,
+                gitsigns = true, -- Requires gitsigns
+                handle = true,
+                search = true, -- Requires hlslens
+                ale = false, -- Requires ALE
+            },
+        },
+		config = function(_, opts)
+			require("scrollbar").setup(opts)
 			require("scrollbar.handlers.search").setup()
 			require("scrollbar.handlers.gitsigns").setup()
 

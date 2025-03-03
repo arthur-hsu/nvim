@@ -60,5 +60,5 @@ return {
         vim.api.nvim_set_hl(0, "FlashCursor",     { fg = "#b3b8f5", bg = "#88D97B", bold = true })
         vim.api.nvim_set_hl(0, "FlashPrompt",     { link= "MsgArea" })
         vim.api.nvim_set_hl(0, "FlashPromptIcon", { link= "Special" })
-    end,
+    end
 }

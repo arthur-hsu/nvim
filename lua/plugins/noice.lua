@@ -157,5 +157,5 @@ return {
 			end
 		end, { silent = true, expr = true })
 		require("telescope").load_extension("noice")
-	end,
+	end
 }

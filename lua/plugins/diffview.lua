@@ -587,8 +587,8 @@ return {
 				help_panel = {
 					{ "n", "q", actions.close, { desc = "Close help menu" } },
 					{ "n", "<esc>", actions.close, { desc = "Close help menu" } },
-				},
-			},
+				}
+			}
 		})
-	end,
+	end
 }

@@ -207,7 +207,7 @@ return {
 
                     -- C-p to print last response
                     vim.keymap.set('n', '<C-p>', function()
-                        print(require("CopilotChat").response())
+                    print(require("CopilotChat").response())
                     end, { buffer = true, remap = true })
                 end
             })
