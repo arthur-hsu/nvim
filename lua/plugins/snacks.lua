@@ -110,9 +110,16 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        animate      = { enabled = true },
         styles       = styles,
-        bigfile      = { enabled = true },
+        animate      = { enabled = true },
+        bigfile      = {
+            enabled = true,
+            config = {
+                notify      = true,             -- show notification when big file detected
+                size        = 1 * 1024 * 1024,  -- 1.5MB
+                line_length = 1000,             -- average line length (useful for minified files)
+            }
+        },
         quickfile    = { enabled = true },
         words        = { enabled = false },
         terminal     = { enabled = true },
