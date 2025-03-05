@@ -29,6 +29,15 @@ vim.api.nvim_create_user_command("DiffviewToggle", function(e)
         vim.cmd("DiffviewOpen " .. e.args)
     end
 end, { nargs = "*" })
+vim.api.nvim_create_user_command("CleanShada", function()
+    local shada_dir = vim.fn.stdpath("data") .. "/shada"
+    for _, file in ipairs(vim.fn.glob(shada_dir .. "/*", true, true)) do
+        os.remove(file)
+    end
+    print("All shada files deleted in: " .. shada_dir)
+    vim.cmd("wshada")
+    vim.cmd("rshada!")
+end, {})
 
 vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history() end, {})
 vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open() end, {})
