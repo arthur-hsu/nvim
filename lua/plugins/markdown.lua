@@ -55,12 +55,17 @@ return {
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         opts = {
             file_types = { "markdown", "Avante" },
-            render_modes = true,
+            -- render_modes = true,
+            render_modes = { 'n', 'c', 't' },
             code = {
                 width     = 'block',
                 sign      = false,
                 left_pad  = 2,
                 right_pad = 4,
+            },
+            pipe_table = {
+                style = 'normal',
+                preset = 'heavy'
             },
         },
         config = function(_, opts)

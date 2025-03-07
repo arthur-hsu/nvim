@@ -467,6 +467,7 @@ return {
                                 end
                             end)
                         end,
+                        { desc = "Commit the staged changes" },
                     },
                     {
                         "n",

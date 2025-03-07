@@ -31,6 +31,65 @@ local function find_lines_between_separator(lines, pattern, at_least_one)
     return result, separator_line_start, separator_line_finish, line_count
 end
 
+
+local function commit_message_markdown(separator, result)
+  -- 創建 Markdown 格式的 Commit Message 模板
+  local content = {
+    "# Commit Message",
+    "",
+    "**Changes:**",
+    separator .. result .. separator,
+    "",
+    "**Auto commit? (y/n)**"
+  }
+
+  -- 創建一個新的 buffer
+  local buf = vim.api.nvim_create_buf(false, true) -- 不列入 buffer list
+
+  -- 設定 buffer 為 Markdown 格式
+  vim.bo[buf].filetype = "markdown"
+
+  -- 寫入內容到 buffer
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
+
+  -- 設定浮動窗口大小
+  local width = 60
+  local height = #content + 2
+  local opts = {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = math.floor((vim.o.columns - width) / 2),
+    row = math.floor((vim.o.lines - height) / 2),
+    style = "minimal",
+    border = "rounded"
+  }
+
+  -- 創建浮動窗口
+  local win = vim.api.nvim_open_win(buf, true, opts)
+
+  -- 允許用戶輸入 commit message
+  vim.api.nvim_buf_set_option(buf, "modifiable", true)
+  vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
+
+  -- 設定 prompt
+  vim.fn.prompt_setprompt(buf, "> ")
+
+  -- 讓用戶輸入 commit message，並處理輸入
+  vim.fn.prompt_setcallback(buf, function(msg)
+    vim.api.nvim_win_close(win, true) -- 關閉浮動窗口
+    print("Commit Message: " .. msg)  -- 這裡可以改成 commit 操作
+  end)
+
+  vim.cmd("startinsert") -- 進入插入模式
+end
+
+-- 測試函數
+-- commit_message_markdown("---", "Modified README")
+
+
+
+
 local commit_callback = function(response, source, staged)
     local bufnr    = source.bufnr
     local buftype  = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
@@ -133,6 +192,7 @@ local commit_callback = function(response, source, staged)
         end
     else
         notify("Abort", "info", { icon = "", title = "Git commit" })
+        -- vim.api.nvim_input(quit)
     end
 end
 
@@ -172,19 +232,12 @@ return {
             local select = require("CopilotChat.select")
             local prompts = {
                 QuickChat             = {},
-                QuickChatWithFiletype = {},
-                Explain               = { prompt = "> /COPILOT_EXPLAIN\n\n解釋這段代碼如何運行。" },
-                Suggestion            = { prompt = "> /COPILOT_GENERATE\n\n請查看以上代碼並提供改進建議的sample code。" },
-                Annotations           = { prompt = "> /COPILOT_GENERATE\n\n為所選程式編寫文件。 回覆應該是一個包含原始程式的程式塊，並將文件作為註釋新增。 為所使用的寫程式語言使用最合適的文件樣式（例如 JavaScript的JSDoc，Python的docstrings等)" },
-                Refactor              = { prompt = "> /COPILOT_GENERATE\n\n請重構以上代碼以提高其清晰度和可讀性。" },
-                Tests                 = { prompt = "> /COPILOT_GENERATE\n\n簡要說明以上代碼的工作原理，然後產生單元測試。" },
                 Translate             = { prompt = "> /COPILOT_GENERATE\n\n將英文翻譯成繁體中文, 或是將中文翻譯成英文, 回答中不需要包含行數" },
-                Fix                   = {
-                    prompt = '> /COPILOT_GENERATE\n\nPlease assist with the following diagnostic issue in file:',
-                },
                 Commit                = {
                     prompt =
-                    '> #git:unstaged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    '使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    sticky = '#git:unstaged',
+                    selection = false,
                     callback = function(response, source)
                         commit_callback(response, source, false)
                     end
@@ -192,7 +245,9 @@ return {
                 CommitStaged          = {
                     -- prompt            = 'Write commit message for the change with commitizen convention. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
                     prompt =
-                    '> #git:staged\n\n使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    '使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。',
+                    sticky = '#git:staged',
+                    selection = false,
                     callback = function(response, source)
                         commit_callback(response, source, true)
                     end,
@@ -203,7 +258,8 @@ return {
             vim.api.nvim_create_autocmd('BufEnter', {
                 pattern = 'copilot-*',
                 callback = function()
-                    vim.opt_local.relativenumber = true
+                    vim.opt_local.relativenumber = false
+                    -- vim.opt_local.number         = false
 
                     -- C-p to print last response
                     vim.keymap.set('n', '<C-p>', function()

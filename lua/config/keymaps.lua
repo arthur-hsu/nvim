@@ -7,7 +7,12 @@
 -- command_mode      = "c",
 
 -- Shorten function name
-local keymap    = vim.api.nvim_set_keymap
+local keymap    = vim.keymap.set
+
+
+
+
+
 
 -- Custom Commands
 vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
@@ -46,7 +51,7 @@ vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open(
 
 
 
-local opts = { noremap = true, silent = true }
+local opts = { silent = true }
 local term_opts = { silent = true }
 if vim.loop.os_uname().sysname == 'Linux' or vim.loop.os_uname().sysname == 'Darwin' then
     keymap("n", "<leader>rc", ":Telescope file_browser path=$HOME/.config/nvim/lua<cr>", opts)
@@ -55,7 +60,13 @@ elseif vim.loop.os_uname().sysname == 'Windows_NT' then
 end
 
 -- Disable cmd history keymap
-vim.api.nvim_set_keymap("n", "q:", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "q:", "<Nop>", opts)
+
+
+keymap("n", "d", "\"_d", opts)
+keymap("n", "D", "\"_D", opts)
+keymap("v", "d", "\"_d", opts)
+
 
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                                                    opts )
 keymap("n", "<leader>mc", "<cmd>Mason<CR>",                                                   opts )
