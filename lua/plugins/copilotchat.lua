@@ -130,7 +130,7 @@ local commit_callback = function(response, source, staged)
                 end
             )
 
-            vim.api.nvim_input(quit)
+            -- vim.api.nvim_input(quit)
         end
     else
         notify("Abort", "info", { icon = "", title = "Git commit" })
