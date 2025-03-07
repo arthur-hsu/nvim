@@ -210,7 +210,7 @@ return {
                 pattern = 'copilot-*',
                 callback = function()
                     vim.opt_local.relativenumber = false
-                    -- vim.opt_local.number         = false
+                    vim.opt_local.number         = false
 
                     -- C-p to print last response
                     vim.keymap.set('n', '<C-p>', function()

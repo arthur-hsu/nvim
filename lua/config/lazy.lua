@@ -57,6 +57,7 @@ local enter_load = function()
             "nvim-treesitter",
             "nvim-lspconfig",
             "dropbar.nvim",
+            -- "lspsaga.nvim"
         }
     })
     vim.cmd [[LspStart]]
