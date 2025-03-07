@@ -61,7 +61,7 @@ return {
                 completion    = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered()
             },
-            mapping = require("plugins.cmp.keybindings").cmp(cmp),
+            mapping = require("plugins.cmp.keybindings").keybind(cmp),
             sorting = {
                 priority_weight = 2,
                 comparators = {

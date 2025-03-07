@@ -1,7 +1,7 @@
 local pluginKeys = {}
 local luasnip = require("luasnip")
 -- nvim-cmp 自动补全
-pluginKeys.cmp = function(cmp)
+pluginKeys.keybind = function(cmp)
     local feedkey = function(key, mode)
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
     end
