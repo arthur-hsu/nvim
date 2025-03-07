@@ -32,64 +32,6 @@ local function find_lines_between_separator(lines, pattern, at_least_one)
 end
 
 
-local function commit_message_markdown(separator, result)
-  -- 創建 Markdown 格式的 Commit Message 模板
-  local content = {
-    "# Commit Message",
-    "",
-    "**Changes:**",
-    separator .. result .. separator,
-    "",
-    "**Auto commit? (y/n)**"
-  }
-
-  -- 創建一個新的 buffer
-  local buf = vim.api.nvim_create_buf(false, true) -- 不列入 buffer list
-
-  -- 設定 buffer 為 Markdown 格式
-  vim.bo[buf].filetype = "markdown"
-
-  -- 寫入內容到 buffer
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
-
-  -- 設定浮動窗口大小
-  local width = 60
-  local height = #content + 2
-  local opts = {
-    relative = "editor",
-    width = width,
-    height = height,
-    col = math.floor((vim.o.columns - width) / 2),
-    row = math.floor((vim.o.lines - height) / 2),
-    style = "minimal",
-    border = "rounded"
-  }
-
-  -- 創建浮動窗口
-  local win = vim.api.nvim_open_win(buf, true, opts)
-
-  -- 允許用戶輸入 commit message
-  vim.api.nvim_buf_set_option(buf, "modifiable", true)
-  vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
-
-  -- 設定 prompt
-  vim.fn.prompt_setprompt(buf, "> ")
-
-  -- 讓用戶輸入 commit message，並處理輸入
-  vim.fn.prompt_setcallback(buf, function(msg)
-    vim.api.nvim_win_close(win, true) -- 關閉浮動窗口
-    print("Commit Message: " .. msg)  -- 這裡可以改成 commit 操作
-  end)
-
-  vim.cmd("startinsert") -- 進入插入模式
-end
-
--- 測試函數
--- commit_message_markdown("---", "Modified README")
-
-
-
-
 local commit_callback = function(response, source, staged)
     local bufnr    = source.bufnr
     local buftype  = vim.api.nvim_get_option_value('filetype', { buf = bufnr })

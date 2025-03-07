@@ -1,3 +1,73 @@
+
+
+local pickers      = require("telescope.pickers")
+local finders      = require("telescope.finders")
+local conf         = require("telescope.config").values
+local actions      = require "telescope.actions"
+local action_state = require "telescope.actions.state"
+
+
+-- to execute the function
+-- colors()
+-- vim.api.nvim_win_set_option(0, 'relativenumber', false)
+local function printTable(tbl, indent)
+	indent = indent or 0
+	local indentStr = string.rep("  ", indent) -- 用來縮進輸出
+
+	for k, v in pairs(tbl) do
+		if type(v) == "table" then
+			print(indentStr .. tostring(k) .. " = {")
+			printTable(v, indent + 1) -- 遞迴列印子表
+			print(indentStr .. "}")
+		else
+			print(indentStr .. tostring(k) .. " = " .. tostring(v))
+		end
+	end
+end
+local grep_commit_option = function ()
+    
+    local prompts = require("CopilotChat").prompts()
+
+    local options = {}
+    local target_names = { Commit = true, CommitStaged = true }
+    for key, value in pairs(prompts) do
+        if target_names[key] then
+            table.insert(options, key)
+        end
+    end
+    return options
+end
+
+local CommitChoice = function(opts)
+	opts = opts or {}
+	pickers
+		.new(opts, {
+			prompt_title = "Commit",
+			finder = finders.new_table({
+				results = grep_commit_option(),
+			}),
+			sorter = conf.generic_sorter(opts),
+			attach_mappings = function(prompt_bufnr, map)
+				actions.select_default:replace(function()
+					actions.close(prompt_bufnr)
+					local selection = action_state.get_selected_entry()
+					local choice = selection[1]
+                    local config = require("CopilotChat").prompts()[choice]
+                    config.headless = true
+
+					if choice ~= nil then
+						require("CopilotChat").ask(config.prompt, config)
+					end
+				end)
+				return true
+			end,
+		})
+		:find()
+end
+
+
+
+
 return {
 	"sindrets/diffview.nvim",
 	event = "VeryLazy",
@@ -449,23 +519,7 @@ return {
                         "n",
                         "cc",
                         function()
-                            vim.ui.input({ prompt = "Commit message: " }, function(msg)
-                                if not msg then
-                                    return
-                                end
-                                local results = vim.system({ "git", "commit", "-m", msg }, { text = true }):wait()
-
-                                if results.code ~= 0 then
-                                    vim.notify(
-                                    "Commit failed with the message: \n"
-                                    .. vim.trim(results.stdout .. "\n" .. results.stderr),
-                                    vim.log.levels.ERROR,
-                                    { title = "Commit" }
-                                    )
-                                else
-                                    vim.notify(results.stdout, vim.log.levels.INFO, { title = "Commit" })
-                                end
-                            end)
+                            CommitChoice(require("telescope.themes").get_dropdown({}))
                         end,
                         { desc = "Commit the staged changes" },
                     },
