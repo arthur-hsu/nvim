@@ -40,6 +40,7 @@ local commit_callback = function(response, source, staged)
     local accept   = require("CopilotChat").config.mappings.accept_diff.normal
     local quit     = require("CopilotChat").config.mappings.close.normal
     local showdiff = require("CopilotChat").config.mappings.show_diff.normal
+    local chat = require("CopilotChat")
     local lines    = {}
 
     for line in response:gmatch("[^\r\n]+") do
@@ -57,7 +58,9 @@ local commit_callback = function(response, source, staged)
     local result = table.concat(res, "\n")
     if total_lines == 0 then
         notify("No commit msg", "error", { title = "Git commit" })
-        vim.api.nvim_input(quit)
+        if chat.chat:visible() then
+            vim.api.nvim_input(quit)
+        end
         return
     end
     local separator = "\n" .. string.rep("─", max_line) .. "\n"
@@ -65,13 +68,17 @@ local commit_callback = function(response, source, staged)
     if string.match(input, '^[yY]$') then
         if string.match(buftype, 'gitcommit') then
             vim.api.nvim_input(accept)
-            vim.api.nvim_input(quit)
+            if chat.chat:visible() then
+                vim.api.nvim_input(quit)
+            end
         else
             local tmpfile = vim.fn.stdpath("cache") .. "/copilot_commit_msg"
             local file = io.open(tmpfile, "w")
             if not file then
                 notify("Failed to open file: " .. tmpfile, "error", { title = "Git commit" })
-                vim.api.nvim_input(quit)
+                if chat.chat:visible() then
+                    vim.api.nvim_input(quit)
+                end
                 return
             end
             file:write(result)
@@ -130,7 +137,9 @@ local commit_callback = function(response, source, staged)
                 end
             )
 
-            -- vim.api.nvim_input(quit)
+            if chat.chat:visible() then
+                vim.api.nvim_input(quit)
+            end
         end
     else
         notify("Abort", "info", { icon = "", title = "Git commit" })
