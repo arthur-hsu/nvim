@@ -9,6 +9,7 @@ return {
 	},
 	{ "rcarriga/nvim-notify" },
 	{ "nvim-tree/nvim-web-devicons" },
+    { "nvim-lua/plenary.nvim" },
 	{
 		"ibhagwan/fzf-lua",
 		-- optional for icon support

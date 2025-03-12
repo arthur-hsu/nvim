@@ -4,7 +4,7 @@ return {
 		vim.o.timeout = true
 		vim.o.timeoutlen = 320
 	end,
-	-- enabled = false,
+    -- lazy = true,
 	event = "VeryLazy",
 	opts = {
 		plugins = {
