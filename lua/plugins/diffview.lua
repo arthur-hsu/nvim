@@ -1,10 +1,5 @@
 
 
-local pickers      = require("telescope.pickers")
-local finders      = require("telescope.finders")
-local conf         = require("telescope.config").values
-local actions      = require "telescope.actions"
-local action_state = require "telescope.actions.state"
 
 
 -- to execute the function
@@ -39,6 +34,11 @@ local grep_commit_option = function ()
 end
 
 local CommitChoice = function(opts)
+    local pickers           = require("telescope.pickers")
+    local finders           = require("telescope.finders")
+    local conf              = require("telescope.config").values
+    local telescope_actions = require "telescope.actions"
+    local action_state      = require "telescope.actions.state"
 	opts = opts or {}
 	pickers
 		.new(opts, {
@@ -48,8 +48,8 @@ local CommitChoice = function(opts)
 			}),
 			sorter = conf.generic_sorter(opts),
 			attach_mappings = function(prompt_bufnr, map)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
+				telescope_actions.select_default:replace(function()
+					telescope_actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
 					local choice = selection[1]
                     local config = require("CopilotChat").prompts()[choice]

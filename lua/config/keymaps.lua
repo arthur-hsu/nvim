@@ -63,9 +63,9 @@ end
 vim.api.nvim_set_keymap("n", "q:", "<Nop>", opts)
 
 
-keymap("n", "d", "\"_d", opts)
-keymap("n", "D", "\"_D", opts)
-keymap("v", "d", "\"_d", opts)
+keymap("n", "x", "\"_x", opts)
+keymap("n", "X", "\"_X", opts)
+keymap("v", "x", "\"_x", opts)
 
 
 keymap("n", "<leader>L",  "<cmd>Lazy<CR>",                                                    opts )
