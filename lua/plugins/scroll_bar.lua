@@ -110,10 +110,21 @@ return {
                     highlight = "CursorColumn",
                     priority = 99,
                 },
+                GitAdd = {
+                    text = "│",
+                },
+                GitChange = {
+                    text = "│",
+                },
+                GitDelete = {
+                    text = "│",
+                },
+
             },
             excluded_buftypes = {
                 "terminal",
                 "nofile",
+                ""
             },
             excluded_filetypes = {
                 "DiffviewFiles",
