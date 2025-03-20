@@ -2,6 +2,7 @@ vim.api.nvim_set_hl(0, "AvanteIncoming", { bg = "#304753" })
 return {
     "yetone/avante.nvim",
     event = "VeryLazy",
+    build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
     version = false,
     -- tag = "v0.0.13",
     opts = {
@@ -47,16 +48,14 @@ return {
             },
         },
     },
-    build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-        or "make",
     dependencies = {
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
         --- The below dependencies are optional,
-        "hrsh7th/nvim-cmp",      -- autocompletion for avante commands and mentions
+        "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua", -- for providers='copilot'
+        "zbirenbaum/copilot.lua",      -- for providers='copilot'
         {
             -- support for image pasting
             "HakonHarnes/img-clip.nvim",

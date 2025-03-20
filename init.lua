@@ -1,9 +1,6 @@
--- if vim.loop.os_uname().sysname == 'Windows_NT' then
---     vim.opt.shell = "pwsh"
---     vim.opt.shellcmdflag = "-command"
---     -- vim.opt.shellquote = "\""
---     -- vim.opt.shellxquote = ""
--- end
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+    vim.opt.shell = "pwsh"
+end
 -- elseif vim.loop.os_uname().sysname == 'Darwin' then
 --     vim.g.python3_host_prog= "/Users/arthur/.pyenv/versions/3.11.7/bin/python"
 -- -- elseif vim.loop.os_uname().sysname == 'Linux' then
