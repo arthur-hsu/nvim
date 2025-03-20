@@ -50,10 +50,6 @@ local file_detial = function(scope)
 	return detial[scope]
 end
 
-local copilot_status = function(scope)
-	local status = require("copilot_status").status_string()
-	return scope[status]
-end
 
 local conditions = {
 	buffer_not_empty = function()
@@ -72,23 +68,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		{
-			"jonahgoldwastaken/copilot-status.nvim",
-			-- dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
-			lazy = true,
-			config = function()
-				require("copilot_status").setup({
-					icons = {
-						idle = "idle",
-						error = "error",
-						offline = "offline",
-						warning = "warning",
-						loading = "loading",
-					},
-					debug = false,
-				})
-			end,
-		},
+        'AndreM222/copilot-lualine',
 	},
 	event = "VeryLazy",
 	opts = function()
@@ -352,7 +332,6 @@ return {
 				return (os_color[os] or { fg = "#88D97B", bg = "None" })
 			end,
 		})
-
 		-- Branch --
 		ins_right({
 			"branch",
@@ -361,32 +340,30 @@ return {
 		})
 
 		-- Copilot --
-		ins_right({
-			function()
-				local icons = {
-					["idle"]    = " ",
-					["warning"] = " ",
-					["loading"] = " ",
-					["error"]   = " ",
-					["offline"] = " ",
-				}
-				return copilot_status(icons) or icons["error"]
-				--return require("copilot_status").status_string()
-			end,
-			cond = function()
-				return require("copilot_status").enabled() == true
-			end,
-			color = function()
-				local copilot_colours = {
-					["idle"]    = { fg = colors.blue,    bg = "None" },
-					["warning"] = { fg = colors.orange,  bg = "None" },
-					["loading"] = { fg = colors.green,   bg = "None" },
-					["error"]   = { fg = colors.red,     bg = "None" },
-					["offline"] = { fg = colors.offline, bg = "None" },
-				}
-				return copilot_status(copilot_colours) or copilot_colours["error"]
-			end,
-		})
+        ins_right({
+            "copilot",
+            symbols = {
+                status = {
+                    icons = {
+                        enabled = " ",
+                        sleep = " ", -- auto-trigger disabled
+                        disabled = " ",
+                        warning = " ",
+                        unknown = " "
+                    },
+                    hl = {
+                        enabled  = colors.blue,
+                        sleep    = "#AEB7D0",
+                        disabled = "#6272A4",
+                        warning  = "#FFB86C",
+                        unknown  = "#FF5555"
+                    }
+                },
+                spinners = "dots", -- has some premade spinners
+                spinner_color = "#6272A4"
+            },
+            show_colors = true,
+        })
         return config
 	end,
 	config = function(_, opts)

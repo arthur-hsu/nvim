@@ -24,6 +24,8 @@ local gen_spec_list = function ()
 end
 local spec_list = gen_spec_list()
 
+
+
 require("lazy").setup({
     spec = spec_list,
     -- spec = {},
