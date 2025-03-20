@@ -41,7 +41,7 @@ return {
 			filetype_path = "",
 			-- Execute before executing a file
 			before_run_filetype = function()
-				vim.cmd(":w")
+				vim.cmd("w")
 			end,
 			filetype = {
 				javascript = "node",

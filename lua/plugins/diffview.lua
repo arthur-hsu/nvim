@@ -54,6 +54,7 @@ local CommitChoice = function(opts)
 					local choice = selection[1]
                     local config = require("CopilotChat").prompts()[choice]
                     config.headless = false
+                    config.model = "claude-3.7-sonnet"
                     config.window = {
                         layout = 'float',
                         relative = 'win',
