@@ -59,7 +59,6 @@ local commit_callback = function(response, source, staged)
     if total_lines == 0 then
         notify("No commit msg", "error", { title = "Git commit" })
         if chat.chat:visible() then
-            -- vim.api.nvim_input(quit)
             vim.cmd(quit)
         end
         return
@@ -70,16 +69,18 @@ local commit_callback = function(response, source, staged)
         if string.match(buftype, 'gitcommit') then
             vim.api.nvim_input(accept)
             if chat.chat:visible() then
-                -- vim.api.nvim_input(quit)
                 vim.cmd(quit)
             end
         else
+            if chat.chat:visible() then
+                
+                vim.cmd(quit)
+            end
             local tmpfile = vim.fn.stdpath("cache") .. "/copilot_commit_msg"
             local file = io.open(tmpfile, "w")
             if not file then
                 notify("Failed to open file: " .. tmpfile, "error", { title = "Git commit" })
                 if chat.chat:visible() then
-                    -- vim.api.nvim_input(quit)
                     vim.cmd(quit)
                 end
                 return
@@ -140,15 +141,10 @@ local commit_callback = function(response, source, staged)
                 end
             )
 
-            if chat.chat:visible() then
-                -- vim.api.nvim_input(quit)
-                vim.cmd(quit)
-            end
         end
     else
         notify("Abort", "info", { icon = "", title = "Git commit" })
         if chat.chat:visible() then
-            -- vim.api.nvim_input(quit)
             vim.cmd(quit)
         end
     end

@@ -53,15 +53,6 @@ local CommitChoice = function(opts)
 					local selection = action_state.get_selected_entry()
 					local choice = selection[1]
                     local config = require("CopilotChat").prompts()[choice]
-                    config.headless = false
-                    config.model = "o3-mini"
-                    config.window = {
-                        layout = 'float',
-                        relative = 'win',
-                        width = 0.3,
-                        height = 0.2,
-                        title = "Auto Commit",
-                    }
 
 					if choice ~= nil then
 						require("CopilotChat").ask(config.prompt, config)
