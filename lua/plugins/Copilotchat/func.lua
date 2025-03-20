@@ -37,7 +37,8 @@ local commit_callback = function(response, source, staged)
     -- local notify   = vim.notify
     local notify   = require("notify")
     local accept   = require("CopilotChat").config.mappings.accept_diff.normal
-    local quit     = require("CopilotChat").config.mappings.close.normal
+    -- local quit     = require("CopilotChat").config.mappings.close.normal
+    local quit     = "<cmd>CopilotChatClose<cr>"
     local showdiff = require("CopilotChat").config.mappings.show_diff.normal
     local chat = require("CopilotChat")
     local lines    = {}
@@ -58,7 +59,8 @@ local commit_callback = function(response, source, staged)
     if total_lines == 0 then
         notify("No commit msg", "error", { title = "Git commit" })
         if chat.chat:visible() then
-            vim.api.nvim_input(quit)
+            -- vim.api.nvim_input(quit)
+            vim.cmd(quit)
         end
         return
     end
@@ -68,7 +70,8 @@ local commit_callback = function(response, source, staged)
         if string.match(buftype, 'gitcommit') then
             vim.api.nvim_input(accept)
             if chat.chat:visible() then
-                vim.api.nvim_input(quit)
+                -- vim.api.nvim_input(quit)
+                vim.cmd(quit)
             end
         else
             local tmpfile = vim.fn.stdpath("cache") .. "/copilot_commit_msg"
@@ -76,7 +79,8 @@ local commit_callback = function(response, source, staged)
             if not file then
                 notify("Failed to open file: " .. tmpfile, "error", { title = "Git commit" })
                 if chat.chat:visible() then
-                    vim.api.nvim_input(quit)
+                    -- vim.api.nvim_input(quit)
+                    vim.cmd(quit)
                 end
                 return
             end
@@ -137,13 +141,15 @@ local commit_callback = function(response, source, staged)
             )
 
             if chat.chat:visible() then
-                vim.api.nvim_input(quit)
+                -- vim.api.nvim_input(quit)
+                vim.cmd(quit)
             end
         end
     else
         notify("Abort", "info", { icon = "", title = "Git commit" })
         if chat.chat:visible() then
-            vim.api.nvim_input(quit)
+            -- vim.api.nvim_input(quit)
+            vim.cmd(quit)
         end
     end
 end
