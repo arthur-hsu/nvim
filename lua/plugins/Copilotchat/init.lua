@@ -1,3 +1,4 @@
+local prompt = require("plugins.Copilotchat.prompt")
 return {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
@@ -10,6 +11,7 @@ return {
         model             = "claude-3.7-sonnet-thought",
         debug             = false,
         log_level         = "fatal",
+        prompts           = prompt,
         question_header   = '  User ', -- Header to use for user questions
         answer_header     = '  Copilot ', -- Header to use for AI answers
         error_header      = '  Error ', -- Header to use for errors
@@ -30,9 +32,9 @@ return {
 
     config = function(_, opts)
         vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
-        local prompt = require("plugins.Copilotchat.prompt")
-        opts.prompts = prompt
+
         require("CopilotChat").setup(opts)
+
         vim.api.nvim_create_autocmd('BufEnter', {
             pattern = 'copilot-*',
             callback = function()
