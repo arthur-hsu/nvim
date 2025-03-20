@@ -157,6 +157,7 @@ return {
         -- { "nvim-telescope/telescope.nvim" }, -- for telescope help actions (optional)
     },
     opts = {
+        model             = "claude-3.7-sonnet-thought",
         debug             = false,
         log_level         = "fatal",
         question_header   = '  User ', -- Header to use for user questions
