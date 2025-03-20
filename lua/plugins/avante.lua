@@ -47,27 +47,40 @@ return {
             temperature = 0,
             max_tokens = 8192,
         },
+        claude = {
+            endpoint = "https://api.githubcopilot.com",
+            model = "claude-3.7-sonnet",
+            timeout = 30000, -- Timeout in milliseconds
+            temperature = 0,
+            max_tokens = 20480,
+        },
 
 		highlights = {
-			---@type AvanteConflictHighlights
 			diff = {
 				current = "RenderMarkdownCode",
 				incoming = "AvanteIncoming",
 			},
 		},
 		behaviour = {
-			auto_focus_sidebar = true,
-			auto_suggestions = false, -- Experimental stage
-			auto_suggestions_respect_ignore = false,
-			auto_set_highlight_group = true,
-			auto_set_keymaps = true,
-			auto_apply_diff_after_generation = true,
-			jump_result_buffer_on_finish = true,
-			support_paste_from_clipboard = true,
-			minimize_diff = true,
-			enable_token_counting = true,
-			enable_cursor_planning_mode = true,
+			auto_focus_sidebar                  = true,
+			auto_suggestions                    = false, -- Experimental stage
+			auto_suggestions_respect_ignore     = false,
+			auto_set_highlight_group            = true,
+			auto_set_keymaps                    = true,
+			auto_apply_diff_after_generation    = false,
+			jump_result_buffer_on_finish        = true,
+			support_paste_from_clipboard        = true,
+			minimize_diff                       = true,
+			enable_token_counting               = false,
+			enable_cursor_planning_mode         = true,
+            enable_claude_text_editor_tool_mode = false,
+            use_cwd_as_project_root             = true,
 		},
+        windows = {
+            position = "smart", -- right, left, top, bottom, smart
+            wrap = true, -- similar to vim.o.wrap
+            width = 30, -- default % based on available width in vertical layout
+        },
 		mappings = {
 			--- @class AvanteConflictMappings
 			diff = {
@@ -79,6 +92,18 @@ return {
 				next = "]x",
 				prev = "[x",
 			},
+            sidebar = {
+                edit_user_request = "e",
+                switch_windows = "<Tab>",
+                reverse_switch_windows = "<S-Tab>",
+                remove_file = "d",
+                add_file = "a",
+                close = { "<Esc>", "q", "<C-c>" },
+                close_from_input = {
+                    normal = "<Esc>", "q", "<C-c>",
+                    insert = "<C-c>",
+                },
+            },
 		},
 	},
 }

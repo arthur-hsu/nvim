@@ -51,12 +51,12 @@ return {
 			require("copilot").setup(opts)
 			local keys = {
 				["tab"] = vim.api.nvim_replace_termcodes("<Tab>", true, true, true),
-				["cmp"] = vim.api.nvim_replace_termcodes("<CR>", true, true, true),
+				["CR"] = vim.api.nvim_replace_termcodes("<CR>", true, true, true),
 				["ctrl-tab"] = vim.api.nvim_replace_termcodes("<C-Tab>", true, true, true),
 			}
 			_G.tab_action = function()
 				if require("cmp").get_selected_entry() ~= nil then
-					return keys["cmp"]
+					return keys["CR"]
                 elseif require("copilot.suggestion").is_visible() then
 					require("copilot.suggestion").accept()
 					return

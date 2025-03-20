@@ -13,6 +13,21 @@ pluginKeys.keybind = function(cmp)
     return {
         -- ["<up>"]   = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         -- ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ["<left>"] = cmp.mapping(function (fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<right>"] = cmp.mapping(function (fallback)
+            if luasnip.jumpable(1) then
+                luasnip.jump(1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
 
         ["<up>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
@@ -22,7 +37,7 @@ pluginKeys.keybind = function(cmp)
                 fallback()
             end
         end, { "i", "s" }),
-
+        
         ["<down>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
                 -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
@@ -44,7 +59,6 @@ pluginKeys.keybind = function(cmp)
             i = function(fallback)
                 if cmp.visible() and cmp.get_active_entry() then
                     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-                    print("Enter")
                 else
                     fallback()
                 end
@@ -55,14 +69,14 @@ pluginKeys.keybind = function(cmp)
         -- -- Copilot cmp recommend
         ["<Tab>"] = vim.schedule_wrap(
             function(fallback)
-                if cmp.visible() and cmp.get_active_entry() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                if cmp.visible() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+
                 else
                     fallback()
                 end
             end
         ),
-        
         -- Cause of Copilot.lua
         --
         -- ["<S-Tab>"] = cmp.mapping(function(fallback)
