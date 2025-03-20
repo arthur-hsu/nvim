@@ -11,14 +11,13 @@ pluginKeys.keybind = function(cmp)
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
     end
     return {
-        -- -- 上一个
-        -- ["<up>"]   = cmp.mapping.select_prev_item(),
-        -- -- 下一个
-        -- ["<down>"] = cmp.mapping.select_next_item(),
+        -- ["<up>"]   = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        -- ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 
         ["<up>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
+                -- cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
             else
                 fallback()
             end
@@ -26,18 +25,15 @@ pluginKeys.keybind = function(cmp)
 
         ["<down>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             else
                 fallback()
             end
         end, { "i", "s" }),
 
-
-
-
-
         -- 出现补全
-        ["<C -,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- 取消
         ["?"] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -48,7 +44,7 @@ pluginKeys.keybind = function(cmp)
             i = function(fallback)
                 if cmp.visible() and cmp.get_active_entry() then
                     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-
+                    print("Enter")
                 else
                     fallback()
                 end
@@ -56,40 +52,53 @@ pluginKeys.keybind = function(cmp)
             s = cmp.mapping.confirm({ select = false }),
             c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         }),
-
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() and has_words_before() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-                -- if #cmp.get_entries() == 1 then
-                --     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-                -- else
-                --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-                -- end
-            elseif has_words_before() then
-                if cmp.visible() then
-                    cmp.complete()
-                    if #cmp.get_entries() == 1 then
-                        cmp.confirm({ select = true })
-                    end
+        -- -- Copilot cmp recommend
+        ["<Tab>"] = vim.schedule_wrap(
+            function(fallback)
+                if cmp.visible() and cmp.get_active_entry() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
                 else
                     fallback()
                 end
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
             end
-        end, { "i", "s" }),
+        ),
+        
+        -- Cause of Copilot.lua
+        --
+        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.select_prev_item()
+        --     elseif luasnip.jumpable(-1) then
+        --         luasnip.jump(-1)
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i", "s" }),
+        --
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() and has_words_before() then
+        --         cmp.select_next_item()
+        --         -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+        --         -- if #cmp.get_entries() == 1 then
+        --         --     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        --         -- else
+        --         --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+        --         -- end
+        --     elseif has_words_before() then
+        --         if cmp.visible() then
+        --             cmp.complete()
+        --             if #cmp.get_entries() == 1 then
+        --                 cmp.confirm({ select = true })
+        --             end
+        --         else
+        --             fallback()
+        --         end
+        --     elseif luasnip.expand_or_jumpable() then
+        --         luasnip.expand_or_jump()
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i", "s" }),
 
         -- -- cmd line mapping
         -- ['<Tab>'] = {
@@ -123,18 +132,6 @@ pluginKeys.keybind = function(cmp)
         --     end
         -- end, { "i", "s" }),
 
-
-
-        -- -- Copilot cmp recommend
-        -- ["<Tab>"] = vim.schedule_wrap(
-        --     function(fallback)
-        --         if cmp.visible() and has_words_before() then
-        --             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-        --         else
-        --             fallback()
-        --         end
-        --     end
-        -- ),
     }
 end
 

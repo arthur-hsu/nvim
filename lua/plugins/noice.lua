@@ -141,6 +141,17 @@ return {
 			throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
 			---"@type NoiceConfigViews"
 			---@see section on views
+            routes = {
+                {
+                    filter = {
+                        event = 'msg_show',
+                        any = {
+                            { find = 'Agent service not initialized' },
+                        },
+                    },
+                    opts = { skip = true },
+                },
+            },
 		},
 	},
 	config = function(_, opts)

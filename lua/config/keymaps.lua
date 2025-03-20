@@ -88,6 +88,8 @@ keymap("v", "<TAB>",   ">gv", opts)
 keymap("v", ">",       ">gv", opts)
 keymap("v", "<S-TAB>", "<gv", opts)
 keymap("v", "<",       "<gv", opts)
+keymap("i", "<S-Tab>", "<C-d>", opts)
+
 
 keymap("v", "<M-c>", "y", opts)
 keymap("n", "<C-s>", "<cmd>w<cr>", opts)
