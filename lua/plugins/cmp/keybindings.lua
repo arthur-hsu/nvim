@@ -11,8 +11,6 @@ pluginKeys.keybind = function(cmp)
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
     end
     return {
-        -- ["<up>"]   = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        -- ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ["<left>"] = cmp.mapping(function (fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
@@ -31,8 +29,8 @@ pluginKeys.keybind = function(cmp)
 
         ["<up>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
-                -- cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Replace })
+                -- cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
             else
                 fallback()
             end
@@ -40,8 +38,8 @@ pluginKeys.keybind = function(cmp)
         
         ["<down>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
-                -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
+                -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             else
                 fallback()
             end
@@ -66,86 +64,30 @@ pluginKeys.keybind = function(cmp)
             s = cmp.mapping.confirm({ select = false }),
             c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         }),
-        -- -- Copilot cmp recommend
-        ["<Tab>"] = vim.schedule_wrap(
-            function(fallback)
-                if cmp.visible() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
 
-                else
-                    fallback()
-                end
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if require("copilot.suggestion").is_visible() then
+                require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
+            elseif luasnip.jumpable(1) then
+                luasnip.jump(1)
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
             end
-        ),
-        -- Cause of Copilot.lua
-        --
-        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-        --     if cmp.visible() then
-        --         cmp.select_prev_item()
-        --     elseif luasnip.jumpable(-1) then
-        --         luasnip.jump(-1)
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
-        --
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --     if cmp.visible() and has_words_before() then
-        --         cmp.select_next_item()
-        --         -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-        --         -- if #cmp.get_entries() == 1 then
-        --         --     cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-        --         -- else
-        --         --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-        --         -- end
-        --     elseif has_words_before() then
-        --         if cmp.visible() then
-        --             cmp.complete()
-        --             if #cmp.get_entries() == 1 then
-        --                 cmp.confirm({ select = true })
-        --             end
-        --         else
-        --             fallback()
-        --         end
-        --     elseif luasnip.expand_or_jumpable() then
-        --         luasnip.expand_or_jump()
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
+        end, { "i", "s", }),
 
-        -- -- cmd line mapping
-        -- ['<Tab>'] = {
-        --     c = function(_)
-        --         if cmp.visible() then
-        --             if #cmp.get_entries() == 1 then
-        --                 cmp.confirm({ select = true })
-        --             else
-        --                 cmp.select_next_item()
-        --             end
-        --         else
-        --             cmp.complete()
-        --             if #cmp.get_entries() == 1 then
-        --                 cmp.confirm({ select = true })
-        --             end
-        --         end
-        --     end,
-        -- }
-
-
-
-        -- -- Raw tab
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --     if cmp.visible() and has_words_before() then
-        --         cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-        --         -- cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-        --     elseif luasnip.expand_or_jumpable() then
-        --         luasnip.expand_or_jump()
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
-
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     }
 end
 

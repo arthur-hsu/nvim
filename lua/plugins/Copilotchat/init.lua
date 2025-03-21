@@ -17,10 +17,10 @@ return {
         error_header      = '  Error ', -- Header to use for errors
         chat_autocomplete = false,
         window            = {
-            border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-            width = 0.5, -- fractional width of parent
-            height = 0.6, -- fractional height of parent
-            title = '  CopilotChat ', -- title of chat window
+            border = 'rounded',          -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+            width  = -1.5,               -- fractional width of parent
+            height = -1.6,               -- fractional height of parent
+            title  = '  CopilotChat ',  -- title of chat window
         },
         mappings          = {
             accept_diff = {
@@ -29,7 +29,6 @@ return {
             },
         },
     },
-
     config = function(_, opts)
         vim.api.nvim_set_hl(0, "CopilotChatSpinner", { link = "DiagnosticVirtualTextInfo" })
 
@@ -40,7 +39,6 @@ return {
             callback = function()
                 vim.opt_local.relativenumber = false
                 vim.opt_local.number         = false
-
                 -- C-p to print last response
                 vim.keymap.set('n', '<C-p>', function()
                 print(require("CopilotChat").response())
@@ -48,7 +46,6 @@ return {
             end
         })
     end,
-
     keys = {
         {
             '<leader>cci',

@@ -35,10 +35,9 @@ return {
             experimental = {
                 ghost_text = false,
             },
-            
-            -- view ={
-            --     entries = {name = 'custom', selection_order = 'near_cursor' }
-            -- },
+            view ={
+                entries = { name = 'custom', selection_order = 'neal_cursor', follow_cursor = true },
+            },
             snippet = {
                 expand = function(args)
                     -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -55,7 +54,8 @@ return {
                 { name = 'buffer',          group_index = 3 },
             }),
             window = {
-                completion    = cmp.config.window.bordered(),
+                completion    = cmp.config.window.bordered({
+                }),
                 documentation = cmp.config.window.bordered()
             },
             mapping = require("plugins.cmp.keybindings").keybind(cmp),
@@ -83,6 +83,7 @@ return {
                 format = require("lspkind").cmp_format({
                     with_text = true, -- do not show text alongside icons
                     maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    maxheight = 3, -- prevent the popup from showing more than provided lines (e.g 3 will not show more than 3 lines)
                     show_labelDetails = true,
                     before = function (entry, vim_item)
                         -- Source
