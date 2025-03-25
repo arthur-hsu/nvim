@@ -3,6 +3,13 @@ local styles = {
         wo = {
             foldmethod = "marker",
         }
+    },
+    notification_history = {
+        wo = {
+            number = false,
+            relativenumber = false,
+            wrap = true
+        }
     }
 }
 

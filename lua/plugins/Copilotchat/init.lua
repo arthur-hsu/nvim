@@ -18,8 +18,8 @@ return {
         chat_autocomplete = false,
         window            = {
             border = 'rounded',          -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-            width  = -1.5,               -- fractional width of parent
-            height = -1.6,               -- fractional height of parent
+            width  = 0.5,               -- fractional width of parent
+            height = 0.6,               -- fractional height of parent
             title  = '  CopilotChat ',  -- title of chat window
         },
         mappings          = {
@@ -39,6 +39,7 @@ return {
             callback = function()
                 vim.opt_local.relativenumber = false
                 vim.opt_local.number         = false
+                vim.opt_local.foldmethod     = "marker",
                 -- C-p to print last response
                 vim.keymap.set('n', '<C-p>', function()
                 print(require("CopilotChat").response())
