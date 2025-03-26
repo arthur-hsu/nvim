@@ -7,10 +7,11 @@ return {
             "NormalFloat",
             "FloatBorder",
             "CursorLine",
+            "Pmenu",
             
         },
         excludes = {
-            "PmenuSbar"
+            "PmenuSbar",
         }, -- If you want to excludes from default transparent groups. eg: { 'LineNr' }
     },
 }

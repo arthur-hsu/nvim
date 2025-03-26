@@ -72,8 +72,8 @@ pluginKeys.keybind = function(cmp)
                 cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
             elseif luasnip.jumpable(1) then
                 luasnip.jump(1)
-            elseif has_words_before() then
-                cmp.complete()
+            -- elseif has_words_before() then
+            --     cmp.complete()
             else
                 fallback()
             end
