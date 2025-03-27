@@ -60,6 +60,8 @@ local enter_load = function()
             "nvim-lspconfig",
             "dropbar.nvim",
             "telescope.nvim",
+            "nvim-cmp",
+            "blink.cmp"
             -- "lspsaga.nvim"
         }
     })

@@ -1,3 +1,4 @@
+
 local Linter_and_Formatter = {
     -- Formatter
     "stylua",
