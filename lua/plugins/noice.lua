@@ -89,7 +89,6 @@ return {
 		},
 		-- default options for require('noice').redirect
 		-- see the section on Command Redirection
-		---@type "NoiceRouteConfig"
 		redirect = {
 			view = "popup",
 			filter = { event = "msg_show" },
@@ -122,12 +121,12 @@ return {
 				view = "mini",
 			},
 			override = {
-				["vim.lsp.util.convert_input_to_markdown_lines"] = true, -- override the default lsp markdown formatter with Noice
-				["vim.lsp.util.stylize_markdown"] = true, -- override the lsp markdown formatter with Noice
-				["cmp.entry.get_documentation"] = true, -- override cmp documentation with Noice (needs the other options to work)
+				["vim.lsp.util.convert_input_to_markdown_lines"] = false, -- override the default lsp markdown formatter with Noice
+				["vim.lsp.util.stylize_markdown"]                = false, -- override the lsp markdown formatter with Noice
+				["cmp.entry.get_documentation"]                  = false, -- override cmp documentation with Noice (needs the other options to work)
 			},
 			signature = {
-				enabled = true,
+				enabled = false,
 				auto_open = {
 					enabled = true,
 					trigger = true, -- Automatically show signature help when typing a trigger character from the LSP

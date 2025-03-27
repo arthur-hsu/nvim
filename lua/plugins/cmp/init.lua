@@ -30,7 +30,7 @@ return {
     opts = function ()
         local cmp = require("cmp")
         return {
-            -- enabled = false,
+            enabled = true,
             experimental = {
                 ghost_text = false,
             },

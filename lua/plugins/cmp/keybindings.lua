@@ -70,10 +70,10 @@ pluginKeys.keybind = function(cmp)
                 require("copilot.suggestion").accept()
             elseif cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
+            -- elseif has_words_before() and cmp.get_active_entry() then
+            --     cmp.complete()
             elseif luasnip.jumpable(1) then
                 luasnip.jump(1)
-            -- elseif has_words_before() then
-            --     cmp.complete()
             else
                 fallback()
             end

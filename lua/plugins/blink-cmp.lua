@@ -1,19 +1,16 @@
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
-    enabled = false,
+    -- enabled = false,
+    event = "VeryLazy",
 	dependencies = {
         "rafamadriz/friendly-snippets",
-        {
-            "onsails/lspkind-nvim",
-            config = function ()
-                require('lspkind').init({
-                    symbol_map = {
-                        Copilot = "",
-                    },
-                })
-            end
-        },
 
     },
     
@@ -27,24 +24,25 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		keymap = {
-            preset = 'enter',
-
-            ["<Tab>"] = {
-                function(cmp)
-                    if require("copilot.suggestion").is_visible() then
-                        require("copilot.suggestion").accept()
-                        return true
-                    end
-                end,
-                'select_next',
-                'snippet_forward',
-                'fallback'
-            },
-            ["<S-Tab>"] = {
-                'select_prev',
-                'snippet_backward',
-                'fallback'
-            },
+            preset = "none",
+            -- preset = 'enter',
+            --
+            -- ["<Tab>"] = {
+            --     function(cmp)
+            --         if require("copilot.suggestion").is_visible() then
+            --             require("copilot.suggestion").accept()
+            --             return true
+            --         end
+            --     end,
+            --     'select_next',
+            --     'snippet_forward',
+            --     'fallback'
+            -- },
+            -- ["<S-Tab>"] = {
+            --     'select_prev',
+            --     'snippet_backward',
+            --     'fallback'
+            -- },
 
         },
         
@@ -55,6 +53,9 @@ return {
 		},
         signature = {
             enabled = true,
+            trigger = {
+                show_on_insert = true,
+            },
             window = {
                 show_documentation = true,
                 border = 'rounded'
@@ -62,61 +63,31 @@ return {
         },
 		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
-            documentation = { auto_show = true, window = { border = 'rounded' }},
             menu = {
+                enabled = false,
+                -- window = {
+                --     auto_show = false,
+                -- },
                 border = 'rounded',
                 draw = {
                     columns = {{ "label", "label_description", gap = 1 }, { "kind_icon"}, {"kind" }, { "source_name" }},
-                    components = {
-                        
-                        -- source_name = {
-                        --     text = function(ctx)
-                        --         
-                        --         if ctx.source_name == "LSP" then
-                        --             return ctx.item
-                        --         end
-                        --         return ctx.source_name
-                        --     end,
-                        --     highlight = "BlinkCmpSource",
-                        -- },
-                        kind_icon = {
-                            text = function(ctx)
-                                local lspkind = require("lspkind")
-                                local icon = ctx.kind_icon
-                                if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
-                                    if dev_icon then
-                                        icon = dev_icon
-                                    end
-                                else
-                                    icon = require("lspkind").symbolic(ctx.kind, {
-                                        mode = "symbol",
-                                   })
-                                end
-                                
-
-                                return icon .. ctx.icon_gap
-                            end,
-                            -- Optionally, use the highlight groups from nvim-web-devicons
-                            -- You can also add the same function for `kind.highlight` if you want to
-                            -- keep the highlight groups in sync with the icons.
-                            highlight = function(ctx)
-                                local hl = "BlinkCmpKind" .. ctx.kind
-                                or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                                if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                                    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-                                    if dev_icon then
-                                        hl = dev_hl
-                                    end
-                                end
-                                return hl
-                            end,
-                        }
-                    }
+                    -- align_to = "cursor",
+                    treesitter = { 'lsp' }
                 }
             },
+            list = {
+                selection = {
+                    preselect = false,
+                    auto_insert = true
+                }
+            },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 100,
+                window = { border = 'rounded' },
+            },
         },
-        snippets = { preset = 'luasnip' },
+        -- snippets = { preset = 'luasnip' },
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
@@ -130,6 +101,7 @@ return {
 		-- See the fuzzy documentation for more information
 		fuzzy = { implementation = "prefer_rust_with_warning" },
         cmdline = {
+            enabled = false,
             sources = function()
                 local type = vim.fn.getcmdtype()
                 if type == '/' or type == '?' then return { 'buffer' } end
