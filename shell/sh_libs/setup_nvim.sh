@@ -11,9 +11,20 @@ mkdir -p nvim_deb
 
 sudo apt-get update
 
+
+
+
+
+
+
+
+
 sudo apt-get update
-sudo apt-get install nodejs -y
-sudo apt-get install npm -y
+
+curl -fsSL https://deb.nodesource.com/setup_current.x -o /tmp/nodesource_setup.sh
+sudo bash /tmp/nodesource_setup.sh
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
 
 sudo npm install -g neovim yarn
 

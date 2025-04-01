@@ -50,7 +50,7 @@ else
     echo "Install finish"
     cd ~/.config/nvim/shell/nvim_deb || exit
     if [ -n "$latest_pkg" ]; then
-        rm "$latest_file"
+        git rm "$latest_file"
     fi
 fi
 
