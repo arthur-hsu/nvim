@@ -21,8 +21,9 @@ sudo apt-get update
 
 sudo apt-get update
 
-curl -fsSL https://deb.nodesource.com/setup_current.x -o /tmp/nodesource_setup.sh
+curl -fsSL https://deb.nodesource.com/setup_lts.x -o /tmp/nodesource_setup.sh
 sudo bash /tmp/nodesource_setup.sh
+sudo apt-get install nsolid -y
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 
@@ -35,8 +36,7 @@ ver=$(python3 -V)
 version=$(echo "$ver" | awk '{ match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH) }')
 sudo mv /usr/lib/python"$version"/EXTERNALLY-MANAGED /usr/lib/python"$version"/EXTERNALLY-MANAGED.bk
 
-pip3 install neovim
+pip3 install neovim typer
 
-curl -fsSL https://deno.land/install.sh | sh
 
 
