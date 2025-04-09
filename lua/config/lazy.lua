@@ -66,5 +66,6 @@ local enter_load = function()
         }
     })
     vim.cmd [[LspStart]]
+
 end
 vim.api.nvim_create_autocmd("UIEnter", {callback= enter_load})

@@ -8,11 +8,13 @@ return {
             "FloatBorder",
             "CursorLine",
             "Pmenu",
-            
+            "PmenuSbar",
+            "DropBarMenuSbar",
+            "WinBar",
+            "BufferLineGroupLabel"
         },
         excludes = {
-            "PmenuSbar",
+            -- "PmenuSbar",
         }, -- If you want to excludes from default transparent groups. eg: { 'LineNr' }
     },
 }
-

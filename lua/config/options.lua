@@ -6,6 +6,31 @@ local g   = vim.g
 -- Disable the perl provider support
 g.loaded_perl_provider = 0
 
+
+local function my_paste(reg)
+    return function(lines)
+        --[ 返回 “” 寄存器的内容，用来作为 p 操作符的粘贴物 ]
+        local content = vim.fn.getreg('"')
+        return vim.split(content, '\n')
+        
+    end
+end
+
+vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+        --[ 小括号里面的内容可能是毫无意义的，但是保持原样可能看起来更好一点 ]
+        ["+"] = my_paste("+"),
+        ["*"] = my_paste("*"),
+    },
+}
+
+
+
 -- 设置退格键的行为
 opt.backspace          = {'indent', 'eol', 'start'}
 

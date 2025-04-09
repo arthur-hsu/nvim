@@ -87,7 +87,7 @@ keymap("n", "<S-TAB>", "<<",  opts)
 keymap("v", "<TAB>",   ">gv", opts)
 keymap("v", ">",       ">gv", opts)
 keymap("v", "<",       "<gv", opts)
--- keymap("v", "<S-TAB>", "<gv", opts)
+keymap("v", "<S-TAB>", "<gv", opts)
 -- keymap("i", "<S-Tab>", "<C-d>", opts)
 
 
@@ -97,6 +97,9 @@ keymap("n", "<C-z>", "<C-o><C-o>", opts)
 -- keymap("i", "<C-s>", "<esc>:w<CR>", opts)
 keymap("i", "<C-z>", "<esc><C-o><C-o>", opts)
 
+
+vim.keymap.set("v", "<C-c>", 'y', opts)
+vim.keymap.set("v", "<M-c>", 'y', opts)
 
 
 
