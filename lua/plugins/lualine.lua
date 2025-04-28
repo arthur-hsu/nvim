@@ -229,7 +229,7 @@ return {
 			function()
 				local msg = " "
 				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-				local clients = vim.lsp.get_active_clients()
+				local clients = vim.lsp.get_clients()
 				if buf_ft == "alpha" or buf_ft == "snacks_dashboard" then
 					return "        " .. "Practice makes perfect"
 				end

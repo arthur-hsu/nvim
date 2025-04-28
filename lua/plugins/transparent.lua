@@ -7,10 +7,13 @@ return {
             "NormalFloat",
             "FloatBorder",
             "CursorLine",
+            "TabLine",
+            "StatusLine",
             "Pmenu",
             "PmenuSbar",
             "DropBarMenuSbar",
             "WinBar",
+            "WinBarNC",
             "BufferLineGroupLabel"
         },
         excludes = {
