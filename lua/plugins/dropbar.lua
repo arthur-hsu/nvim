@@ -2,7 +2,6 @@ return {
     "Bekaboo/dropbar.nvim",
     -- optional, but required for fuzzy finder support
     event = "VeryLazy",
-    -- enabled =false,
     dependencies = {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -10,8 +9,6 @@ return {
     opts = {
         bar = {
             enable = function(buf, win, _)
-                print("buf, win", buf, win)
-                print(vim.api.nvim_win_get_option(win, "diff"))
                 if
                     not vim.api.nvim_buf_is_valid(buf)
                     or not vim.api.nvim_win_is_valid(win)
