@@ -79,7 +79,7 @@ return {
         windows = {
             position = "smart", -- right, left, top, bottom, smart
             wrap = true, -- similar to vim.o.wrap
-            width = 30, -- default % based on available width in vertical layout
+            width = 40, -- default % based on available width in vertical layout
         },
 		mappings = {
 			--- @class AvanteConflictMappings
