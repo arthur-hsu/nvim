@@ -9,7 +9,9 @@ local Linter_and_Formatter = {
 
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
 	dependencies = {
+        "neovim/nvim-lspconfig",
 		{
 			"williamboman/mason.nvim",
 			cmd = "Mason",
@@ -25,29 +27,18 @@ return {
         {
             "williamboman/mason-lspconfig.nvim",
             config = function()
-                require("mason-lspconfig").setup({ automatic_enable = true })
+                require("mason-lspconfig").setup({ automatic_enable = false })
             end
         }
 	},
 	opts = function()
 		local ensure_installed = {} ---@type string[]
-        server_config = vim.lsp.config
-        function Add_lsp_server(tbl, indent)
-            indent = indent or 0
-            if indent == 2 then
-                return
-            end
 
-            for key, value in pairs(tbl) do
-                if type(value) == "table" then
-                    Add_lsp_server(value, indent + 1)
-                    if indent == 1 then
-                        ensure_installed[#ensure_installed + 1] = key
-                    end
-                end
-            end
+        local lsp_server = require("mason-lspconfig").get_installed_servers()
+        for _, server in pairs(lsp_server) do
+            ensure_installed[#ensure_installed + 1] = server
         end
-        Add_lsp_server(server_config)
+
 
 		for _, lint in ipairs(Linter_and_Formatter) do
 			ensure_installed[#ensure_installed + 1] = lint
