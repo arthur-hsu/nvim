@@ -58,6 +58,7 @@ local enter_load = function()
 
             "nvim-treesitter",
             "nvim-lspconfig",
+            "mason-tool-installer.nvim",
             "dropbar.nvim",
             "telescope.nvim",
             "nvim-cmp",

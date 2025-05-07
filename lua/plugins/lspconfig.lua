@@ -1,13 +1,4 @@
 
-local Linter_and_Formatter = {
-    -- Formatter
-    "stylua",
-    "prettier",
-    "shfmt",
-
-    -- Linter
-    "markdownlint",
-}
 
 local servers_config = {
     ruff                            = {
@@ -73,23 +64,6 @@ local servers_config = {
     },
     docker_compose_language_service = {},
     dockerls                        = {},
-    -- emmet_language_server           = {
-    --     filetypes = {
-    --         'css',
-    --         'eruby',
-    --         'html',
-    --         'htmldjango',
-    --         'javascriptreact',
-    --         'less',
-    --         'pug',
-    --         'sass',
-    --         'scss',
-    --         'typescriptreact',
-    --         'htmlangular',
-    --         'markdown',
-    --     },
-    --
-    -- },
     html = {
         filetypes = { 'html', 'templ', "markdown" },
     },
@@ -123,32 +97,24 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            {
+                'hrsh7th/cmp-nvim-lsp'
+            },
         },
         ---@class PluginLspOpts
         opts = {
             -- options for vim.diagnostic.config()
             -- Automatically format on save
             -- autoformat = true,
+            -- autostart = true,
             single_file_support = true,
             -- options for vim.lsp.buf.format
             -- `bufnr` and `filter` is handled by the LazyVim formatter,
             -- but can be also overriden when specified
-            format = {
-                formatting_options = nil,
-                timeout_ms = nil,
-            },
-            -- LSP Server Settings
-            ---@type lspconfig.options
-            servers = servers_config,
-            setup = {},
         },
         
         ---@param opts PluginLspOpts
         config = function(plugin, opts)
-            local servers      = opts.servers
             -- local capabilities = vim.lsp.protocol.make_client_capabilities()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             capabilities.textDocument.foldingRange                                      = {
@@ -166,70 +132,20 @@ return {
             capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
             capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
             capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
-
-            local function setup_handler(server)
-                local server_opts = servers[server] or {}
-                -- server_opts.on_attach = function (client, bufnr)
-                --     -- print('Attached to client', client.name, bufnr)
-                --     vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
-                -- end
-                if server == 'pyright' then
-                    capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
-                end
-                
+            for server_name, server_opts in pairs(servers_config) do
                 server_opts.capabilities = capabilities
-
-
-                if opts.setup[server] then
-                    if opts.setup[server](server, server_opts) then
-                        return
-                    end
-                elseif opts.setup["*"] then
-                    if opts.setup["*"](server, server_opts) then
-                        return
-                    end
+                if server_name == 'pyright' then
+                    server_opts.capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
                 end
-                require("lspconfig")[server].setup(server_opts)
+                vim.lsp.config(server_name, server_opts)
             end
+            -- for server_name, server_opts in pairs(servers_config) do
+            --     server_opts.capabilities = capabilities
+            --     if server_name == 'pyright' then
+            --         server_opts.capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
+            --     end
+            -- end
 
-            require("mason-lspconfig").setup()
-            require("mason-lspconfig").setup_handlers({ setup_handler })
-
-            local mlsp = require("mason-lspconfig")
-            local available = mlsp.get_available_servers()
-
-            for server, server_opts in pairs(servers) do
-                if server_opts then
-                    server_opts = server_opts == true and {} or server_opts
-                    -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-                    if server_opts.mason == false or not vim.tbl_contains(available, server) then
-                        setup_handler(server)
-                    end
-                end
-            end
         end
     },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        event = "VeryLazy",
-        opts = function()
-            local ensure_installed = {} ---@type string[]
-
-            for server, server_opts in pairs(servers_config) do
-                ensure_installed[#ensure_installed + 1] = server
-            end
-            for _, lint in ipairs(Linter_and_Formatter) do
-                ensure_installed[#ensure_installed + 1] = lint
-            end
-
-            return {
-                ensure_installed = ensure_installed,
-            }
-        end,
-
-        config = function(_, opts)
-            require("mason-tool-installer").setup(opts)
-            vim.cmd [[MasonToolsUpdate]]
-        end
-    }
 }
