@@ -10,7 +10,7 @@ end
 
 local ver = vim.version() -- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
 
-if ver.minor >= 9 then
+if ver.minor >= 9 and vim.loop.os_uname().sysname ~= 'Windows_NT' then
     if vim.g.vscode then
         -- VSCode extension
         require "config.options"
