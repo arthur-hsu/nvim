@@ -1,4 +1,12 @@
 
+local Linter_and_Formatter = {
+    -- Formatter
+    "stylua",
+    "prettier",
+    "shfmt",
+    -- Linter
+    "markdownlint",
+}
 
 local servers_config = {
     ruff                            = {
@@ -93,24 +101,35 @@ local servers_config = {
 
 
 return {
-    -- lspconfig
     {
         "neovim/nvim-lspconfig",
+        lazy = false,
         dependencies = {
+            {
+                "williamboman/mason.nvim",
+                cmd = "Mason",
+                opts = {
+                    max_concurrent_installers = 4,
+                    ui = { border = "rounded" },
+                },
+                config = function(_, opts)
+                    require("mason").setup(opts)
+                end,
+            },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                -- config = function()
+                --     require("mason-lspconfig").setup({ automatic_enable = true })
+                -- end
+            },
             {
                 'hrsh7th/cmp-nvim-lsp'
             },
         },
         ---@class PluginLspOpts
         opts = {
-            -- options for vim.diagnostic.config()
-            -- Automatically format on save
-            -- autoformat = true,
             -- autostart = true,
             single_file_support = true,
-            -- options for vim.lsp.buf.format
-            -- `bufnr` and `filter` is handled by the LazyVim formatter,
-            -- but can be also overriden when specified
         },
         
         ---@param opts PluginLspOpts
@@ -138,15 +157,36 @@ return {
                     server_opts.capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
                 end
                 vim.lsp.config(server_name, server_opts)
-                vim.lsp.enable(server_name)
             end
-            -- for server_name, server_opts in pairs(servers_config) do
-            --     server_opts.capabilities = capabilities
-            --     if server_name == 'pyright' then
-            --         server_opts.capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
-            --     end
-            -- end
-
+            require("mason-lspconfig").setup({ automatic_enable = true })
         end
     },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        opts = function()
+            local ensure_installed = {} ---@type string[]
+
+            local lsp_server = require("mason-lspconfig").get_installed_servers()
+            for _, server in pairs(lsp_server) do
+                ensure_installed[#ensure_installed + 1] = server
+            end
+
+
+            for _, lint in ipairs(Linter_and_Formatter) do
+                ensure_installed[#ensure_installed + 1] = lint
+            end
+
+            return {
+                ensure_installed = ensure_installed,
+            }
+        end,
+
+        config = function(_, opts)
+            require("mason-tool-installer").setup(opts)
+            vim.cmd([[MasonToolsUpdate]])
+        end,
+    }
 }
