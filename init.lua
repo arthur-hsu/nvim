@@ -1,12 +1,23 @@
 if vim.loop.os_uname().sysname == 'Windows_NT' then
     vim.opt.shell = "pwsh"
 end
+
+
 -- elseif vim.loop.os_uname().sysname == 'Darwin' then
 --     vim.g.python3_host_prog= "/Users/arthur/.pyenv/versions/3.11.7/bin/python"
 -- -- elseif vim.loop.os_uname().sysname == 'Linux' then
 -- --     vim.g.python3_host_prog= "/home/arthur/.pyenv/versions/3.11.7/bin/python"
 -- end
 
+
+vim.notify = function(msg, ...)
+  if msg:match("vim%.deprecated") then
+    return
+  end
+  return vim.notify_original(msg, ...)
+end
+
+vim.notify_original = vim.notify
 
 local ver = vim.version() -- You need to use ver.major.. '.' .. ver.minor .. '.' .. ver.patch
 
