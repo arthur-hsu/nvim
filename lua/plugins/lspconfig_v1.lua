@@ -229,8 +229,8 @@ return {
         commit = "09caa33",
         opts = function()
             local ensure_installed = {} ---@type string[]
-            local lsp_server = require("mason-lspconfig").get_installed_servers()
-            for _, server in pairs(lsp_server) do
+            -- local lsp_server = require("mason-lspconfig").get_installed_servers()
+            for server, _  in pairs(servers_config) do
                 ensure_installed[#ensure_installed + 1] = server
             end
             for _, lint in ipairs(Linter_and_Formatter) do

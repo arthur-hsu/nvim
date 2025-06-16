@@ -1,13 +1,18 @@
- asdf
- bat
- bpytop
- eza
- fd
- git
- macism
- node
- openssh
- ripgrep
- tldr
- wget
- zsh
+asdf
+bat
+bpytop
+eza
+fd
+git
+macism
+node
+openssh
+ripgrep
+tldr
+wget
+zsh
+
+
+# Casks
+openinterminal-lite
+stats
