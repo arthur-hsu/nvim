@@ -36,23 +36,18 @@ return {
 		provider                  = "copilot", -- Recommend using Claude
 		auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
 		cursor_applying_provider  = "copilot", -- In this example, use Groq for applying, but you can also use any provider you want.
-        copilot = {
-            endpoint = "https://api.githubcopilot.com",
-            -- model = "o1",
-            -- claude can use with avante
-            model = "claude-3.7-sonnet",
-            proxy = nil, -- [protocol://]host[:port] Use this proxy
-            allow_insecure = false, -- Allow insecure server connections
-            timeout = 30000, -- Timeout in milliseconds
-            temperature = 0,
-            max_tokens = 8192,
-        },
-        claude = {
-            endpoint = "https://api.githubcopilot.com",
-            model = "claude-3.7-sonnet",
-            timeout = 30000, -- Timeout in milliseconds
-            temperature = 0,
-            max_tokens = 20480,
+        providers = {
+            copilot = {
+                model = "claude-3.7-sonnet",
+                proxy = nil, -- [protocol://]host[:port] Use this proxy
+                allow_insecure = false, -- Allow insecure server connections
+                timeout = 30000, -- Timeout in milliseconds
+            },
+            claude = {
+                endpoint = "https://api.githubcopilot.com",
+                model = "claude-3.7-sonnet",
+                timeout = 30000, -- Timeout in milliseconds
+            }
         },
 
 		highlights = {
