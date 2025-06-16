@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 curl https://pyenv.run | bash
 pyenv update
 cat <<'EOF' | tee -a ~/.zshrc
