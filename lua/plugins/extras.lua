@@ -44,4 +44,25 @@ return {
 		},
 		config = true,
 	},
+    {
+        "fedepujol/move.nvim",
+        event= "VeryLazy",
+        keys = {
+            -- Normal Mode
+            { "<C-A-DOWN>",  ":MoveLine(1)<CR>",   desc = "Move Line Down",       noremap = true, silent = true},
+            { "<C-A-UP>",    ":MoveLine(-1)<CR>",  desc = "Move Line Up",         noremap = true, silent = true},
+            { "<C-A-LEFT>",  ":MoveWord(-1)<CR>", desc = "Move Word Left",  noremap = true, silent = true },
+            { "<C-A-RIGHT>", ":MoveWord(1)<CR>",  desc = "Move Word Right", noremap = true, silent = true },
+            -- Visual Mode
+            { "<C-A-DOWN>",  ":MoveBlock(1)<CR>", mode = { "v" }, desc = "Move Block Up"    , noremap = true, silent = true},
+            { "<C-A-UP>",    ":MoveBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Down" , noremap = true, silent = true},
+            { "<C-A-LEFT>", ":MoveHBlock(-1)<CR>", mode = { "v" }, desc = "Move Block Left" , noremap = true, silent = true },
+            { "<C-A-RIGHT>",":MoveHBlock(1)<CR>", mode = { "v" }, desc = "Move Block Right", noremap = true, silent = true },
+        },
+        opts = {
+            char = {
+                enable = true -- Enables char movement
+            }
+        }
+    }
 }
