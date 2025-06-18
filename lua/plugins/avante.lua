@@ -87,6 +87,10 @@ return {
 				next = "]x",
 				prev = "[x",
 			},
+            submit = {
+                normal = "<CR>",
+                insert = "<CR>",
+            },
             sidebar = {
                 edit_user_request = "e",
                 switch_windows = "<Tab>",
@@ -95,8 +99,8 @@ return {
                 add_file = "a",
                 close = { "<Esc>", "q", "<C-c>" },
                 close_from_input = {
-                    normal = "<Esc>", "q", "<C-c>",
-                    insert = "<C-c>",
+                    normal = { "<Esc>", "q", "<C-c>" },
+                    insert = { "<Esc>", "<C-c>" },
                 },
             },
 		},
