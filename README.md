@@ -45,7 +45,7 @@ and switch profile to ubuntu
 
 ## windows
 
-```shell
+```sh
 cd
 git clone https://github.com/arthur-hsu/nvim.git AppData/Local/nvim
 ```
