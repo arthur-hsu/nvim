@@ -1,15 +1,19 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
+        dependencies = {
+            -- "LiadOz/nvim-dap-repl-highlights"
+        },
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
         config = function()
+            -- require("nvim-dap-repl-highlights").setup()
             require("nvim-treesitter.install").compilers = { "gcc", "clang", "mingw" }
             require 'nvim-treesitter.configs'.setup {
                 auto_install     = true,
                 sync_install     = true,
-                ensure_installed = { "python", "bash", "json", "vim", "vimdoc", "markdown", "markdown_inline", "lua", "regex", "gitcommit", "diff" }, -- or all
+                ensure_installed = { "python", "bash", "json", "vim", "vimdoc", "markdown", "markdown_inline", "lua", "regex", "gitcommit", "diff", "dap_repl" }, -- or all
                 highlight        = {
                     enable = true,
                 },

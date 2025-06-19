@@ -155,8 +155,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         local lsp_opts = { buffer = ev.buf }
-        -- vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
-        vim.keymap.set('n',          'gd',        "<CMD>Lspsaga goto_definition <CR>",                                                  lsp_opts)
+        vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
+        -- vim.keymap.set('n',          'gd',        "<CMD>Lspsaga goto_definition <CR>",                                                  lsp_opts)
         vim.keymap.set('n',          'gr',        "<cmd>Telescope lsp_references theme=ivy<CR>",                           lsp_opts)
         vim.keymap.set('n',          'gpd',       "<CMD>Lspsaga peek_definition <CR>",                                     lsp_opts)
         vim.keymap.set('n',          'gh',        vim.lsp.buf.hover,                                                       lsp_opts)
