@@ -11,38 +11,23 @@ local Linter_and_Formatter = {
 
 local servers_config = {
     ruff                            = {
-        init_options = {
-            settings = {
-                lint = {
-                    ignore = {
-                        "F541",
-                        "F401",
-                        "E401",
-                        "E701",
-                        "F841",
-                        "E722",
-                    }
+        root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git', },
+        settings = {
+            lint = {
+                ignore = {
+                    "F541",
+                    "F401",
+                    "E401",
+                    "E701",
+                    "F841",
+                    "E722",
                 }
             }
         }
     },
     pyright                         = {
-        -- for Disable "XXX" is not accessed
-        -- handlers = {
-        --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-        --         local new_diagnostics = {}
-        --         for _, diagnostic in ipairs(result.diagnostics) do
-        --             if not string.find(diagnostic.message, "is not accessed") then
-        --                 table.insert(new_diagnostics, diagnostic)
-        --             end
-        --         end
-        --         -- 更新结果中的诊断列表
-        --         result.diagnostics = new_diagnostics
-        --         -- 调用默认的处理函数
-        --         vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
-        --     end,
-        -- },
         settings = {
+            root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git', },
             pyright = {
                 disableOrganizeImports = true,
             },
@@ -70,6 +55,22 @@ local servers_config = {
                 }
             }
         },
+        -- for Disable "XXX" is not accessed
+        -- handlers = {
+        --     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+        --         local new_diagnostics = {}
+        --         for _, diagnostic in ipairs(result.diagnostics) do
+        --             if not string.find(diagnostic.message, "is not accessed") then
+        --                 table.insert(new_diagnostics, diagnostic)
+        --             end
+        --         end
+        --         -- 更新结果中的诊断列表
+        --         result.diagnostics = new_diagnostics
+        --         -- 调用默认的处理函数
+        --         vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, config)
+        --     end,
+        -- },
+
     },
     docker_compose_language_service = {},
     dockerls                        = {},
@@ -247,4 +248,3 @@ return {
         end
     }
 }
-

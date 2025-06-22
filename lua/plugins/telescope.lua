@@ -67,10 +67,6 @@ return {
                 -- path_display       = { "tail" },
                 path_display          = { "smart" },
                 dynamic_preview_title = true,
-                -- path_display = function(opts, path)
-                    --   local tail = require("telescope.utils").path_tail(path)
-                    --   return string.format("%s (%s)", tail, path)
-                    -- end,
                 vimgrep_arguments = {
                     "rg",
                     "--hidden",
