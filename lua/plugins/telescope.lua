@@ -18,6 +18,16 @@ local function flash(prompt_bufnr)
     })
 end
 
+local function _git_root()
+    local git_root = vim.fs.find(".git", { upward = true, type = "directory" })[1]
+    if git_root then
+        git_root = vim.fs.dirname(git_root)
+        return git_root
+    else
+        return vim.fn.getcwd()
+    end
+end
+
 return {
     'nvim-telescope/telescope.nvim',
     event = "VeryLazy",
@@ -129,7 +139,31 @@ return {
     keys = {
         { "<leader>fb", "<cmd>Telescope file_browser path=%:p:help select_buffer=true<cr>", desc = "Open Buffer",      mode = { "n" } },
         { "<leader>ff", "<cmd>Telescope find_files<cr>",                                    desc = "Find File",        mode = { "n" } },
+        {
+            "<leader>fF",
+            function ()
+                local git_root = _git_root()
+                require('telescope.builtin').find_files({
+                    prompt_title = 'Find File in ' .. git_root,
+                    cwd = git_root,
+                })
+            end,
+            desc = "Find File in Git Root",
+            mode = { "n" },
+        },
         { "<leader>fg", "<cmd>Telescope live_grep<cr>",                                     desc = "Grep File",        mode = { "n" } },
+        {
+            "<leader>fG",
+            function ()
+                local git_root = _git_root()
+                require('telescope.builtin').live_grep({
+                    prompt_title = 'Grep File in ' .. git_root,
+                    cwd = git_root,
+                })
+            end,
+            desc = "Grep File in Git Root",
+            mode = { "n" }
+        },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>",                                     desc = "Help Tags",        mode = { "n" } },
         { "<leader>fn", "<cmd>enew<cr>",                                                    desc = "New File",         mode = { "n" } },
         { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                                      desc = "Open Recent File", mode = { "n" } },
