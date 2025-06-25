@@ -8,10 +8,8 @@ local Linter_and_Formatter = {
     -- Linter
     "markdownlint",
 }
-
 local servers_config = {
     ruff                            = {
-        root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git', },
         settings = {
             lint = {
                 ignore = {
@@ -25,9 +23,9 @@ local servers_config = {
             }
         }
     },
+
     pyright                         = {
         settings = {
-            root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git', },
             pyright = {
                 disableOrganizeImports = true,
             },
@@ -189,7 +187,23 @@ return {
                 --     vim.notify("Attached to client " .. client.name .. " on buffer " .. bufnr, vim.log.levels.INFO)
                 -- end
                 if server == 'pyright' then
+                    server_opts.root_dir = require('lspconfig').util.root_pattern(
+                        -- 'pyproject.toml',
+                        'setup.py',
+                        'setup.cfg',
+                        'requirements.txt',
+                        '.git'
+                    ) or vim.fn.getcwd()
+
                     capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
+                elseif server == 'ruff' then
+                    server_opts.root_dir = require('lspconfig').util.root_pattern(
+                        -- 'pyproject.toml',
+                        'setup.py',
+                        'setup.cfg',
+                        'requirements.txt',
+                        '.git'
+                    ) or vim.fn.getcwd()
                 end
                 
                 server_opts.capabilities = capabilities

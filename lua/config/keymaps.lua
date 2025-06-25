@@ -45,6 +45,14 @@ vim.api.nvim_create_user_command("CleanShada", function()
 end, {})
 
 vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history() end, {})
+vim.api.nvim_create_user_command('Code', function ()
+    local filepath = vim.api.nvim_buf_get_name(0)           -- 完整路徑
+    local cursor = vim.api.nvim_win_get_cursor(0)            -- {line, col}
+    local line = cursor[1]
+    local col = cursor[2] + 1  -- Lua 的 col 是從 0 開始，通常 +1 較直覺
+    local cmd = string.format('!code --goto %s:%d:%d', filepath, line, col)
+    vim.cmd(cmd) end, {}
+)
 vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open() end, {})
 ---------------------------------------------------------------------
 
