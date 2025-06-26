@@ -8,7 +8,7 @@ return {
         -- { "nvim-telescope/telescope.nvim" }, -- for telescope help actions (optional)
     },
     opts = {
-        model             = "claude-3.7-sonnet-thought",
+        model             = "gpt-4.1",
         debug             = false,
         log_level         = "fatal",
         prompts           = prompt,

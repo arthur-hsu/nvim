@@ -1,10 +1,12 @@
 local func = require("plugins.Copilotchat.func")
 local function CommitMsg(staged)
     return {
-        prompt = "使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。",
+        -- prompt = "使用繁體中文詳盡的總結這次提交的更改，並使用 commitizen 慣例總結提交內容，消息包涵標題以及改動的細項。確保標題最多 50 個字符，消息在 72 個字符處換行。將整個消息用 gitcommit 語言的代碼塊包裹起來。",
+        prompt = 'Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.',
+
         context = staged and 'git:staged' or 'git:unstaged',
         selection = false,
-        model = "o3-mini",
+        -- model = "gpt-4.1",
         debug = true,
         window = {
             layout = 'float',

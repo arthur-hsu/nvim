@@ -38,7 +38,7 @@ return {
 		cursor_applying_provider  = "copilot", -- In this example, use Groq for applying, but you can also use any provider you want.
         providers = {
             copilot = {
-                model = "claude-sonnet-4",
+                model = "gpt-4.1",
                 proxy = nil, -- [protocol://]host[:port] Use this proxy
                 allow_insecure = false, -- Allow insecure server connections
                 timeout = 30000, -- Timeout in milliseconds
