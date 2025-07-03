@@ -10,15 +10,21 @@ local Linter_and_Formatter = {
 }
 local servers_config = {
     ruff                            = {
-        settings = {
-            lint = {
-                ignore = {
-                    "F541",
-                    "F401",
-                    "E401",
-                    "E701",
-                    "F841",
-                    "E722",
+        init_options = {
+            settings = {
+                -- format = {
+                --     preview = true
+                -- },
+                lint = {
+                    -- preview = true,
+                    ignore = {
+                        "F541",
+                        "F401",
+                        "E401",
+                        "E701",
+                        "F841",
+                        "E722",
+                    }
                 }
             }
         }
@@ -49,6 +55,8 @@ local servers_config = {
                         reportCallIssue                  = "none",
                         reportPrivateImportUsage         = "none",
                         reportAttributeAccessIssue       = "none",
+                        reportReturnType                 = "none",
+                        reportRedeclaration              = "none",
                     }
                 }
             }

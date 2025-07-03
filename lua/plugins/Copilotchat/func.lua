@@ -73,7 +73,6 @@ local commit_callback = function(response, source, staged)
             end
         else
             if chat.chat:visible() then
-                
                 vim.cmd(quit)
             end
             local tmpfile = vim.fn.stdpath("cache") .. "/copilot_commit_msg"

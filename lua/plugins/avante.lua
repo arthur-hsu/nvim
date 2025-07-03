@@ -38,11 +38,16 @@ return {
 		cursor_applying_provider  = "copilot", -- In this example, use Groq for applying, but you can also use any provider you want.
         providers = {
             copilot = {
-                model = "gpt-4.1",
+                model = "gpt-4o",
+                -- model = "claude-sonnet-4",
                 proxy = nil, -- [protocol://]host[:port] Use this proxy
                 allow_insecure = false, -- Allow insecure server connections
                 timeout = 30000, -- Timeout in milliseconds
+            },
+            gemini = {
+                 model = "gemini-2.5-pro",
             }
+
         },
 
 		highlights = {
@@ -51,21 +56,24 @@ return {
 				incoming = "AvanteIncoming",
 			},
 		},
-		behaviour = {
-			auto_focus_sidebar                  = true,
-			auto_suggestions                    = false, -- Experimental stage
-			auto_suggestions_respect_ignore     = false,
-			auto_set_highlight_group            = true,
-			auto_set_keymaps                    = true,
-			auto_apply_diff_after_generation    = true,
-			jump_result_buffer_on_finish        = true,
-			support_paste_from_clipboard        = true,
-			minimize_diff                       = true,
-			enable_token_counting               = false,
-			enable_cursor_planning_mode         = true,
-            enable_claude_text_editor_tool_mode = true,
-            use_cwd_as_project_root             = true,
-		},
+        behaviour = {
+            auto_focus_sidebar = true,
+            auto_suggestions = false, -- Experimental stage
+            auto_suggestions_respect_ignore = false,
+            auto_set_highlight_group = true,
+            auto_set_keymaps = true,
+            auto_apply_diff_after_generation = false,
+            jump_result_buffer_on_finish = false,
+            support_paste_from_clipboard = false,
+            minimize_diff = true,
+            enable_token_counting = false,
+            use_cwd_as_project_root = false,
+            auto_focus_on_diff_view = false,
+            ---@type boolean | string[] -- true: auto-approve all tools, false: normal prompts, string[]: auto-approve specific tools by name
+            auto_approve_tool_permissions = true, -- Default: show permission prompts for all tools
+            auto_check_diagnostics = true,
+        },
+
         windows = {
             position = "smart", -- right, left, top, bottom, smart
             wrap = true, -- similar to vim.o.wrap

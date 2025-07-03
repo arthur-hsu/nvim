@@ -7,7 +7,7 @@ return {
 			require("colorizer").attach_to_buffer(0, { names = false, mode = "background", css = true })
 		end,
 	},
-	{ "rcarriga/nvim-notify" },
+	{ "rcarriga/nvim-notify", tag = "v3.14.1" },
 	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"ibhagwan/fzf-lua",
