@@ -6,7 +6,7 @@ return {
 		opts = {
 			panel = { enabled = false },
 			suggestion = {
-				enabled = true,
+				enabled = false,
 				auto_trigger = true,
 				debounce = 500,
 				keymap = {

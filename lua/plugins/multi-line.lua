@@ -5,8 +5,8 @@ return {
     init = function()
         vim.g.VM_maps = {
             -- ["I BS"]      = "",
-            ["Goto Next"] = "",
-            ["Goto Prev"] = ""
+            ["Goto Next"] = "]v",
+            ["Goto Prev"] = "[v"
         }
 	end,
     config = function ()

@@ -22,8 +22,13 @@ return {
             end
         },
         "hrsh7th/cmp-nvim-lua",
-		"zbirenbaum/copilot.lua",
-        "zbirenbaum/copilot-cmp",
+        {
+            "zbirenbaum/copilot-cmp",
+            config = function ()
+                require("copilot_cmp").setup()
+            end
+        },
+        "zbirenbaum/copilot.lua",
         'rafamadriz/friendly-snippets',
         'petertriho/cmp-git',
     },
@@ -39,7 +44,7 @@ return {
             },
             sources = cmp.config.sources({
                 { name = "path" },
-                { name = "copilot",         group_index = 1 },
+                { name = "copilot",         group_index = 2 },
                 { name = "nvim_lsp",        group_index = 2,max_item_count = 20 },
                 { name = 'render-markdown', group_index = 2 },
                 { name = 'luasnip',         group_index = 2, max_item_count = 3 },
