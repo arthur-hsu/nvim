@@ -6,7 +6,7 @@ local function CommitMsg(staged)
 
         context = staged and 'git:staged' or 'git:unstaged',
         selection = false,
-        model = "gpt-4o",
+        -- model = "gpt-4o",
         debug = true,
         window = {
             layout = 'float',

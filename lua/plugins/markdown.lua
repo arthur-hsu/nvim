@@ -157,5 +157,5 @@ return {
             end
             vim.api.nvim_create_user_command("PeekToggle", toggle, {})
         end,
-    }
+    },
 }
