@@ -11,6 +11,15 @@ local keymap    = vim.keymap.set
 
 
 
+local function _git_root()
+    local git_root = vim.fs.find(".git", { upward = true, type = "directory" })[1]
+    if git_root then
+        git_root = vim.fs.dirname(git_root)
+        return git_root
+    else
+        return vim.fn.getcwd()
+    end
+end
 
 
 
@@ -45,14 +54,49 @@ vim.api.nvim_create_user_command("CleanShada", function()
 end, {})
 
 vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history() end, {})
-vim.api.nvim_create_user_command('Code', function ()
-    local filepath = vim.api.nvim_buf_get_name(0)           -- 完整路徑
-    local cursor = vim.api.nvim_win_get_cursor(0)            -- {line, col}
-    local line = cursor[1]
-    local col = cursor[2] + 1  -- Lua 的 col 是從 0 開始，通常 +1 較直覺
-    local cmd = string.format('!code --goto %s:%d:%d', filepath, line, col)
-    vim.cmd(cmd) end, {}
-)
+
+vim.api.nvim_create_user_command("Code", function(opts)
+	local arg = opts.args -- 取得命令的參數字串
+    local cmd_opt = { silent = true }
+	if arg == nil or arg == "" then
+		-- 沒有輸入參數：開啟當前 Git 根目錄
+		-- 假設 _git_root() 函式已經定義並返回 Git 根目錄路徑
+		-- 請確保 _git_root() 函式在你的配置中可用
+		local git_root = _git_root()
+		if git_root then
+			local cmd = string.format('!code "%s"', git_root)
+			vim.cmd(cmd, cmd_opt)
+		else
+			print("Error: Git root not found. Cannot open VS Code.")
+		end
+	elseif arg == "." then
+		-- 參數是 "."：開啟當前緩衝區的當前行和列
+		local filepath = vim.api.nvim_buf_get_name(0) -- 完整檔案路徑
+		if filepath == "" then -- 檢查是否是未保存的緩衝區
+			print("Cannot open current line in VS Code: Buffer not saved to a file.")
+			return
+		end
+		local cursor = vim.api.nvim_win_get_cursor(0) -- {行號, 列號}
+		local line = cursor[1]
+		local col = cursor[2] + 1 -- Lua 的 col 是從 0 開始，VS Code 通常從 1 開始
+
+		-- 使用 --goto 參數讓 VS Code 跳轉到指定位置
+		local cmd = string.format('!code --goto "%s:%d:%d"', filepath, line, col)
+		vim.cmd(cmd, cmd_opt)
+	else
+		-- 其他參數：作為路徑直接打開
+		local cmd = string.format('!code "%s"', arg)
+		vim.cmd(cmd, cmd_opt)
+	end
+end, {
+	nargs = "?", -- 接受零個或一個參數
+	desc = "Open current project/file/line in VS Code",
+	-- 你原先的 completion = 'dir' 可能會與 '.' 參數的邏輯衝突，
+	-- 因為 '.' 本身是個有效的目錄名。
+	-- 如果你希望為其他路徑參數提供目錄補全，可以保留。
+	complete = 'dir'
+})
+
 vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open() end, {})
 ---------------------------------------------------------------------
 

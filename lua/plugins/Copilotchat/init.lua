@@ -8,7 +8,7 @@ return {
         -- { "nvim-telescope/telescope.nvim" }, -- for telescope help actions (optional)
     },
     opts = {
-        model             = "gpt-4.1",
+        model             = "gpt-4o",
         debug             = false,
         log_level         = "fatal",
         prompts           = prompt,
