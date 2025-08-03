@@ -64,7 +64,7 @@ vim.api.nvim_create_user_command("Code", function(opts)
 		-- 請確保 _git_root() 函式在你的配置中可用
 		local git_root = _git_root()
 		if git_root then
-			local cmd = string.format('!code "%s"', git_root)
+			local cmd = string.format('!code -n "%s"', git_root)
 			vim.cmd(cmd, cmd_opt)
 		else
 			print("Error: Git root not found. Cannot open VS Code.")

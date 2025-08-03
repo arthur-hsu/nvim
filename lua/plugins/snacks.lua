@@ -132,6 +132,22 @@ return {
         terminal     = { enabled = true },
         indent       = indent,
         dashboard    = dashboard,
+        explorer     = {
+            replace_netrw = true, -- replace netrw with Snacks Explorer
+            auto_close = true,
+
+        },
+        picker       = {
+            explorer = {
+                win = {
+                    list = {
+                        keys = {
+                            ["h"] = "explorer_close"
+                        },
+                    },
+                },
+            },
+        },
         statuscolumn = {
             -- enabled = false,
             left    = { "fold", "git" }, -- priority of signs on the right (high to low)

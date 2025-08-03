@@ -86,6 +86,7 @@ return {
                     "--line-number",
                     "--column",
                     "--smart-case",
+                    "--pcre2"
                     -- "--colors 'match:fg:169,169,169'"
                 },
                 file_ignore_patterns = {
@@ -101,7 +102,7 @@ return {
                 file_browser = {
                     theme = "ivy",
                     -- disables netrw and use telescope-file-browser in its place
-                    hijack_netrw = true,
+                    -- hijack_netrw = true,
                     mappings = {
                         ["i"] = {
                             ["<C-o>"] = fb_actions.open,

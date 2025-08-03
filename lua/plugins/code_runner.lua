@@ -1,6 +1,6 @@
 return {
 	"CRAG666/code_runner.nvim",
-	dependencies = { "CRAG666/betterTerm.nvim" },
+	-- dependencies = { "CRAG666/betterTerm.nvim" },
 	event = "VeryLazy",
 	config = function()
 		require("code_runner").setup({
@@ -74,13 +74,13 @@ return {
 			project = {},
 			prefix = "",
 		})
-		vim.keymap.set("n", "<leader>e", function()
-			require("betterTerm").send(
-				require("code_runner.commands").get_filetype_command(),
-				1,
-				{ clean = false, interrupt = true }
-			)
-		end, { desc = "Excute File" })
+		-- vim.keymap.set("n", "<leader>e", function()
+		-- 	require("betterTerm").send(
+		-- 		require("code_runner.commands").get_filetype_command(),
+		-- 		1,
+		-- 		{ clean = false, interrupt = true }
+		-- 	)
+		-- end, { desc = "Excute File" })
 	end
 }
 

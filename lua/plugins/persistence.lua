@@ -1,6 +1,10 @@
 return {
     "folke/persistence.nvim",
-    opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
+    cmd = { "PersistenceLoadPre", "PersistenceLoadPost", "PersistenceSavePre", "PersistenceSavePost" },
+    opts = {
+        need = 0,
+        options = { "buffers", "tabpages", "winsize", "help", "globals" }
+    },
     keys = {
         { "<leader>rs", function() require("persistence").select() end,                desc = "select a session to load" },
         { "<leader>rl", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
