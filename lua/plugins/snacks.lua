@@ -83,14 +83,14 @@ local dashboard = {
     },
     sections = {
         { section = "header" },
-        {
-            section = "terminal",
-            random = 10,
-            cmd = cmd(),
-            pane = 2,
-            padding = 1,
-            height = 8,
-        },
+        -- {
+        --     section = "terminal",
+        --     random = 10,
+        --     cmd = cmd(),
+        --     pane = 2,
+        --     padding = 1,
+        --     height = 8,
+        -- },
         { section = "keys", gap = 1, padding = 1 },
         { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
