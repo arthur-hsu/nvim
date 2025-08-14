@@ -1,4 +1,3 @@
-
 local Linter_and_Formatter = {
     -- Formatter
     "stylua",
@@ -122,9 +121,6 @@ local servers_config = {
         },
     },
 }
-
-
-
 return {
     -- lspconfig
     {

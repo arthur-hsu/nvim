@@ -5,7 +5,7 @@ return {
         -- event={'InsertEnter','CmdlineEnter'},
         event="VeryLazy",
         opts = {
-            pair_map=true,
+            pair_map=false,
             pair_cmap=false,
             multiline=true,
             tabout = {
@@ -49,7 +49,6 @@ return {
     {
         "windwp/nvim-autopairs",
         event = { 'InsertEnter', 'CmdlineEnter' },
-        -- enabled = false,
         config = function()
             require("nvim-autopairs").setup({
                 fast_wrap = false,
