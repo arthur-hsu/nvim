@@ -58,36 +58,25 @@ vim.api.nvim_create_user_command('Msg', function () Snacks.notifier.show_history
 vim.api.nvim_create_user_command("Code", function(opts)
 	local arg = opts.args -- 取得命令的參數字串
     local cmd_opt = { silent = true }
-	if arg == nil or arg == "" then
-		-- 沒有輸入參數：開啟當前 Git 根目錄
-		-- 假設 _git_root() 函式已經定義並返回 Git 根目錄路徑
-		-- 請確保 _git_root() 函式在你的配置中可用
-		local git_root = _git_root()
-		if git_root then
-			local cmd = string.format('!code -n "%s"', git_root)
-			vim.cmd(cmd, cmd_opt)
-		else
-			print("Error: Git root not found. Cannot open VS Code.")
-		end
-	elseif arg == "." then
-		-- 參數是 "."：開啟當前緩衝區的當前行和列
+    local git_root = _git_root()
+
+    local dir = git_root or vim.fn.getcwd() -- 如果找到 Git 根目錄，使用它，否則使用當前工作目錄
+
+    local cmd
+    if not arg then
+        cmd = arg
+    else
 		local filepath = vim.api.nvim_buf_get_name(0) -- 完整檔案路徑
 		if filepath == "" then -- 檢查是否是未保存的緩衝區
-			print("Cannot open current line in VS Code: Buffer not saved to a file.")
+			vim.notify("Cannot open current line in VS Code: Buffer not saved to a file.")
 			return
 		end
 		local cursor = vim.api.nvim_win_get_cursor(0) -- {行號, 列號}
-		local line = cursor[1]
-		local col = cursor[2] + 1 -- Lua 的 col 是從 0 開始，VS Code 通常從 1 開始
-
-		-- 使用 --goto 參數讓 VS Code 跳轉到指定位置
-		local cmd = string.format('!code --goto "%s:%d:%d"', filepath, line, col)
-		vim.cmd(cmd, cmd_opt)
-	else
-		-- 其他參數：作為路徑直接打開
-		local cmd = string.format('!code "%s"', arg)
-		vim.cmd(cmd, cmd_opt)
-	end
+		local line   = cursor[1]
+		local col    = cursor[2] + 1 -- Lua 的 col 是從 0 開始，VS Code 通常從 1 開始
+		cmd = string.format('--goto "%s:%d:%d"', filepath, line, col)
+    end
+    vim.cmd(string.format('!code -a "%s" %s', dir, cmd), cmd_opt)
 end, {
 	nargs = "?", -- 接受零個或一個參數
 	desc = "Open current project/file/line in VS Code",
