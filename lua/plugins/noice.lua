@@ -28,6 +28,7 @@ return {
 			end,
 		},
 	},
+    -- enabled = false,
 	event = "VeryLazy",
 	opts = {
 		background_colour = "#000000",

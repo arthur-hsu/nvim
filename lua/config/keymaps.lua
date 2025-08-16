@@ -89,6 +89,10 @@ end, {
 vim.api.nvim_create_user_command('Dashboard', function () Snacks.dashboard.open() end, {})
 ---------------------------------------------------------------------
 
+vim.keymap.set('n', '<space>D', function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' })
 
 
 
@@ -194,7 +198,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.notify(string.format("LSP Formatting lines %d to %d", start_row, end_row))
             vim.api.nvim_input("<esc>")
         end
-
+        
         local lsp_opts = { buffer = ev.buf }
         vim.keymap.set('n',          'gd',        vim.lsp.buf.definition,                                                  lsp_opts)
         -- vim.keymap.set('n',          'gd',        "<CMD>Lspsaga goto_definition <CR>",                                                  lsp_opts)

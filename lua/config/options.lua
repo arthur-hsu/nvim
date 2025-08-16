@@ -90,6 +90,7 @@ opt.softtabstop        = 4
 
 -- 启用自动缩进
 opt.autoindent         = true
+opt.smartindent        = true
 
 -- 启用自动切换当前目录为当前文件的目录
 opt.autochdir          = true
@@ -167,7 +168,7 @@ opt.undodir            = vim.fn.stdpath('cache') .. '/undo'
 opt.autoread           = true
 
 -- 设置补全菜单的行为
-g.completeopt          = "menu,menuone,noselect"
+g.completeopt          = "menu,menuone,noselect,fuzzy"
 
 -- 设置弹出菜单的最大高度
 opt.pumheight          = 10
@@ -185,7 +186,7 @@ opt.autowrite          = true
 -- opt.iskeyword:remove('.')
 
 -- 允許markdown文件中的標示符號轉譯
--- opt.conceallevel       = 1
+-- opt.conceallevel       = 0
 
 -- 在normal和visual模式下隱藏標示符號
 opt.concealcursor      = 'nvic'
@@ -195,6 +196,9 @@ vim.o.guicursor        = "n-v-:block-blinkon500-blinkoff500,i-c-ci:ver40-iCursor
 
 -- 禁用拼字檢查
 opt.spell              = false
+
+-- 设置窗口边框样式为圆角
+-- opt.winborder          = 'rounded'
 
 -- 设置文件格式为unix
 -- opt.fileformat         = "unix"

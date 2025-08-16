@@ -1,4 +1,5 @@
 local prompt = require("plugins.Copilotchat.prompt")
+
 return {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
@@ -8,7 +9,7 @@ return {
         -- { "nvim-telescope/telescope.nvim" }, -- for telescope help actions (optional)
     },
     opts = {
-        model             = "gpt-4o",
+        model             = "gpt-5-mini",
         debug             = false,
         log_level         = "fatal",
         prompts           = prompt,

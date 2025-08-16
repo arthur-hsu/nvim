@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-    virtual_text = false,
+    -- virtual_text = false,
     signs = {
         severity = { min = vim.diagnostic.severity.WARN },
         text = {
@@ -31,19 +31,15 @@ vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true,
     float = {
+        severity = { min = vim.diagnostic.severity.WARN },
         border = 'rounded',
         show_header = true,
         source = "always",  -- Or "if_many"
         focusable = false,
-    }
+    },
+    -- virtual_lines = true,
     -- virtual_text = {
+    --     current_line = true,
     --     severity = { min = vim.diagnostic.severity.WARN }
-    -- },
-    --float = {
-        --severity = { min = vim.diagnostic.severity.WARN },
-        --show_header = true,
-        --source = "always",  -- Or "if_many"
-        --border = 'rounded',
-        --focusable = false,
-    --},
+    -- }
 })
