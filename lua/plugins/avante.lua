@@ -6,7 +6,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		--- The below dependencies are optional,
-		-- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 		"zbirenbaum/copilot.lua", -- for providers='copilot'
 		-- {
@@ -29,27 +29,22 @@ return {
 	},
 	event = "VeryLazy",
 	version = false,
+
 	-- tag = "v0.0.13",
 	build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
 	opts = {
+        debug = true,
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 		provider                  = "gemini", -- Recommend using Claude
 		auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-		cursor_applying_provider  = "gemini", -- In this example, use Groq for applying, but you can also use any provider you want.
         providers = {
             copilot = {
-                model = "gpt-5-mini",
-                -- model = "claude-sonnet-4",
-                proxy = nil, -- [protocol://]host[:port] Use this proxy
-                allow_insecure = false, -- Allow insecure server connections
-                timeout = 30000, -- Timeout in milliseconds
+                model = "claude-sonnet-4",
             },
             gemini = {
                  model = "gemini-2.5-pro",
             }
-
         },
-
 		highlights = {
 			diff = {
 				current = "RenderMarkdownCode",

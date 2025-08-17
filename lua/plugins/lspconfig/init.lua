@@ -16,15 +16,8 @@ return {
                     require("mason").setup(opts)
                 end,
             },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                -- config = function()
-                --     require("mason-lspconfig").setup({ automatic_enable = true })
-                -- end
-            },
-            {
-                'hrsh7th/cmp-nvim-lsp'
-            },
+            { "williamboman/mason-lspconfig.nvim"},
+            { 'hrsh7th/cmp-nvim-lsp' },
         },
         ---@class PluginLspOpts
         opts = {
@@ -73,7 +66,6 @@ return {
             for _, server in pairs(lsp_server) do
                 ensure_installed[#ensure_installed + 1] = server
             end
-
 
             for _, lint in ipairs(lsp_config.Linter_and_Formatter) do
                 ensure_installed[#ensure_installed + 1] = lint
