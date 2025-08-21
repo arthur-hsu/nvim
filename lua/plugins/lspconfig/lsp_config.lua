@@ -26,17 +26,17 @@ local servers_config = {
         root_markers = python_root_markers,
         init_options = {
             settings = {
-                -- format = {
-                --     preview = true
-                -- },
+                format = {
+                    preview = true
+                },
                 lint = {
-                    -- preview = true,
+                    preview = true,
                     ignore = {
-                        "F541",
                         "F401",
+                        "F541",
+                        "F841",
                         "E401",
                         "E701",
-                        "F841",
                         "E722",
                     }
                 }
@@ -53,8 +53,8 @@ local servers_config = {
             },
             python = {
                 analysis = {
-                    typeCheckingMode = 'basic',
-                    -- ignore = { '*' },
+                    typeCheckingMode = 'basic', -- 'off' or 'basic'
+                    -- ignore = { '*' }, -- ignore all warnings
                     diagnosticSeverityOverrides = {
                         -- reportUndefinedVariable          = "none",
                         reportUnusedImport               = "none",

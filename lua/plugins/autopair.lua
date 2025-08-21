@@ -49,6 +49,11 @@ return {
                 {'"','"',newline=true,multiline=true},
                 {"'","'",newline=true,multiline=true},
                 {'```','```',newline=true,multiline=true},
+                {'[',']',multiline=true},
+                {'(',')',multiline=true},
+                {'{','}',multiline=true},
+                {'"""','"""',newline=true,ft=nil},
+
             }
         },
         config = function (_, opts)

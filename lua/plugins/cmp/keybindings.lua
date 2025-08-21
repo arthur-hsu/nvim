@@ -66,12 +66,16 @@ pluginKeys.keybind = function(cmp)
         }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").accept()
-            elseif cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
+            -- if require("copilot.suggestion").is_visible() then
+            --     require("copilot.suggestion").accept()
+            -- luasnip = require("luasnip")
+            -- if luasnip.expandable() then
+            --     luasnip.expand()
             -- elseif has_words_before() and cmp.get_active_entry() then
             --     cmp.complete()
+            if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+                -- cmp.select_next_item({select = false})
             elseif luasnip.jumpable(1) then
                 luasnip.jump(1)
             else
