@@ -16,33 +16,33 @@ return {
 			config = function()
 				require("lspkind").init({
 					symbol_map = {
-						Copilot = "",
-						Supermaven = "",
-                        claude = '󰋦',
-                        openai = '󱢆',
-                        codestral = '󱎥',
-                        gemini = '',
-                        Groq = '',
-                        Openrouter = '󱂇',
-                        Ollama = '󰳆',
+						Copilot       = "",
+						Supermaven    = "",
+                        claude        = '󰋦',
+                        openai        = '󱢆',
+                        codestral     = '󱎥',
+                        gemini        = '',
+                        Groq          = '',
+                        Openrouter    = '󱂇',
+                        Ollama        = '󰳆',
                         ['Llama.cpp'] = '󰳆',
-                        Deepseek = ''
+                        Deepseek      = ''
 					},
 				})
                 vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", {fg ="#6CC644"})
+                vim.api.nvim_set_hl(0, "CmpItemKindcopilot", { fg = "#31A8FF", bg = "None" })
 			end,
 		},
 		"hrsh7th/cmp-nvim-lua",
 		{
 			"zbirenbaum/copilot-cmp",
-			config = function()
+            config = function()
 				require("copilot_cmp").setup()
 			end,
 		},
 		"zbirenbaum/copilot.lua",
 		"rafamadriz/friendly-snippets",
 		"petertriho/cmp-git",
-		-- "milanglacier/minuet-ai.nvim",
 	},
 	opts = function()
 		local cmp = require("cmp")
@@ -63,9 +63,9 @@ return {
 			},
 			sources = cmp.config.sources({
 				{ name = "path" },
-                { name = "minuet" },
-                 { name = "supermaven" },
 				{ name = "copilot"         , group_index = 2 },
+                { name = "minuet"          , group_index = 2 },
+                { name = "supermaven"      , group_index = 2 },
 				{ name = "nvim_lsp"        , group_index = 2, max_item_count = 20 },
 				{ name = "render-markdown" , group_index = 2 },
 				-- { name = "luasnip"         , group_index = 3, max_item_count = 3 },
@@ -99,8 +99,8 @@ return {
 				-- fields = { cmp.ItemField.Abbr },
 				format = require("lspkind").cmp_format({
 					with_text = true, -- do not show text alongside icons
-					-- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-					-- maxheight = 3, -- prevent the popup from showing more than provided lines (e.g 3 will not show more than 3 lines)
+					maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+					-- maxheight = 5, -- prevent the popup from showing more than provided lines (e.g 3 will not show more than 3 lines)
 					show_labelDetails = true,
 					before = function(entry, vim_item)
 						-- Source
@@ -154,6 +154,7 @@ return {
 						},
 					},
 				},
+                { name = "nvim_lua" },
 			}),
 		})
 		-- Set configuration for specific filetype.
@@ -164,6 +165,5 @@ return {
 				{ name = "buffer" },
 			}),
 		})
-		vim.api.nvim_set_hl(0, "CmpItemKindcopilot", { fg = "#31A8FF", bg = "None" })
 	end,
 }
