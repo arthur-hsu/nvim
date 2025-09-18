@@ -8,21 +8,20 @@ return {
         -- },
         opts = {
             keywords = {
-                tag = { icon = "󰌕 ", color = "tag",alt = { "RAW" } },
-                IMPORTANT = { icon = "󰂵 ", color = "error",alt = { "Important" } },
-                
                 FIX = {
                     icon = " ", -- icon used for the sign, and in search results
                     color = "error", -- can be a hex color, or a named color (see below)
                     alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR" }, -- a set of other keywords that all map to this FIX keywords
                     -- signs = false, -- configure signs for some keywords individually
                 },
-                TODO = { icon = " ", color = "info" },
-                HACK = { icon = " ", color = "warning" },
-                WARN = { icon = " ", color = "warning",   alt = { "WARNING",  "XXX", "WORKAROUND" } },
-                PERF = { icon = " ", alt = { "OPTIM",     "PERFORMANCE",      "OPTIMIZE" } },
-                NOTE = { icon = " ", color = "info",      alt = { "INFO" } },
-                TEST = { icon = "⏲ ", color = "test",      alt = { "TESTING",  "PASSED",       "FAILED" } },
+                tag       = { icon = "󰌕 ", color = "tag",     alt =  { "RAW" } },
+                IMPORTANT = { icon = "󰂵 ", color = "error",   alt =  { "Important" } },
+                TODO      = { icon = " ", color = "actionItem",    alt =  { "DONE" } },
+                HACK      = { icon = " ", color = "warning" },
+                WARN      = { icon = " ", color = "warning", alt =  { "WARNING",  "XXX", "WORKAROUND" } },
+                PERF      = { icon = " ",                    alt =  { "OPTIM",     "PERFORMANCE", "OPTIMIZE" } },
+                NOTE      = { icon = " ", color = "info",    alt =  { "INFO" } },
+                TEST      = { icon = "⏲ ", color = "test",    alt =  { "TESTING",  "PASSED", "FAILED" } },
             },
             signs = false,
             sign_priority = 8, -- sign priority`

@@ -44,6 +44,7 @@ return {
             capabilities.textDocument.completion.completionItem.deprecatedSupport       = true
             capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
             capabilities.textDocument.completion.completionItem.tagSupport              = { valueSet = { 1 } }
+
             for server_name, server_opts in pairs(lsp_config.servers_config) do
                 server_opts.capabilities = capabilities
                 if server_name == 'pyright' then
@@ -52,6 +53,18 @@ return {
                 vim.lsp.config(server_name, server_opts)
             end
             require("mason-lspconfig").setup({ automatic_enable = true })
+            vim.lsp.inlay_hint.enable(true)
+
+            -- For disable semanticTokensProvider to avoid highlight bug
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client.name == "basedpyright" then
+                        client.server_capabilities.semanticTokensProvider = nil
+                    end
+                end,
+            });
+
         end
     },
     {

@@ -44,6 +44,47 @@ local servers_config = {
         }
     },
 
+    basedpyright                         = {
+        root_markers = python_root_markers,
+
+        settings = {
+            basedpyright = {
+                disableOrganizeImports = true,
+                analysis = {
+                    inlayHints = {
+                        variableTypes = false,
+                    },
+                    typeCheckingMode = 'basic', -- 'off' or 'basic'
+                    -- ignore = { '*' }, -- ignore all warnings
+                    diagnosticSeverityOverrides = {
+                        -- reportUndefinedVariable          = "none",
+                        reportUnusedImport               = "none",
+                        reportMissingImports             = "none",
+                        reportUnusedVariable             = "none",
+                        reportUnboundVariable            = "none",
+                        reportGeneralTypeIssues          = "none",
+                        reportOptionalMemberAccess       = "none",
+                        reportArgumentType               = "none",
+                        reportOperatorIssue              = "none",
+                        reportOptionalSubscript          = "none",
+                        reportOptionalIterable           = "none",
+                        reportIncompatibleMethodOverride = "none",
+                        reportCallIssue                  = "none",
+                        reportPrivateImportUsage         = "none",
+                        reportAttributeAccessIssue       = "none",
+                        reportReturnType                 = "none",
+                        reportRedeclaration              = "none",
+
+                        -- basedpyright diagnostics
+                        reportUnknownParameterType       = "none",
+                        reportUnknownVariableType        = "none",
+                        -- reportUnknownVariableType        = "none",
+                    }
+                }
+            },
+            python = {}
+        },
+    },
     pyright                         = {
         root_markers = python_root_markers,
 
@@ -73,6 +114,7 @@ local servers_config = {
                         reportAttributeAccessIssue       = "none",
                         reportReturnType                 = "none",
                         reportRedeclaration              = "none",
+
                     }
                 }
             }

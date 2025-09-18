@@ -15,6 +15,7 @@ return {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.markdownlint,
                     null_ls.builtins.formatting.shfmt,
+                    -- null_ls.builtins.formatting.ruff,
                     -- null_ls.builtins.diagnostics.markdownlint
 
                 },
