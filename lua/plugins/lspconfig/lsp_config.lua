@@ -17,6 +17,7 @@ local Linter_and_Formatter = {
     "stylua",
     "prettier",
     "shfmt",
+    -- "black",
 
     -- Linter
     "markdownlint",
