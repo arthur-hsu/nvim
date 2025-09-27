@@ -1,13 +1,13 @@
 return {
 	"CRAG666/code_runner.nvim",
-	-- dependencies = { "CRAG666/betterTerm.nvim" },
+	dependencies = { "CRAG666/betterTerm.nvim" },
 	event = "VeryLazy",
 	config = function()
 		require("code_runner").setup({
 			-- choose default mode (valid term, tab, float, toggle)
 			mode = "term",
 			-- Focus on runner window(only works on toggle, term and tab mode)
-			focus = true,
+			-- focus = true,
 			-- startinsert (see ':h inserting-ex')
 			startinsert = true,
 			insert_prefix = "",
