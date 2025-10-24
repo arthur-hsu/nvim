@@ -14,8 +14,9 @@ return {
         event="VeryLazy",
         -- branch='development',
         branch='v0.6',
+        -- branch='v0.7-pre-alpha',
         opts = {
-            -- pair_cmap=false,
+            pair_cmap=false,
             multiline=true,
             tabout = {
                 enable = true,
