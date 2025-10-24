@@ -35,7 +35,21 @@ alias d="docker"
 alias dc="docker-compose"
 alias minicom="minicom -O timestamp=extended"
 
-activate(){
+tre() {
+    # 基礎命令陣列
+    local -a args=('eza' '--long' '--tree' '--level=3' '--ignore-glob=__pycache__')
+
+    # 檢查第一個參數是否為 "-a" 或 "--all"
+    if [[ "$1" != "-a" && "$1" != "--all" ]]; then
+        # 如果不是，就加上簡化輸出的參數
+        args+=(--no-permissions --no-filesize --no-user --no-time)
+    fi
+
+    # 執行組合好的命令，並傳遞所有原始參數
+    "${args[@]}" "$@"
+}
+
+activate() {
     pyenv activate "$1"
     export pypath=$(pyenv which python)
 }
