@@ -47,7 +47,6 @@ local servers_config = {
 
     basedpyright                         = {
         root_markers = python_root_markers,
-
         settings = {
             basedpyright = {
                 disableOrganizeImports = true,
