@@ -1,7 +1,9 @@
+local leet_arg = "leet"
 return {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
     -- event = "VeryLazy",
+    lazy = leet_arg ~= vim.fn.argv(0, -1),
     cmd = "Leet",
     dependencies = {
         -- include a picker of your choice, see picker section for more details
@@ -10,9 +12,10 @@ return {
     },
     opts = {
         -- configuration goes here
+        arg = "leet",
         lang = "python3",
         cn = {
-            enabled = true, ---@type boolean
+            enabled = false, ---@type boolean
             translator = true, ---@type boolean
             translate_problems = true, ---@type boolean
         },
@@ -26,7 +29,7 @@ return {
                     vim.list_extend(default_imports, { "from .leetcode import *" })
                     return default_imports
                 end,
-                -- after = { "def test():", "    print('test')" },
+                after = { "" },
             },
             ["cpp"] = {
                 imports = function()

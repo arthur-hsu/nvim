@@ -69,16 +69,18 @@ local dashboard = {
     preset = {
         header = the_edge,
         keys = {
-            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-            { icon = " ", key = "v", desc = "View change", action = ":DiffviewToggle" },
-            { icon = " ", key = "h", desc = "Commit history", action = ":DiffviewFileHistoryToggle %" },
-            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-            { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-            { icon = " ", key = "s", desc = "Restore Session" --[[ , section = "session" ]], action = ":lua require('persistence').select()" },
-            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+            { icon = " ", key = "f", desc = "Find File",                                     action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = " ", key = "n", desc = "New File",                                      action = ":ene | startinsert" },
+            { icon = " ", key = "g", desc = "Find Text",                                     action = ":lua Snacks.dashboard.pick('live_grep')" },
+            { icon = " ", key = "v", desc = "View change",                                   action = ":DiffviewToggle" },
+            { icon = " ", key = "h", desc = "Commit history",                                action = ":DiffviewFileHistoryToggle %" },
+            { icon = " ", key = "r", desc = "Recent Files",                                  action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = " ", key = "c", desc = "Config",                                        action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+            { icon = " ", key = "s", desc = "Restore Session" --[[ , section = "session" ]], action = ":lua require('persistence').select()" },
+            { icon = " ", key = "l", desc = "Open LeetCode",                                 action = ":Leet" },
+            -- { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
             { icon = " ", key = "q", desc = "Quit", action = ":q" },
+            -- 
         }
     },
     sections = {
