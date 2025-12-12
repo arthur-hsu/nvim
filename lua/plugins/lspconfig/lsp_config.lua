@@ -21,8 +21,10 @@ local Linter_and_Formatter = {
 
     -- Linter
     "markdownlint",
+    "golangci-lint",
 }
 local servers_config = {
+    gopls = {},
     ruff                            = {
         root_markers = python_root_markers,
         init_options = {

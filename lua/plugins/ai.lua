@@ -3,6 +3,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "VeryLazy",
+        -- enabled = false,
 		opts = {
 			panel = { enabled = false },
 			suggestion = {
@@ -22,7 +23,7 @@ return {
 				["*"] = true,
                 -- ["python"] = true,
 			},
-            copilot_model = "gpt-4o-copilot",
+            -- copilot_model = "gpt-4o-copilot",
 			copilot_node_command = "node", -- Node.js version must be > 16.x
 			server_opts_overrides = {
 				trace = "verbose",

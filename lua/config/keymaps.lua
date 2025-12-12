@@ -22,6 +22,22 @@ local function _git_root()
 end
 
 
+local range_formatting = function()
+    local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+    local end_row, _   = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+
+    vim.lsp.buf.format({
+        range = {
+            ["start"] = { start_row - 1, 0 }, -- Adjust to 0-based indexing
+            ["end"]   = { end_row - 1, 0 },   -- Adjust to 0-based indexing
+        },
+        async = true,
+    })
+
+    vim.notify(string.format("LSP Formatting lines %d to %d", start_row, end_row))
+    vim.api.nvim_input("<esc>")
+end
+
 
 -- Custom Commands
 vim.api.nvim_create_user_command("DiffviewFileHistoryToggle", function(e)
@@ -181,22 +197,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
         local function desc(description)
             return { noremap = true, silent = true, buffer = bufnr, desc = description }
-        end
-
-        local range_formatting = function()
-            local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
-            local end_row, _   = unpack(vim.api.nvim_buf_get_mark(0, ">"))
-
-            vim.lsp.buf.format({
-                range = {
-                    ["start"] = { start_row - 1, 0 }, -- Adjust to 0-based indexing
-                    ["end"]   = { end_row - 1, 0 },   -- Adjust to 0-based indexing
-                },
-                async = true,
-            })
-
-            vim.notify(string.format("LSP Formatting lines %d to %d", start_row, end_row))
-            vim.api.nvim_input("<esc>")
         end
         
         local lsp_opts = { buffer = ev.buf }

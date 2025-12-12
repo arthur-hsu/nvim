@@ -55,8 +55,16 @@ pluginKeys.keybind = function(cmp)
 
         ["<CR>"] = cmp.mapping({
             i = function(fallback)
-                if cmp.visible() and cmp.get_active_entry() then
-                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                -- if cmp.visible() and cmp.get_active_entry() then
+                if cmp.visible() then
+                    if luasnip.expandable() then
+                        luasnip.expand()
+                    else
+                        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                        -- cmp.confirm({
+                        --     select = true,
+                        -- })
+                    end
                 else
                     fallback()
                 end
@@ -76,7 +84,7 @@ pluginKeys.keybind = function(cmp)
             if cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Insert, select = false })
                 -- cmp.select_next_item({select = false})
-            elseif luasnip.jumpable(1) then
+            elseif luasnip.locally_jumpable(1) then
                 luasnip.jump(1)
             else
                 fallback()
@@ -86,7 +94,7 @@ pluginKeys.keybind = function(cmp)
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item({ behavior = cmp.ConfirmBehavior.Select, select = false })
-            elseif luasnip.jumpable(-1) then
+            elseif luasnip.locally_jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()

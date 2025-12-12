@@ -41,7 +41,7 @@ return {
 			end,
 		},
 		"zbirenbaum/copilot.lua",
-		"rafamadriz/friendly-snippets",
+		-- "rafamadriz/friendly-snippets",
 		"petertriho/cmp-git",
 	},
 	opts = function()

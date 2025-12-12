@@ -68,7 +68,9 @@ return {
                 'confirm_done',
                 function(event)
                     local ok, ls_name = pcall(ls_name_from_event, event)
-                    if ok and (ls_name == 'rust-analyzer' or ls_name == 'lua_ls') then
+                    local whitelisted_ls = { "rust-analyzer", "lua_ls", "gopls" }
+
+                    if ok and (vim.tbl_contains(whitelisted_ls, ls_name)) then
                         return
                     end
 
