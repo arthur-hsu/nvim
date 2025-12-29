@@ -24,7 +24,12 @@ local Linter_and_Formatter = {
     "golangci-lint",
 }
 local servers_config = {
-    gopls = {},
+    gopls = {
+        completeUnimported = true,
+        usePlaceholders = true,
+        -- 增加補全結果的細節，有助於 cmp 排序
+        completionDocumentation = true,
+    },
     ruff                            = {
         root_markers = python_root_markers,
         init_options = {

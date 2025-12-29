@@ -168,7 +168,8 @@ opt.undodir            = vim.fn.stdpath('cache') .. '/undo'
 opt.autoread           = true
 
 -- 设置补全菜单的行为
-g.completeopt          = "menu,menuone,noselect,fuzzy"
+-- g.completeopt          = "menu,menuone,noselect"
+opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy" }
 
 -- 设置弹出菜单的最大高度
 opt.pumheight          = 10

@@ -3,6 +3,7 @@ local prompt = require("plugins.Copilotchat.prompt")
 return {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
+    -- enabled = false,
     dependencies = {
         { "zbirenbaum/copilot.lua" },        -- or github/copilot.vim
         { "nvim-lua/plenary.nvim" },         -- for curl, log wrapper

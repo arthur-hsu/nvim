@@ -90,7 +90,7 @@ return {
 			-- local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
 			-- 	.. "/venv/bin/python3"
 			local debugpyPythonPath = vim.fn.system("which python"):gsub("%s+$", "")
-			print("Debugpy Python Path: " .. debugpyPythonPath)
+			-- print("Debugpy Python Path: " .. debugpyPythonPath)
 
 			require("dap-python").setup(debugpyPythonPath, {})
 		end,

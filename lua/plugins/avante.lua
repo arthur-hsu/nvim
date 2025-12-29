@@ -29,20 +29,31 @@ return {
 	},
 	event = "VeryLazy",
 	version = false,
+    -- commit = "4e75d03",
 
 	-- tag = "v0.0.13",
 	build = vim.fn.has("win32") == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
 	opts = {
         -- debug = true,
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-		provider                  = "gemini", -- Recommend using Claude
+		provider                  = "gemini-cli", -- Recommend using Claude
 		auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+        -- acp_providers             = {
+        --     ["gemini-cli"] = {
+        --         command = "gemini",
+        --         args = {
+        --             "--experimental-acp",
+        --             "--allowed-tools=ShellTool",
+        --             -- "-m gemini-2.5-flash",
+        --         },
+        --     },
+        -- },
         providers = {
             copilot = {
                 model = "claude-sonnet-4",
             },
             gemini = {
-                 model = "gemini-2.5-pro",
+                 model = "gemini-2.5-flash",
             }
         },
 		highlights = {
@@ -54,9 +65,6 @@ return {
         behaviour = {
             auto_focus_sidebar = true,
             auto_suggestions = false, -- Experimental stage
-            auto_suggestions_respect_ignore = false,
-            auto_set_highlight_group = true,
-            auto_set_keymaps = true,
             auto_apply_diff_after_generation = false,
             jump_result_buffer_on_finish = false,
             support_paste_from_clipboard = false,

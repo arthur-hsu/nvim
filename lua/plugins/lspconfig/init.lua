@@ -49,6 +49,8 @@ return {
                 server_opts.capabilities = capabilities
                 if server_name == 'pyright' then
                     capabilities.textDocument.completion.completionItem.tagSupport.valueSet = { 2 }
+                elseif server_name == "gopls" then
+                    capabilities.textDocument.completion.completionItem.preselectSupport = false
                 end
                 vim.lsp.config(server_name, server_opts)
             end
