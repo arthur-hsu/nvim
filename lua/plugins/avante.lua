@@ -36,7 +36,7 @@ return {
 	opts = {
         -- debug = true,
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-		provider                  = "gemini-cli", -- Recommend using Claude
+		provider                  = "gemini-cli",
 		auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
         -- acp_providers             = {
         --     ["gemini-cli"] = {
@@ -53,7 +53,7 @@ return {
                 model = "claude-sonnet-4",
             },
             gemini = {
-                 model = "gemini-2.5-flash",
+                model = "gemini-3-flash-preview",
             }
         },
 		highlights = {
